@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { spinTable } from "@/lib/spinTable";
+import { galleryHover } from "@/lib/galleryHover";
 
 /** All GSAP motion lives here. Content is visible without JS; animations only add to it. */
 export default function Animations() {
@@ -53,6 +54,8 @@ export default function Animations() {
       });
     }
 
+    const gallery = document.getElementById("galleryRow");
+    if (gallery) cleanups.push(galleryHover(gallery));
     const table = document.getElementById("tableIll");
     if (table) cleanups.push(spinTable(table, window.matchMedia("(prefers-reduced-motion: reduce)").matches));
 
