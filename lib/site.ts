@@ -13,10 +13,10 @@ export type MeetupEvent = {
   tables: { lang: TableLang; taken: number }[];
 };
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://womensmeetupsamsterdam.nl").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://womensmeetupsinamsterdam.nl").replace(/\/$/, "");
 export const SITE_NAME = "Women's Meetups in Amsterdam";
 export const INSTAGRAM = "womensmeetupsamsterdam";
-export const EMAIL = "hello@womensmeetupsamsterdam.nl";
+export const EMAIL = "hello@womensmeetupsinamsterdam.nl";
 export const BOANNA_SOCIALS = [
   { name: "Instagram", handle: "@boannap", url: "https://www.instagram.com/boannap" },
   { name: "YouTube", handle: "@boannathroughtwenties", url: "https://www.youtube.com/@boannathroughtwenties" },
