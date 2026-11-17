@@ -157,7 +157,6 @@ export default function Home({ lang }: { lang: Lang }) {
               <div><span className="kicker">{t.h_kicker}</span><h2 className="title">{t.h_title}</h2></div>
               <div>
                 <div className="table-ill" id="tableIll" dangerouslySetInnerHTML={{ __html: tableSvg() }} />
-                <span className="spin-hint">{t.spin_hint}</span>
               </div>
             </div>
             <div className="how-grid">

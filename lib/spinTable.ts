@@ -40,7 +40,7 @@ export function spinTable(root: HTMLElement, reducedMotion = false): () => void 
   const onScroll = () => {
     const y = window.scrollY;
     const r = root.getBoundingClientRect();
-    if (r.bottom > 0 && r.top < window.innerHeight) vel = Math.max(-12, Math.min(12, vel + (y - lastY) * 0.04));
+    if (r.bottom > 0 && r.top < window.innerHeight) vel = Math.max(-2.5, Math.min(2.5, vel + (y - lastY) * 0.008));
     lastY = y;
   };
 

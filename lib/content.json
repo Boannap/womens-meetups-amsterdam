@@ -276,8 +276,7 @@
       "Cappuccino with heart latte art on a sunny café terrace in Amsterdam",
       "Woman smiling in a coffee and brunch bar during a meetup in Amsterdam"
     ],
-    "s_follow": "Find me",
-    "spin_hint": "spin the table ↻"
+    "s_follow": "Find me"
   },
   "nl": {
     "meta_title": "Women's Meetups in Amsterdam | Kleine koffiemeetups op verborgen plekjes, geen abonnement",
@@ -556,7 +555,6 @@
       "Cappuccino met hartje op een zonnig terras in Amsterdam",
       "Lachende vrouw in een koffie- en brunchbar tijdens een meetup in Amsterdam"
     ],
-    "s_follow": "Vind me",
-    "spin_hint": "draai aan de tafel ↻"
+    "s_follow": "Vind me"
   }
 }
