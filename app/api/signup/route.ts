@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 
 /**
  * Saves a sign-up in Supabase (table `signups`, see supabase/schema.sql).
- * Without SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY it only logs, so the site works before Supabase is set up.
+ * Uses the PUBLISHABLE key: the database only lets it ADD rows with consent (RLS insert-only policy),
+ * never read, change or delete. Without SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY it only logs.
  * Nothing is emailed from here: you decide yourself when and how to contact people.
  */
 const str = (v: unknown, max = 200) => (typeof v === "string" ? v.trim().slice(0, max) : "");
@@ -39,7 +40,7 @@ export async function POST(req: Request) {
   }
 
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) {
     console.log("[signup] Supabase not configured yet, received:", { ...row, email: "***" });
     return NextResponse.json({ ok: true, stored: false });
@@ -47,7 +48,8 @@ export async function POST(req: Request) {
 
   const res = await fetch(`${url}/rest/v1/signups`, {
     method: "POST",
-    headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json", Prefer: "return=minimal" },
+    // New-style keys (sb_...) go in the apikey header only; legacy JWT keys also as Bearer.
+    headers: { apikey: key, ...(key.startsWith("sb_") ? {} : { Authorization: `Bearer ${key}` }), "Content-Type": "application/json", Prefer: "return=minimal" },
     body: JSON.stringify(row),
   });
   if (!res.ok) {

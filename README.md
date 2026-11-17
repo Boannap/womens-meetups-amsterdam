@@ -52,7 +52,7 @@ Let op: het gratis Hobby-plan van Vercel is alleen voor niet-commercieel gebruik
 
 1. Maak een project op supabase.com, kies regio EU (Frankfurt).
 2. SQL editor > plak `supabase/schema.sql` > Run.
-3. Project settings > API: kopieer de URL en de `service_role` key naar `SUPABASE_URL` en `SUPABASE_SERVICE_ROLE_KEY` in Vercel.
+3. In Vercel staan `SUPABASE_URL` en `SUPABASE_PUBLISHABLE_KEY`. Die sleutel kan alleen aanmeldingen toevoegen, niet lezen. De `service_role` key is pas nodig voor Mollie en hoort alleen in Vercel, nooit in een chat.
 4. Aanmeldingen zie je daarna in Supabase > Table editor > `signups`. Daar vul je ook `table_id` in als je iemand aan een tafel matcht.
 
 Zolang Supabase nog niet gekoppeld is, werkt het formulier wel maar wordt er niets bewaard (alleen gelogd).

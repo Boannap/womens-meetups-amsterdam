@@ -30,3 +30,9 @@ create table if not exists public.payments (
   email text
 );
 alter table public.payments enable row level security;
+
+-- The website may only ADD sign-ups (with consent). It can never read, change or delete them.
+grant insert on public.signups to anon;
+create policy "website can add signups with consent"
+  on public.signups for insert to anon
+  with check (consent = true and table_id is null and notes is null);
