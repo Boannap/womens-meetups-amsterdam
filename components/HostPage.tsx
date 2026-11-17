@@ -16,7 +16,7 @@ export default function HostPage({ lang }: { lang: Lang }) {
       <main>
         <section className="sec host" style={{ minHeight: "80vh" }}>
           <div className="wrap host-grid" style={{ alignItems: "start" }}>
-            <div style={{ position: "sticky", top: 110 }}>
+            <div className="sticky-desk">
               <div className="portrait scallop" id="portrait">
                 <Image src="/boanna.jpg" alt="Boanna Pieterse, founder of Women's Meetups in Amsterdam" fill sizes="(max-width: 900px) 90vw, 380px" style={{ objectFit: "cover" }} />
               </div>

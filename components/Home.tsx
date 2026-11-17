@@ -190,7 +190,7 @@ export default function Home({ lang }: { lang: Lang }) {
         {/* JOIN */}
         <section className="sec" id="join">
           <div className="wrap join-grid">
-            <div style={{ position: "sticky", top: 110 }}>
+            <div className="sticky-desk">
               <span className="kicker">{t.j_kicker}</span>
               <h2 className="title">{t.j_title}</h2>
               <p className="lead" style={{ marginTop: 14 }}>{t.j_text}</p>
