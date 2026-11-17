@@ -1,0 +1,562 @@
+{
+  "en": {
+    "meta_title": "Women's Meetups in Amsterdam | Small coffee meetups in hidden spots, no subscription",
+    "meta_desc": "New friends in Amsterdam, one coffee at a time. Table of Six: six women, matched by personality, in the cosiest cafés and hidden spots of Amsterdam. €8 per meetup, no subscription.",
+    "nav_meetups": "Meetups",
+    "nav_exp": "The experience",
+    "nav_how": "How it works",
+    "nav_faq": "FAQ",
+    "nav_cta": "I'm in →",
+    "hero_eyebrow": "Table of Six · Amsterdam",
+    "hero_title": "Six girls.<br>One table.",
+    "hero_h1sub": "Coffee meetups for Dutch and English-speaking girls in Amsterdam",
+    "hero_lead": "New friends in Amsterdam, one coffee at a time. For Dutch and English-speaking girls. Small tables, good conversation and no subscription. We match you by personality and work field, pick one of Amsterdam's cosiest cafés or hidden spots, and bring the questions. Your first coffee is on us.",
+    "hero_cta1": "I'm in →",
+    "hero_cta2": "See upcoming tables",
+    "hero_note": "€8 per meetup · no subscription · first coffee on us",
+    "r_head": "WOMEN'S MEETUPS AMSTERDAM",
+    "r_table": "TABLE OF SIX · #001",
+    "r_seat": "1x SEAT AT THE TABLE",
+    "r_coffee": "1x FIRST COFFEE",
+    "r_cards": "1x CONVERSATION CARDS",
+    "r_talks": "∞  TALKS",
+    "r_friends": "5x NEW FRIENDS",
+    "r_free": "FREE",
+    "r_total": "TOTAL",
+    "r_mood": "GOOD MOOD",
+    "r_incl": "INCL.",
+    "r_thanks": "THANK YOU, SEE YOU THERE",
+    "r_hand": "see you this month!",
+    "marquee": [
+      "no subscription",
+      "first coffee for free",
+      "hidden spots in Amsterdam",
+      "talks for free",
+      "new friends for free",
+      "six women, one table",
+      "Dutch & English",
+      "no pressure"
+    ],
+    "m_kicker": "Upcoming tables",
+    "m_title": "Pick a date. We'll pick your table.",
+    "m_text": "Once a month (soon every two weeks) we open several Tables of Six at the same time across Amsterdam. Your café and your tablemates' first names land in your inbox two days before.",
+    "f_all": "All",
+    "f_nl": "Nederlands",
+    "f_en": "English",
+    "f_mix": "NL + EN",
+    "ev_tables": "tables",
+    "ev_spots": "spots left",
+    "ev_full": "Full? Join the waitlist",
+    "ev_reserve": "Reserve my seat",
+    "ev_cafe": "hidden spot revealed after matching",
+    "ev_price": "€8 · first coffee included",
+    "ev_lang_nl": "Dutch",
+    "ev_lang_en": "English",
+    "ev_lang_mix": "Dutch + English",
+    "ev_none": "No tables in this language yet. Sign up and we'll open one.",
+    "e_kicker": "The experience",
+    "e_title": "Not another big networking night.",
+    "e1_t": "Matched, not random",
+    "e1_p": "You tell us your personality type and what you do. We seat you with five girls you'll actually click with: a similar vibe, different worlds.",
+    "e2_t": "Six girls, one table",
+    "e2_p": "Small enough to really talk, big enough that there's always someone new to hear from. More sign-ups? We simply open more tables.",
+    "e3_t": "Friends after the coffee",
+    "e3_p": "After your meetup you join our community group, so the plans don't end when the cups are empty.",
+    "h_kicker": "How it works",
+    "h_title": "Simple to join. Carefully matched.",
+    "h1_t": "Sign up",
+    "h1_p": "A two-minute form: your personality type, your work or study field, and whether you'd like to talk in Dutch, English or both.",
+    "h2_t": "We match your table",
+    "h2_p": "We put six girls together who'll get along, book a cosy café and send you the details two days before.",
+    "h3_t": "Show up & sip",
+    "h3_p": "Your first coffee is on us. Conversation cards are on the table, so nobody has to fill the silence.",
+    "h4_t": "Stay friends",
+    "h4_p": "Afterwards you join the community group with everyone from your date, for borrels, walks and the next table.",
+    "c_kicker": "On the table",
+    "c_title": "No awkward small talk. We bring the questions.",
+    "c_text": "Every table gets a little stack of conversation cards. Tap the deck for a taste.",
+    "c_btn": "Shuffle a question",
+    "c_label": "question",
+    "questions": [
+      "What did sixteen-year-old you think you'd be doing right now?",
+      "Which spot in Amsterdam would you never tell a tourist about?",
+      "What are you proud of that nobody ever asks about?",
+      "Which song is your current personality?",
+      "What would you do with a completely free Tuesday?",
+      "What's a small thing that makes Amsterdam feel like home?",
+      "What's something you want to get braver at this year?",
+      "Best advice you ever got from a friend?"
+    ],
+    "j_kicker": "Join",
+    "j_title": "Tell us a little about you.",
+    "j_text": "Takes two minutes. We only use it to match your table. Never shared, never sold.",
+    "j_name": "First name",
+    "j_email": "Email",
+    "j_age": "Age",
+    "j_hood": "Where in Amsterdam?",
+    "j_lang": "I'd like my table in…",
+    "j_lang_nl": "Dutch",
+    "j_lang_en": "English",
+    "j_lang_both": "Either is fine",
+    "j_type": "Personality type",
+    "j_type_unknown": "No idea, surprise me",
+    "j_field": "Work or study field",
+    "j_fields": [
+      "Creative & design",
+      "Tech & IT",
+      "Healthcare",
+      "Education",
+      "Business, marketing & finance",
+      "Hospitality & retail",
+      "Law & government",
+      "Science & research",
+      "Student",
+      "Something else"
+    ],
+    "j_hoping": "I'm hoping for…",
+    "j_hopes": [
+      "New friends",
+      "Someone to go out with",
+      "A study or work buddy",
+      "Just a nice afternoon"
+    ],
+    "j_days": "Best moment for me",
+    "j_dayopts": [
+      "Saturday afternoon",
+      "Sunday afternoon",
+      "Weekday evening"
+    ],
+    "j_insta": "Instagram (optional)",
+    "j_consent": "I agree that my answers are used to match me with a table, as described in the privacy policy.",
+    "j_submit": "Save my seat →",
+    "j_ok_t": "You're on the list ✿",
+    "j_ok_p": "We'll email you as soon as your table is matched. Keep an eye on your inbox (and your spam folder, just in case).",
+    "j_preview": "Preview: this form isn't connected yet, nothing was sent.",
+    "j_choose": "Choose…",
+    "j_other": "Other / outside the ring",
+    "faq_kicker": "Questions",
+    "faq_title": "Good to know",
+    "faq": [
+      [
+        "What is Women's Meetups in Amsterdam?",
+        "A community for women who want new friends in Amsterdam, without a subscription. We host Tables of Six: small coffee meetups in the cosiest cafés and hidden spots of the city, with every table matched on personality, work field and language and a host at every table."
+      ],
+      [
+        "Who joins?",
+        "Women who live in, study in, work in or visit Amsterdam. Many are in their twenties, but women in their thirties and beyond, newcomers and travellers are just as welcome. Dutch and international women alike. Tell us about yourself and we'll match you with the right table."
+      ],
+      [
+        "Do I need to speak Dutch?",
+        "No. When you sign up you choose Dutch, English or either. We match tables by language, so everyone can join the conversation."
+      ],
+      [
+        "What does it cost?",
+        "€8 per meetup, including your first coffee and the conversation cards. Anything else you order at the café, you pay there yourself."
+      ],
+      [
+        "How do you match the tables?",
+        "We look at personality type, work or study field, age, language and neighbourhood. The goal: a similar energy, different stories."
+      ],
+      [
+        "I'm an introvert. Will this be awkward?",
+        "It's built for you. Six people, not sixty. Conversation cards on the table. And you'll know the café and first names in advance."
+      ],
+      [
+        "Do I have to talk a lot?",
+        "Not at all. Some love to chat and laugh, others prefer to listen first. Both are welcome. Your host brings conversation cards and an icebreaker when it helps, so the conversation flows by itself."
+      ],
+      [
+        "Can I bring a friend?",
+        "Of course. You both sign up separately and mention each other's name; we'll seat you together, or at different tables if you'd like to stretch."
+      ],
+      [
+        "Is this a dating thing?",
+        "No. It's friendship only, for women."
+      ],
+      [
+        "What if I can't make it?",
+        "In the cosiest cafés and hidden spots across Amsterdam: De Pijp, Jordaan, Oost, West, Noord and Centrum. You get the exact spot two days before."
+      ],
+      [
+        "Where do the meetups happen?",
+        "In cosy cafés across Amsterdam: De Pijp, Jordaan, Oost, West, Noord and Centrum. You get the exact café two days before."
+      ]
+    ],
+    "cl_title": "Your chair is already pulled out.",
+    "cl_text": "Small tables, good conversation, lots of laughs. No subscription.",
+    "cl_btn": "I'm in →",
+    "ft_tag": "Coffee meetups & new friends for young women in Amsterdam.",
+    "ft_explore": "Explore",
+    "ft_legal": "Legal",
+    "ft_privacy": "Privacy policy",
+    "ft_terms": "Terms & cancellation",
+    "ft_contact": "Contact",
+    "ft_follow": "Follow along",
+    "ages": [
+      "18-20",
+      "21-24",
+      "25-29",
+      "30+"
+    ],
+    "hoods": [
+      "Centrum",
+      "De Pijp",
+      "Jordaan",
+      "Oud-West",
+      "West",
+      "Oost",
+      "Noord",
+      "Nieuw-West",
+      "Zuid",
+      "Zuidoost"
+    ],
+    "u_kicker": "Why it's different",
+    "u_title": "No membership. No big rooms. Just your table.",
+    "u_text": "Plenty of clubs ask for a yearly membership before you've even met anyone. We don't. You pay per meetup, only when you feel like it.",
+    "usps": [
+      [
+        "No subscription",
+        "€8 per meetup, first coffee included. No membership, no yearly fee, no strings."
+      ],
+      [
+        "A small, curated table",
+        "Six women, screened and matched on personality, work field and language. Never a room full of strangers."
+      ],
+      [
+        "Hidden spots in Amsterdam",
+        "We meet in the cosiest cafés and hidden spots of the city. You'll leave with new friends and a new favourite (very Instagrammable) place."
+      ],
+      [
+        "A host at the table",
+        "Your host welcomes you, brings conversation cards and an icebreaker or topic when it helps. As guided as you like, as free as you like."
+      ],
+      [
+        "Talk a lot, or just listen",
+        "Love to chat and laugh? Great. Rather sit back for a bit? Also great. This is a safe, no-pressure space."
+      ],
+      [
+        "Everyone gets a seat",
+        "In your twenties, thirties or beyond, new in town, travelling through, or born and raised here. Tell us who you are and we'll find your perfect table."
+      ]
+    ],
+    "b_kicker": "Meet your host",
+    "b_title": "Hi, I'm Boanna.",
+    "b_short": "Musical actress turned content creator and presenter. I'll be at the table to welcome you, bring the questions and make sure everyone feels at home.",
+    "b_more": "Read my story →",
+    "b_photo": "photo of Boanna",
+    "b_story": [
+      "Hi, I'm Boanna Pieterse. I started out as a musical theatre actress, where connection was always at the heart of everything: with the cast, with the audience, with the story.",
+      "After the stage I found my way into content creation and presenting, and got to work on all kinds of beautiful projects. I worked with so many people, but sometimes I missed real connection and real friendship.",
+      "Making friends as an adult can be surprisingly hard. And yet, in a busy city like this one, women keep each other strong. That's why I started Women's Meetups in Amsterdam.",
+      "I want to show you the most beautiful little spots I've discovered in Amsterdam, and let you connect with each other, without any obligations. Just a girls-only place to drink great coffee and chat, guided or not, depending on what you need, with careful screening of who sits at your table.",
+      "A small, no-pressure group. If you'd rather stay quiet, that's fine. If you want to talk and laugh a lot, that's fine too. It's a safe space.",
+      "Whether you're in your twenties like me, in your thirties or older, travelling through, or living in Amsterdam and speaking Dutch: let us know, and we'll make the perfect match.",
+      "I also noticed a lot of big commercial companies organising meetups where you first have to sign up for an expensive subscription. This is different. You pay per meetup, and that's it."
+    ],
+    "b_sign": "See you at the table, Boanna ♥",
+    "b_back": "← Back to home",
+    "b_page_title": "Founder | Meet Boanna Pieterse, Women's Meetups in Amsterdam",
+    "b_page_desc": "Boanna Pieterse, musical actress turned content creator and presenter, hosts small coffee meetups for women in Amsterdam's cosiest cafés and hidden spots.",
+    "j_error": "Oops, something went wrong. Please try again, or email us.",
+    "b_founder": "Founder",
+    "g_kicker": "From previous tables",
+    "g_title": "Coffee, cake and a lot of laughing.",
+    "g_text": "A peek at earlier meetups in some of Amsterdam's cosiest cafés and hidden spots.",
+    "g_caps": [
+      "first coffee on us",
+      "cappuccino & chats",
+      "matcha cake o'clock",
+      "terrace in the sun",
+      "hidden spot, found"
+    ],
+    "g_alts": [
+      "Woman smiling at a coffee meetup in a pink café in Amsterdam",
+      "Cappuccino and iced latte at a women's coffee meetup in Amsterdam",
+      "Flower latte art and matcha cake in a cosy Amsterdam café",
+      "Cappuccino with heart latte art on a sunny café terrace in Amsterdam",
+      "Woman smiling in a coffee and brunch bar during a meetup in Amsterdam"
+    ],
+    "s_follow": "Find me",
+    "spin_hint": "spin the table ↻"
+  },
+  "nl": {
+    "meta_title": "Women's Meetups in Amsterdam | Kleine koffiemeetups op verborgen plekjes, geen abonnement",
+    "meta_desc": "Nieuwe vriendinnen in Amsterdam, één koffietje tegelijk. Table of Six: zes vrouwen, gematcht op persoonlijkheid, in de gezelligste cafés en verborgen plekjes van Amsterdam. €8 per meetup, geen abonnement.",
+    "nav_meetups": "Meetups",
+    "nav_exp": "De ervaring",
+    "nav_how": "Hoe het werkt",
+    "nav_faq": "Vragen",
+    "nav_cta": "Ik doe mee →",
+    "hero_eyebrow": "Table of Six · Amsterdam",
+    "hero_title": "Zes meiden.<br>Eén tafel.",
+    "hero_h1sub": "Koffiemeetups voor Nederlandse en Engelssprekende meiden in Amsterdam",
+    "hero_lead": "Nieuwe vriendinnen in Amsterdam, één koffietje tegelijk. Voor Nederlandse en Engelssprekende meiden. Kleine groepjes, goed gesprek en geen abonnement. We matchen je op persoonlijkheid en werkveld, kiezen een van de gezelligste cafés of hidden spots van Amsterdam en nemen de vragen mee. Je eerste koffie is van ons.",
+    "hero_cta1": "Ik doe mee →",
+    "hero_cta2": "Bekijk komende tafels",
+    "hero_note": "€8 per meetup · geen abonnement · eerste koffie van ons",
+    "r_head": "WOMEN'S MEETUPS AMSTERDAM",
+    "r_table": "TABLE OF SIX · #001",
+    "r_seat": "1x PLEK AAN TAFEL",
+    "r_coffee": "1x EERSTE KOFFIE",
+    "r_cards": "1x GESPREKSKAARTJES",
+    "r_talks": "∞  GESPREKKEN",
+    "r_friends": "5x NIEUWE VRIENDINNEN",
+    "r_free": "GRATIS",
+    "r_total": "TOTAAL",
+    "r_mood": "GOEIE VIBES",
+    "r_incl": "INCL.",
+    "r_thanks": "DANK JE, TOT DAN",
+    "r_hand": "tot deze maand!",
+    "marquee": [
+      "geen abonnement",
+      "eerste koffie gratis",
+      "verborgen plekjes in Amsterdam",
+      "gesprekken gratis",
+      "nieuwe vriendinnen gratis",
+      "zes vrouwen, één tafel",
+      "Nederlands & Engels",
+      "geen druk"
+    ],
+    "m_kicker": "Komende tafels",
+    "m_title": "Kies een datum. Wij kiezen je tafel.",
+    "m_text": "Eén keer per maand (straks elke twee weken) openen we meerdere Tables of Six tegelijk, verspreid over Amsterdam. Je café en de voornamen van je tafelgenoten krijg je twee dagen van tevoren in je mail.",
+    "f_all": "Alles",
+    "f_nl": "Nederlands",
+    "f_en": "English",
+    "f_mix": "NL + EN",
+    "ev_tables": "tafels",
+    "ev_spots": "plekken vrij",
+    "ev_full": "Vol? Zet me op de wachtlijst",
+    "ev_reserve": "Reserveer mijn plek",
+    "ev_cafe": "hidden spot volgt na de matching",
+    "ev_price": "€8 · eerste koffie inbegrepen",
+    "ev_lang_nl": "Nederlands",
+    "ev_lang_en": "Engels",
+    "ev_lang_mix": "Nederlands + Engels",
+    "ev_none": "Nog geen tafels in deze taal. Meld je aan, dan openen we er een.",
+    "e_kicker": "De ervaring",
+    "e_title": "Geen groot netwerkevent.",
+    "e1_t": "Gematcht, niet willekeurig",
+    "e1_p": "Je vertelt ons je persoonlijkheidstype en wat je doet. Wij zetten je bij vijf meiden met wie het klikt: dezelfde vibe, andere werelden.",
+    "e2_t": "Zes meiden, één tafel",
+    "e2_p": "Klein genoeg om echt te praten, groot genoeg om steeds iemand nieuws te horen. Meer aanmeldingen? Dan openen we gewoon meer tafels.",
+    "e3_t": "Vriendinnen na de koffie",
+    "e3_p": "Na je meetup kom je in onze communitygroep, zodat de plannen niet stoppen als de kopjes leeg zijn.",
+    "h_kicker": "Hoe het werkt",
+    "h_title": "Makkelijk aanmelden. Zorgvuldig gematcht.",
+    "h1_t": "Meld je aan",
+    "h1_p": "Een formulier van twee minuten: je persoonlijkheidstype, je werk- of studieveld en of je liever Nederlands, Engels of allebei praat.",
+    "h2_t": "Wij matchen je tafel",
+    "h2_p": "We zetten zes meiden bij elkaar die het leuk gaan hebben, reserveren een gezellig café en sturen je twee dagen van tevoren de details.",
+    "h3_t": "Kom & geniet",
+    "h3_p": "Je eerste koffie is van ons. De gespreksvragen liggen op tafel, dus niemand hoeft de stilte te vullen.",
+    "h4_t": "Blijf vriendinnen",
+    "h4_p": "Daarna kom je in de communitygroep met iedereen van jouw datum, voor borrels, wandelingen en de volgende tafel.",
+    "c_kicker": "Op tafel",
+    "c_title": "Geen ongemakkelijke small talk. Wij nemen de vragen mee.",
+    "c_text": "Elke tafel krijgt een stapeltje gespreksvragen. Tik op het stapeltje voor een voorproefje.",
+    "c_btn": "Nieuwe vraag",
+    "c_label": "vraag",
+    "questions": [
+      "Wat dacht jij op je zestiende dat je nu zou doen?",
+      "Welk plekje in Amsterdam zou je nooit aan een toerist verklappen?",
+      "Waar ben je trots op waar niemand ooit naar vraagt?",
+      "Welk liedje is op dit moment jouw persoonlijkheid?",
+      "Wat zou je doen met een compleet vrije dinsdag?",
+      "Welk klein ding maakt dat Amsterdam als thuis voelt?",
+      "Waar wil je dit jaar wat dapperder in worden?",
+      "Wat is het beste advies dat je ooit van een vriendin kreeg?"
+    ],
+    "j_kicker": "Aanmelden",
+    "j_title": "Vertel ons iets over jezelf.",
+    "j_text": "Kost twee minuten. We gebruiken het alleen om je tafel te matchen. Nooit gedeeld, nooit verkocht.",
+    "j_name": "Voornaam",
+    "j_email": "E-mail",
+    "j_age": "Leeftijd",
+    "j_hood": "Waar in Amsterdam?",
+    "j_lang": "Mijn tafel graag in het…",
+    "j_lang_nl": "Nederlands",
+    "j_lang_en": "Engels",
+    "j_lang_both": "Maakt niet uit",
+    "j_type": "Persoonlijkheidstype",
+    "j_type_unknown": "Geen idee, verras me",
+    "j_field": "Werk- of studieveld",
+    "j_fields": [
+      "Creatief & design",
+      "Tech & IT",
+      "Zorg",
+      "Onderwijs",
+      "Business, marketing & finance",
+      "Horeca & retail",
+      "Recht & overheid",
+      "Wetenschap & onderzoek",
+      "Student",
+      "Iets anders"
+    ],
+    "j_hoping": "Ik hoop op…",
+    "j_hopes": [
+      "Nieuwe vriendinnen",
+      "Iemand om mee uit te gaan",
+      "Een studie- of werkmaatje",
+      "Gewoon een leuke middag"
+    ],
+    "j_days": "Beste moment voor mij",
+    "j_dayopts": [
+      "Zaterdagmiddag",
+      "Zondagmiddag",
+      "Doordeweekse avond"
+    ],
+    "j_insta": "Instagram (optioneel)",
+    "j_consent": "Ik ga ermee akkoord dat mijn antwoorden worden gebruikt om me aan een tafel te matchen, zoals beschreven in de privacyverklaring.",
+    "j_submit": "Houd een plek voor me vrij →",
+    "j_ok_t": "Je staat op de lijst ✿",
+    "j_ok_p": "We mailen je zodra je tafel gematcht is. Houd je inbox in de gaten (en je spammap, voor de zekerheid).",
+    "j_preview": "Preview: dit formulier is nog niet gekoppeld, er is niets verstuurd.",
+    "j_choose": "Kies…",
+    "j_other": "Anders / buiten de ring",
+    "faq_kicker": "Vragen",
+    "faq_title": "Goed om te weten",
+    "faq": [
+      [
+        "Wat is Women's Meetups in Amsterdam?",
+        "Een community voor vrouwen die nieuwe vriendinnen willen maken in Amsterdam, zonder abonnement. We organiseren Tables of Six: kleine koffiemeetups in de gezelligste cafés en verborgen plekjes van de stad, elke tafel gematcht op persoonlijkheid, werkveld en taal, met een host aan elke tafel."
+      ],
+      [
+        "Wie doen er mee?",
+        "Vrouwen die in Amsterdam wonen, studeren, werken of op bezoek zijn. Veel zijn twintiger, maar dertigers en ouder, nieuwkomers en reizigers zijn net zo welkom. Nederlandse én internationale vrouwen. Vertel ons wie je bent, dan matchen we je aan de juiste tafel."
+      ],
+      [
+        "Moet ik Nederlands spreken?",
+        "Nee. Bij je aanmelding kies je Nederlands, Engels of maakt niet uit. We matchen tafels op taal, dus iedereen kan meepraten."
+      ],
+      [
+        "Wat kost het?",
+        "€8 per meetup, inclusief je eerste koffie en de gespreksvragen. Wat je verder bestelt, reken je zelf af bij het café."
+      ],
+      [
+        "Hoe matchen jullie de tafels?",
+        "We kijken naar persoonlijkheidstype, werk- of studieveld, leeftijd, taal en buurt. Het doel: dezelfde energie, andere verhalen."
+      ],
+      [
+        "Ik ben introvert. Wordt dit ongemakkelijk?",
+        "Het is juist voor jou gemaakt. Zes mensen, geen zestig. Gespreksvragen op tafel. En je weet vooraf het café en de voornamen."
+      ],
+      [
+        "Moet ik veel praten?",
+        "Helemaal niet. De een kletst en lacht graag, de ander luistert liever eerst. Allebei welkom. Je host neemt gespreksvragen en zo nodig een ijsbreker mee, zodat het gesprek vanzelf loopt."
+      ],
+      [
+        "Mag ik een vriendin meenemen?",
+        "Natuurlijk. Jullie melden je allebei apart aan en noemen elkaars naam; dan zetten we jullie bij elkaar, of juist aan verschillende tafels als je jezelf wilt uitdagen."
+      ],
+      [
+        "Is dit daten?",
+        "Nee. Het gaat alleen om vriendschap, tussen vrouwen."
+      ],
+      [
+        "Wat als ik niet kan?",
+        "In de gezelligste cafés en verborgen plekjes door heel Amsterdam: De Pijp, Jordaan, Oost, West, Noord en Centrum. Het precieze adres hoor je twee dagen van tevoren."
+      ],
+      [
+        "Waar zijn de meetups?",
+        "In gezellige cafés door heel Amsterdam: De Pijp, Jordaan, Oost, West, Noord en Centrum. Het precieze café hoor je twee dagen van tevoren."
+      ]
+    ],
+    "cl_title": "Je stoel staat al klaar.",
+    "cl_text": "Kleine tafels, goed gesprek, veel gelach. Geen abonnement.",
+    "cl_btn": "Ik doe mee →",
+    "ft_tag": "Koffiemeetups & nieuwe vriendinnen voor jonge vrouwen in Amsterdam.",
+    "ft_explore": "Ontdek",
+    "ft_legal": "Juridisch",
+    "ft_privacy": "Privacyverklaring",
+    "ft_terms": "Voorwaarden & annuleren",
+    "ft_contact": "Contact",
+    "ft_follow": "Volg ons",
+    "ages": [
+      "18-20",
+      "21-24",
+      "25-29",
+      "30+"
+    ],
+    "hoods": [
+      "Centrum",
+      "De Pijp",
+      "Jordaan",
+      "Oud-West",
+      "West",
+      "Oost",
+      "Noord",
+      "Nieuw-West",
+      "Zuid",
+      "Zuidoost"
+    ],
+    "u_kicker": "Waarom het anders is",
+    "u_title": "Geen lidmaatschap. Geen grote zalen. Gewoon jouw tafel.",
+    "u_text": "Veel clubs vragen een jaarlidmaatschap voordat je ook maar iemand hebt ontmoet. Wij niet. Je betaalt per meetup, alleen als jij er zin in hebt.",
+    "usps": [
+      [
+        "Geen abonnement",
+        "€8 per meetup, eerste koffie inbegrepen. Geen lidmaatschap, geen jaarbedrag, nergens aan vast."
+      ],
+      [
+        "Een klein, zorgvuldig groepje",
+        "Zes vrouwen, gescreend en gematcht op persoonlijkheid, werkveld en taal. Nooit een zaal vol vreemden."
+      ],
+      [
+        "Verborgen plekjes in Amsterdam",
+        "We zitten in de gezelligste cafés en hidden spots van de stad. Je gaat naar huis met nieuwe vriendinnen én een nieuw favoriet (heel Insta-waardig) plekje."
+      ],
+      [
+        "Een host aan tafel",
+        "Je host verwelkomt je, neemt gespreksvragen mee en zo nodig een ijsbreker of onderwerp. Zo begeleid als jij wilt, zo vrij als jij wilt."
+      ],
+      [
+        "Veel kletsen, of gewoon luisteren",
+        "Hou je van kletsen en lachen? Top. Wil je even rustig aankijken? Ook top. Dit is een veilige plek zonder druk."
+      ],
+      [
+        "Iedereen krijgt een stoel",
+        "Twintiger, dertiger of ouder, net in de stad, op doorreis of hier geboren. Vertel wie je bent, dan zoeken wij jouw perfecte tafel."
+      ]
+    ],
+    "b_kicker": "Maak kennis met je host",
+    "b_title": "Hoi, ik ben Boanna.",
+    "b_short": "Musicalactrice, daarna content creator en presentator. Ik zit aan tafel om je te verwelkomen, de vragen mee te nemen en te zorgen dat iedereen zich thuis voelt.",
+    "b_more": "Lees mijn verhaal →",
+    "b_photo": "foto van Boanna",
+    "b_story": [
+      "Hoi, ik ben Boanna Pieterse. Ik begon als musicalactrice, waar verbinding altijd centraal stond: met de cast, met het publiek, met het verhaal.",
+      "Na het podium kwam ik als content creator en presentator in allerlei mooie projecten terecht. Ik werkte met heel veel mensen, maar soms miste ik de echte connectie en vriendschap.",
+      "Vrienden maken op volwassen leeftijd is soms best lastig. En toch: in deze drukke stad houden vrouwen elkaar sterk. Daarom ben ik Women's Meetups in Amsterdam begonnen.",
+      "Ik wil je mijn mooiste ontdekte plekjes in Amsterdam laten zien en jullie met elkaar laten verbinden, zonder verplichtingen. Gewoon een girls-onder-elkaar-plek waar we heerlijke koffie drinken en kletsen, deels of niet begeleid, afhankelijk van jouw behoefte, met een goede screening van wie er aan tafel zit.",
+      "Een klein groepje zonder druk. Wil je liever wat stiller zijn, dan mag dat. Wil je juist heel veel kletsen en lachen, dan mag dat ook. Het is een safe space.",
+      "Of je nou in je twenties bent net als ik, in je dertiger jaren of ouder, op reis bent, of gewoon in Amsterdam woont en Nederlands spreekt: laat het weten, dan zorgen wij voor de perfecte connectie.",
+      "Ook zag ik veel grote commerciële bedrijven meetups organiseren waarvoor je eerst een duur abonnement moest afsluiten. Dit is anders. Je betaalt per meetup, en dat is het."
+    ],
+    "b_sign": "Tot aan tafel, Boanna ♥",
+    "b_back": "← Terug naar home",
+    "b_page_title": "Founder | Maak kennis met Boanna Pieterse, Women's Meetups in Amsterdam",
+    "b_page_desc": "Boanna Pieterse, musicalactrice, content creator en presentator, host kleine koffiemeetups voor vrouwen in de gezelligste cafés en verborgen plekjes van Amsterdam.",
+    "j_error": "Oeps, er ging iets mis. Probeer het opnieuw of mail ons.",
+    "b_founder": "Founder",
+    "g_kicker": "Van eerdere tafels",
+    "g_title": "Koffie, taart en heel veel lachen.",
+    "g_text": "Een kijkje bij eerdere meetups in de gezelligste cafés en verborgen plekjes van Amsterdam.",
+    "g_caps": [
+      "eerste koffie van ons",
+      "cappuccino & kletsen",
+      "matchacake-tijd",
+      "terrasje in de zon",
+      "hidden spot, gevonden"
+    ],
+    "g_alts": [
+      "Lachende vrouw bij een koffiemeetup in een roze café in Amsterdam",
+      "Cappuccino en ijslatte bij een koffiemeetup voor vrouwen in Amsterdam",
+      "Latte art en matchacake in een gezellig café in Amsterdam",
+      "Cappuccino met hartje op een zonnig terras in Amsterdam",
+      "Lachende vrouw in een koffie- en brunchbar tijdens een meetup in Amsterdam"
+    ],
+    "s_follow": "Vind me",
+    "spin_hint": "draai aan de tafel ↻"
+  }
+}
