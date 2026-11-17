@@ -100,7 +100,7 @@ header.scrolled{border-color:rgba(90,15,20,.12)}
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-art{min-height:560px;max-width:420px;margin:0 auto;width:100%}.receipt{right:0;width:280px}.card-pink{width:230px;height:165px;top:330px}.hand-note{left:30%;font-size:2.1rem}.cup-hero{top:auto;bottom:90px;width:90px}}
 /* marquee */
 .marquee{background:var(--wine);color:var(--pink);overflow:hidden;padding:18px 0;transform:rotate(-1.5deg);margin:0 -20px;border-block:3px solid var(--wine)}
-.marquee .track{display:flex;width:max-content;animation:mq 32s linear infinite}
+.marquee .track{display:flex;width:max-content;animation:mq 75s linear infinite}
 .marquee span{font-family:var(--display);font-weight:700;font-size:1.6rem;white-space:nowrap;padding:0 22px;display:flex;align-items:center;gap:44px}
 .marquee span:after{content:"✿";color:var(--tomato)}
 @keyframes mq{to{transform:translateX(-50%)}}
