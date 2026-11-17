@@ -51,7 +51,7 @@ export default function Home({ lang }: { lang: Lang }) {
                 <div className="inner"><b>Table<br />of Six</b><span>where friendships start</span></div>
               </div>
               <div className="receipt" id="receipt">
-                <div className="c"><b>{t.r_head}</b><br />{t.r_table}<br />SUN 29 NOV · 14:00</div>
+                <div className="c"><b>{t.r_head}</b><br />{t.r_table}<br />SUN 20 DEC · 14:00</div>
                 <hr />
                 <div className="row"><span>{t.r_seat}</span><span>€8.00</span></div>
                 <div className="row"><span>{t.r_coffee}</span><span className="free">{t.r_free}</span></div>
