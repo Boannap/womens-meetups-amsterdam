@@ -3,6 +3,8 @@
 import { useState } from "react";
 import type { Dict, Lang } from "@/lib/site";
 
+// €10 incl. 21% VAT: VAT = 10 - 10/1.21 = 1.74; service costs = Mollie iDEAL fee.
+const PRICE = { total: "10.00", vat: "1.74", service: "0.32", seat: "7.94" };
 const TYPES = ["INFJ", "INFP", "ENFJ", "ENFP", "INTJ", "INTP", "ENTJ", "ENTP", "ISFJ", "ISFP", "ESFJ", "ESFP", "ISTJ", "ISTP", "ESTJ", "ESTP"];
 
 export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
@@ -81,6 +83,14 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       <fieldset className="field full"><legend>{t.j_days}</legend>{pills("days", t.j_dayopts, "checkbox")}</fieldset>
       <div className="field full"><label className="l" htmlFor="fi">{t.j_insta}</label><input id="fi" name="instagram" type="text" placeholder="@" /></div>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="vh" aria-hidden="true" />
+      <div className="price-box">
+        <h4>{t.pr_title}</h4>
+        <div className="r"><span>{t.pr_seat}</span><span>€{PRICE.seat}</span></div>
+        <div className="r"><span>{t.pr_service}</span><span>€{PRICE.service}</span></div>
+        <div className="r"><span>{t.pr_vat}</span><span>€{PRICE.vat}</span></div>
+        <div className="r t"><span>{t.pr_total}</span><span>€{PRICE.total}</span></div>
+        <small>{t.pr_note}</small>
+      </div>
       <label className="consent full field" style={{ flexDirection: "row" }}>
         <input type="checkbox" name="consent" required />
         <span>{t.j_consent}</span>

@@ -101,6 +101,8 @@ header.scrolled{border-color:rgba(90,15,20,.12)}
 
 .sticky-desk{position:static}@media (min-width:901px){.sticky-desk{position:sticky;top:110px}}
 @media (max-width:520px){.nav{gap:10px}.logo b{font-size:1rem}.logo i{font-size:1rem}.logo svg{width:11px;height:11px}.lang{font-size:.75rem;flex:none}.lang button,.lang a,.lang span{padding:.3em .6em}}
+
+.price-box{grid-column:1/-1;background:#F6EEE3;border:2px dashed rgba(90,15,20,.18);border-radius:18px;padding:18px 22px;font-size:.95rem}.price-box h4{font-family:var(--display);color:var(--wine);font-size:1.15rem;margin-bottom:8px}.price-box .r{display:flex;justify-content:space-between;padding:3px 0;color:#5b3a3c}.price-box .t{border-top:1.5px solid rgba(90,15,20,.2);margin-top:6px;padding-top:8px;font-weight:700;color:var(--wine);font-size:1.05rem}.price-box small{display:block;margin-top:6px;color:#8a6466}
 /* marquee */
 .marquee{background:var(--wine);color:var(--pink);overflow:hidden;padding:18px 0;transform:rotate(-1.5deg);margin:0 -20px;border-block:3px solid var(--wine)}
 .marquee .track{display:flex;width:max-content;animation:mq 75s linear infinite}

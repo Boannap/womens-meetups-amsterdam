@@ -276,7 +276,13 @@
       "Cappuccino with heart latte art on a sunny café terrace in Amsterdam",
       "Woman smiling in a coffee and brunch bar during a meetup in Amsterdam"
     ],
-    "s_follow": "Find me"
+    "s_follow": "Find me",
+    "pr_title": "Your ticket",
+    "pr_seat": "Seat at the table + first drink",
+    "pr_service": "Service costs",
+    "pr_vat": "VAT (21%)",
+    "pr_total": "Total",
+    "pr_note": "All prices include VAT. No extra costs at checkout."
   },
   "nl": {
     "meta_title": "Women's Meetups in Amsterdam | Kleine koffiemeetups op verborgen plekjes, geen abonnement",
@@ -555,6 +561,12 @@
       "Cappuccino met hartje op een zonnig terras in Amsterdam",
       "Lachende vrouw in een koffie- en brunchbar tijdens een meetup in Amsterdam"
     ],
-    "s_follow": "Vind me"
+    "s_follow": "Vind me",
+    "pr_title": "Jouw ticket",
+    "pr_seat": "Plek aan tafel + eerste drankje",
+    "pr_service": "Servicekosten",
+    "pr_vat": "Btw (21%)",
+    "pr_total": "Totaal",
+    "pr_note": "Alle prijzen zijn inclusief btw. Geen extra kosten bij het afrekenen."
   }
 }

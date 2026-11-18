@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       amount: { currency: "EUR", value: PRICE_EUR },
-      description: `Table of Six ${eventId}`,
+      description: `Table of Six ${eventId} · €10.00 incl. €1.74 VAT and €0.32 service costs`,
       redirectUrl: `${home}?paid=1#join`,
       webhookUrl: `${SITE_URL}/api/mollie-webhook`,
       locale: lang === "nl" ? "nl_NL" : "en_GB",
