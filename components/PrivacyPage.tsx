@@ -16,7 +16,7 @@ const COPY = {
       ["Your rights", "You can ask to see, correct or delete your data at any time, and you can complain to the Autoriteit Persoonsgegevens."],
     ],
     cancelTitle: "Tickets & cancellation",
-    cancel: "A ticket costs €10 including VAT and your first drink. Can't make it? Let us know at least 48 hours before the meetup and we'll move your seat to the next date. Later cancellations or no-shows can't be refunded. If we have to cancel, you get a full refund.",
+    cancel: "A ticket costs €8 and includes your first coffee. Can't make it? Let us know at least 48 hours before the meetup and we'll move your seat to the next date. Later cancellations or no-shows can't be refunded. If we have to cancel, you get a full refund.",
   },
   nl: {
     title: "Privacy & voorwaarden",
@@ -29,7 +29,7 @@ const COPY = {
       ["Jouw rechten", "Je kunt je gegevens altijd inzien, laten aanpassen of verwijderen, en je kunt een klacht indienen bij de Autoriteit Persoonsgegevens."],
     ],
     cancelTitle: "Tickets & annuleren",
-    cancel: "Een ticket kost €10, inclusief btw en je eerste drankje. Kun je niet? Laat het minstens 48 uur van tevoren weten, dan verplaatsen we je plek naar de volgende datum. Later annuleren of niet komen kunnen we niet terugbetalen. Moeten wij annuleren, dan krijg je je geld volledig terug.",
+    cancel: "Een ticket kost €8, inclusief je eerste koffie. Kun je niet? Laat het minstens 48 uur van tevoren weten, dan verplaatsen we je plek naar de volgende datum. Later annuleren of niet komen kunnen we niet terugbetalen. Moeten wij annuleren, dan krijg je je geld volledig terug.",
   },
 };
 
