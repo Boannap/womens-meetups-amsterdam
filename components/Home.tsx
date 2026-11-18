@@ -53,13 +53,13 @@ export default function Home({ lang }: { lang: Lang }) {
               <div className="receipt" id="receipt">
                 <div className="c"><b>{t.r_head}</b><br />{t.r_table}<br />SUN 20 DEC · 14:00</div>
                 <hr />
-                <div className="row"><span>{t.r_seat}</span><span>€8.00</span></div>
+                <div className="row"><span>{t.r_seat}</span><span>€10.00</span></div>
                 <div className="row"><span>{t.r_coffee}</span><span className="free">{t.r_free}</span></div>
                 <div className="row"><span>{t.r_cards}</span><span className="free">{t.r_free}</span></div>
                 <div className="row"><span>{t.r_talks}</span><span className="free">{t.r_free}</span></div>
                 <div className="row"><span>{t.r_friends}</span><span className="free">{t.r_free}</span></div>
                 <hr />
-                <div className="row tot"><span>{t.r_total}</span><span>€8.00</span></div>
+                <div className="row tot"><span>{t.r_total}</span><span>€10.00</span></div>
                 <div className="row"><span>{t.r_mood}</span><span>{t.r_incl}</span></div>
                 <hr />
                 <div className="c">*** {t.r_thanks} ***</div>

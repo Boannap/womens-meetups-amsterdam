@@ -1,7 +1,7 @@
 {
   "en": {
     "meta_title": "Women's Meetups in Amsterdam | Small coffee meetups in hidden spots, no subscription",
-    "meta_desc": "New friends in Amsterdam, one coffee at a time. Table of Six: six women, matched by personality, in the cosiest cafés and hidden spots of Amsterdam. €8 per meetup, no subscription.",
+    "meta_desc": "New friends in Amsterdam, one coffee at a time. Table of Six: six women, matched by personality, in the cosiest cafés and hidden spots of Amsterdam. €10 per meetup, no subscription.",
     "nav_meetups": "Meetups",
     "nav_exp": "The experience",
     "nav_how": "How it works",
@@ -13,7 +13,7 @@
     "hero_lead": "New friends in Amsterdam, one coffee at a time. For Dutch and English-speaking girls. Small tables, good conversation and no subscription. We match you by personality and work field, pick one of Amsterdam's cosiest cafés or hidden spots, and bring the questions. Your first coffee is on us.",
     "hero_cta1": "I'm in →",
     "hero_cta2": "See upcoming tables",
-    "hero_note": "€8 per meetup · no subscription · first coffee on us",
+    "hero_note": "€10 incl. VAT · no subscription · first drink on us",
     "r_head": "WOMEN'S MEETUPS AMSTERDAM",
     "r_table": "TABLE OF SIX · #001",
     "r_seat": "1x SEAT AT THE TABLE",
@@ -49,7 +49,7 @@
     "ev_full": "Full? Join the waitlist",
     "ev_reserve": "Reserve my seat",
     "ev_cafe": "hidden spot revealed after matching",
-    "ev_price": "€8 · first coffee included",
+    "ev_price": "€10 incl. VAT · first drink included",
     "ev_lang_nl": "Dutch",
     "ev_lang_en": "English",
     "ev_lang_mix": "Dutch + English",
@@ -151,7 +151,7 @@
       ],
       [
         "What does it cost?",
-        "€8 per meetup, including your first coffee and the conversation cards. Anything else you order at the café, you pay there yourself."
+        "€10 per meetup, incl. VAT, including your first drink and the conversation cards. Anything else you order at the café, you pay there yourself."
       ],
       [
         "How do you match the tables?",
@@ -216,7 +216,7 @@
     "usps": [
       [
         "No subscription",
-        "€8 per meetup, first coffee included. No membership, no yearly fee, no strings."
+        "€10 per meetup incl. VAT, first drink included. No membership, no yearly fee, no strings."
       ],
       [
         "A small, curated table",
@@ -286,7 +286,7 @@
   },
   "nl": {
     "meta_title": "Women's Meetups in Amsterdam | Kleine koffiemeetups op verborgen plekjes, geen abonnement",
-    "meta_desc": "Nieuwe vriendinnen in Amsterdam, één koffietje tegelijk. Table of Six: zes vrouwen, gematcht op persoonlijkheid, in de gezelligste cafés en verborgen plekjes van Amsterdam. €8 per meetup, geen abonnement.",
+    "meta_desc": "Nieuwe vriendinnen in Amsterdam, één koffietje tegelijk. Table of Six: zes vrouwen, gematcht op persoonlijkheid, in de gezelligste cafés en verborgen plekjes van Amsterdam. €10 per meetup, geen abonnement.",
     "nav_meetups": "Meetups",
     "nav_exp": "De ervaring",
     "nav_how": "Hoe het werkt",
@@ -298,7 +298,7 @@
     "hero_lead": "Nieuwe vriendinnen in Amsterdam, één koffietje tegelijk. Voor Nederlandse en Engelssprekende meiden. Kleine groepjes, goed gesprek en geen abonnement. We matchen je op persoonlijkheid en werkveld, kiezen een van de gezelligste cafés of hidden spots van Amsterdam en nemen de vragen mee. Je eerste koffie is van ons.",
     "hero_cta1": "Ik doe mee →",
     "hero_cta2": "Bekijk komende tafels",
-    "hero_note": "€8 per meetup · geen abonnement · eerste koffie van ons",
+    "hero_note": "€10 incl. btw · geen abonnement · eerste drankje van ons",
     "r_head": "WOMEN'S MEETUPS AMSTERDAM",
     "r_table": "TABLE OF SIX · #001",
     "r_seat": "1x PLEK AAN TAFEL",
@@ -334,7 +334,7 @@
     "ev_full": "Vol? Zet me op de wachtlijst",
     "ev_reserve": "Reserveer mijn plek",
     "ev_cafe": "hidden spot volgt na de matching",
-    "ev_price": "€8 · eerste koffie inbegrepen",
+    "ev_price": "€10 incl. btw · eerste drankje inbegrepen",
     "ev_lang_nl": "Nederlands",
     "ev_lang_en": "Engels",
     "ev_lang_mix": "Nederlands + Engels",
@@ -436,7 +436,7 @@
       ],
       [
         "Wat kost het?",
-        "€8 per meetup, inclusief je eerste koffie en de gespreksvragen. Wat je verder bestelt, reken je zelf af bij het café."
+        "€10 per meetup, incl. btw en je eerste drankje en de gespreksvragen. Wat je verder bestelt, reken je zelf af bij het café."
       ],
       [
         "Hoe matchen jullie de tafels?",
@@ -501,7 +501,7 @@
     "usps": [
       [
         "Geen abonnement",
-        "€8 per meetup, eerste koffie inbegrepen. Geen lidmaatschap, geen jaarbedrag, nergens aan vast."
+        "€10 per meetup incl. btw, eerste drankje inbegrepen. Geen lidmaatschap, geen jaarbedrag, nergens aan vast."
       ],
       [
         "Een klein, zorgvuldig groepje",
