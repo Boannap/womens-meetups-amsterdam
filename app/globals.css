@@ -234,15 +234,15 @@ fieldset{border:0;display:flex;flex-direction:column;gap:8px}
 .chair{width:180px;margin:0 auto 20px;color:var(--wine)}
 /* footer */
 footer{background:var(--wine);color:var(--blush);padding:70px 0 30px}
-.ft{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+.ft{display:grid;grid-template-columns:1.3fr .8fr .9fr 1.4fr;gap:30px}
 footer .logo{color:var(--pink)}
 footer h4{font-family:var(--script);font-size:1.5rem;color:var(--pink);margin-bottom:8px;font-weight:700}
 footer ul{list-style:none;display:grid;gap:6px;font-size:.95rem}
 footer a{text-decoration:none}
 footer a:hover{text-decoration:underline}
 .copy{margin-top:50px;padding-top:20px;border-top:1px solid rgba(249,217,223,.2);font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;opacity:.75}
-.ft>div{min-width:0}footer li{overflow-wrap:anywhere}
-@media (max-width:800px){.ft{grid-template-columns:1fr 1fr}}@media (max-width:520px){.ft{grid-template-columns:1fr}}
+.ft>div{min-width:0}footer li{overflow-wrap:normal}footer .handle{display:inline-block;font-size:.92em;letter-spacing:-.01em;white-space:normal}
+@media (max-width:1180px){.ft{grid-template-columns:1fr 1fr}}@media (max-width:520px){.ft{grid-template-columns:1fr}}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (prefers-reduced-motion:reduce){.marquee .track{animation:none}}
 .lang a,.lang span{padding:.35em .8em;text-decoration:none;color:var(--wine)}.lang .on{background:var(--wine);color:var(--pink)}

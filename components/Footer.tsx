@@ -38,8 +38,8 @@ export default function Footer({ lang }: { lang: Lang }) {
           <div>
             <h4>{t.ft_follow}</h4>
             <ul>
-              <li><a href={`https://www.instagram.com/${INSTAGRAM}`} rel="noopener">Instagram: @{INSTAGRAM}</a></li>
-              <li>{t.ft_contact}: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+              <li><a href={`https://www.instagram.com/${INSTAGRAM}`} rel="noopener">Instagram: <span className="handle">{splitAmsterdam(`@${INSTAGRAM}`)}</span></a></li>
+              <li>{t.ft_contact}: <a className="handle" href={`mailto:${EMAIL}`}>{splitAmsterdam(EMAIL)}</a></li>
             </ul>
           </div>
         </div>
@@ -50,4 +50,11 @@ export default function Footer({ lang }: { lang: Lang }) {
       </div>
     </footer>
   );
+}
+
+/** Long handles may only wrap right before "amsterdam": "hello@womensmeetupsin" / "amsterdam.nl". */
+function splitAmsterdam(text: string) {
+  const i = text.lastIndexOf("amsterdam");
+  if (i <= 0) return text;
+  return (<>{text.slice(0, i)}<wbr />{text.slice(i)}</>);
 }
