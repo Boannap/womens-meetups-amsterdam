@@ -80,4 +80,4 @@ Staat in `public/boanna.jpg` (800 x 1000). Nieuwe foto? Vervang dat bestand met 
 - [ ] Echte meetupdata en cafés in `lib/events.json`
 - [ ] Instagram-naam en e-mailadres in `lib/site.ts`
 - [ ] Privacytekst en annuleringsvoorwaarden laten checken (`components/PrivacyPage.tsx`)
-- [ ] Domein, Supabase en later Mollie koppelen
+- [ ] Domein (womensmeetupsinamsterdam.nl), Supabase en later Mollie koppelen
