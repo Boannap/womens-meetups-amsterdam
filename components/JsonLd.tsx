@@ -40,7 +40,7 @@ export default function JsonLd({ lang }: { lang: Lang }) {
     inLanguage: Array.from(new Set(e.tables.map((tb) => (tb.lang === "mix" ? "nl" : tb.lang)))),
     maximumAttendeeCapacity: e.tables.length * 6,
     location: { "@type": "Place", name: `Café in ${e.areas}`, address: { "@type": "PostalAddress", addressLocality: "Amsterdam", addressCountry: "NL" } },
-    offers: { "@type": "Offer", price: PRICE_EUR, priceCurrency: "EUR", availability: "https://schema.org/InStock", url: `${home}#join` },
+    offers: { "@type": "Offer", price: PRICE_EUR, priceCurrency: "EUR", availability: e.soldOut || e.tables.every((tb) => tb.taken >= 6) ? "https://schema.org/SoldOut" : "https://schema.org/InStock", url: `${home}#join` },
     organizer: { "@id": `${SITE_URL}/#org` },
     performer: { "@id": `${SITE_URL}/#boanna` },
   }));
