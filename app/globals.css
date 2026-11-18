@@ -204,10 +204,20 @@ form.join{background:var(--paper);border-radius:30px;padding:36px;display:grid;g
 .field{display:flex;flex-direction:column;gap:6px}
 .field.full{grid-column:1/-1}
 label.l,legend{font-weight:700;font-size:.9rem;color:var(--wine)}
-input[type=text],input[type=email],select{font:inherit;padding:.7em .9em;border-radius:14px;border:2px solid #e3d3c6;background:#fff;color:var(--ink);width:100%}
+input[type=text],input[type=email],input[type=tel],select{font:inherit;padding:.7em .9em;border-radius:14px;border:2px solid #e3d3c6;background:#fff;color:var(--ink);width:100%}
 input:focus,select:focus{outline:none;border-color:var(--tomato)}
 fieldset{border:0;display:flex;flex-direction:column;gap:8px}
 .pills{display:flex;flex-wrap:wrap;gap:8px}
+.quiz{background:var(--cream,#fff6ee);border-radius:22px;padding:20px 20px 16px;border:2px dashed rgba(90,15,20,.18)}
+.quiz legend{font-family:var(--display);font-weight:700;font-size:1.35rem;color:var(--wine);padding:0 6px}
+.quiz legend .kicker{font-size:.8rem;margin-right:6px}
+.quiz-intro{font-size:.92rem;color:#5b3a3c;margin:2px 0 6px}
+.quiz-q{margin-top:10px}.quiz-n{font-weight:600;font-size:.95rem;margin-bottom:6px;color:var(--wine)}
+.quiz-result{margin-top:16px;border-radius:18px;padding:14px 16px;background:#fff;color:#7a5a5c;font-size:.92rem;transition:all .3s}
+.quiz-result.on{background:var(--wine);color:var(--blush)}
+.quiz-result small{display:block;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.quiz-result b{display:block;font-family:var(--display);font-size:1.5rem;color:var(--pink);margin:2px 0}
+.hint{font-size:.82rem;color:#7a5a5c}
 .pills label{cursor:pointer}
 .pills input{position:absolute;opacity:0;pointer-events:none}
 .pills span{display:inline-block;padding:.45em .95em;border-radius:999px;border:2px solid #e3d3c6;font-size:.92rem;transition:all .15s}

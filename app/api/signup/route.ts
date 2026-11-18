@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { quizType } from "@/lib/quiz";
 
 /**
  * Saves a sign-up in Supabase (table `signups`, see supabase/schema.sql).
@@ -20,13 +21,19 @@ export async function POST(req: Request) {
   // Honeypot: bots fill the hidden "website" field.
   if (str(body.website)) return NextResponse.json({ ok: true });
 
+  const quizAnswers = Array.isArray(body.quiz) ? body.quiz.slice(0, 5).map((a) => (typeof a === "number" ? a : null)) : [];
+  const contactPref = body.contact_pref === "email" ? "email" : "whatsapp_email";
   const row = {
     name: str(body.name, 80),
     email: str(body.email, 160).toLowerCase(),
     age: str(body.age, 20),
     language: str(body.language, 40),
     neighbourhood: str(body.neighbourhood, 60),
-    personality: str(body.personality, 40),
+    personality: quizType(quizAnswers) ?? "",
+    quiz: quizAnswers,
+    phone: contactPref === "whatsapp_email" ? str(body.phone, 24).replace(/[^+0-9 ()-]/g, "") : "",
+    contact_pref: contactPref,
+    whatsapp_consent: contactPref === "whatsapp_email" && body.whatsapp_consent === true,
     field: str(body.field, 80),
     hoping: list(body.hoping),
     days: list(body.days),
@@ -35,7 +42,8 @@ export async function POST(req: Request) {
     consent: body.consent === true,
   };
 
-  if (!row.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(row.email) || !row.consent) {
+  if (!row.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(row.email) || !row.consent || !row.personality
+    || (row.contact_pref === "whatsapp_email" && (row.phone.replace(/\D/g, "").length < 8 || !row.whatsapp_consent))) {
     return NextResponse.json({ error: "missing fields" }, { status: 422 });
   }
 

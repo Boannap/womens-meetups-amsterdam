@@ -323,7 +323,79 @@
         "A girls' afternoon, every month",
         "Once a month, soon every two weeks, usually on a Sunday afternoon. €10 incl. VAT and service costs, no membership."
       ]
-    ]
+    ],
+    "j_phone": "Phone number (for WhatsApp)",
+    "j_contact": "How do you want your table details?",
+    "j_contact_opts": [
+      "WhatsApp + email",
+      "Email only"
+    ],
+    "j_contact_note": "The café and time always come by email too.",
+    "j_wa_consent": "I'm fine with receiving WhatsApp messages about my table and the community group.",
+    "q_kicker": "Quick quiz",
+    "q_title": "Which tablemate are you?",
+    "q_intro": "Five quick questions, no wrong answers. We use your type to match your table.",
+    "q_result": "You're",
+    "quiz": [
+      [
+        "At a party you're usually…",
+        [
+          "right in the middle of the group",
+          "deep in a chat with one person",
+          "looking around first, then joining in"
+        ]
+      ],
+      [
+        "After a busy week you recharge with…",
+        [
+          "a night out with friends",
+          "a quiet evening on the couch",
+          "something new: a museum, a walk, a market"
+        ]
+      ],
+      [
+        "Your favourite kind of conversation…",
+        [
+          "dreams, feelings and life",
+          "funny stories and what's new in the city",
+          "a bit of everything"
+        ]
+      ],
+      [
+        "A silence at the table feels…",
+        [
+          "awkward, I'll fill it",
+          "fine, a moment to breathe",
+          "like a chance for a deeper question"
+        ]
+      ],
+      [
+        "Your perfect Sunday in Amsterdam…",
+        [
+          "brunch with a big group",
+          "a hidden café with a good book",
+          "cycling through a neighbourhood I don't know yet"
+        ]
+      ]
+    ],
+    "types": {
+      "chatter": [
+        "The Chatterbox",
+        "You talk easily and bring the energy. Nobody's shy for long at your table."
+      ],
+      "connector": [
+        "The Connector",
+        "You ask the good questions and bring people together."
+      ],
+      "explorer": [
+        "The Explorer",
+        "Calm, curious and always up for a new spot or plan."
+      ],
+      "listener": [
+        "The Listener",
+        "A great listener who loves a real, deep conversation."
+      ]
+    }
   },
   "nl": {
     "meta_title": "Nieuwe vriendinnen maken in Amsterdam | Koffiemeetups voor vrouwen",
@@ -649,6 +721,78 @@
         "Elke maand een meidenmiddag",
         "Eén keer per maand, binnenkort elke twee weken, meestal op zondagmiddag. €10 incl. btw en servicekosten, geen lidmaatschap."
       ]
-    ]
+    ],
+    "j_phone": "Telefoonnummer (voor WhatsApp)",
+    "j_contact": "Hoe wil je de details van je tafel ontvangen?",
+    "j_contact_opts": [
+      "WhatsApp + mail",
+      "Alleen mail"
+    ],
+    "j_contact_note": "Het café en de tijd krijg je altijd ook per mail.",
+    "j_wa_consent": "Ik vind het goed om WhatsAppjes te krijgen over mijn tafel en de communitygroep.",
+    "q_kicker": "Snelle quiz",
+    "q_title": "Welke tafelgenoot ben jij?",
+    "q_intro": "Vijf snelle vragen, er zijn geen foute antwoorden. Met jouw type matchen we je tafel.",
+    "q_result": "Jij bent",
+    "quiz": [
+      [
+        "Op een feestje ben jij meestal…",
+        [
+          "midden in de groep",
+          "diep in gesprek met één persoon",
+          "eerst even rondkijken, dan aanhaken"
+        ]
+      ],
+      [
+        "Na een drukke week laad jij op met…",
+        [
+          "een avondje uit met vriendinnen",
+          "een rustige avond op de bank",
+          "iets nieuws: een museum, een wandeling, een markt"
+        ]
+      ],
+      [
+        "Jouw favoriete soort gesprek…",
+        [
+          "dromen, gevoelens en het leven",
+          "grappige verhalen en wat er nieuw is in de stad",
+          "van alles een beetje"
+        ]
+      ],
+      [
+        "Een stilte aan tafel voelt…",
+        [
+          "ongemakkelijk, ik vul hem op",
+          "prima, even ademhalen",
+          "als een kans voor een diepere vraag"
+        ]
+      ],
+      [
+        "Jouw perfecte zondag in Amsterdam…",
+        [
+          "brunchen met een grote groep",
+          "een verstopt café met een goed boek",
+          "fietsen door een buurt die ik nog niet ken"
+        ]
+      ]
+    ],
+    "types": {
+      "chatter": [
+        "De Kletskous",
+        "Jij praat makkelijk en brengt de energie. Aan jouw tafel is niemand lang verlegen."
+      ],
+      "connector": [
+        "De Verbinder",
+        "Jij stelt de goede vragen en brengt mensen samen."
+      ],
+      "explorer": [
+        "De Ontdekker",
+        "Rustig, nieuwsgierig en altijd in voor een nieuw plekje of plan."
+      ],
+      "listener": [
+        "De Luisteraar",
+        "Een topluisteraar die houdt van een echt, diep gesprek."
+      ]
+    }
   }
 }
