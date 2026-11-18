@@ -1,7 +1,7 @@
 {
   "en": {
-    "meta_title": "Women's Meetups in Amsterdam | Small coffee meetups in hidden spots, no subscription",
-    "meta_desc": "New friends in Amsterdam, one coffee at a time. Table of Six: six women, matched by personality, in the cosiest cafés and hidden spots of Amsterdam. €10 per meetup, no subscription.",
+    "meta_title": "Make new friends in Amsterdam | Coffee meetups for women",
+    "meta_desc": "Looking for new friends in Amsterdam? Six women, matched by personality, meet for coffee in cute cafés and hidden spots. Introvert friendly, €10, no membership.",
     "nav_meetups": "Meetups",
     "nav_exp": "The experience",
     "nav_how": "How it works",
@@ -180,6 +180,18 @@
       [
         "Where do the meetups happen?",
         "In cosy cafés across Amsterdam: De Pijp, Jordaan, Oost, West, Noord and Centrum. You get the exact café two days before."
+      ],
+      [
+        "How do I make friends in Amsterdam as an adult?",
+        "Small, regular meetups work best: you meet the same kind of people more than once and conversations go deeper than at a big event. That is exactly what a Table of Six is. Sign up, get matched with five women and keep in touch through the community group afterwards."
+      ],
+      [
+        "I just moved to Amsterdam. Is this for expats too?",
+        "Yes. Many women at our tables are new in town. Pick an English table, or a mixed Dutch and English one if you'd like to meet Dutch girls and practise a little."
+      ],
+      [
+        "Can I order tea instead of coffee?",
+        "Of course. Your first drink is included, whether that's a cappuccino, fresh mint tea, chai or matcha."
       ]
     ],
     "cl_title": "Your chair is already pulled out.",
@@ -282,11 +294,40 @@
     "pr_service": "Service costs",
     "pr_vat": "VAT (21%)",
     "pr_total": "Total",
-    "pr_note": "All prices include VAT. No extra costs at checkout."
+    "pr_note": "All prices include VAT. No extra costs at checkout.",
+    "k_kicker": "Make friends in Amsterdam",
+    "k_title": "Looking for new friends in Amsterdam? Pull up a chair.",
+    "k_text": "Making friends as an adult is hard, especially in a busy city. Whether you just moved here, your friends moved away or you simply want more girls to grab a coffee with, a small table is the easiest place to start.",
+    "k_items": [
+      [
+        "New in Amsterdam",
+        "Just moved here for work or study? Dutch girls, expats and internationals share our tables, so you meet locals and newcomers at the same time."
+      ],
+      [
+        "Introvert or extrovert",
+        "Six is small enough for quieter girls to feel at ease and big enough for the talkers to have fun. We mix personalities on purpose and the conversation cards do the heavy lifting."
+      ],
+      [
+        "A coffee date with new girlfriends",
+        "Think of it as a friend date, not a dating event. Coffee, tea, chai or matcha: your first drink is on us."
+      ],
+      [
+        "Cute cafés and hidden spots",
+        "We pick cosy cafés and hidden gems in De Pijp, Jordaan, Oost, West and Noord. Half the fun is finding a new favourite spot in the city."
+      ],
+      [
+        "Meet new people, minus the crowd",
+        "No loud bar, no name tags, no room full of fifty strangers. Just a real conversation with five women matched to you."
+      ],
+      [
+        "A girls' afternoon, every month",
+        "Once a month, soon every two weeks, usually on a Sunday afternoon. €10 incl. VAT and service costs, no membership."
+      ]
+    ]
   },
   "nl": {
-    "meta_title": "Women's Meetups in Amsterdam | Kleine koffiemeetups op verborgen plekjes, geen abonnement",
-    "meta_desc": "Nieuwe vriendinnen in Amsterdam, één koffietje tegelijk. Table of Six: zes vrouwen, gematcht op persoonlijkheid, in de gezelligste cafés en verborgen plekjes van Amsterdam. €10 per meetup, geen abonnement.",
+    "meta_title": "Nieuwe vriendinnen maken in Amsterdam | Koffiemeetups voor vrouwen",
+    "meta_desc": "Op zoek naar nieuwe vriendinnen in Amsterdam? Zes vrouwen, gematcht op persoonlijkheid, drinken koffie in leuke cafés en op verborgen plekjes. Ook voor introverten, €10.",
     "nav_meetups": "Meetups",
     "nav_exp": "De ervaring",
     "nav_how": "Hoe het werkt",
@@ -465,6 +506,18 @@
       [
         "Waar zijn de meetups?",
         "In gezellige cafés door heel Amsterdam: De Pijp, Jordaan, Oost, West, Noord en Centrum. Het precieze café hoor je twee dagen van tevoren."
+      ],
+      [
+        "Hoe maak je nieuwe vriendinnen in Amsterdam?",
+        "Kleine, terugkerende meetups werken het best: je ziet mensen vaker en de gesprekken gaan dieper dan op een groot event. Dat is precies wat een Table of Six is. Meld je aan, word gematcht met vijf vrouwen en houd daarna contact via de communitygroep."
+      ],
+      [
+        "Ik ben net in Amsterdam komen wonen. Kan ik meedoen?",
+        "Zeker. Veel vrouwen aan onze tafels zijn nieuw in de stad. Kies een Nederlandse, Engelse of gemengde tafel, wat jij het fijnst vindt."
+      ],
+      [
+        "Kan ik ook thee bestellen in plaats van koffie?",
+        "Natuurlijk. Je eerste drankje is inbegrepen, of dat nu een cappuccino, verse muntthee, chai of matcha is."
       ]
     ],
     "cl_title": "Je stoel staat al klaar.",
@@ -567,6 +620,35 @@
     "pr_service": "Servicekosten",
     "pr_vat": "Btw (21%)",
     "pr_total": "Totaal",
-    "pr_note": "Alle prijzen zijn inclusief btw. Geen extra kosten bij het afrekenen."
+    "pr_note": "Alle prijzen zijn inclusief btw. Geen extra kosten bij het afrekenen.",
+    "k_kicker": "Vriendinnen maken in Amsterdam",
+    "k_title": "Op zoek naar nieuwe vriendinnen in Amsterdam? Schuif aan.",
+    "k_text": "Als volwassene nieuwe vrienden maken is lastig, zeker in een drukke stad. Ben je net verhuisd, zijn je vriendinnen weggetrokken of wil je gewoon meer meiden om mee te koffiedrinken? Aan een kleine tafel begin je het makkelijkst.",
+    "k_items": [
+      [
+        "Nieuw in Amsterdam",
+        "Net verhuisd voor je werk of studie? Aan onze tafels zitten Nederlandse meiden en internationals samen, dus je leert meteen mensen uit de stad kennen."
+      ],
+      [
+        "Introvert of extravert",
+        "Met z'n zessen ben je klein genoeg om je als stillere meid op je gemak te voelen en groot genoeg voor de praters. We mixen persoonlijkheden bewust en de gesprekskaartjes doen de rest."
+      ],
+      [
+        "Een koffiedate met nieuwe vriendinnen",
+        "Zie het als een vriendinnendate, niet als daten. Koffie, thee, chai of matcha: je eerste drankje is van ons."
+      ],
+      [
+        "Leuke cafés en verborgen plekjes",
+        "We kiezen gezellige cafés en hidden spots in De Pijp, de Jordaan, Oost, West en Noord. De helft van de lol is een nieuw favoriet plekje in de stad ontdekken."
+      ],
+      [
+        "Nieuwe mensen ontmoeten, zonder grote groep",
+        "Geen luide kroeg, geen naamstickers, geen zaal vol vijftig onbekenden. Gewoon een echt gesprek met vijf vrouwen die bij je passen."
+      ],
+      [
+        "Elke maand een meidenmiddag",
+        "Eén keer per maand, binnenkort elke twee weken, meestal op zondagmiddag. €10 incl. btw en servicekosten, geen lidmaatschap."
+      ]
+    ]
   }
 }

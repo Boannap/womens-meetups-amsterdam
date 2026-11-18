@@ -26,9 +26,12 @@ export function pageMeta(lang: Lang, paths: { en: string; nl: string }, title?: 
     twitter: { card: "summary_large_image", title: tt, description: dd, images: ["/og.png"] },
     icons: { icon: "/favicon.svg" },
     keywords: [
-      "women's meetups Amsterdam", "make friends in Amsterdam", "new friends Amsterdam", "hidden spots Amsterdam",
-      "cosy cafés Amsterdam", "coffee meetup Amsterdam", "koffiemeetups vrouwen Amsterdam", "vriendinnen maken Amsterdam",
-      "verborgen plekjes Amsterdam", "Table of Six",
+      "make friends in Amsterdam", "make new friends Amsterdam", "meet new people Amsterdam", "women's meetups Amsterdam",
+      "meetups Amsterdam", "girls meetup Amsterdam", "friend date Amsterdam", "coffee meetup Amsterdam", "expat women Amsterdam",
+      "introvert friendly meetup Amsterdam", "cute cafés Amsterdam", "cosy cafés Amsterdam", "hidden spots Amsterdam", "hidden gems Amsterdam",
+      "nieuwe vriendinnen maken Amsterdam", "nieuwe vrienden maken Amsterdam", "vriendinnen zoeken Amsterdam", "mensen ontmoeten Amsterdam",
+      "nieuwe mensen leren kennen Amsterdam", "koffiedate Amsterdam", "meidenmiddag Amsterdam", "leuke cafés Amsterdam",
+      "verborgen plekjes Amsterdam", "introvert nieuwe mensen ontmoeten", "Table of Six",
     ],
   };
 }

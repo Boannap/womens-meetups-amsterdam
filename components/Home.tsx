@@ -200,6 +200,23 @@ export default function Home({ lang }: { lang: Lang }) {
           </div>
         </section>
 
+        {/* NEW FRIENDS (SEO) */}
+        <section className="sec" id="new-friends" style={{ paddingTop: 40 }}>
+          <div className="wrap">
+            <span className="kicker">{t.k_kicker}</span>
+            <h2 className="title" style={{ maxWidth: "22ch" }}>{t.k_title}</h2>
+            <p className="lead" style={{ marginTop: 14, maxWidth: "60ch" }}>{t.k_text}</p>
+            <div className="usp-grid" style={{ marginTop: 34 }}>
+              {t.k_items.map(([h, p]) => (
+                <article className="usp reveal" key={h}>
+                  <h3>{h}</h3>
+                  <p>{p}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* FAQ */}
         <section className="sec" id="faq" style={{ paddingTop: 40 }}>
           <div className="wrap">
