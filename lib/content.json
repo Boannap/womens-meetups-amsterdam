@@ -78,14 +78,16 @@
     "c_btn": "Shuffle a question",
     "c_label": "question",
     "questions": [
-      "What did sixteen-year-old you think you'd be doing right now?",
+      "What's something you changed your mind about in the last few years?",
+      "When do you feel most like yourself?",
+      "What's a moment from this year you'd like to relive?",
+      "Who's someone who quietly changed your life?",
+      "What are you secretly proud of?",
+      "What does a really good friendship feel like to you?",
+      "What would you try if you knew nobody would judge you?",
+      "What's something you're still figuring out?",
       "Which spot in Amsterdam would you never tell a tourist about?",
-      "What are you proud of that nobody ever asks about?",
-      "Which song is your current personality?",
-      "What would you do with a completely free Tuesday?",
-      "What's a small thing that makes Amsterdam feel like home?",
-      "What's something you want to get braver at this year?",
-      "Best advice you ever got from a friend?"
+      "What did sixteen-year-old you think you'd be doing right now?"
     ],
     "j_kicker": "Join",
     "j_title": "Tell us a little about you.",
@@ -113,7 +115,7 @@
       "Student",
       "Something else"
     ],
-    "j_hoping": "I'm hoping for…",
+    "j_hoping": "What do you most want to get out of the meetup?",
     "j_hopes": [
       "New friends",
       "Someone to go out with",
@@ -395,7 +397,29 @@
         "The Listener",
         "A great listener who loves a real, deep conversation."
       ]
-    }
+    },
+    "ev_soldout": "Sold out",
+    "j_event": "Which edition?",
+    "j_event_wait": "waitlist",
+    "j_found": "How did you find us?",
+    "j_found_opts": [
+      "Instagram",
+      "TikTok",
+      "Google",
+      "Through a friend",
+      "Something else"
+    ],
+    "j_wish": "What kind of girls would you love at your table, and why? (optional)",
+    "j_wish_ph": "For example: girls who love art, someone new in town too…",
+    "j_ease": "Quick one: was this easy to fill in?",
+    "j_ease_opts": [
+      "😍 Super easy",
+      "🙂 Fine",
+      "😕 Could be easier"
+    ],
+    "j_submit_wait": "Put me on the waitlist →",
+    "j_ok_wait_t": "You're on the waitlist ✿",
+    "j_ok_wait_p": "This edition is full, but you're on the list. If a seat opens up, or when we add a table, you'll hear from us first."
   },
   "nl": {
     "meta_title": "Nieuwe vriendinnen maken in Amsterdam | Koffiemeetups voor vrouwen",
@@ -476,14 +500,16 @@
     "c_btn": "Nieuwe vraag",
     "c_label": "vraag",
     "questions": [
-      "Wat dacht jij op je zestiende dat je nu zou doen?",
+      "Waar ben je de afgelopen jaren anders over gaan denken?",
+      "Wanneer voel je je het meest jezelf?",
+      "Welk moment van dit jaar zou je nog een keer willen beleven?",
+      "Wie heeft jouw leven ongemerkt veranderd?",
+      "Waar ben je stiekem trots op?",
+      "Hoe voelt een echt goede vriendschap voor jou?",
+      "Wat zou je proberen als niemand je zou beoordelen?",
+      "Waar ben je nog steeds achter aan het komen?",
       "Welk plekje in Amsterdam zou je nooit aan een toerist verklappen?",
-      "Waar ben je trots op waar niemand ooit naar vraagt?",
-      "Welk liedje is op dit moment jouw persoonlijkheid?",
-      "Wat zou je doen met een compleet vrije dinsdag?",
-      "Welk klein ding maakt dat Amsterdam als thuis voelt?",
-      "Waar wil je dit jaar wat dapperder in worden?",
-      "Wat is het beste advies dat je ooit van een vriendin kreeg?"
+      "Wat dacht jij op je zestiende dat je nu zou doen?"
     ],
     "j_kicker": "Aanmelden",
     "j_title": "Vertel ons iets over jezelf.",
@@ -511,7 +537,7 @@
       "Student",
       "Iets anders"
     ],
-    "j_hoping": "Ik hoop op…",
+    "j_hoping": "Wat wil je het liefst uit de meetup halen?",
     "j_hopes": [
       "Nieuwe vriendinnen",
       "Iemand om mee uit te gaan",
@@ -793,6 +819,28 @@
         "De Luisteraar",
         "Een topluisteraar die houdt van een echt, diep gesprek."
       ]
-    }
+    },
+    "ev_soldout": "Uitverkocht",
+    "j_event": "Voor welke editie?",
+    "j_event_wait": "wachtlijst",
+    "j_found": "Hoe heb je ons gevonden?",
+    "j_found_opts": [
+      "Instagram",
+      "TikTok",
+      "Google",
+      "Via een vriendin",
+      "Anders"
+    ],
+    "j_wish": "Met wat voor meiden zou je graag aan tafel zitten, en waarom? (optioneel)",
+    "j_wish_ph": "Bijvoorbeeld: meiden die van kunst houden, iemand die ook net nieuw is in de stad…",
+    "j_ease": "Korte vraag: was dit makkelijk in te vullen?",
+    "j_ease_opts": [
+      "😍 Super makkelijk",
+      "🙂 Prima",
+      "😕 Kon makkelijker"
+    ],
+    "j_submit_wait": "Zet me op de wachtlijst →",
+    "j_ok_wait_t": "Je staat op de wachtlijst ✿",
+    "j_ok_wait_p": "Deze editie is vol, maar je staat op de lijst. Komt er een plek vrij of openen we een extra tafel, dan hoor je het als eerste."
   }
 }

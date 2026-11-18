@@ -11,6 +11,7 @@ export type MeetupEvent = {
   title: Record<Lang, string>;
   areas: string;
   tables: { lang: TableLang; taken: number }[];
+  soldOut?: boolean;
 };
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://womensmeetupsinamsterdam.nl").replace(/\/$/, "");

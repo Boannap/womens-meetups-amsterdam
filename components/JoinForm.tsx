@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import type { Dict, Lang } from "@/lib/site";
+import { useEffect, useState } from "react";
+import { EVENTS, type Dict, type Lang } from "@/lib/site";
 import { quizType, type TypeKey } from "@/lib/quiz";
 
 // €10 incl. 21% VAT: VAT = 10 - 10/1.21 = 1.74; service costs = Mollie iDEAL fee.
@@ -12,6 +12,16 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [answers, setAnswers] = useState<(number | null)[]>(() => t.quiz.map(() => null));
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
   const type: TypeKey | null = quizType(answers);
+  const upcoming = EVENTS.filter((e) => new Date(e.end) > new Date());
+  const isFull = (id: string) => { const e = upcoming.find((x) => x.id === id); return !!e && (!!e.soldOut || e.tables.every((tb) => tb.taken >= 6)); };
+  const [eventId, setEventId] = useState<string>(() => (upcoming.find((e) => !isFull(e.id)) ?? upcoming[0])?.id ?? "");
+  const waitlist = isFull(eventId);
+  useEffect(() => {
+    const pick = (ev: Event) => setEventId((ev as CustomEvent<string>).detail);
+    window.addEventListener("wma:pick-event", pick);
+    return () => window.removeEventListener("wma:pick-event", pick);
+  }, []);
+  const fmtDate = (d: string) => new Intl.DateTimeFormat(lang === "nl" ? "nl-NL" : "en-GB", { timeZone: "Europe/Amsterdam", weekday: "short", day: "numeric", month: "short" }).format(new Date(d));
   const typeInfo = type ? (t.types as Record<TypeKey, string[]>)[type] : null;
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -27,6 +37,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       whatsapp_consent: contact === "whatsapp_email" && fd.get("wa_consent") === "on",
       hoping: fd.getAll("hoping"), days: fd.getAll("days"), instagram: fd.get("instagram"),
       consent: fd.get("consent") === "on", site_lang: lang,
+      event_id: eventId, waitlist, found_via: fd.get("found_via"), table_wish: fd.get("table_wish"), form_ease: fd.get("form_ease"),
       website: fd.get("website"), // honeypot, must stay empty
     };
     setState("sending");
@@ -41,16 +52,16 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   if (state === "ok") {
     return (
       <div className="join" style={{ display: "block" }}>
-        <div className="ok"><h3>{t.j_ok_t}</h3><p>{t.j_ok_p}</p></div>
+        <div className="ok"><h3>{waitlist ? t.j_ok_wait_t : t.j_ok_t}</h3><p>{waitlist ? t.j_ok_wait_p : t.j_ok_p}</p></div>
       </div>
     );
   }
 
-  const pills = (name: string, arr: string[], type: "radio" | "checkbox") => (
+  const pills = (name: string, arr: string[], type: "radio" | "checkbox", req = true) => (
     <div className="pills">
       {arr.map((o, i) => (
         <label key={o}>
-          <input type={type} name={name} value={o} required={type === "radio" && i === 0} />
+          <input type={type} name={name} value={o} required={req && type === "radio" && i === 0} />
           <span>{o}</span>
         </label>
       ))}
@@ -59,6 +70,16 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
 
   return (
     <form className="join" onSubmit={onSubmit} noValidate>
+      {upcoming.length > 0 && (
+        <fieldset className="field full"><legend>{t.j_event}</legend>
+          <div className="pills">
+            {upcoming.map((e) => (
+              <label key={e.id}><input type="radio" name="event" value={e.id} checked={eventId === e.id} onChange={() => setEventId(e.id)} />
+                <span>{fmtDate(e.date)}{isFull(e.id) ? ` · ${t.j_event_wait}` : ""}</span></label>
+            ))}
+          </div>
+        </fieldset>
+      )}
       <div className="field"><label className="l" htmlFor="fn">{t.j_name}</label><input id="fn" name="name" type="text" autoComplete="given-name" required /></div>
       <div className="field"><label className="l" htmlFor="fe">{t.j_email}</label><input id="fe" name="email" type="email" autoComplete="email" required /></div>
       <fieldset className="field full"><legend>{t.j_age}</legend>{pills("age", t.ages, "radio")}</fieldset>
@@ -118,22 +139,25 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
           </label>
         </>
       )}
+      <div className="field full"><label className="l" htmlFor="fw">{t.j_wish}</label><textarea id="fw" name="table_wish" rows={3} maxLength={500} placeholder={t.j_wish_ph} /></div>
+      <fieldset className="field full"><legend>{t.j_found}</legend>{pills("found_via", t.j_found_opts, "radio", false)}</fieldset>
       <div className="field full"><label className="l" htmlFor="fi">{t.j_insta}</label><input id="fi" name="instagram" type="text" placeholder="@" /></div>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="vh" aria-hidden="true" />
-      <div className="price-box">
+      {!waitlist && <div className="price-box">
         <h4>{t.pr_title}</h4>
         <div className="r"><span>{t.pr_seat}</span><span>€{PRICE.seat}</span></div>
         <div className="r"><span>{t.pr_service}</span><span>€{PRICE.service}</span></div>
         <div className="r"><span>{t.pr_vat}</span><span>€{PRICE.vat}</span></div>
         <div className="r t"><span>{t.pr_total}</span><span>€{PRICE.total}</span></div>
         <small>{t.pr_note}</small>
-      </div>
+      </div>}
+      <fieldset className="field full"><legend>{t.j_ease}</legend>{pills("form_ease", t.j_ease_opts, "radio", false)}</fieldset>
       <label className="consent full field" style={{ flexDirection: "row" }}>
         <input type="checkbox" name="consent" required />
         <span>{t.j_consent}</span>
       </label>
       <div className="full field" style={{ alignItems: "flex-start" }}>
-        <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : t.j_submit}</button>
+        <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : waitlist ? t.j_submit_wait : t.j_submit}</button>
         {state === "error" && <p style={{ color: "var(--tomato)", marginTop: 8 }}>{t.j_error}</p>}
       </div>
     </form>

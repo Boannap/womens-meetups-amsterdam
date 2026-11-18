@@ -29,7 +29,7 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
         {list.length === 0 && <p className="empty">{t.ev_none}</p>}
         {list.map((e) => {
           const tables = e.tables.filter((tb) => filter === "all" || tb.lang === filter);
-          const left = tables.reduce((n, tb) => n + (6 - tb.taken), 0);
+          const left = e.soldOut ? 0 : tables.reduce((n, tb) => n + (6 - tb.taken), 0);
           return (
             <article className="ev" key={e.id}>
               <div className="ev-date scallop">
@@ -55,9 +55,9 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
                 </div>
               </div>
               <div className="ev-r">
-                {left > 0 && <span className="left">{left} {t.ev_spots}</span>}
+                {left > 0 ? <span className="left">{left} {t.ev_spots}</span> : <span className="left soldout">{t.ev_soldout}</span>}
                 <span className="price">{t.ev_price}</span>
-                <a className="btn btn-wine" href="#join">{left > 0 ? t.ev_reserve : t.ev_full}</a>
+                <a className="btn btn-wine" href="#join" onClick={() => window.dispatchEvent(new CustomEvent("wma:pick-event", { detail: e.id }))}>{left > 0 ? t.ev_reserve : t.ev_full}</a>
               </div>
             </article>
           );

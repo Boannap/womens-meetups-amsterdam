@@ -11,13 +11,14 @@
     "tables": [
       {
         "lang": "nl",
-        "taken": 1
+        "taken": 6
       },
       {
         "lang": "mix",
-        "taken": 0
+        "taken": 6
       }
-    ]
+    ],
+    "soldOut": true
   },
   {
     "id": "2027-01-10",
