@@ -21,7 +21,7 @@ export default function Home({ lang }: { lang: Lang }) {
 
   return (
     <div lang={lang}>
-      <Header lang={lang} alt={homePath(lang === "nl" ? "en" : "nl")} />
+      <Header lang={lang} alt={homePath(lang === "nl" ? "en" : "nl", lang)} />
       <main>
         {/* HERO */}
         <section className="hero">

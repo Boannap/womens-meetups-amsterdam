@@ -1,9 +1,10 @@
-import { dict, EVENTS, SITE_URL, SITE_NAME, INSTAGRAM, PRICE_EUR, BOANNA_SOCIALS, homePath, hostPath, type Lang } from "@/lib/site";
+import { dict, EVENTS, baseUrl, absUrl, ROUTES, SITE_NAME, INSTAGRAM, PRICE_EUR, BOANNA_SOCIALS, type Lang } from "@/lib/site";
 
 /** Structured data for Google and AI answer engines: Organization, Person (host), Events, FAQ. */
 export default function JsonLd({ lang }: { lang: Lang }) {
   const t = dict(lang);
-  const home = SITE_URL + (homePath(lang) === "/" ? "/" : homePath(lang));
+  const SITE_URL = baseUrl(lang);
+  const home = absUrl(lang, ROUTES.home[lang]);
   const org = {
     "@type": "Organization",
     "@id": `${SITE_URL}/#org`,
@@ -23,7 +24,7 @@ export default function JsonLd({ lang }: { lang: Lang }) {
     jobTitle: "Founder & host, Women's Meetups in Amsterdam",
     knowsAbout: ["musical theatre", "content creation", "presenting", "community building"],
     description: t.b_page_desc,
-    url: SITE_URL + hostPath(lang),
+    url: absUrl(lang, ROUTES.founder[lang]),
     homeLocation: { "@type": "City", name: "Amsterdam" },
     image: `${SITE_URL}/boanna.jpg`,
     sameAs: BOANNA_SOCIALS.map((s) => s.url),

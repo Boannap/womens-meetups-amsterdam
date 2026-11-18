@@ -1,15 +1,16 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/site";
+import { ROUTES, absUrl, type Lang } from "@/lib/site";
+
+const PRIORITY = { home: 1, founder: 0.8, privacy: 0.3 } as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages: [string, string, number][] = [["/", "/nl", 1], ["/founder", "/nl/founder", 0.8], ["/privacy", "/nl/privacy", 0.3]];
-  return pages.flatMap(([en, nl, priority]) =>
-    [en, nl].map((path) => ({
-      url: SITE_URL + (path === "/" ? "" : path),
+  return (Object.keys(ROUTES) as (keyof typeof ROUTES)[]).flatMap((k) =>
+    (["en", "nl"] as Lang[]).map((lang) => ({
+      url: absUrl(lang, ROUTES[k][lang]),
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
-      priority,
-      alternates: { languages: { en: SITE_URL + (en === "/" ? "" : en), nl: SITE_URL + nl } },
+      priority: PRIORITY[k],
+      alternates: { languages: { en: absUrl("en", ROUTES[k].en), nl: absUrl("nl", ROUTES[k].nl) } },
     }))
   );
 }

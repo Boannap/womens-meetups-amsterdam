@@ -12,7 +12,7 @@ export default function HostPage({ lang }: { lang: Lang }) {
   const home = homePath(lang);
   return (
     <div lang={lang}>
-      <Header lang={lang} alt={hostPath(lang === "nl" ? "en" : "nl")} />
+      <Header lang={lang} alt={hostPath(lang === "nl" ? "en" : "nl", lang)} />
       <main>
         <section className="sec host" style={{ minHeight: "80vh" }}>
           <div className="wrap host-grid" style={{ alignItems: "start" }}>

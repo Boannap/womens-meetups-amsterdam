@@ -37,7 +37,7 @@ export default function PrivacyPage({ lang }: { lang: Lang }) {
   const c = COPY[lang];
   return (
     <div lang={lang}>
-      <Header lang={lang} alt={privacyPath(lang === "nl" ? "en" : "nl")} />
+      <Header lang={lang} alt={privacyPath(lang === "nl" ? "en" : "nl", lang)} />
       <main className="sec">
         <div className="wrap faq story-page">
           <h1 className="title" style={{ marginBottom: 30 }}>{c.title}</h1>

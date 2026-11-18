@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { SITE_URL, PRICE_EUR } from "@/lib/site";
+import { baseUrl, absUrl, ROUTES, PRICE_EUR } from "@/lib/site";
 
 /**
  * STEP 2 (later): Mollie payment for one seat.
@@ -14,7 +14,8 @@ export async function POST(req: Request) {
   const { eventId, email, lang } = (await req.json().catch(() => ({}))) as { eventId?: string; email?: string; lang?: string };
   if (!eventId) return NextResponse.json({ error: "eventId required" }, { status: 422 });
 
-  const home = lang === "nl" ? `${SITE_URL}/nl` : SITE_URL;
+  const l = lang === "nl" ? "nl" : "en";
+  const home = absUrl(l, ROUTES.home[l]);
   const res = await fetch("https://api.mollie.com/v2/payments", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
@@ -22,7 +23,7 @@ export async function POST(req: Request) {
       amount: { currency: "EUR", value: PRICE_EUR },
       description: `Table of Six ${eventId} · €10.00 incl. €1.74 VAT and €0.32 service costs`,
       redirectUrl: `${home}?paid=1#join`,
-      webhookUrl: `${SITE_URL}/api/mollie-webhook`,
+      webhookUrl: `${baseUrl(l)}/api/mollie-webhook`,
       locale: lang === "nl" ? "nl_NL" : "en_GB",
       metadata: { eventId, email },
     }),
