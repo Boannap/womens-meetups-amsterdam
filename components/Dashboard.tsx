@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 type Data = any;
 
 const SECTION_NAMES: Record<string, string> = {
-  top: "Bovenaan (header)", meetups: "Komende tafels", experience: "De ervaring", how: "Hoe het werkt", join: "Aanmeldformulier",
+  top: "Bovenaan (header)", why: "Waarom het anders is", meetups: "Komende tafels", experience: "De ervaring", how: "Hoe het werkt", join: "Aanmeldformulier",
   faq: "Vragen", "new-friends": "Vriendinnen maken", reviews: "Reviews", gallery: "Foto's",
 };
 const TYPE_NAMES: Record<string, string> = { chatter: "Kletskous", connector: "Verbinder", explorer: "Ontdekker", listener: "Luisteraar" };

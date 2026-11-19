@@ -84,8 +84,11 @@ export default function Tracker() {
     document.addEventListener("click", onClick, { capture: true });
 
     const timer = setInterval(() => flush(), 15000);
+    let lastLeave = -5000;
     const leave = () => {
       const now = performance.now();
+      if (now - lastLeave < 1500) return;
+      lastLeave = now;
       seen.forEach((s, id) => { const t = s.total + (s.since !== null ? now - s.since : 0); if (t > 800) track("section", id, t / 1000); s.total = 0; s.since = s.since !== null ? now : null; });
       track("time", location.pathname, (now - start) / 1000);
       flush(true);
