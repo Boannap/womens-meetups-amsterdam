@@ -30,7 +30,6 @@ export function signature(lang: Lang = "nl") {
 <tr><td style="vertical-align:middle;padding-right:16px"><img src="${MAIL_BASE}/mail/logo.png" width="72" height="72" alt="Women's Meetups in Amsterdam" style="display:block;border-radius:50%"></td>
 <td style="vertical-align:middle">
 <img src="${MAIL_BASE}/mail/handtekening.png" width="150" height="50" alt="Boanna" style="display:block;margin:0 0 2px -4px">
-<div style="${sans};font-size:14px;color:${C.wine};font-weight:700">Boanna Pieterse</div>
 <div style="${sans};font-size:13px;color:${C.soft}">${role} · Women's Meetups in Amsterdam</div>
 <div style="${sans};font-size:13px;margin-top:4px"><a href="${MAIL_BASE}" style="color:${C.tomato};text-decoration:none">womensmeetupsinamsterdam.nl</a> · <a href="https://www.instagram.com/womensmeetupsinamsterdam" style="color:${C.tomato};text-decoration:none">@womensmeetupsinamsterdam</a></div>
 </td></tr></table>`;
