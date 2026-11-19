@@ -16,6 +16,7 @@ const AGAIN_NAMES: Record<string, string> = { yes: "Zeker", maybe: "Misschien", 
 const MATCH_NAMES: Record<string, string> = { "3": "Helemaal", "2": "Best wel", "1": "Niet echt" };
 
 const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+const TOPIC_NAMES: Record<string, string> = { meetup: "Vraag over meetup", aanmelding: "Aanmelding wijzigen", samenwerken: "Samenwerken / pers", anders: "Anders" };
 const PKG_NAMES: Record<string, string> = { proeftafel: "Proeftafel", maand1: "1x per maand €19", maand2: "2x per maand €35", "weet-niet": "Weet nog niet" };
 const FIELD_NAMES: Record<string, string> = { first_name: "Voornaam", name: "Naam", email: "E-mail", phone: "Telefoon", contact_pref: "WhatsApp of mail", wa_consent: "WhatsApp-toestemming", age: "Leeftijd", hood: "Buurt", neighbourhood: "Buurt", contact: "WhatsApp of mail", instagram: "Instagram", consent: "Akkoord privacy", field: "Werkveld", language: "Taal", hoping: "Wat ze hopen", quiz: "Quiz", table_wish: "Tafelwens", found_via: "Hoe gevonden", form_ease: "Makkelijk?", event: "Datum" };
 
@@ -164,6 +165,21 @@ export default function Dashboard() {
         <div><small>Gem. tijd op site</small><b>{data.avg_time ? `${Math.floor(data.avg_time / 60)}:${String(data.avg_time % 60).padStart(2, "0")}` : "-"}</b><em>min</em></div>
         <div><small>Reviewscore</small><b>{rv.avg_rating ?? "-"}</b><em>{rv.count} reviews</em></div>
       </div>
+
+      {(data.contacts || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Berichten via het contactformulier ✉️</h3>
+          <ul className="db-list">
+            {data.contacts.map((c: any) => (
+              <li key={c.id}>
+                <b>{c.name}</b> · {TOPIC_NAMES[c.topic] ?? c.topic} <small>({new Date(c.created_at).toLocaleDateString("nl-NL")}{c.lang === "en" ? ", Engels" : ""})</small><br />
+                <em>&ldquo;{c.message}&rdquo;</em><br />
+                <a className="db-toggle" href={`mailto:${c.email}?subject=${encodeURIComponent(c.lang === "en" ? "Re: your message to Women's Meetups" : "Re: je bericht aan Women's Meetups")}`}>Beantwoorden ({c.email})</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {(data.partners || []).length > 0 && (
         <div className="db-advice db-partners">

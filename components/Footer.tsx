@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { dict, homePath, hostPath, partnerPath, privacyPath, EMAIL, INSTAGRAM, type Lang } from "@/lib/site";
+import { dict, homePath, hostPath, partnerPath, contactPath, privacyPath, EMAIL, INSTAGRAM, type Lang } from "@/lib/site";
 import { Icon } from "./SvgDefs";
 import { LANDINGS, LANDING_ROUTES, type LandingKey } from "@/lib/landings";
 import { pubPath } from "@/lib/site";
@@ -43,6 +43,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             <ul>
               <li><a href={`https://www.instagram.com/${INSTAGRAM}`} rel="noopener">Instagram: <span className="handle">{splitAmsterdam(`@${INSTAGRAM}`)}</span></a></li>
               <li>{t.ft_contact}: <a className="handle" href={`mailto:${EMAIL}`}>{splitAmsterdam(EMAIL)}</a></li>
+              <li><Link href={contactPath(lang)}>{lang === "nl" ? "Contactformulier" : "Contact form"}</Link></li>
             </ul>
           </div>
         </div>

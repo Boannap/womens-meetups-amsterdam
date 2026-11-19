@@ -48,7 +48,7 @@ export default function PrivacyPage({ lang }: { lang: Lang }) {
           {c.sections.map(([h, p]) => (
             <section key={h} style={{ marginBottom: 22 }}>
               <h2 className="display" style={{ fontSize: "1.5rem", color: "var(--wine)", marginBottom: 6 }}>{h}</h2>
-              <p>{p}</p>
+              <p>{p.includes(EMAIL) ? <>{p.split(EMAIL)[0]}<a href={`mailto:${EMAIL}`}>{EMAIL}</a>{p.split(EMAIL)[1]}</> : p}</p>
             </section>
           ))}
           <section id="cancellation" style={{ marginTop: 40 }}>

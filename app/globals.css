@@ -387,3 +387,4 @@ footer a:hover{text-decoration:underline}
 .landing .pt-h1{font-family:var(--display);font-weight:800;color:var(--wine);line-height:1.02;font-size:clamp(2.2rem,5.5vw,4rem);max-width:20ch;margin:0 0 18px}
 .ft-seo{display:flex;flex-wrap:wrap;gap:6px 18px;padding:18px 0 4px;font-size:.9rem}
 .ft-seo a{color:inherit;opacity:.85}
+.ct-alt{margin-top:28px;padding-top:18px;border-top:2px dashed var(--pink)}.ct-alt p{margin:0 0 6px}.ct-alt a{color:var(--wine);font-weight:700}
