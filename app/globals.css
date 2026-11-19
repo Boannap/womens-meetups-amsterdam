@@ -340,3 +340,34 @@ footer a:hover{text-decoration:underline}
 .db-table th,.db-table td{text-align:left;padding:6px 8px;border-bottom:1px solid #eee}
 .db-table th{font-weight:600;color:#8a6f6f}
 .db-table td:not(:first-child),.db-table th:not(:first-child){text-align:right;white-space:nowrap}
+
+/* Partner page */
+.partner .pt-h1{font-size:clamp(2.2rem,5.5vw,4rem);max-width:20ch;margin:0 0 18px}
+.pt-intro{max-width:60ch;font-size:1.15rem;margin:0 0 26px}
+.pt-why{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:26px}
+.pt-why>div{background:var(--paper);border:2px solid var(--wine);border-radius:22px;padding:20px}
+.pt-why h3{font-family:var(--display);color:var(--wine);margin:0 0 8px;font-size:1.25rem}
+.pt-why p{margin:0}
+.pt-packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:26px;align-items:stretch}
+.pt-pack{background:var(--paper);border:2.5px solid var(--wine);border-radius:26px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.pt-pack.star{background:var(--blush);box-shadow:6px 6px 0 var(--wine)}
+.pt-pack h3{font-family:var(--display);color:var(--wine);font-size:1.6rem;margin:0}
+.pt-price{margin:0}.pt-price b{font-family:var(--display);font-size:2.2rem;color:var(--tomato)}
+.pt-guests{margin:0;font-weight:700;color:var(--wine)}
+.pt-pack ul{padding-left:20px;margin:6px 0 14px;flex:1}
+.pt-pack li{margin-bottom:6px}
+.pt-pack .btn{align-self:flex-start;font-size:1rem}
+.pt-note{font-size:.9rem;opacity:.8;margin-top:14px}
+.pt-extra{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
+.pt-extra>div{border:2px dashed var(--berry);border-radius:20px;padding:18px 20px}
+.pt-extra h3{margin:0 0 6px;color:var(--wine)}.pt-extra p{margin:0}
+.pt-form-wrap{max-width:760px}
+.pt-form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.pt-form label{display:flex;flex-direction:column;gap:6px;font-weight:700;color:var(--wine);font-size:.95rem}
+.pt-form .full{grid-column:1/-1}
+.pt-form input,.pt-form select,.pt-form textarea{font:inherit;font-weight:400;color:var(--ink);background:#fff;border:2px solid var(--wine);border-radius:14px;padding:.6em .8em}
+.pt-form .btn{justify-self:start}
+.pt-privacy{font-size:.85rem;opacity:.8;margin:0}
+.pt-ok{font-size:1.2rem;background:var(--blush);border-radius:18px;padding:18px 22px;color:var(--wine)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+@media (max-width:640px){.pt-form{grid-template-columns:1fr}}

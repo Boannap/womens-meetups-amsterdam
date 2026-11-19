@@ -15,6 +15,7 @@ const AGAIN_NAMES: Record<string, string> = { yes: "Zeker", maybe: "Misschien", 
 const MATCH_NAMES: Record<string, string> = { "3": "Helemaal", "2": "Best wel", "1": "Niet echt" };
 
 const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+const PKG_NAMES: Record<string, string> = { proeftafel: "Proeftafel", buurtcafe: "Buurtcafé €39", stamcafe: "Stamcafé €79", koffie: "Betalen in koffie", "weet-niet": "Weet nog niet" };
 const FIELD_NAMES: Record<string, string> = { first_name: "Voornaam", name: "Naam", email: "E-mail", phone: "Telefoon", contact_pref: "WhatsApp of mail", wa_consent: "WhatsApp-toestemming", age: "Leeftijd", hood: "Buurt", neighbourhood: "Buurt", contact: "WhatsApp of mail", instagram: "Instagram", consent: "Akkoord privacy", field: "Werkveld", language: "Taal", hoping: "Wat ze hopen", quiz: "Quiz", table_wish: "Tafelwens", found_via: "Hoe gevonden", form_ease: "Makkelijk?", event: "Datum" };
 
 type Tip = { level: "go" | "fix" | "info"; text: React.ReactNode };
@@ -163,6 +164,21 @@ export default function Dashboard() {
         <div><small>Reviewscore</small><b>{rv.avg_rating ?? "-"}</b><em>{rv.count} reviews</em></div>
       </div>
 
+      {(data.partners || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Cafés die willen samenwerken ☕</h3>
+          <ul className="db-list">
+            {data.partners.map((p: any) => (
+              <li key={p.id}>
+                <b>{p.cafe}</b>{p.neighbourhood ? ` · ${p.neighbourhood}` : ""} · {PKG_NAMES[p.package] ?? p.package} <small>({new Date(p.created_at).toLocaleDateString("nl-NL")})</small><br />
+                {p.contact} · <a href={`mailto:${p.email}`}>{p.email}</a>{p.phone ? ` · ${p.phone}` : ""}{p.link ? <> · <a href={p.link.startsWith("http") ? p.link : `https://${p.link}`} target="_blank" rel="noopener">{p.link}</a></> : null}
+                {p.message && <><br /><em>&ldquo;{p.message}&rdquo;</em></>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="db-advice">
         <h3>Wat kun je aanpassen</h3>
         <p className="db-hint">Advies op basis van de cijfers van de afgelopen {days} dagen.</p>
@@ -207,6 +223,14 @@ export default function Dashboard() {
         </Card>
 
         <h2 className="db-sub">Google (.nl en .com samen)</h2>
+        <Card title="Voor Google" hint="Wat Google van je site te zien krijgt" wide>
+          <ul className="db-list">
+            <li>Sitemap (lijst van al je pagina&apos;s): <a href="https://womensmeetupsinamsterdam.nl/sitemap.xml" target="_blank" rel="noopener">.nl</a> · <a href="https://womensmeetupsinamsterdam.com/sitemap.xml" target="_blank" rel="noopener">.com</a></li>
+            <li>Robots.txt (wat Google wel en niet mag bekijken): <a href="https://womensmeetupsinamsterdam.nl/robots.txt" target="_blank" rel="noopener">.nl</a> · <a href="https://womensmeetupsinamsterdam.com/robots.txt" target="_blank" rel="noopener">.com</a></li>
+            <li>Dit dashboard en het reviewformulier staan op &quot;niet indexeren&quot;, dus die vindt niemand via Google.</li>
+            <li><a href="https://search.google.com/search-console" target="_blank" rel="noopener">Open Search Console</a></li>
+          </ul>
+        </Card>
         {!data.google?.connected ? (
           <Card title="Google-zoekwoorden" wide><p className="db-empty">Nog niet gekoppeld. Zodra de Google-sleutel in Vercel staat, zie je hier waar meiden op zoeken.</p></Card>
         ) : (

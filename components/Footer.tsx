@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { dict, homePath, hostPath, privacyPath, EMAIL, INSTAGRAM, type Lang } from "@/lib/site";
+import { dict, homePath, hostPath, partnerPath, privacyPath, EMAIL, INSTAGRAM, type Lang } from "@/lib/site";
 import { Icon } from "./SvgDefs";
 
 export default function Footer({ lang }: { lang: Lang }) {
@@ -26,6 +26,7 @@ export default function Footer({ lang }: { lang: Lang }) {
               <li><a href={a("#how")}>{t.nav_how}</a></li>
               <li><Link href={hostPath(lang)}>{t.b_founder}</Link></li>
               <li><a href={a("#faq")}>{t.nav_faq}</a></li>
+              <li><Link href={partnerPath(lang)}>{lang === "nl" ? "Voor cafés: samenwerken" : "For cafés: partner with us"}</Link></li>
             </ul>
           </div>
           <div>

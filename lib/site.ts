@@ -53,7 +53,9 @@ export const ROUTES = {
   home: { en: "/", nl: "/nl" },
   founder: { en: "/founder", nl: "/nl/founder" },
   privacy: { en: "/privacy", nl: "/nl/privacy" },
+  partners: { en: "/partners", nl: "/nl/samenwerken" },
 } as const;
 export const homePath = (lang: Lang, from?: Lang) => href(lang, ROUTES.home[lang], from);
 export const hostPath = (lang: Lang, from?: Lang) => href(lang, ROUTES.founder[lang], from);
+export const partnerPath = (lang: Lang, from?: Lang) => href(lang, ROUTES.partners[lang], from);
 export const privacyPath = (lang: Lang, from?: Lang) => href(lang, ROUTES.privacy[lang], from);

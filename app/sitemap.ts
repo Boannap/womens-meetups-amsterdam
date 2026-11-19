@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { ROUTES, absUrl, type Lang } from "@/lib/site";
 
-const PRIORITY = { home: 1, founder: 0.8, privacy: 0.3 } as const;
+const PRIORITY = { home: 1, founder: 0.8, partners: 0.7, privacy: 0.3 } as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return (Object.keys(ROUTES) as (keyof typeof ROUTES)[]).flatMap((k) =>
