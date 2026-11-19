@@ -166,6 +166,15 @@ export default function Dashboard() {
         <div><small>Reviewscore</small><b>{rv.avg_rating ?? "-"}</b><em>{rv.count} reviews</em></div>
       </div>
 
+      {(data.priority || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Eerst mailen bij nieuwe data ⏳</h3>
+          <p className="db-hint">Deze meiden stonden op de wachtlijst en kregen geen plek. Zodra je nieuwe data online zet, mail je hen als eerste.</p>
+          <p>{data.priority.length} meiden · <a className="db-toggle" href={`mailto:?bcc=${data.priority.map((p: any) => p.email).join(",")}&subject=${encodeURIComponent("Nieuwe data! Jij hoort het als eerste ☕")}&body=${encodeURIComponent("Hoi!\n\nJe stond op de wachtlijst, dus jij hoort het als eerste: de nieuwe data staan online. Kies je tafel via womensmeetupsinamsterdam.com voordat we ze op Instagram zetten.\n\nLiefs,\nBoanna")}`}>Open mail (BCC) ✉️</a></p>
+          <small>{data.priority.map((p: any) => `${p.name} (${p.event_id})`).join(" · ")}</small>
+        </div>
+      )}
+
       {(data.contacts || []).length > 0 && (
         <div className="db-advice db-partners">
           <h3>Berichten via het contactformulier ✉️</h3>

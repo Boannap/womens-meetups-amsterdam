@@ -143,10 +143,10 @@ export function mailNoSpot(lang: Lang, d: MailData) {
   const subject = nl ? "Helaas, deze keer geen plekje" : "No seat this time, sorry";
   const body = nl
     ? h1(`Hoi ${firstName(d.name)},`) + p(`Helaas is er voor ${day(d.date, lang)} geen plekje vrijgekomen. Je hebt niets betaald, dus je hoeft verder niets te doen.`) +
-      p("De volgende keer krijg je voorrang: zodra de nieuwe data online staan, hoor je het als eerste.") + `<p style="margin:22px 0 14px">${btn(`${MAIL_BASE}/#meetups`, "Bekijk de volgende tafels →")}</p>` + p("Liefs,")
+      p("Zodra de nieuwe data online staan, hoor jij het als eerste. Nog voordat ze op Instagram staan.") + `<p style="margin:22px 0 14px">${btn(`${MAIL_BASE}/#meetups`, "Bekijk de volgende tafels →")}</p>` + p("Liefs,")
     : h1(`Hi ${firstName(d.name)},`) + p(`Unfortunately no seat opened up for ${day(d.date, lang)}. You haven't paid anything, so there's nothing you need to do.`) +
-      p("Next time you get priority: as soon as new dates are online, you'll be the first to know.") + `<p style="margin:22px 0 14px">${btn(`${MAIL_BASE}/#meetups`, "See the next tables →")}</p>` + p("Love,");
-  return { subject, html: layout(lang, nl ? "Deze keer geen plek, de volgende keer voorrang." : "No seat this time, priority next time.", body) };
+      p("As soon as new dates are online, you'll be the first to know. Even before they're on Instagram.") + `<p style="margin:22px 0 14px">${btn(`${MAIL_BASE}/#meetups`, "See the next tables →")}</p>` + p("Love,");
+  return { subject, html: layout(lang, nl ? "Deze keer geen plek. Bij nieuwe data hoor jij het als eerste." : "No seat this time. You'll hear about new dates first.", body) };
 }
 
 export function mailPartner(lang: Lang, name = "") {
