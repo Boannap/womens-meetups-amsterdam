@@ -27,7 +27,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       ],
       faq: [
         ["Hoe maak ik nieuwe vriendinnen in Amsterdam?", "Zoek een plek waar je dezelfde soort mensen vaker ziet en waar je echt kunt praten. Bij Women's Meetups zit je met zes meiden aan één tafel, gematcht op persoonlijkheid, met vragenkaartjes en een host, zodat het gesprek vanzelf gaat."],
-        ["Wat kost het?", "€12,50 per meetup, inclusief btw en servicekosten. Je eerste koffie is inbegrepen. Geen abonnement."],
+        ["Wat kost het?", "€12,50 per meetup, inclusief btw en servicekosten. Je eerste koffietje krijg je van ons! Geen abonnement."],
         ["Wanneer zijn de meetups?", "Meestal op zondag rond 10.30, perfect voor een brunch. De data staan op de homepage."],
       ],
       cta: "Bekijk de volgende tafels",
@@ -153,7 +153,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       ],
       faq: [
         ["Welke cafés zijn het?", "Dat wisselt per meetup. Je hoort twee dagen van tevoren in welk café je tafel staat."],
-        ["Moet ik daar iets bestellen?", "Je eerste koffie is inbegrepen. We raden je aan er lekker een ontbijtje of hapje bij te bestellen. Dat reken je zelf af."],
+        ["Moet ik daar iets bestellen?", "Je eerste koffietje krijg je van ons! We raden je aan er lekker een ontbijtje of hapje bij te bestellen. Dat reken je zelf af."],
         ["Ik heb een café, kan ik meedoen?", "Graag! Kijk op onze pagina voor cafés hoe we samenwerken."],
       ],
       cta: "Schuif aan bij een tafel",

@@ -440,7 +440,7 @@
     "hero_eyebrow": "Table of Six · Amsterdam",
     "hero_title": "Zes meiden.<br>Eén tafel.",
     "hero_h1sub": "Koffiemeetups voor Nederlandse en Engelssprekende meiden in Amsterdam",
-    "hero_lead": "Nieuwe vriendinnen in Amsterdam, één koffietje tegelijk. Voor Nederlandse en Engelssprekende meiden. Kleine groepjes, goed gesprek en geen abonnement. We matchen je op persoonlijkheid en werkveld, kiezen een van de gezelligste cafés of hidden spots van Amsterdam en nemen de vragen mee. Je eerste koffie is inbegrepen.",
+    "hero_lead": "Nieuwe vriendinnen in Amsterdam, één koffietje tegelijk. Voor Nederlandse en Engelssprekende meiden. Kleine groepjes, goed gesprek en geen abonnement. We matchen je op persoonlijkheid en werkveld, kiezen een van de gezelligste cafés of hidden spots van Amsterdam en nemen de vragen mee. Je eerste koffietje krijg je van ons!",
     "hero_cta1": "Ik doe mee →",
     "hero_cta2": "Bekijk komende tafels",
     "hero_note": "€12,50 incl. btw & servicekosten · geen abonnement",
@@ -479,7 +479,7 @@
     "ev_full": "Vol? Zet me op de wachtlijst",
     "ev_reserve": "Reserveer mijn plek",
     "ev_cafe": "hidden spot volgt na de matching",
-    "ev_price": "€12,50 incl. btw & servicekosten · eerste koffie inbegrepen",
+    "ev_price": "€12,50 incl. btw & servicekosten · je eerste koffietje krijg je van ons",
     "ev_lang_nl": "Nederlands",
     "ev_lang_en": "Engels",
     "ev_lang_mix": "Nederlands + Engels",
@@ -499,7 +499,7 @@
     "h2_t": "Wij matchen je tafel",
     "h2_p": "We zetten zes meiden bij elkaar die het leuk gaan hebben, reserveren een gezellig café en sturen je twee dagen van tevoren de details.",
     "h3_t": "Kom & geniet",
-    "h3_p": "Je eerste koffie is inbegrepen. Een host heet iedereen welkom en brengt het gesprek op gang met de vragenkaartjes, dus niemand hoeft de stilte te vullen.",
+    "h3_p": "Je eerste koffietje krijg je van ons! Een host heet iedereen welkom en brengt het gesprek op gang met de vragenkaartjes, dus niemand hoeft de stilte te vullen.",
     "h4_t": "Blijf vriendinnen",
     "h4_p": "Daarna kom je in de communitygroep met iedereen van jouw datum, voor borrels, wandelingen en de volgende tafel.",
     "c_kicker": "Op tafel",
@@ -624,7 +624,7 @@
       ],
       [
         "Kan ik ook thee bestellen in plaats van koffie?",
-        "Natuurlijk. En je eerste drankje is inbegrepen, of dat nu een cappuccino, verse muntthee, chai of matcha is."
+        "Natuurlijk. En je eerste drankje krijg je van ons, of dat nu een cappuccino, verse muntthee, chai of matcha is."
       ]
     ],
     "cl_title": "Je stoel staat al klaar.",
@@ -661,7 +661,7 @@
     "usps": [
       [
         "Geen abonnement",
-        "€12,50 per meetup incl. btw & servicekosten. Geen lidmaatschap, geen jaarbedrag, nergens aan vast. Eerste koffie inbegrepen."
+        "€12,50 per meetup incl. btw & servicekosten. Geen lidmaatschap, geen jaarbedrag, nergens aan vast. Je eerste koffietje krijg je van ons!"
       ],
       [
         "Een klein, zorgvuldig groepje",
@@ -708,7 +708,7 @@
     "g_title": "Koffie, taart en heel veel lachen.",
     "g_text": "Een kijkje bij eerdere meetups in de gezelligste cafés en verborgen plekjes van Amsterdam.",
     "g_caps": [
-      "eerste koffie inbegrepen",
+      "eerste koffietje van ons",
       "cappuccino & kletsen",
       "matchacake-tijd",
       "terrasje in de zon",
@@ -742,7 +742,7 @@
       ],
       [
         "Een koffiedate met nieuwe vriendinnen",
-        "Zie het als een vriendinnendate, niet als daten. Koffie, thee, chai of matcha: je eerste drankje is inbegrepen."
+        "Zie het als een vriendinnendate, niet als daten. Koffie, thee, chai of matcha: je eerste drankje krijg je van ons."
       ],
       [
         "Leuke cafés en verborgen plekjes",
@@ -851,10 +851,10 @@
     "j_submit_wait": "Zet me op de wachtlijst →",
     "j_ok_wait_t": "Je staat op de wachtlijst ✿",
     "j_ok_wait_p": "Deze editie is vol, maar je staat op de lijst. Komt er een plek vrij of openen we een extra tafel, dan hoor je het als eerste.",
-    "promo_k": "Altijd inbegrepen",
-    "promo": "Eerste koffie inbegrepen ☕",
+    "promo_k": "Bij elke meetup",
+    "promo": "Je eerste koffietje krijg je van ons! ☕",
     "pr_coffee": "Eerste koffie",
-    "pr_free": "inbegrepen",
+    "pr_free": "van ons",
     "hero_cta1_b": "Reserveer mijn stoel →",
     "rv_kicker": "Aan tafel gezegd",
     "rv_title": "Wat meiden zeggen"

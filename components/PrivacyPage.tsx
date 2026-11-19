@@ -33,7 +33,7 @@ const COPY = {
       ["Jouw rechten", "Je kunt je gegevens altijd inzien, laten aanpassen of verwijderen, en je kunt een klacht indienen bij de Autoriteit Persoonsgegevens."],
     ],
     cancelTitle: "Tickets & annuleren",
-    cancel: "Een ticket kost €12,50, inclusief btw en servicekosten (je eerste koffie is inbegrepen). Kun je niet? Laat het minstens 48 uur van tevoren weten, dan verplaatsen we je plek naar de volgende datum. Later annuleren of niet komen kunnen we niet terugbetalen. Moeten wij annuleren, dan krijg je je geld volledig terug.",
+    cancel: "Een ticket kost €12,50, inclusief btw en servicekosten (je eerste koffietje krijg je van ons). Kun je niet? Laat het minstens 48 uur van tevoren weten, dan verplaatsen we je plek naar de volgende datum. Later annuleren of niet komen kunnen we niet terugbetalen. Moeten wij annuleren, dan krijg je je geld volledig terug.",
   },
 };
 

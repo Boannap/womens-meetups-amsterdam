@@ -64,7 +64,7 @@ const h1 = (t: string) => `<h1 style="${font};font-size:30px;line-height:1.1;col
 const p = (t: string) => `<p style="margin:0 0 14px">${t}</p>`;
 const btn = (href: string, t: string) => `<a href="${href}" style="display:inline-block;background:${C.wine};color:${C.pink};${sans};font-weight:700;font-size:16px;text-decoration:none;padding:13px 26px;border-radius:999px">${t}</a>`;
 const card = (rows: [string, string][]) => `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.cream};border-radius:16px;margin:6px 0 18px"><tr><td style="padding:18px 20px">${rows.map(([k, v]) => `<div style="margin:4px 0"><span style="display:inline-block;width:26px">${k}</span>${v}</div>`).join("")}</td></tr></table>`;
-const promo = (lang: Lang) => `<div style="display:inline-block;background:${C.pink};color:${C.wine};border:2px dashed rgba(90,15,20,.35);border-radius:6px;padding:8px 16px;${sans};font-size:14px;font-weight:700;margin:2px 0 16px">☕ ${lang === "nl" ? "Je eerste koffie is inbegrepen" : "Your first coffee is included"}</div>`;
+const promo = (lang: Lang) => `<div style="display:inline-block;background:${C.pink};color:${C.wine};border:2px dashed rgba(90,15,20,.35);border-radius:6px;padding:8px 16px;${sans};font-size:14px;font-weight:700;margin:2px 0 16px">☕ ${lang === "nl" ? "Je eerste koffietje krijg je van ons!" : "Your first coffee is included"}</div>`;
 
 /** 1. Right after payment + sign-up (text approved by Boanna, 18 Nov). */
 export function mailConfirm(lang: Lang, d: MailData) {
@@ -93,7 +93,7 @@ export function mailDetails(lang: Lang, d: MailData) {
   const body = nl
     ? h1(`Nog twee nachtjes slapen, ${firstName(d.name)}!`) + p("Je tafel is gematcht en we hebben een gezellig plekje voor jullie gevonden. Hier zijn de details:") + card(rows) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route in Google Maps →")}</p>` +
-      p("<b>Goed om te weten</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>Vraag bij binnenkomst naar de tafel van <b>Women's Meetups</b>, of zoek de gesprekskaartjes op tafel.</li><li>Je eerste koffie is inbegrepen. Bestel er lekker een ontbijtje of bananenbrood bij! Wat je verder bestelt, reken je zelf af.</li><li>Kun je toch niet? Laat het ons vandaag nog weten, dan geven we je plek aan iemand van de wachtlijst.</li></ul>` +
+      p("<b>Goed om te weten</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>Vraag bij binnenkomst naar de tafel van <b>Women's Meetups</b>, of zoek de gesprekskaartjes op tafel.</li><li>Je eerste koffietje krijg je van ons! Bestel er lekker een ontbijtje of bananenbrood bij! Wat je verder bestelt, reken je zelf af.</li><li>Kun je toch niet? Laat het ons vandaag nog weten, dan geven we je plek aan iemand van de wachtlijst.</li></ul>` +
       p("We hebben er zin in!")
     : h1(`Two more sleeps, ${firstName(d.name)}!`) + p("Your table is matched and we found a cosy spot for you. Here are the details:") + card(rows) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions in Google Maps →")}</p>` +
@@ -107,7 +107,7 @@ export function mailMorning(lang: Lang, d: MailData) {
   const nl = lang === "nl";
   const subject = nl ? "Vandaag is het zover ☀️" : "Today's the day ☀️";
   const body = nl
-    ? h1(`Goedemorgen ${firstName(d.name)}! ☀️`) + p(`Vandaag om <b>${time(d.date, lang)}</b> zit je met vijf nieuwe meiden aan tafel bij <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Je eerste koffie is inbegrepen"], ["🥐", "Bestel er lekker een ontbijtje of bananenbrood bij"]]) +
+    ? h1(`Goedemorgen ${firstName(d.name)}! ☀️`) + p(`Vandaag om <b>${time(d.date, lang)}</b> zit je met vijf nieuwe meiden aan tafel bij <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Je eerste koffietje krijg je van ons"], ["🥐", "Bestel er lekker een ontbijtje of bananenbrood bij"]]) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route →")}</p>` + p("Kom gewoon zoals je bent. Wij nemen de vragen mee, jij jezelf.") + p("Tot straks,")
     : h1(`Good morning ${firstName(d.name)}! ☀️`) + p(`Today at <b>${time(d.date, lang)}</b> you'll sit down with five new girls at <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Your first coffee is included"], ["🥐", "Treat yourself to breakfast or banana bread"]]) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions →")}</p>` + p("Just come as you are. We bring the questions, you bring yourself.") + p("See you soon,");
@@ -131,7 +131,7 @@ export function mailSpotOpen(lang: Lang, d: MailData & { payUrl?: string }) {
   const nl = lang === "nl";
   const subject = nl ? "Er is een plekje vrij! ☕" : "A seat just opened up! ☕";
   const body = nl
-    ? h1(`Goed nieuws, ${firstName(d.name)}!`) + p("Er is een plekje vrijgekomen aan tafel.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["☕", "Eerste koffie inbegrepen"]]) +
+    ? h1(`Goed nieuws, ${firstName(d.name)}!`) + p("Er is een plekje vrijgekomen aan tafel.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["☕", "Je eerste koffietje krijg je van ons"]]) +
       `<p style="margin:22px 0 14px">${btn(d.payUrl || "#", "Pak mijn stoel →")}</p>` + p("De plek houden we 24 uur voor je vast. Daarna gaat hij naar de volgende op de wachtlijst.") + p("Tot snel aan tafel,")
     : h1(`Good news, ${firstName(d.name)}!`) + p("A seat just opened up at the table.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["☕", "First coffee included"]]) +
       `<p style="margin:22px 0 14px">${btn(d.payUrl || "#", "Claim my seat →")}</p>` + p("We'll hold it for you for 24 hours. After that it goes to the next person on the waitlist.") + p("See you at the table,");

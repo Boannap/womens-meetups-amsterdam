@@ -29,7 +29,7 @@ function advice(data: any): Tip[] {
   if (v < 30) return [{ level: "info", text: <>Nog maar {v} bezoekers in deze periode. Vanaf zo&apos;n 30 geef ik hier concreet advies, daarvoor is het vooral toeval.</> }];
   const r = (a: number, b: number) => (b ? a / b : 0);
   if (r(f.saw_events, v) < 0.4) tips.push({ level: "fix", text: <>Minder dan de helft ziet de <b>komende tafels</b> ({pct(f.saw_events, v)}%). Zet de data hoger op de pagina of maak de knop bovenaan duidelijker.</> });
-  if (f.saw_events >= 15 && r(f.form_start, f.saw_events) < 0.2) tips.push({ level: "fix", text: <>Veel meiden zien de tafels maar beginnen niet aan het formulier ({pct(f.form_start, f.saw_events)}%). Test een duidelijkere knop, of zet de prijs en &quot;eerste koffie inbegrepen&quot; vlak bij de datum.</> });
+  if (f.saw_events >= 15 && r(f.form_start, f.saw_events) < 0.2) tips.push({ level: "fix", text: <>Veel meiden zien de tafels maar beginnen niet aan het formulier ({pct(f.form_start, f.saw_events)}%). Test een duidelijkere knop, of zet de prijs en &quot;je eerste koffietje krijg je van ons&quot; vlak bij de datum.</> });
   if (f.form_start >= 10 && r(f.quiz_done, f.form_start) < 0.6) tips.push({ level: "fix", text: <>Een flink deel stopt tijdens de quiz ({pct(f.quiz_done, f.form_start)}% maakt hem af). Overweeg 4 vragen in plaats van 5, of zeg erbij &quot;duurt 30 seconden&quot;.</> });
   if (f.quiz_done >= 10 && r(f.submitted, f.quiz_done) < 0.7) {
     const d = Object.entries(x.dropoff_field || {}).sort((a: any, b: any) => b[1] - a[1])[0];
