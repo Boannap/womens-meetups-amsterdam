@@ -126,14 +126,16 @@ export function mailReview(lang: Lang, d: MailData) {
       q("Klikte het met je tafel?") + chip(u("match", 3), "😍 Helemaal") + chip(u("match", 2), "🙂 Best wel") + chip(u("match", 1), "😕 Niet echt") +
       q("Kom je nog een keer?") + chip(u("again", "yes"), "Zeker weten") + chip(u("again", "maybe"), "Misschien") + chip(u("again", "no"), "Nee") +
       q("Wat vond je het leukst?") + chip(u("best", "people"), "De meiden") + chip(u("best", "cards"), "De kaartjes") + chip(u("best", "cafe"), "Het café") + chip(u("best", "vibe"), "De sfeer") +
-      `<p style="margin:22px 0 14px">${btn(`${MAIL_BASE}/review?r=${encodeURIComponent(d.token || "")}&l=${lang}`, "Nog iets kwijt? Schrijf een zinnetje →")}</p>` +
+      p("<b>Nog iets kwijt?</b> Klik gewoon op beantwoorden en typ je zinnetje. Ik lees alles zelf.") +
+      `<p style="margin:0 0 14px;font-size:13px;color:#8a6f6f">Mag je zinnetje op de website? <a href="${MAIL_BASE}/review?r=${encodeURIComponent(d.token || "")}&l=${lang}" style="color:#8a6f6f">Schrijf het dan hier</a>.</p>` +
       p("Volgende tafel? Je bent altijd welkom.") + p("Liefs,")
     : h1(`Thank you for yesterday, ${firstName(d.name)} 🤍`) + p("It was so lovely having you at the table. Got 20 seconds? Just tap your answer, that's it.") +
       q("How was your meetup? (1 = meh, 5 = loved it)") + `<div>${hearts}</div>` +
       q("Did you click with your table?") + chip(u("match", 3), "😍 Totally") + chip(u("match", 2), "🙂 Kind of") + chip(u("match", 1), "😕 Not really") +
       q("Would you come again?") + chip(u("again", "yes"), "Definitely") + chip(u("again", "maybe"), "Maybe") + chip(u("again", "no"), "No") +
       q("What did you love most?") + chip(u("best", "people"), "The girls") + chip(u("best", "cards"), "The cards") + chip(u("best", "cafe"), "The café") + chip(u("best", "vibe"), "The vibe") +
-      `<p style="margin:22px 0 14px">${btn(`${MAIL_BASE}/review?r=${encodeURIComponent(d.token || "")}&l=${lang}`, "Anything else? Write a sentence →")}</p>` +
+      p("<b>Anything else?</b> Just hit reply and type your sentence. I read every one myself.") +
+      `<p style="margin:0 0 14px;font-size:13px;color:#8a6f6f">Okay to share it on the website? <a href="${MAIL_BASE}/review?r=${encodeURIComponent(d.token || "")}&l=${lang}" style="color:#8a6f6f">Write it here instead</a>.</p>` +
       p("Next table? You're always welcome.") + p("Love,");
   return { subject: nl ? "Hoe was het? (20 seconden) 🤍" : "How was it? (20 seconds) 🤍", html: layout(lang, nl ? "Tik je antwoord aan, meer hoeft niet." : "Just tap your answer, that's all.", body) };
 }
