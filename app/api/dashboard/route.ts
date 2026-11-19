@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { rpc } from "@/lib/supa";
+import { gsc } from "@/lib/gsc";
 
 /** Password-protected stats. The password is checked inside the database (bcrypt), never stored in the site. */
 export async function POST(req: Request) {
@@ -11,6 +12,10 @@ export async function POST(req: Request) {
   }
   const data = await rpc<Record<string, unknown>>("dashboard_stats", { p_password: b.password, p_days: Math.min(365, Math.max(1, Number(b.days) || 30)) });
   if (!data || data.error) return NextResponse.json({ error: "wrong password" }, { status: 401 });
-  const extra = await rpc<Record<string, unknown>>("dashboard_extra", { p_password: b.password, p_days: Math.min(365, Math.max(1, Number(b.days) || 30)) });
-  return NextResponse.json({ ...data, extra: extra ?? {} }, { headers: { "Cache-Control": "no-store" } });
+  const days = Math.min(365, Math.max(1, Number(b.days) || 30));
+  const [extra, google] = await Promise.all([
+    rpc<Record<string, unknown>>("dashboard_extra", { p_password: b.password, p_days: days }),
+    gsc(days).catch(() => null),
+  ]);
+  return NextResponse.json({ ...data, extra: extra ?? {}, google }, { headers: { "Cache-Control": "no-store" } });
 }

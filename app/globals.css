@@ -335,3 +335,8 @@ footer a:hover{text-decoration:underline}
 .db-advice .tip-go{background:#eaf6ec}.db-advice .tip-go::before{content:"✨"}
 .db-advice .tip-info{background:#f4f1ec}.db-advice .tip-info::before{content:"💡"}
 .db-advice code{font-size:.85em;word-break:break-all}
+
+.db-table{width:100%;border-collapse:collapse;font-size:14px}
+.db-table th,.db-table td{text-align:left;padding:6px 8px;border-bottom:1px solid #eee}
+.db-table th{font-weight:600;color:#8a6f6f}
+.db-table td:not(:first-child),.db-table th:not(:first-child){text-align:right;white-space:nowrap}

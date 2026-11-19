@@ -63,6 +63,13 @@ function advice(data: any): Tip[] {
   const evs = (x.events || []) as { event_id: string; seats: number; waitlist: number }[];
   const full = evs.find((e) => e.waitlist >= 6);
   if (full) tips.push({ level: "go", text: <>Er staan {full.waitlist} meiden op de wachtlijst voor <b>{full.event_id}</b>. Dat is een hele extra tafel: open er één bij.</> });
+  const g = data.google;
+  if (g?.connected) {
+    const near = (g.queries || []).filter((q: any) => q.position > 8 && q.position <= 20 && q.impressions >= 10).sort((a: any, b: any) => b.impressions - a.impressions)[0];
+    if (near) tips.push({ level: "go", text: <>Je staat op plek {near.position} in Google voor <b>&quot;{near.q}&quot;</b> ({near.impressions}x gezien). Dat is net pagina 2. Een blog of een extra vraag over dit onderwerp kan je naar pagina 1 tillen.</> });
+    const lowCtr = (g.queries || []).filter((q: any) => q.position <= 5 && q.impressions >= 30 && q.clicks / q.impressions < 0.03)[0];
+    if (lowCtr) tips.push({ level: "fix", text: <>Je staat hoog voor <b>&quot;{lowCtr.q}&quot;</b>, maar bijna niemand klikt. Je titel en beschrijving in Google kunnen aantrekkelijker; zeg het en ik pas ze aan.</> });
+  }
   if (!tips.length) tips.push({ level: "go", text: <>Alles ziet er gezond uit. Niets aanpassen, gewoon blijven posten.</> });
   return tips.slice(0, 7);
 }
@@ -198,6 +205,29 @@ export default function Dashboard() {
         <Card title="Knoptest bovenaan" hint={`A = "Ik doe mee", B = "Reserveer mijn stoel"`}>
           <Bars data={exp.map((e) => [`Variant ${e.variant} (${e.visitors} bez.)`, pct(e.submitted, e.visitors)])} unit="%" />
         </Card>
+
+        <h2 className="db-sub">Google (.nl en .com samen)</h2>
+        {!data.google?.connected ? (
+          <Card title="Google-zoekwoorden" wide><p className="db-empty">Nog niet gekoppeld. Zodra de Google-sleutel in Vercel staat, zie je hier waar meiden op zoeken.</p></Card>
+        ) : (
+          <>
+            <Card title="In Google" hint="Google loopt ongeveer 2 dagen achter">
+              <ul className="db-list">
+                <li>Keer gezien: <b>{data.google.totals.impressions}</b></li>
+                <li>Kliks naar je site: <b>{data.google.totals.clicks}</b></li>
+                <li>Gemiddelde plek: <b>{data.google.totals.position || "-"}</b></li>
+                {Object.entries(data.google.by_lang || {}).map(([l, v]: any) => <li key={l}>{l === "nl" ? "Nederlands (.nl)" : "Engels (.com)"}: <b>{v.clicks}</b> kliks, {v.impressions}x gezien</li>)}
+              </ul>
+            </Card>
+            <Card title="Welke pagina's Google laat zien"><Bars data={(data.google.pages || []).map((p: any) => [p.page || "/", p.impressions])} /></Card>
+            <Card title="Waar zoeken ze op" hint="Zoekwoord · keer gezien · kliks · plek in Google" wide>
+              {(data.google.queries || []).length ? (
+                <table className="db-table"><thead><tr><th>Zoekwoord</th><th>Gezien</th><th>Kliks</th><th>Plek</th><th>Site</th></tr></thead>
+                  <tbody>{data.google.queries.map((q: any) => <tr key={q.q}><td>{q.q}</td><td>{q.impressions}</td><td>{q.clicks}</td><td>{q.position}</td><td>{q.lang}</td></tr>)}</tbody></table>
+              ) : <p className="db-empty">Nog geen zoekwoorden. Een nieuwe site heeft vaak een paar weken nodig.</p>}
+            </Card>
+          </>
+        )}
 
         <h2 className="db-sub">Formulier en keuzes</h2>
         <Card title="Tot welk veld komen ze" hint="Aantal meiden dat dit veld aanklikte"><Bars data={x.fields_reached} names={FIELD_NAMES} /></Card>
