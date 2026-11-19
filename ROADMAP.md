@@ -21,6 +21,9 @@
 3. Blogs voor SEO/GEO, bijvoorbeeld "De gezelligste verborgen cafés in Amsterdam" en "Vrienden maken als introvert in Amsterdam".
 4. Eventpagina's aansluiten: events op Luma aanmaken (en eventueel Meetup / Eventbrite), gekoppeld aan de site.
 
+## Video (herinnering)
+- Remotion: pakket-installaties aanzetten in Claude Settings, nieuwe chat starten. Skill kit van Dirck: directe link vragen (portal.dirckmulder.com, achter inlog). Geluiden van Pixabay.
+
 ## Later
 5. Mollie betalingen met btw en servicekosten zichtbaar bij afrekenen.
 6. Vercel Pro voordat er verkocht wordt.

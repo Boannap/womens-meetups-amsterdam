@@ -44,6 +44,7 @@ export default function Home({ lang }: { lang: Lang }) {
                 <a href="#meetups" className="btn btn-ghost">{t.hero_cta2}</a>
               </div>
               <p className="note"><Icon id="cup" style={{ color: "var(--tomato)" }} />{t.hero_note}</p>
+              <div className="promo"><small>{t.promo_k}</small><b>{t.promo}</b></div>
             </div>
 
             <div className="hero-art" aria-hidden="true">
@@ -53,13 +54,13 @@ export default function Home({ lang }: { lang: Lang }) {
               <div className="receipt" id="receipt">
                 <div className="c"><b>{t.r_head}</b><br />{t.r_table}<br />SUN 20 DEC · 14:00</div>
                 <hr />
-                <div className="row"><span>{t.r_seat}</span><span>€10.00</span></div>
+                <div className="row"><span>{t.r_seat}</span><span>€12.50</span></div>
                 <div className="row"><span>{t.r_coffee}</span><span className="free">{t.r_free}</span></div>
                 <div className="row"><span>{t.r_cards}</span><span className="free">{t.r_free}</span></div>
                 <div className="row"><span>{t.r_talks}</span><span className="free">{t.r_free}</span></div>
                 <div className="row"><span>{t.r_friends}</span><span className="free">{t.r_free}</span></div>
                 <hr />
-                <div className="row tot"><span>{t.r_total}</span><span>€10.00</span></div>
+                <div className="row tot"><span>{t.r_total}</span><span>€12.50</span></div>
                 <div className="row"><span>{t.r_mood}</span><span>{t.r_incl}</span></div>
                 <hr />
                 <div className="c">*** {t.r_thanks} ***</div>

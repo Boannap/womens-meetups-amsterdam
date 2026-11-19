@@ -219,6 +219,10 @@ fieldset{border:0;display:flex;flex-direction:column;gap:8px}
 .quiz-result b{display:block;font-family:var(--display);font-size:1.5rem;color:var(--pink);margin:2px 0}
 .ev-r .left.soldout{font-family:var(--display);font-size:1rem;font-weight:700;background:var(--wine);color:var(--pink);padding:.35em .8em;border-radius:999px;transform:rotate(-3deg);display:inline-block}
 textarea{font:inherit;padding:.7em .9em;border-radius:14px;border:2px solid #e3d3c6;background:#fff;color:var(--ink);width:100%;resize:vertical}
+.promo{display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin-top:16px;background:var(--pink);color:var(--wine);border:2px dashed rgba(90,15,20,.35);border-radius:6px;padding:10px 22px 8px;transform:rotate(-3deg);box-shadow:0 12px 20px -12px rgba(90,15,20,.5)}
+.promo small{font-family:var(--body,inherit);font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+.promo b{font-family:var(--display);font-size:1.5rem;line-height:1.05}
+.price-box .promo-row span:last-child{background:var(--pink);color:var(--wine);font-weight:700;border-radius:999px;padding:0 .6em}
 .hint{font-size:.82rem;color:#7a5a5c}
 .pills label{cursor:pointer}
 .pills input{position:absolute;opacity:0;pointer-events:none}

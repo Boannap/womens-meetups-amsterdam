@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { EVENTS, type Dict, type Lang } from "@/lib/site";
 import { quizType, type TypeKey } from "@/lib/quiz";
 
-// €10 incl. 21% VAT: VAT = 10 - 10/1.21 = 1.74; service costs = Mollie iDEAL fee.
-const PRICE = { total: "10.00", vat: "1.74", service: "0.32", seat: "7.94" };
+// €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Mollie iDEAL fee. First coffee free (special edition).
+const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
 
 export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
@@ -146,6 +146,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       {!waitlist && <div className="price-box">
         <h4>{t.pr_title}</h4>
         <div className="r"><span>{t.pr_seat}</span><span>€{PRICE.seat}</span></div>
+        <div className="r promo-row"><span>☕ {t.pr_coffee}</span><span>{t.pr_free}</span></div>
         <div className="r"><span>{t.pr_service}</span><span>€{PRICE.service}</span></div>
         <div className="r"><span>{t.pr_vat}</span><span>€{PRICE.vat}</span></div>
         <div className="r t"><span>{t.pr_total}</span><span>€{PRICE.total}</span></div>

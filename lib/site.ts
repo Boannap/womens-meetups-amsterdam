@@ -23,7 +23,7 @@ export const BOANNA_SOCIALS = [
   { name: "YouTube", handle: "@boannathroughtwenties", url: "https://www.youtube.com/@boannathroughtwenties" },
 ] as const;
 export const MEETUP_PHOTOS = [1, 2, 3, 4, 5].map((n) => `/meetups/meetup-${n}.jpg`);
-export const PRICE_EUR = "10.00";
+export const PRICE_EUR = "12.50";
 
 export const dict = (lang: Lang): Dict => content[lang] as Dict;
 export const EVENTS = events as MeetupEvent[];
