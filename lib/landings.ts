@@ -27,7 +27,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       ],
       faq: [
         ["Hoe maak ik nieuwe vriendinnen in Amsterdam?", "Zoek een plek waar je dezelfde soort mensen vaker ziet en waar je echt kunt praten. Bij Women's Meetups zit je met zes meiden aan één tafel, gematcht op persoonlijkheid, met vragenkaartjes en een host, zodat het gesprek vanzelf gaat."],
-        ["Wat kost het?", "€12,50 per meetup, inclusief btw en servicekosten. Je eerste koffie is van ons. Geen abonnement."],
+        ["Wat kost het?", "€12,50 per meetup, inclusief btw en servicekosten. Je eerste koffie is inbegrepen. Geen abonnement."],
         ["Wanneer zijn de meetups?", "Meestal op zondag rond 10.30, perfect voor een brunch. De data staan op de homepage."],
       ],
       cta: "Bekijk de volgende tafels",
@@ -47,7 +47,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       ],
       faq: [
         ["How do I make friends in Amsterdam?", "Find a place where you see the same kind of people more than once and can actually talk. At Women's Meetups you sit with six women at one table, matched on personality, with question cards and a host, so the conversation flows."],
-        ["How much does it cost?", "€12.50 per meetup, incl. VAT and service costs. Your first coffee is on us. No subscription."],
+        ["How much does it cost?", "€12.50 per meetup, incl. VAT and service costs. Your first coffee is included. No subscription."],
         ["When are the meetups?", "Usually on Sunday around 10:30, perfect for brunch. Dates are on the homepage."],
       ],
       cta: "See the next tables",
@@ -153,7 +153,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       ],
       faq: [
         ["Welke cafés zijn het?", "Dat wisselt per meetup. Je hoort twee dagen van tevoren in welk café je tafel staat."],
-        ["Moet ik daar iets bestellen?", "Je eerste koffie is van ons. We raden je aan er lekker een ontbijtje of hapje bij te bestellen. Dat reken je zelf af."],
+        ["Moet ik daar iets bestellen?", "Je eerste koffie is inbegrepen. We raden je aan er lekker een ontbijtje of hapje bij te bestellen. Dat reken je zelf af."],
         ["Ik heb een café, kan ik meedoen?", "Graag! Kijk op onze pagina voor cafés hoe we samenwerken."],
       ],
       cta: "Schuif aan bij een tafel",
@@ -173,7 +173,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       ],
       faq: [
         ["Which cafés are they?", "It changes every meetup. You hear which café your table is at two days before."],
-        ["Do I have to order something?", "Your first coffee is on us. We recommend treating yourself to breakfast or a bite too. That you pay yourself."],
+        ["Do I have to order something?", "Your first coffee is included. We recommend treating yourself to breakfast or a bite too. That you pay yourself."],
         ["I run a café, can I join?", "We'd love that! See our page for cafés on how we work together."],
       ],
       cta: "Join a table",

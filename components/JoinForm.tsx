@@ -5,7 +5,7 @@ import { EVENTS, type Dict, type Lang } from "@/lib/site";
 import { quizType, type TypeKey } from "@/lib/quiz";
 import { track } from "./Tracker";
 
-// €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Mollie iDEAL fee. First coffee free (limited time).
+// €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Mollie iDEAL fee. First coffee included.
 const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
 
 export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
