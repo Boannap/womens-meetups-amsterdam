@@ -1,6 +1,7 @@
 import { Gluten, Caveat, Courier_Prime, DM_Sans } from "next/font/google";
 import SvgDefs from "./SvgDefs";
 import Animations from "./Animations";
+import Tracker from "./Tracker";
 import "@/app/globals.css";
 
 const gluten = Gluten({ subsets: ["latin"], variable: "--font-gluten", display: "swap" });
@@ -16,6 +17,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         <SvgDefs />
         {children}
         <Animations />
+        <Tracker />
       </body>
     </html>
   );

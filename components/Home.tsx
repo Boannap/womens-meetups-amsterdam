@@ -1,3 +1,5 @@
+import HeroCta from "./HeroCta";
+import Quotes from "./Quotes";
 import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -40,7 +42,7 @@ export default function Home({ lang }: { lang: Lang }) {
               </h1>
               <p className="lead">{t.hero_lead}</p>
               <div className="ctas">
-                <a href="#join" className="btn btn-wine">{t.hero_cta1}</a>
+                <HeroCta a={t.hero_cta1} b={t.hero_cta1_b} />
                 <a href="#meetups" className="btn btn-ghost">{t.hero_cta2}</a>
               </div>
               <p className="note"><Icon id="cup" style={{ color: "var(--tomato)" }} />{t.hero_note}</p>
@@ -217,6 +219,8 @@ export default function Home({ lang }: { lang: Lang }) {
             </div>
           </div>
         </section>
+
+        <Quotes kicker={t.rv_kicker} title={t.rv_title} />
 
         {/* FAQ */}
         <section className="sec" id="faq" style={{ paddingTop: 40 }}>

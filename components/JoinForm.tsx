@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { EVENTS, type Dict, type Lang } from "@/lib/site";
 import { quizType, type TypeKey } from "@/lib/quiz";
+import { track } from "./Tracker";
 
-// €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Mollie iDEAL fee. First coffee free (special edition).
+// €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Mollie iDEAL fee. First coffee free (limited time).
 const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
 
 export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
@@ -12,6 +13,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [answers, setAnswers] = useState<(number | null)[]>(() => t.quiz.map(() => null));
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
   const type: TypeKey | null = quizType(answers);
+  const [started, setStarted] = useState(false);
+  useEffect(() => { if (type) track("form", "quiz_done", undefined, type); }, [type]);
   const upcoming = EVENTS.filter((e) => new Date(e.end) > new Date());
   const isFull = (id: string) => { const e = upcoming.find((x) => x.id === id); return !!e && (!!e.soldOut || e.tables.every((tb) => tb.taken >= 6)); };
   const [eventId, setEventId] = useState<string>(() => (upcoming.find((e) => !isFull(e.id)) ?? upcoming[0])?.id ?? "");
@@ -41,6 +44,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       website: fd.get("website"), // honeypot, must stay empty
     };
     setState("sending");
+    track("form", "submit", undefined, waitlist ? "waitlist" : "seat");
     try {
       const res = await fetch("/api/signup", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       setState(res.ok ? "ok" : "error");
@@ -69,7 +73,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   );
 
   return (
-    <form className="join" onSubmit={onSubmit} noValidate>
+    <form className="join" onSubmit={onSubmit} noValidate onFocus={() => { if (!started) { setStarted(true); track("form", "start"); } }}>
       {upcoming.length > 0 && (
         <fieldset className="field full"><legend>{t.j_event}</legend>
           <div className="pills">

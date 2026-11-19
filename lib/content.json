@@ -153,7 +153,7 @@
       ],
       [
         "What does it cost?",
-        "€12.50 per meetup, incl. VAT & service costs and the conversation cards. Special edition: for a limited time your first coffee is on us. Anything else you order at the café, you pay there yourself."
+        "€12.50 per meetup, incl. VAT & service costs and the conversation cards. For a limited time your first coffee is on us. Anything else you order at the café, you pay there yourself."
       ],
       [
         "How do you match the tables?",
@@ -420,10 +420,13 @@
     "j_submit_wait": "Put me on the waitlist →",
     "j_ok_wait_t": "You're on the waitlist ✿",
     "j_ok_wait_p": "This edition is full, but you're on the list. If a seat opens up, or when we add a table, you'll hear from us first.",
-    "promo_k": "Special edition · Limited time",
+    "promo_k": "First editions · Limited time",
     "promo": "First coffee on us ☕",
-    "pr_coffee": "First coffee (special edition)",
-    "pr_free": "free"
+    "pr_coffee": "First coffee (first editions)",
+    "pr_free": "free",
+    "hero_cta1_b": "Save my seat →",
+    "rv_kicker": "From the table",
+    "rv_title": "What the girls say"
   },
   "nl": {
     "meta_title": "Nieuwe vriendinnen maken in Amsterdam | Koffiemeetups voor vrouwen",
@@ -579,7 +582,7 @@
       ],
       [
         "Wat kost het?",
-        "€12,50 per meetup, incl. btw & servicekosten en de gespreksvragen. Special edition: tijdelijk is je eerste koffie van ons. Wat je verder bestelt, reken je zelf af bij het café."
+        "€12,50 per meetup, incl. btw & servicekosten en de gespreksvragen. Tijdelijk is je eerste koffie van ons. Wat je verder bestelt, reken je zelf af bij het café."
       ],
       [
         "Hoe matchen jullie de tafels?",
@@ -846,9 +849,12 @@
     "j_submit_wait": "Zet me op de wachtlijst →",
     "j_ok_wait_t": "Je staat op de wachtlijst ✿",
     "j_ok_wait_p": "Deze editie is vol, maar je staat op de lijst. Komt er een plek vrij of openen we een extra tafel, dan hoor je het als eerste.",
-    "promo_k": "Special edition · Tijdelijk",
+    "promo_k": "First editions · Limited time",
     "promo": "Eerste koffie van ons ☕",
-    "pr_coffee": "Eerste koffie (special edition)",
-    "pr_free": "gratis"
+    "pr_coffee": "Eerste koffie (first editions)",
+    "pr_free": "gratis",
+    "hero_cta1_b": "Reserveer mijn stoel →",
+    "rv_kicker": "Aan tafel gezegd",
+    "rv_title": "Wat meiden zeggen"
   }
 }

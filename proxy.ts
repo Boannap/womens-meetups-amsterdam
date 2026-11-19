@@ -29,4 +29,4 @@ export function proxy(req: NextRequest) {
 }
 
 // Pages only: API routes, Next assets and files (sitemap.xml, robots.txt, images, llms.txt) pass straight through.
-export const config = { matcher: ["/((?!api|_next|.*\\..*).*)"] };
+export const config = { matcher: ["/((?!api|_next|review|dashboard|.*\\..*).*)"] };
