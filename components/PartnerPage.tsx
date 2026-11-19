@@ -20,19 +20,18 @@ export const PARTNER = {
       ["Een link die Google waardeert", "Je krijgt een eigen plekje met link op onze partnerpagina. Goed voor je vindbaarheid."],
     ],
     pk_t: "Kies wat bij je past",
-    pk_note: "Prijzen excl. btw. Opzeggen kan per maand. Op zondagochtend bestellen de meiden vaak ontbijt of iets lekkers erbij.",
+    pk_note: "Na je aanvraag mail ik je de prijzen en alle details. Opzeggen kan altijd per maand.",
     packages: [
-      { id: "proeftafel", name: "Proeftafel", price: "Gratis", per: "eenmalig", guests: "1 meetup bij jou", items: ["Jij trakteert elke meid op 1 koffie van het huis", "We bieden jouw café één keer aan als meetup-locatie", "Vermelding in onze Instagram-story", "Een maand op onze partnerpagina"], cta: "Proeftafel aanvragen" },
-      { id: "maand1", name: "1x per maand", price: "€19", per: "per maand", guests: "Elke maand 1 meetup bij jou", items: ["Jij trakteert elke meid op 1 koffie van het huis", "Je café als vaste meetup-locatie in onze agenda", "Logo en link op onze partnerpagina", "Je café in de mails van de meiden aan jouw tafels", "Een Instagram-story bij elke meetup"], cta: "1x per maand" },
-      { id: "maand2", name: "2x per maand", price: "€35", per: "per maand", guests: "Elke maand 2 meetups bij jou", items: ["Alles van 1x per maand", "Logo op onze homepage", "Een blog over jouw café op onze site", "Elke maand een samen-post of reel", "Partner-sticker voor op je raam"], cta: "2x per maand", star: true },
+      { id: "proeftafel", name: "Proeftafel", price: "Eenmalig", per: "om te proberen", guests: "1 meetup bij jou", items: ["Jij trakteert elke meid op 1 koffie van het huis", "We bieden jouw café één keer aan als meetup-locatie", "Vermelding in onze Instagram-story", "Een maand op onze partnerpagina"], cta: "Proeftafel aanvragen" },
+      { id: "maand1", name: "1x per maand", price: "1x", per: "per maand", guests: "Elke maand 1 meetup bij jou", items: ["Jij trakteert elke meid op 1 koffie van het huis", "Je café als vaste meetup-locatie in onze agenda", "Logo en link op onze partnerpagina", "Je café in de mails van de meiden aan jouw tafels", "Een Instagram-story bij elke meetup"], cta: "1x per maand" },
+      { id: "maand2", name: "2x per maand", price: "2x", per: "per maand", guests: "Elke maand 2 meetups bij jou", items: ["Alles van 1x per maand", "Logo op onze homepage", "Een blog over jouw café op onze site", "Elke maand een samen-post of reel", "Partner-sticker voor op je raam"], cta: "2x per maand", star: true },
     ],
     coffee_t: "Standaard bij elk pakket",
     coffee: "Elke meid aan jouw tafel krijgt 1 koffie van het huis. Dat is onze vaste aanbieding aan de meiden, en hun eerste kennismaking met jouw koffie.",
     vibe_t: "Wat we de meiden meegeven",
     vibe: "We raden de meiden altijd aan om tijdens de gezellige kennismaking een ontbijtje of hapje te bestellen. En we vinden een goede, persoonlijke sfeer heel belangrijk: een fijne tafel, een warm welkom, een plek waar je graag blijft hangen.",
-    disc: "Let op: je betaalt voor een plek als meetup-locatie in onze agenda en voor de promotie. We doen ons best om elke tafel vol te krijgen, maar we kunnen niet garanderen hoeveel meiden er per keer komen.",
-    link_t: "Bonus: een maand gratis",
-    link: "Schrijf een blogje of post over onze samenwerking op je eigen website, met een link naar ons. Dan is je eerste maand gratis. Wij leveren de tekst en foto's aan, jij hoeft alleen te plaatsen.",
+    link_t: "Bonus: schrijf over ons",
+    link: "Schrijf een blogje of post over onze samenwerking op je eigen website, met een link naar ons. Dan krijg je er een extraatje bij. Wij leveren de tekst en foto's aan, jij hoeft alleen te plaatsen.",
     form_t: "Laten we kennismaken",
     form_p: "Vul dit in, dan mail ik je binnen een paar dagen. Liefs, Boanna",
     back: "Terug naar de meetups",
@@ -51,19 +50,18 @@ export const PARTNER = {
       ["A link Google likes", "You get your own spot with a link on our partner page. Good for being found online."],
     ],
     pk_t: "Pick what suits you",
-    pk_note: "Prices excl. VAT. Cancel any month. On Sunday mornings the women often order breakfast or a treat too.",
+    pk_note: "After your request I'll e-mail you the prices and all the details. Cancel any month.",
     packages: [
-      { id: "proeftafel", name: "Taster table", price: "Free", per: "one time", guests: "1 meetup at your café", items: ["You treat every woman to 1 coffee on the house", "We offer your café once as a meetup location", "A mention in our Instagram story", "One month on our partner page"], cta: "Request a taster table" },
-      { id: "maand1", name: "Once a month", price: "€19", per: "per month", guests: "1 meetup at your café every month", items: ["You treat every woman to 1 coffee on the house", "Your café as a regular meetup location in our calendar", "Logo and link on our partner page", "Your café in the e-mails of the women at your tables", "An Instagram story at every meetup"], cta: "Once a month" },
-      { id: "maand2", name: "Twice a month", price: "€35", per: "per month", guests: "2 meetups at your café every month", items: ["Everything in Once a month", "Logo on our homepage", "A blog about your café on our site", "A joint post or reel every month", "Partner sticker for your window"], cta: "Twice a month", star: true },
+      { id: "proeftafel", name: "Taster table", price: "Once", per: "to try it out", guests: "1 meetup at your café", items: ["You treat every woman to 1 coffee on the house", "We offer your café once as a meetup location", "A mention in our Instagram story", "One month on our partner page"], cta: "Request a taster table" },
+      { id: "maand1", name: "Once a month", price: "1x", per: "a month", guests: "1 meetup at your café every month", items: ["You treat every woman to 1 coffee on the house", "Your café as a regular meetup location in our calendar", "Logo and link on our partner page", "Your café in the e-mails of the women at your tables", "An Instagram story at every meetup"], cta: "Once a month" },
+      { id: "maand2", name: "Twice a month", price: "2x", per: "a month", guests: "2 meetups at your café every month", items: ["Everything in Once a month", "Logo on our homepage", "A blog about your café on our site", "A joint post or reel every month", "Partner sticker for your window"], cta: "Twice a month", star: true },
     ],
     coffee_t: "Included in every package",
     coffee: "Every woman at your table gets 1 coffee on the house. That's our standard offer to the women, and their first taste of your coffee.",
     vibe_t: "What we tell the women",
     vibe: "We always recommend the women order breakfast or a bite during the cosy first meeting. And a good, personal atmosphere matters a lot to us: a nice table, a warm welcome, a place where you want to stay a little longer.",
-    disc: "Please note: you pay for a spot as a meetup location in our calendar and for the promotion. We do our best to fill every table, but we can't guarantee how many women come each time.",
-    link_t: "Bonus: one month free",
-    link: "Write a short blog or post about our partnership on your own website, with a link to us, and your first month is free. We'll send the text and photos, you just publish it.",
+    link_t: "Bonus: write about us",
+    link: "Write a short blog or post about our partnership on your own website, with a link to us, and you get a little extra. We'll send the text and photos, you just publish it.",
     form_t: "Let's meet",
     form_p: "Fill this in and I'll e-mail you within a few days. Love, Boanna",
     back: "Back to the meetups",
@@ -110,7 +108,6 @@ export default function PartnerPage({ lang }: { lang: Lang }) {
               ))}
             </div>
             <p className="pt-note">{t.pk_note}</p>
-            <p className="pt-disc">{t.disc}</p>
             <div className="pt-extra">
               <div><h3>☕ {t.coffee_t}</h3><p>{t.coffee}</p></div>
               <div><h3>🥐 {t.vibe_t}</h3><p>{t.vibe}</p></div>

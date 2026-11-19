@@ -1,3 +1,4 @@
+import { partnerMail } from "./partnerMail";
 /**
  * Branded e-mails for Women's Meetups in Amsterdam.
  * Plain tables + inline styles so they look right in Gmail, Apple Mail and Outlook.
@@ -114,6 +115,13 @@ export function mailMorning(lang: Lang, d: MailData) {
 }
 
 /** 4. The day after: one-tap review poll inside the e-mail. Every option is a link that saves the answer. */
+export function mailPartner(lang: Lang, name = "") {
+  const m = partnerMail(lang, name);
+  const body = h1(m.hi) + p(m.intro) + p(`<b>${m.packs_t}</b>`) + `<ul style="margin:0 0 14px;padding-left:20px">${m.packs.map((x) => `<li>${x}</li>`).join("")}</ul>` +
+    p(m.coffee) + card([["📊", `<b>${m.indic_t}:</b> ${m.indic}`]]) + p(m.bonus) + `<p style="margin:0 0 14px;font-size:13px;color:#8a6f6f">${m.disc}</p>` + p(m.next) + p(m.bye);
+  return { subject: m.subject, html: layout(lang, m.intro, body) };
+}
+
 export function mailReview(lang: Lang, d: MailData) {
   const nl = lang === "nl";
   const u = (q: string, v: string | number) => `${MAIL_BASE}/api/review?r=${encodeURIComponent(d.token || "")}&q=${q}&v=${v}&l=${lang}`;

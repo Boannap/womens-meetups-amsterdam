@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { partnerMail, partnerMailText } from "@/lib/partnerMail";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type Data = any;
@@ -173,6 +174,7 @@ export default function Dashboard() {
                 <b>{p.cafe}</b>{p.neighbourhood ? ` · ${p.neighbourhood}` : ""} · {PKG_NAMES[p.package] ?? p.package} <small>({new Date(p.created_at).toLocaleDateString("nl-NL")})</small><br />
                 {p.contact} · <a href={`mailto:${p.email}`}>{p.email}</a>{p.phone ? ` · ${p.phone}` : ""}{p.link ? <> · <a href={p.link.startsWith("http") ? p.link : `https://${p.link}`} target="_blank" rel="noopener">{p.link}</a></> : null}
                 {p.message && <><br /><em>&ldquo;{p.message}&rdquo;</em></>}
+                <br /><a className="db-toggle" href={`mailto:${p.email}?subject=${encodeURIComponent(partnerMail(p.lang === "en" ? "en" : "nl").subject)}&body=${encodeURIComponent(partnerMailText(p.lang === "en" ? "en" : "nl", p.contact))}`}>Open mail met prijzen ✉️</a>
               </li>
             ))}
           </ul>
