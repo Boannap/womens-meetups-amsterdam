@@ -11,6 +11,7 @@ const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
 export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const [answers, setAnswers] = useState<(number | null)[]>(() => t.quiz.map(() => null));
+  const [step, setStep] = useState(0);
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
   const type: TypeKey | null = quizType(answers);
   const [started, setStarted] = useState(false);
@@ -32,7 +33,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     e.preventDefault();
     const form = e.currentTarget;
     if (!form.checkValidity()) { form.reportValidity(); return; }
-    if (!type) { form.querySelector<HTMLInputElement>("#quiz input")?.focus(); return; }
+    if (!type) { setStep(Math.max(0, answers.findIndex((x) => x === null))); form.querySelector("#quiz")?.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     const fd = new FormData(form);
     const body = {
       name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), language: fd.get("language"),
@@ -41,7 +42,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       whatsapp_consent: contact === "whatsapp_email" && fd.get("wa_consent") === "on",
       hoping: fd.getAll("hoping"), days: fd.getAll("days"), instagram: fd.get("instagram"),
       consent: fd.get("consent") === "on", site_lang: lang,
-      event_id: eventId, waitlist, found_via: fd.get("found_via"), table_wish: fd.get("table_wish"), form_ease: fd.get("form_ease"),
+      event_id: eventId, waitlist, found_via: fd.get("found_via"), table_wish: fd.get("table_wish"),
       website: fd.get("website"), // honeypot, must stay empty
     };
     setState("sending");
@@ -109,20 +110,33 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       <fieldset className="field full quiz" id="quiz">
         <legend><span className="kicker">{t.q_kicker}</span> {t.q_title}</legend>
         <p className="quiz-intro">{t.q_intro}</p>
-        {t.quiz.map(([q, opts], qi) => (
-          <div className="quiz-q" key={q as string}>
-            <p className="quiz-n">{qi + 1}/{t.quiz.length} · {q as string}</p>
-            <div className="pills">
-              {(opts as string[]).map((o, oi) => (
-                <label key={o}>
-                  <input type="radio" name={`q${qi}`} value={oi} checked={answers[qi] === oi}
-                    onChange={() => setAnswers((a) => a.map((v, i) => (i === qi ? oi : v)))} />
-                  <span>{o}</span>
-                </label>
-              ))}
+        {(() => {
+          const qi = Math.min(step, t.quiz.length - 1);
+          const [q, opts] = t.quiz[qi];
+          const done = answers.every((a) => a !== null);
+          if (done && step >= t.quiz.length) return null;
+          return (
+            <div className="quiz-q quiz-step" key={qi}>
+              <div className="quiz-nav">
+                <button type="button" className="quiz-back" onClick={() => setStep((s) => Math.max(0, Math.min(s, t.quiz.length - 1) - 1))} disabled={qi === 0} aria-label={lang === "nl" ? "Vorige vraag" : "Previous question"}>←</button>
+                <p className="quiz-n">{qi + 1}/{t.quiz.length} · {q as string}</p>
+              </div>
+              <div className="quiz-bar"><span style={{ width: `${(answers.filter((a) => a !== null).length / t.quiz.length) * 100}%` }} /></div>
+              <div className="pills">
+                {(opts as string[]).map((o, oi) => (
+                  <label key={o}>
+                    <input type="radio" name={`q${qi}`} value={oi} checked={answers[qi] === oi}
+                      onChange={() => { setAnswers((a) => a.map((v, i) => (i === qi ? oi : v))); setTimeout(() => setStep(qi + 1), 260); }} />
+                    <span>{o}</span>
+                  </label>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })()}
+        {answers.every((a) => a !== null) && step >= t.quiz.length && (
+          <button type="button" className="quiz-redo" onClick={() => setStep(t.quiz.length - 1)}>← {lang === "nl" ? "Antwoord aanpassen" : "Change an answer"}</button>
+        )}
         <div className={`quiz-result${typeInfo ? " on" : ""}`} aria-live="polite">
           {typeInfo ? (<><small>{t.q_result}</small><b>{typeInfo[0]}</b><span>{typeInfo[1]}</span></>) : <span>☕ {answers.filter((a) => a !== null).length}/{t.quiz.length}</span>}
         </div>
@@ -157,7 +171,6 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         <div className="r t"><span>{t.pr_total}</span><span>€{PRICE.total}</span></div>
         <small>{t.pr_note}</small>
       </div>}
-      <fieldset className="field full"><legend>{t.j_ease}</legend>{pills("form_ease", t.j_ease_opts, "radio", false)}</fieldset>
       <label className="consent full field" style={{ flexDirection: "row" }}>
         <input type="checkbox" name="consent" required />
         <span>{t.j_consent}</span>
