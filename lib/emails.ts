@@ -32,7 +32,7 @@ export function signature(lang: Lang = "nl") {
 <td style="vertical-align:middle">
 <img src="${MAIL_BASE}/mail/handtekening.png" width="150" height="50" alt="Boanna" style="display:block;margin:0 0 2px -4px">
 <div style="${sans};font-size:13px;color:${C.soft}">${role} · Women's Meetups in Amsterdam</div>
-<div style="${sans};font-size:13px;margin-top:4px"><a href="${MAIL_BASE}" style="color:${C.tomato};text-decoration:none">womensmeetupsinamsterdam.nl</a> · <a href="https://www.instagram.com/womensmeetupsinamsterdam" style="color:${C.tomato};text-decoration:none">@womensmeetupsinamsterdam</a></div>
+<div style="${sans};font-size:13px;margin-top:4px"><a href="https://womensmeetupsinamsterdam.com" style="color:${C.tomato};text-decoration:none">womensmeetupsinamsterdam.com</a> · <a href="https://www.instagram.com/womensmeetupsinamsterdam" style="color:${C.tomato};text-decoration:none">@womensmeetupsinamsterdam</a></div>
 </td></tr></table>`;
 }
 
