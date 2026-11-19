@@ -16,8 +16,8 @@ const MATCH_NAMES: Record<string, string> = { "3": "Helemaal", "2": "Best wel", 
 
 const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
 
-function Bars({ data, names, unit = "" }: { data: Record<string, number> | [string, number][]; names?: Record<string, string>; unit?: string }) {
-  const rows = (Array.isArray(data) ? data : Object.entries(data || {})).sort((a, b) => Number(b[1]) - Number(a[1]));
+function Bars({ data, names, unit = "" }: { data: any; names?: Record<string, string>; unit?: string }) {
+  const rows: [string, number][] = (Array.isArray(data) ? data : Object.entries(data || {})).map((r: any) => [String(r[0]), Number(r[1])] as [string, number]).sort((a: [string, number], b: [string, number]) => b[1] - a[1]);
   const max = Math.max(1, ...rows.map((r) => Number(r[1])));
   if (!rows.length) return <p className="db-empty">Nog geen data</p>;
   return (
