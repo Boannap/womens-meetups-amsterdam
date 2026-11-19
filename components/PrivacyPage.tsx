@@ -10,8 +10,8 @@ const COPY = {
     sections: [
       ["Who we are", `Women's Meetups in Amsterdam is run by Boanna Pieterse, Amsterdam. Contact: ${EMAIL}.`],
       ["What we collect", "Your first name, email address, age range, neighbourhood, language preference, personality type, work or study field, what you're hoping for, your preferred days and (optionally) your Instagram handle."],
-      ["Why", "Only to match you with a table, to email you about your meetup and to invite you to the community group. We never sell or share your data with other companies. Your tablemates only see your first name."],
-      ["WhatsApp and reviews", "If you choose WhatsApp, we save your phone number to send you your table details and invite you to the community group; you can switch to email only at any time. After the meetup we ask a few one-tap review questions. Your words only appear on the website (first name only) if you tick that box and we approve it."],
+      ["Why", "Only to match you with a table, to email you about your meetup and to keep you posted about new tables and events. We never sell or share your data with other companies. Your tablemates only see your first name."],
+      ["WhatsApp and reviews", "If you choose WhatsApp, we save your phone number to send you your table details; you can switch to email only at any time. After the meetup we ask a few one-tap review questions. Your words only appear on the website (first name only) if you tick that box and we approve it."],
       ["Website statistics", "We count visits in a privacy-friendly way: no cookies, no IP addresses and no third parties. A random code per browser tab lets us see which parts of the page are read and where the form could be easier. This can't be traced back to you."],
       ["How long", "We keep your data while you're part of the community. Email us and we'll delete everything within 30 days."],
       ["Where it's stored", "In a secure database (Supabase, EU region). Payments are handled by Mollie; we never see your bank or card details."],
@@ -25,8 +25,8 @@ const COPY = {
     sections: [
       ["Wie we zijn", `Women's Meetups in Amsterdam wordt gerund door Boanna Pieterse, Amsterdam. Contact: ${EMAIL}.`],
       ["Wat we verzamelen", "Je voornaam, e-mailadres, leeftijdscategorie, buurt, taalvoorkeur, persoonlijkheidstype, werk- of studieveld, waar je op hoopt, je voorkeursdagen en (optioneel) je Instagram."],
-      ["Waarom", "Alleen om je aan een tafel te matchen, je te mailen over je meetup en je uit te nodigen voor de communitygroep. We verkopen of delen je gegevens nooit met andere bedrijven. Je tafelgenoten zien alleen je voornaam."],
-      ["WhatsApp en reviews", "Kies je voor WhatsApp, dan bewaren we je telefoonnummer om je de details van je tafel te sturen en je uit te nodigen voor de communitygroep. Je kunt altijd terug naar alleen mail. Na de meetup stellen we een paar korte reviewvragen. Je tekst komt alleen op de website (met alleen je voornaam) als je dat aanvinkt en wij het goedkeuren."],
+      ["Waarom", "Alleen om je aan een tafel te matchen, je te mailen over je meetup en je op de hoogte te houden van nieuwe tafels en events. We verkopen of delen je gegevens nooit met andere bedrijven. Je tafelgenoten zien alleen je voornaam."],
+      ["WhatsApp en reviews", "Kies je voor WhatsApp, dan bewaren we je telefoonnummer om je de details van je tafel te sturen en je op de hoogte te houden van nieuwe tafels en events. Je kunt altijd terug naar alleen mail. Na de meetup stellen we een paar korte reviewvragen. Je tekst komt alleen op de website (met alleen je voornaam) als je dat aanvinkt en wij het goedkeuren."],
       ["Websitestatistieken", "We tellen bezoek op een privacyvriendelijke manier: geen cookies, geen IP-adressen en geen derde partijen. Een willekeurige code per browsertabblad laat ons zien welke delen van de pagina gelezen worden en waar het formulier makkelijker kan. Dit is niet naar jou te herleiden."],
       ["Hoe lang", "We bewaren je gegevens zolang je deel uitmaakt van de community. Mail ons en we verwijderen alles binnen 30 dagen."],
       ["Waar het staat", "In een beveiligde database (Supabase, EU-regio). Betalingen lopen via Mollie; wij zien nooit je bank- of kaartgegevens."],

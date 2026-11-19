@@ -61,7 +61,7 @@
     "e2_t": "Six girls, one table",
     "e2_p": "Small enough to really talk, big enough that there's always someone new to hear from. More sign-ups? We simply open more tables.",
     "e3_t": "Friends after the coffee",
-    "e3_p": "After your meetup you join our community group, so the plans don't end when the cups are empty.",
+    "e3_p": "After your meetup you're part of our community: you hear about new dates and events first, so the plans don't end when the cups are empty.",
     "h_kicker": "How it works",
     "h_title": "Simple to join. Carefully matched.",
     "h1_t": "Sign up",
@@ -71,7 +71,7 @@
     "h3_t": "Show up & sip",
     "h3_p": "Your first coffee is included. A host welcomes everyone and gets the conversation going with the question cards, so nobody has to fill the silence.",
     "h4_t": "Stay friends",
-    "h4_p": "Afterwards you join the community group with everyone from your date, for borrels, walks and the next table.",
+    "h4_p": "Afterwards you're part of our community in Amsterdam: through our e-mails and newsletter you hear first about new tables and events.",
     "c_kicker": "On the table",
     "c_title": "No awkward small talk. We bring the questions.",
     "c_text": "Every table gets a little stack of conversation cards. Tap the deck for a taste.",
@@ -186,7 +186,7 @@
       ],
       [
         "How do I make friends in Amsterdam as an adult?",
-        "Small, regular meetups work best: you meet the same kind of people more than once and conversations go deeper than at a big event. That is exactly what a Table of Six is. Sign up, get matched with five women and keep in touch through the community group afterwards."
+        "Small, regular meetups work best: you meet the same kind of people more than once and conversations go deeper than at a big event. That is exactly what a Table of Six is. Sign up, get matched with five women and stay part of the community afterwards through our e-mails and newsletter."
       ],
       [
         "I just moved to Amsterdam. Is this for expats too?",
@@ -334,7 +334,7 @@
       "Email only"
     ],
     "j_contact_note": "The café and time always come by email too.",
-    "j_wa_consent": "I'm fine with receiving WhatsApp messages about my table and the community group.",
+    "j_wa_consent": "I'm fine with receiving WhatsApp messages about my table.",
     "q_kicker": "Quick quiz",
     "q_title": "Which tablemate are you?",
     "q_intro": "Five quick questions, no wrong answers. We use your type to match your table.",
@@ -491,7 +491,7 @@
     "e2_t": "Zes meiden, één tafel",
     "e2_p": "Klein genoeg om echt te praten, groot genoeg om steeds iemand nieuws te horen. Meer aanmeldingen? Dan openen we gewoon meer tafels.",
     "e3_t": "Vriendinnen na de koffie",
-    "e3_p": "Na je meetup kom je in onze communitygroep, zodat de plannen niet stoppen als de kopjes leeg zijn.",
+    "e3_p": "Na je meetup ben je deel van onze community: je hoort als eerste over nieuwe data en events, zodat de plannen niet stoppen als de kopjes leeg zijn.",
     "h_kicker": "Hoe het werkt",
     "h_title": "Makkelijk aanmelden. Zorgvuldig gematcht.",
     "h1_t": "Meld je aan",
@@ -501,7 +501,7 @@
     "h3_t": "Kom & geniet",
     "h3_p": "Je eerste koffietje krijg je van ons! Een host heet iedereen welkom en brengt het gesprek op gang met de vragenkaartjes, dus niemand hoeft de stilte te vullen.",
     "h4_t": "Blijf vriendinnen",
-    "h4_p": "Daarna kom je in de communitygroep met iedereen van jouw datum, voor borrels, wandelingen en de volgende tafel.",
+    "h4_p": "Daarna ben je deel van onze community in Amsterdam: via onze mails en nieuwsbrief hoor je als eerste over nieuwe tafels en events.",
     "c_kicker": "Op tafel",
     "c_title": "Geen ongemakkelijke small talk. Wij nemen de vragen mee.",
     "c_text": "Elke tafel krijgt een stapeltje gespreksvragen. Tik op het stapeltje voor een voorproefje.",
@@ -616,7 +616,7 @@
       ],
       [
         "Hoe maak je nieuwe vriendinnen in Amsterdam?",
-        "Kleine, terugkerende meetups werken het best: je ziet mensen vaker en de gesprekken gaan dieper dan op een groot event. Dat is precies wat een Table of Six is. Meld je aan, word gematcht met vijf vrouwen en houd daarna contact via de communitygroep."
+        "Kleine, terugkerende meetups werken het best: je ziet mensen vaker en de gesprekken gaan dieper dan op een groot event. Dat is precies wat een Table of Six is. Meld je aan, word gematcht met vijf vrouwen en blijf daarna deel van de community via onze mails en nieuwsbrief."
       ],
       [
         "Ik ben net in Amsterdam komen wonen. Kan ik meedoen?",
@@ -764,7 +764,7 @@
       "Alleen mail"
     ],
     "j_contact_note": "Het café en de tijd krijg je altijd ook per mail.",
-    "j_wa_consent": "Ik vind het goed om WhatsAppjes te krijgen over mijn tafel en de communitygroep.",
+    "j_wa_consent": "Ik vind het goed om WhatsAppjes te krijgen over mijn tafel.",
     "q_kicker": "Snelle quiz",
     "q_title": "Welke tafelgenoot ben jij?",
     "q_intro": "Vijf snelle vragen, er zijn geen foute antwoorden. Met jouw type matchen we je tafel.",
