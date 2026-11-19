@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EVENTS, type Dict, type Lang } from "@/lib/site";
 import { quizType, type TypeKey } from "@/lib/quiz";
 import { track } from "./Tracker";
@@ -14,6 +14,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
   const type: TypeKey | null = quizType(answers);
   const [started, setStarted] = useState(false);
+  const touched = useRef(new Set<string>());
   useEffect(() => { if (type) track("form", "quiz_done", undefined, type); }, [type]);
   const upcoming = EVENTS.filter((e) => new Date(e.end) > new Date());
   const isFull = (id: string) => { const e = upcoming.find((x) => x.id === id); return !!e && (!!e.soldOut || e.tables.every((tb) => tb.taken >= 6)); };
@@ -73,7 +74,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   );
 
   return (
-    <form className="join" onSubmit={onSubmit} noValidate onFocus={() => { if (!started) { setStarted(true); track("form", "start"); } }}>
+    <form className="join" onSubmit={onSubmit} noValidate onFocus={(e) => { if (!started) { setStarted(true); track("form", "start"); } const n = (e.target as HTMLInputElement).name?.replace(/^q\d$/, "quiz"); if (n && !touched.current.has(n)) { touched.current.add(n); track("form", `field:${n}`); } }}>
       {upcoming.length > 0 && (
         <fieldset className="field full"><legend>{t.j_event}</legend>
           <div className="pills">

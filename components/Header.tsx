@@ -26,11 +26,11 @@ export default function Header({ lang, alt }: { lang: Lang; alt: string }) {
             {lang === "nl" ? (
               <>
                 <span aria-current="true" className="on">NL</span>
-                <Link href={alt} hrefLang="en">EN</Link>
+                <Link href={alt} hrefLang="en" data-track="lang_switch">EN</Link>
               </>
             ) : (
               <>
-                <Link href={alt} hrefLang="nl">NL</Link>
+                <Link href={alt} hrefLang="nl" data-track="lang_switch">NL</Link>
                 <span aria-current="true" className="on">EN</span>
               </>
             )}

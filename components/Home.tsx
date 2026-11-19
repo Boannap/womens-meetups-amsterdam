@@ -231,7 +231,7 @@ export default function Home({ lang }: { lang: Lang }) {
             </div>
             <div className="faq">
               {t.faq.map(([q, a]) => (
-                <details key={q}><summary>{q}<span className="pm">+</span></summary><p>{a}</p></details>
+                <details key={q}><summary data-track={`faq:${q.slice(0, 40)}`}>{q}<span className="pm">+</span></summary><p>{a}</p></details>
               ))}
             </div>
           </div>

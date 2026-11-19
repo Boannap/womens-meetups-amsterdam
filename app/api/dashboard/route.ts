@@ -11,5 +11,6 @@ export async function POST(req: Request) {
   }
   const data = await rpc<Record<string, unknown>>("dashboard_stats", { p_password: b.password, p_days: Math.min(365, Math.max(1, Number(b.days) || 30)) });
   if (!data || data.error) return NextResponse.json({ error: "wrong password" }, { status: 401 });
-  return NextResponse.json(data, { headers: { "Cache-Control": "no-store" } });
+  const extra = await rpc<Record<string, unknown>>("dashboard_extra", { p_password: b.password, p_days: Math.min(365, Math.max(1, Number(b.days) || 30)) });
+  return NextResponse.json({ ...data, extra: extra ?? {} }, { headers: { "Cache-Control": "no-store" } });
 }

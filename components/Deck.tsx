@@ -21,10 +21,10 @@ export default function Deck({ t }: { t: Dict }) {
         <span className="kicker" style={{ color: "var(--peach)" }}>{t.c_kicker}</span>
         <h2 className="title">{t.c_title}</h2>
         <p className="lead" style={{ margin: "16px 0 26px" }}>{t.c_text}</p>
-        <button className="btn btn-pink" onClick={next}>{t.c_btn}</button>
+        <button className="btn btn-pink" data-track="cards" onClick={next}>{t.c_btn}</button>
       </div>
       <div
-        className="deck" id="deck" role="button" tabIndex={0} aria-live="polite" onClick={next}
+        className="deck" id="deck" data-track="cards" role="button" tabIndex={0} aria-live="polite" onClick={next}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); next(); } }}
       >
         <div className="qcard scallop" />

@@ -325,3 +325,13 @@ footer a:hover{text-decoration:underline}
 .db-days-chart span{width:100%;background:var(--pink);border-radius:6px 6px 0 0;min-height:2px}.db-days-chart small{font-size:.65rem;color:#7a5a5c}
 .db-list{display:grid;gap:10px;margin-top:10px;padding-left:18px}.db-list small{color:#7a5a5c;margin-left:6px}.db-list .db-toggle{margin-left:10px;font-size:.8rem}
 .db-empty{color:#7a5a5c;font-size:.9rem;margin-top:8px}
+
+.db-advice{background:#fff;border:2px solid var(--wine,#6b1f2a);border-radius:18px;padding:18px 22px;margin:0 0 22px}
+.db-advice h3{margin:0 0 4px}
+.db-advice ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.db-advice li{padding:10px 12px 10px 38px;border-radius:12px;position:relative;line-height:1.45}
+.db-advice li::before{position:absolute;left:12px;top:9px}
+.db-advice .tip-fix{background:#fdecea}.db-advice .tip-fix::before{content:"🔧"}
+.db-advice .tip-go{background:#eaf6ec}.db-advice .tip-go::before{content:"✨"}
+.db-advice .tip-info{background:#f4f1ec}.db-advice .tip-info::before{content:"💡"}
+.db-advice code{font-size:.85em;word-break:break-all}
