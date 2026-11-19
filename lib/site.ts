@@ -17,7 +17,7 @@ export type MeetupEvent = {
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://womensmeetupsinamsterdam.nl").replace(/\/$/, "");
 export const SITE_NAME = "Women's Meetups in Amsterdam";
 export const INSTAGRAM = "womensmeetupsinamsterdam";
-export const EMAIL = "hello@womensmeetupsinamsterdam.nl";
+export const EMAIL = "hello@womensmeetupsinamsterdam.com";
 export const BOANNA_SOCIALS = [
   { name: "Instagram", handle: "@boannap", url: "https://www.instagram.com/boannap" },
   { name: "YouTube", handle: "@boannathroughtwenties", url: "https://www.youtube.com/@boannathroughtwenties" },

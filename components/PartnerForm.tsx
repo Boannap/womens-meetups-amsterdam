@@ -8,7 +8,7 @@ const L = {
     cafe: "Naam van je café", contact: "Jouw naam", email: "E-mail", phone: "Telefoon (mag leeg)", hood: "Buurt", link: "Website of Instagram",
     pkg: "Waar denk je aan?", opts: [["proeftafel", "Proeftafel (eenmalig)"], ["maand1", "1x per maand"], ["maand2", "2x per maand"], ["weet-niet", "Weet ik nog niet"]],
     msg: "Vertel iets over je café (sfeer, rustige momenten, hoeveel plek)", send: "Verstuur", busy: "Even geduld…",
-    ok: "Dankjewel! Je aanvraag is binnen. Ik mail je binnen een paar dagen. ☕", err: "Dat ging mis. Mail ons gerust op hello@womensmeetupsinamsterdam.nl",
+    ok: "Dankjewel! Je aanvraag is binnen. Ik mail je binnen een paar dagen. ☕", err: "Dat ging mis. Mail ons gerust op hello@womensmeetupsinamsterdam.com",
     privacy: "We gebruiken je gegevens alleen om contact met je op te nemen over een samenwerking.",
   },
   en: {
