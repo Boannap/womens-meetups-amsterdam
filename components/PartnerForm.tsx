@@ -6,14 +6,14 @@ import type { Lang } from "@/lib/site";
 const L = {
   nl: {
     cafe: "Naam van je café", contact: "Jouw naam", email: "E-mail", phone: "Telefoon (mag leeg)", hood: "Buurt", link: "Website of Instagram",
-    pkg: "Waar denk je aan?", opts: [["proeftafel", "Proeftafel (eenmalig, gratis)"], ["buurtcafe", "Buurtcafé (€39 p/m)"], ["stamcafe", "Stamcafé (€79 p/m)"], ["koffie", "Betalen in koffie"], ["weet-niet", "Weet ik nog niet"]],
+    pkg: "Waar denk je aan?", opts: [["proeftafel", "Proeftafel (eenmalig, gratis)"], ["maand1", "1x per maand (€19 p/m)"], ["maand2", "2x per maand (€35 p/m)"], ["weet-niet", "Weet ik nog niet"]],
     msg: "Vertel iets over je café (sfeer, rustige momenten, hoeveel plek)", send: "Verstuur", busy: "Even geduld…",
     ok: "Dankjewel! Je aanvraag is binnen. Ik mail je binnen een paar dagen. ☕", err: "Dat ging mis. Mail ons gerust op hello@womensmeetupsinamsterdam.nl",
     privacy: "We gebruiken je gegevens alleen om contact met je op te nemen over een samenwerking.",
   },
   en: {
     cafe: "Café name", contact: "Your name", email: "E-mail", phone: "Phone (optional)", hood: "Neighbourhood", link: "Website or Instagram",
-    pkg: "What are you thinking of?", opts: [["proeftafel", "Taster table (one time, free)"], ["buurtcafe", "Neighbourhood café (€39 p/m)"], ["stamcafe", "Home café (€79 p/m)"], ["koffie", "Pay in coffee"], ["weet-niet", "Not sure yet"]],
+    pkg: "What are you thinking of?", opts: [["proeftafel", "Taster table (one time, free)"], ["maand1", "Once a month (€19 p/m)"], ["maand2", "Twice a month (€35 p/m)"], ["weet-niet", "Not sure yet"]],
     msg: "Tell us about your café (vibe, quiet times, how much space)", send: "Send", busy: "One moment…",
     ok: "Thank you! Your request is in. I'll e-mail you within a few days. ☕", err: "Something went wrong. Feel free to e-mail hello@womensmeetupsinamsterdam.com",
     privacy: "We only use your details to get in touch about working together.",

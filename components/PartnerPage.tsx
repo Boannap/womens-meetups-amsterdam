@@ -14,20 +14,21 @@ export const PARTNER = {
     intro: "Wij brengen groepjes van zes meiden samen aan één tafel, om nieuwe vriendinnen te maken. Op zoek naar de fijnste plekken van de stad. Klinkt jouw café als zo'n plek? Dan werken we graag samen: één keer om te proeven, of als vaste partner.",
     why_t: "Wat het jouw café oplevert",
     why: [
-      ["Gasten op rustige momenten", "Wij plannen tafels op middagen en avonden waarop het bij jou wat stiller is. Zes meiden die blijven, bestellen en terugkomen."],
+      ["Brunchgasten op zondagochtend", "Onze tafels zijn meestal op zondag rond 10.30. Zes meiden die blijven, ontbijten, bestellen en terugkomen."],
       ["Nieuwe vaste klanten", "Meiden die bij jou een fijne avond hadden, komen terug. Met hun nieuwe vriendinnen."],
       ["Zichtbaar bij de juiste doelgroep", "Vrouwen van 20 tot 35 in Amsterdam, Nederlands en internationaal. Via onze site, mails en Instagram."],
       ["Een link die Google waardeert", "Je krijgt een eigen plekje met link op onze partnerpagina. Goed voor je vindbaarheid."],
     ],
     pk_t: "Kies wat bij je past",
-    pk_note: "Prijzen excl. btw. Opzeggen kan per maand. Gemiddeld besteedt een meid €10 tot €12 per meetup.",
+    pk_note: "Prijzen excl. btw. Opzeggen kan per maand. Op zondagochtend bestellen de meiden vaak ontbijt of iets lekkers erbij.",
     packages: [
-      { id: "proeftafel", name: "Proeftafel", price: "Gratis", per: "eenmalig", guests: "1 tafel · 6 meiden", items: ["Jij reserveert een tafel, wij brengen de gasten", "Vermelding in onze Instagram-story", "Een maand op onze partnerpagina"], cta: "Proeftafel aanvragen" },
-      { id: "buurtcafe", name: "Buurtcafé", price: "€39", per: "per maand", guests: "±2 tafels · ±12 meiden per maand", items: ["Logo en link op onze partnerpagina", "Je café in de bevestigingsmail van elke meid aan jouw tafel", "Een Instagram-story bij elke meetup", "Partner-sticker voor op je raam"], cta: "Buurtcafé worden", star: true },
-      { id: "stamcafe", name: "Stamcafé", price: "€79", per: "per maand", guests: "±4 tafels · ±24 meiden per maand", items: ["Alles van Buurtcafé", "Logo op onze homepage", "Een blog over jouw café op onze site", "Elke maand een samen-post of reel", "Exclusief: geen ander partnercafé in jouw buurt"], cta: "Stamcafé worden" },
+      { id: "proeftafel", name: "Proeftafel", price: "Gratis", per: "eenmalig", guests: "1 meetup bij jou", items: ["We bieden jouw café één keer aan als meetup-locatie", "Vermelding in onze Instagram-story", "Een maand op onze partnerpagina"], cta: "Proeftafel aanvragen" },
+      { id: "maand1", name: "1x per maand", price: "€19", per: "per maand", guests: "Elke maand 1 meetup bij jou", items: ["Je café als vaste meetup-locatie in onze agenda", "Logo en link op onze partnerpagina", "Je café in de mails van de meiden aan jouw tafels", "Een Instagram-story bij elke meetup"], cta: "1x per maand" },
+      { id: "maand2", name: "2x per maand", price: "€35", per: "per maand", guests: "Elke maand 2 meetups bij jou", items: ["Alles van 1x per maand", "Logo op onze homepage", "Een blog over jouw café op onze site", "Elke maand een samen-post of reel", "Partner-sticker voor op je raam"], cta: "2x per maand", star: true },
     ],
-    coffee_t: "Liever betalen in koffie?",
-    coffee: "Dat kan ook. Trakteer de meiden aan jouw tafels op hun eerste koffie, dan krijg je het pakket Buurtcafé zonder maandbedrag.",
+    coffee_t: "Standaard bij elk pakket",
+    coffee: "Elke meid aan jouw tafel krijgt 1 koffie van het huis. Dat is onze vaste aanbieding aan de meiden, en hun eerste kennismaking met jouw koffie.",
+    disc: "Let op: je betaalt voor een plek als meetup-locatie in onze agenda en voor de promotie. We doen ons best om elke tafel vol te krijgen, maar we kunnen niet garanderen hoeveel meiden er per keer komen.",
     link_t: "Bonus: een maand gratis",
     link: "Schrijf een blogje of post over onze samenwerking op je eigen website, met een link naar ons. Dan is je eerste maand gratis. Wij leveren de tekst en foto's aan, jij hoeft alleen te plaatsen.",
     form_t: "Laten we kennismaken",
@@ -42,20 +43,21 @@ export const PARTNER = {
     intro: "We bring six women together at one table to make new friends, and we're always looking for the loveliest spots in town. Sounds like your café? Let's work together: once to try it out, or as a regular partner.",
     why_t: "What's in it for your café",
     why: [
-      ["Guests at quiet times", "We plan tables on afternoons and evenings when it's calmer at your place. Six women who stay, order and come back."],
+      ["Brunch guests on Sunday morning", "Our tables are usually on Sunday around 10:30. Six women who stay, have breakfast, order and come back."],
       ["New regulars", "Women who had a lovely evening at your café come back. With their new friends."],
       ["Seen by the right crowd", "Women aged 20 to 35 in Amsterdam, Dutch and international. Through our site, e-mails and Instagram."],
       ["A link Google likes", "You get your own spot with a link on our partner page. Good for being found online."],
     ],
     pk_t: "Pick what suits you",
-    pk_note: "Prices excl. VAT. Cancel any month. On average each woman spends €10 to €12 per meetup.",
+    pk_note: "Prices excl. VAT. Cancel any month. On Sunday mornings the women often order breakfast or a treat too.",
     packages: [
-      { id: "proeftafel", name: "Taster table", price: "Free", per: "one time", guests: "1 table · 6 women", items: ["You reserve a table, we bring the guests", "A mention in our Instagram story", "One month on our partner page"], cta: "Request a taster table" },
-      { id: "buurtcafe", name: "Neighbourhood café", price: "€39", per: "per month", guests: "±2 tables · ±12 women a month", items: ["Logo and link on our partner page", "Your café in the confirmation e-mail of every woman at your table", "An Instagram story at every meetup", "Partner sticker for your window"], cta: "Become a neighbourhood café", star: true },
-      { id: "stamcafe", name: "Home café", price: "€79", per: "per month", guests: "±4 tables · ±24 women a month", items: ["Everything in Neighbourhood café", "Logo on our homepage", "A blog about your café on our site", "A joint post or reel every month", "Exclusive: no other partner café in your area"], cta: "Become our home café" },
+      { id: "proeftafel", name: "Taster table", price: "Free", per: "one time", guests: "1 meetup at your café", items: ["We offer your café once as a meetup location", "A mention in our Instagram story", "One month on our partner page"], cta: "Request a taster table" },
+      { id: "maand1", name: "Once a month", price: "€19", per: "per month", guests: "1 meetup at your café every month", items: ["Your café as a regular meetup location in our calendar", "Logo and link on our partner page", "Your café in the e-mails of the women at your tables", "An Instagram story at every meetup"], cta: "Once a month" },
+      { id: "maand2", name: "Twice a month", price: "€35", per: "per month", guests: "2 meetups at your café every month", items: ["Everything in Once a month", "Logo on our homepage", "A blog about your café on our site", "A joint post or reel every month", "Partner sticker for your window"], cta: "Twice a month", star: true },
     ],
-    coffee_t: "Rather pay in coffee?",
-    coffee: "That works too. Treat the women at your tables to their first coffee and you get the Neighbourhood café package without a monthly fee.",
+    coffee_t: "Included in every package",
+    coffee: "Every woman at your table gets 1 coffee on the house. That's our standard offer to the women, and their first taste of your coffee.",
+    disc: "Please note: you pay for a spot as a meetup location in our calendar and for the promotion. We do our best to fill every table, but we can't guarantee how many women come each time.",
     link_t: "Bonus: one month free",
     link: "Write a short blog or post about our partnership on your own website, with a link to us, and your first month is free. We'll send the text and photos, you just publish it.",
     form_t: "Let's meet",
@@ -104,6 +106,7 @@ export default function PartnerPage({ lang }: { lang: Lang }) {
               ))}
             </div>
             <p className="pt-note">{t.pk_note}</p>
+            <p className="pt-disc">{t.disc}</p>
             <div className="pt-extra">
               <div><h3>☕ {t.coffee_t}</h3><p>{t.coffee}</p></div>
               <div><h3>🔗 {t.link_t}</h3><p>{t.link}</p></div>

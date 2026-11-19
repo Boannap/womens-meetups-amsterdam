@@ -125,6 +125,7 @@
     "j_days": "Best moment for me",
     "j_dayopts": [
       "Saturday afternoon",
+      "Sunday morning (brunch)",
       "Sunday afternoon",
       "Weekday evening"
     ],
@@ -322,8 +323,8 @@
         "No loud bar, no name tags, no room full of fifty strangers. Just a real conversation with five women matched to you."
       ],
       [
-        "A girls' afternoon, every month",
-        "Once a month, soon every two weeks, usually on a Sunday afternoon. €12.50 incl. VAT and service costs, no membership."
+        "A girls' brunch, every month",
+        "Once a month, soon every two weeks, usually on a Sunday around 10:30, perfect for brunch. €12.50 incl. VAT and service costs, no membership."
       ]
     ],
     "j_phone": "Phone number (for WhatsApp)",
@@ -554,6 +555,7 @@
     "j_days": "Beste moment voor mij",
     "j_dayopts": [
       "Zaterdagmiddag",
+      "Zondagochtend (brunch)",
       "Zondagmiddag",
       "Doordeweekse avond"
     ],
@@ -751,8 +753,8 @@
         "Geen luide kroeg, geen naamstickers, geen zaal vol vijftig onbekenden. Gewoon een echt gesprek met vijf vrouwen die bij je passen."
       ],
       [
-        "Elke maand een meidenmiddag",
-        "Eén keer per maand, binnenkort elke twee weken, meestal op zondagmiddag. €12,50 incl. btw en servicekosten, geen lidmaatschap."
+        "Elke maand een meidenbrunch",
+        "Eén keer per maand, binnenkort elke twee weken, meestal op zondag rond 10.30, perfect voor een brunch. €12,50 incl. btw en servicekosten, geen lidmaatschap."
       ]
     ],
     "j_phone": "Telefoonnummer (voor WhatsApp)",

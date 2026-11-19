@@ -92,11 +92,11 @@ export function mailDetails(lang: Lang, d: MailData) {
   const body = nl
     ? h1(`Nog twee nachtjes slapen, ${firstName(d.name)}!`) + p("Je tafel is gematcht en we hebben een gezellig plekje voor jullie gevonden. Hier zijn de details:") + card(rows) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route in Google Maps →")}</p>` +
-      p("<b>Goed om te weten</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>Vraag bij binnenkomst naar de tafel van <b>Women's Meetups</b>, of zoek de gesprekskaartjes op tafel.</li><li>Je eerste koffie is van ons. Wat je verder bestelt, reken je zelf af.</li><li>Kun je toch niet? Laat het ons vandaag nog weten, dan geven we je plek aan iemand van de wachtlijst.</li></ul>` +
+      p("<b>Goed om te weten</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>Vraag bij binnenkomst naar de tafel van <b>Women's Meetups</b>, of zoek de gesprekskaartjes op tafel.</li><li>Je eerste koffie is van ons. Bestel er lekker een ontbijtje of bananenbrood bij! Wat je verder bestelt, reken je zelf af.</li><li>Kun je toch niet? Laat het ons vandaag nog weten, dan geven we je plek aan iemand van de wachtlijst.</li></ul>` +
       p("We hebben er zin in!")
     : h1(`Two more sleeps, ${firstName(d.name)}!`) + p("Your table is matched and we found a cosy spot for you. Here are the details:") + card(rows) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions in Google Maps →")}</p>` +
-      p("<b>Good to know</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>Ask for the <b>Women's Meetups</b> table when you walk in, or look for the conversation cards.</li><li>Your first coffee is on us. Anything else you order, you pay at the café.</li><li>Can't make it after all? Let us know today, so we can give your seat to someone on the waitlist.</li></ul>` +
+      p("<b>Good to know</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>Ask for the <b>Women's Meetups</b> table when you walk in, or look for the conversation cards.</li><li>Your first coffee is on us. Treat yourself to some breakfast or banana bread too! Anything else you order, you pay at the café.</li><li>Can't make it after all? Let us know today, so we can give your seat to someone on the waitlist.</li></ul>` +
       p("We can't wait!");
   return { subject, html: layout(lang, nl ? `${d.cafe}, ${time(d.date, lang)}. Alles wat je moet weten.` : `${d.cafe}, ${time(d.date, lang)}. Everything you need to know.`, body) };
 }
@@ -106,11 +106,11 @@ export function mailMorning(lang: Lang, d: MailData) {
   const nl = lang === "nl";
   const subject = nl ? "Vandaag is het zover ☀️" : "Today's the day ☀️";
   const body = nl
-    ? h1(`Goedemorgen ${firstName(d.name)}! ☀️`) + p(`Vanmiddag om <b>${time(d.date, lang)}</b> zit je met vijf nieuwe meiden aan tafel bij <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Je eerste koffie is van ons"]]) +
+    ? h1(`Goedemorgen ${firstName(d.name)}! ☀️`) + p(`Vandaag om <b>${time(d.date, lang)}</b> zit je met vijf nieuwe meiden aan tafel bij <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Je eerste koffie is van ons"], ["🥐", "Bestel er lekker een ontbijtje of bananenbrood bij"]]) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route →")}</p>` + p("Kom gewoon zoals je bent. Wij nemen de vragen mee, jij jezelf.") + p("Tot straks,")
-    : h1(`Good morning ${firstName(d.name)}! ☀️`) + p(`This afternoon at <b>${time(d.date, lang)}</b> you'll sit down with five new girls at <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Your first coffee is on us"]]) +
+    : h1(`Good morning ${firstName(d.name)}! ☀️`) + p(`Today at <b>${time(d.date, lang)}</b> you'll sit down with five new girls at <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Your first coffee is on us"], ["🥐", "Treat yourself to breakfast or banana bread"]]) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions →")}</p>` + p("Just come as you are. We bring the questions, you bring yourself.") + p("See you soon,");
-  return { subject, html: layout(lang, nl ? `Vanmiddag ${time(d.date, lang)} bij ${d.cafe}.` : `This afternoon ${time(d.date, lang)} at ${d.cafe}.`, body) };
+  return { subject, html: layout(lang, nl ? `Vandaag ${time(d.date, lang)} bij ${d.cafe}.` : `Today ${time(d.date, lang)} at ${d.cafe}.`, body) };
 }
 
 /** 4. The day after: one-tap review poll inside the e-mail. Every option is a link that saves the answer. */
