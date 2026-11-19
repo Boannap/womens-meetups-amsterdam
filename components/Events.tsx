@@ -1,11 +1,13 @@
 "use client";
 
+import { useSeats, isEventFull, capacity, takenTotal } from "@/lib/useSeats";
 import { useState } from "react";
 import type { Dict, Lang, MeetupEvent, TableLang } from "@/lib/site";
 
 type Filter = "all" | TableLang;
 
 export default function Events({ lang, t, events }: { lang: Lang; t: Dict; events: MeetupEvent[] }) {
+  const seats = useSeats();
   const [filter, setFilter] = useState<Filter>("all");
   const locale = lang === "nl" ? "nl-NL" : "en-GB";
   const fmt = (d: string, o: Intl.DateTimeFormatOptions) =>
@@ -29,7 +31,7 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
         {list.length === 0 && <p className="empty">{t.ev_none}</p>}
         {list.map((e) => {
           const tables = e.tables.filter((tb) => filter === "all" || tb.lang === filter);
-          const left = e.soldOut ? 0 : tables.reduce((n, tb) => n + (6 - tb.taken), 0);
+          const left = isEventFull(e, seats) ? 0 : Math.min(tables.reduce((n, tb) => n + (6 - tb.taken), 0), capacity(e) - takenTotal(e, seats));
           return (
             <article className="ev" key={e.id}>
               <div className="ev-date scallop">

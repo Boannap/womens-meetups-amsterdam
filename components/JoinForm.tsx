@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { EVENTS, type Dict, type Lang } from "@/lib/site";
 import { quizType, type TypeKey } from "@/lib/quiz";
+import { useSeats, isEventFull } from "@/lib/useSeats";
 import { track } from "./Tracker";
 
 // €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Mollie iDEAL fee. First coffee included.
@@ -18,7 +19,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const touched = useRef(new Set<string>());
   useEffect(() => { if (type) track("form", "quiz_done", undefined, type); }, [type]);
   const upcoming = EVENTS.filter((e) => new Date(e.end) > new Date());
-  const isFull = (id: string) => { const e = upcoming.find((x) => x.id === id); return !!e && (!!e.soldOut || e.tables.every((tb) => tb.taken >= 6)); };
+  const seats = useSeats();
+  const isFull = (id: string) => { const e = upcoming.find((x) => x.id === id); return !!e && isEventFull(e, seats); };
   const [eventId, setEventId] = useState<string>(() => (upcoming.find((e) => !isFull(e.id)) ?? upcoming[0])?.id ?? "");
   const waitlist = isFull(eventId);
   useEffect(() => {

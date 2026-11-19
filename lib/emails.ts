@@ -115,6 +115,40 @@ export function mailMorning(lang: Lang, d: MailData) {
 }
 
 /** 4. The day after: one-tap review poll inside the e-mail. Every option is a link that saves the answer. */
+/** Waitlist: confirmation (no payment yet), a seat opened up, and no seat after all. */
+export function mailWaitlist(lang: Lang, d: MailData) {
+  const nl = lang === "nl";
+  const subject = nl ? "Je staat op de wachtlijst ⏳" : "You're on the waitlist ⏳";
+  const body = nl
+    ? h1(`Hoi ${firstName(d.name)},`) + p("Deze meetup zit vol, maar je staat nu op de wachtlijst.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["💳", "Je betaalt nu nog niets"]]) +
+      p("Zegt iemand af, dan mail ik je meteen. Wie het eerst reageert, krijgt de plek. Uiterlijk twee dagen van tevoren hoor je in ieder geval of het gelukt is.") + p("Vragen? Beantwoord gewoon deze mail.") + p("Duimen maar,")
+    : h1(`Hi ${firstName(d.name)},`) + p("This meetup is full, but you're now on the waitlist.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["💳", "You don't pay anything yet"]]) +
+      p("If someone cancels, I'll e-mail you right away. First to reply gets the seat. Either way, you'll hear from me at least two days before.") + p("Questions? Just reply to this e-mail.") + p("Fingers crossed,");
+  return { subject, html: layout(lang, nl ? "Je staat op de wachtlijst. Je betaalt nu nog niets." : "You're on the waitlist. No payment yet.", body) };
+}
+
+export function mailSpotOpen(lang: Lang, d: MailData & { payUrl?: string }) {
+  const nl = lang === "nl";
+  const subject = nl ? "Er is een plekje vrij! ☕" : "A seat just opened up! ☕";
+  const body = nl
+    ? h1(`Goed nieuws, ${firstName(d.name)}!`) + p("Er is een plekje vrijgekomen aan tafel.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["☕", "Eerste koffie inbegrepen"]]) +
+      `<p style="margin:22px 0 14px">${btn(d.payUrl || "#", "Pak mijn stoel →")}</p>` + p("De plek houden we 24 uur voor je vast. Daarna gaat hij naar de volgende op de wachtlijst.") + p("Tot snel aan tafel,")
+    : h1(`Good news, ${firstName(d.name)}!`) + p("A seat just opened up at the table.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["☕", "First coffee included"]]) +
+      `<p style="margin:22px 0 14px">${btn(d.payUrl || "#", "Claim my seat →")}</p>` + p("We'll hold it for you for 24 hours. After that it goes to the next person on the waitlist.") + p("See you at the table,");
+  return { subject, html: layout(lang, nl ? "Er is een plekje vrijgekomen. Je hebt 24 uur." : "A seat opened up. You have 24 hours.", body) };
+}
+
+export function mailNoSpot(lang: Lang, d: MailData) {
+  const nl = lang === "nl";
+  const subject = nl ? "Helaas, deze keer geen plekje" : "No seat this time, sorry";
+  const body = nl
+    ? h1(`Hoi ${firstName(d.name)},`) + p(`Helaas is er voor ${day(d.date, lang)} geen plekje vrijgekomen. Je hebt niets betaald, dus je hoeft verder niets te doen.`) +
+      p("De volgende keer krijg je voorrang: zodra de nieuwe data online staan, hoor je het als eerste.") + `<p style="margin:22px 0 14px">${btn(`${MAIL_BASE}/#meetups`, "Bekijk de volgende tafels →")}</p>` + p("Liefs,")
+    : h1(`Hi ${firstName(d.name)},`) + p(`Unfortunately no seat opened up for ${day(d.date, lang)}. You haven't paid anything, so there's nothing you need to do.`) +
+      p("Next time you get priority: as soon as new dates are online, you'll be the first to know.") + `<p style="margin:22px 0 14px">${btn(`${MAIL_BASE}/#meetups`, "See the next tables →")}</p>` + p("Love,");
+  return { subject, html: layout(lang, nl ? "Deze keer geen plek, de volgende keer voorrang." : "No seat this time, priority next time.", body) };
+}
+
 export function mailPartner(lang: Lang, name = "") {
   const m = partnerMail(lang, name);
   const body = h1(m.hi) + p(m.intro) + p(`<b>${m.packs_t}</b>`) + `<ul style="margin:0 0 14px;padding-left:20px">${m.packs.map((x) => `<li>${x}</li>`).join("")}</ul>` +
