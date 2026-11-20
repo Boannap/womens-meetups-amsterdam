@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { dict, homePath, hostPath, partnerPath, contactPath, guidelinesPath, privacyPath, EMAIL, INSTAGRAM, type Lang } from "@/lib/site";
+import { BUSINESS, dict, homePath, hostPath, partnerPath, contactPath, guidelinesPath, privacyPath, EMAIL, INSTAGRAM, type Lang } from "@/lib/site";
 import { Icon } from "./SvgDefs";
 import { LANDINGS, LANDING_ROUTES, type LandingKey } from "@/lib/landings";
 import { pubPath } from "@/lib/site";
@@ -53,7 +53,7 @@ export default function Footer({ lang }: { lang: Lang }) {
         </nav>
         <div className="copy">
           <span>© {new Date().getFullYear()} Women&apos;s Meetups in Amsterdam</span>
-          <span>Table of Six ♥ Amsterdam</span>
+          <span>KvK {BUSINESS.kvk} · {lang === "nl" ? "btw" : "VAT"} {BUSINESS.vat} · {BUSINESS.city}</span>
         </div>
       </div>
     </footer>

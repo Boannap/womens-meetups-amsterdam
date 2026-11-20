@@ -10,7 +10,9 @@ import { track } from "./Tracker";
 const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
 
 function linkify(text: string, lang: Lang) {
-  const links: [string, string][] = lang === "nl" ? [["privacyverklaring", privacyPath("nl")], ["huisregels", guidelinesPath("nl")]] : [["privacy policy", privacyPath("en")], ["table guidelines", guidelinesPath("en")]];
+  const links: [string, string][] = lang === "nl"
+    ? [["voorwaarden", `${privacyPath("nl")}#cancellation`], ["privacyverklaring", `${privacyPath("nl")}#top`], ["huisregels", guidelinesPath("nl")]]
+    : [["terms", `${privacyPath("en")}#cancellation`], ["privacy policy", `${privacyPath("en")}#top`], ["table guidelines", guidelinesPath("en")]];
   let parts: (string | React.ReactElement)[] = [text];
   for (const [word, url] of links) {
     parts = parts.flatMap((p) => (typeof p === "string" && p.includes(word) ? [p.split(word)[0], <a key={word} href={url} target="_blank" rel="noopener">{word}</a>, p.split(word).slice(1).join(word)] : [p]));
@@ -52,7 +54,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       phone: contact === "whatsapp_email" ? fd.get("phone") : "", contact_pref: contact,
       whatsapp_consent: contact === "whatsapp_email" && fd.get("wa_consent") === "on",
       hoping: fd.getAll("hoping"), days: fd.getAll("days"), instagram: fd.get("instagram"),
-      consent: fd.get("consent") === "on", site_lang: lang,
+      consent: fd.get("consent") === "on", newsletter: fd.get("newsletter") === "on", site_lang: lang,
       event_id: eventId, waitlist, found_via: fd.get("found_via"), table_wish: fd.get("table_wish"),
       website: fd.get("website"), // honeypot, must stay empty
     };
@@ -185,6 +187,10 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       <label className="consent full field" style={{ flexDirection: "row" }}>
         <input type="checkbox" name="consent" required />
         <span>{linkify(t.j_consent, lang)}</span>
+      </label>
+      <label className="consent full field" style={{ flexDirection: "row" }}>
+        <input type="checkbox" name="newsletter" />
+        <span>{t.j_news}</span>
       </label>
       <div className="full field" style={{ alignItems: "flex-start" }}>
         <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : waitlist ? t.j_submit_wait : t.j_submit}</button>

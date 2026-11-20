@@ -18,6 +18,7 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://womensmeet
 export const SITE_NAME = "Women's Meetups in Amsterdam";
 export const INSTAGRAM = "womensmeetupsinamsterdam";
 export const EMAIL = "hello@womensmeetupsinamsterdam.com";
+export const BUSINESS = { name: "Women's Meetups in Amsterdam", owner: "Boanna Pieterse", city: "Amsterdam", kvk: "83223487", vat: "NL003790574B98" } as const;
 export const BOANNA_SOCIALS = [
   { name: "Instagram", handle: "@boannap", url: "https://www.instagram.com/boannap" },
   { name: "YouTube", handle: "@boannathroughtwenties", url: "https://www.youtube.com/@boannathroughtwenties" },

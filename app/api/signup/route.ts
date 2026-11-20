@@ -45,6 +45,7 @@ export async function POST(req: Request) {
     table_wish: str(body.table_wish, 500),
     form_ease: str(body.form_ease, 40),
     consent: body.consent === true,
+    newsletter: body.newsletter === true,
   };
 
   if (!row.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(row.email) || !row.consent || !row.personality

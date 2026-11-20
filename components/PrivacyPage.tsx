@@ -1,41 +1,78 @@
-import { privacyPath, EMAIL, type Lang } from "@/lib/site";
+import Link from "next/link";
+import { privacyPath, guidelinesPath, contactPath, EMAIL, BUSINESS, type Lang } from "@/lib/site";
 import Header from "./Header";
 import Footer from "./Footer";
 
-/* DRAFT. Have this checked before you go live (for example with a free AVG/GDPR template
-   or a legal check). Fill in your KvK number once you have one. */
-const COPY = {
-  en: {
-    title: "Privacy & terms",
-    sections: [
-      ["Who we are", `Women's Meetups in Amsterdam is run by Boanna Pieterse, Amsterdam. Contact: ${EMAIL}.`],
-      ["What we collect", "Your first name, email address, age range, neighbourhood, language preference, personality type, work or study field, what you're hoping for, your preferred days and (optionally) your Instagram handle."],
-      ["Why", "Only to match you with a table, to email you about your meetup and to keep you posted about new tables and events. We never sell or share your data with other companies. Your tablemates only see your first name."],
-      ["WhatsApp and reviews", "If you choose WhatsApp, we save your phone number to send you your table details; you can switch to email only at any time. After the meetup we ask a few one-tap review questions. Your words only appear on the website (first name only) if you tick that box and we approve it."],
-      ["Website statistics", "We count visits in a privacy-friendly way: no cookies, no IP addresses and no third parties. A random code per browser tab lets us see which parts of the page are read and where the form could be easier. This can't be traced back to you."],
-      ["How long", "We keep your data while you're part of the community. Email us and we'll delete everything within 30 days."],
-      ["Where it's stored", "In a secure database (Supabase, EU region). Payments are handled by Mollie; we never see your bank or card details."],
-      ["Your rights", "You can ask to see, correct or delete your data at any time, and you can complain to the Autoriteit Persoonsgegevens."],
-    ],
-    cancelTitle: "Tickets & cancellation",
-    cancel: "A ticket costs €12.50 including VAT and service costs (your first coffee is included). Can't make it? Let us know at least 48 hours before the meetup and we'll move your seat to the next date. Later cancellations or no-shows can't be refunded. If we have to cancel, you get a full refund.",
-  },
+/* Checked against ACM, KVK, Ondernemersplein and AP guidance on 20 Nov 2026. Not legal advice:
+   have a lawyer look at it before ticket sales grow. Keep the retention terms in sync with cleanup_old_data(). */
+type S = [string, string][];
+const COPY: Record<Lang, { title: string; updated: string; who: string; privTitle: string; priv: S; termsTitle: string; terms: S }> = {
   nl: {
     title: "Privacy & voorwaarden",
-    sections: [
-      ["Wie we zijn", `Women's Meetups in Amsterdam wordt gerund door Boanna Pieterse, Amsterdam. Contact: ${EMAIL}.`],
-      ["Wat we verzamelen", "Je voornaam, e-mailadres, leeftijdscategorie, buurt, taalvoorkeur, persoonlijkheidstype, werk- of studieveld, waar je op hoopt, je voorkeursdagen en (optioneel) je Instagram."],
-      ["Waarom", "Alleen om je aan een tafel te matchen, je te mailen over je meetup en je op de hoogte te houden van nieuwe tafels en events. We verkopen of delen je gegevens nooit met andere bedrijven. Je tafelgenoten zien alleen je voornaam."],
-      ["WhatsApp en reviews", "Kies je voor WhatsApp, dan bewaren we je telefoonnummer om je de details van je tafel te sturen en je op de hoogte te houden van nieuwe tafels en events. Je kunt altijd terug naar alleen mail. Na de meetup stellen we een paar korte reviewvragen. Je tekst komt alleen op de website (met alleen je voornaam) als je dat aanvinkt en wij het goedkeuren."],
-      ["Websitestatistieken", "We tellen bezoek op een privacyvriendelijke manier: geen cookies, geen IP-adressen en geen derde partijen. Een willekeurige code per browsertabblad laat ons zien welke delen van de pagina gelezen worden en waar het formulier makkelijker kan. Dit is niet naar jou te herleiden."],
-      ["Hoe lang", "We bewaren je gegevens zolang je deel uitmaakt van de community. Mail ons en we verwijderen alles binnen 30 dagen."],
-      ["Waar het staat", "In een beveiligde database (Supabase, EU-regio). Betalingen lopen via Mollie; wij zien nooit je bank- of kaartgegevens."],
-      ["Jouw rechten", "Je kunt je gegevens altijd inzien, laten aanpassen of verwijderen, en je kunt een klacht indienen bij de Autoriteit Persoonsgegevens."],
+    updated: "Laatst bijgewerkt: 20 november 2026",
+    who: `${BUSINESS.name} is een eenmanszaak van ${BUSINESS.owner}, gevestigd in ${BUSINESS.city}. KvK-nummer ${BUSINESS.kvk} · btw-id ${BUSINESS.vat}. Contact: ${EMAIL} of het contactformulier.`,
+    privTitle: "Privacyverklaring",
+    priv: [
+      ["Welke gegevens we verzamelen", "Als je je aanmeldt: je voornaam, e-mailadres, leeftijdscategorie, buurt, taalvoorkeur, de antwoorden op de quiz (en het type dat daaruit komt), werk- of studieveld, waar je op hoopt, je voorkeursdagen, hoe je ons vond, je tafelwens en (als je die invult) je Instagram. Kies je voor WhatsApp, dan ook je telefoonnummer. Na de meetup je reviewantwoorden. Via het contactformulier je naam, e-mail en bericht. Cafés die willen samenwerken: hun contactgegevens."],
+      ["Waarvoor en op welke grondslag", "Om je aan een tafel te matchen, je ticket te regelen en je over je meetup te mailen (nodig voor de overeenkomst). Om je via WhatsApp de details van je tafel te sturen en reviewzinnetjes op de site te zetten (alleen met jouw toestemming). Om je mails over nieuwe tafels en events te sturen: met jouw toestemming, of omdat je eerder een ticket kocht (dan mailen we alleen over vergelijkbare meetups). In elke mail kun je je afmelden. Om de website te verbeteren met anonieme statistieken (gerechtvaardigd belang)."],
+      ["Wie je gegevens ziet", "Je tafelgenoten zien alleen je voornaam. We verkopen je gegevens nooit. We werken wel met een paar dienstverleners die ze voor ons verwerken: Supabase (database, EU), Vercel (website, servers in Dublin), Resend (verzenden van mails, EU), Mollie (betalingen) en Google (onze mailbox). Kies je WhatsApp, dan loopt dat via WhatsApp (Meta). Sommige van deze bedrijven zijn Amerikaans; met hen zijn afspraken gemaakt die de Europese regels volgen, zoals het EU-VS Data Privacy Framework of standaardcontractbepalingen."],
+      ["Websitestatistieken", "We tellen bezoek zonder cookies, zonder IP-adressen en zonder advertentiepartijen. Een willekeurige code per browsertabblad (die verdwijnt als je het tabblad sluit) laat ons zien welke delen gelezen worden en waar het formulier makkelijker kan. Dat is niet naar jou te herleiden. Daarom is er geen cookiemelding."],
+      ["Foto's tijdens meetups", "Soms maken we foto's van de sfeer voor onze website of Instagram. Herkenbaar sta je er alleen op als je daar ter plekke ja op zegt. Wil je een foto later toch weg? Laat het ons weten, dan halen we hem weg."],
+      ["Hoe lang we het bewaren", "Aanmeldingen en reviews: tot 2 jaar na je aanmelding. Berichten via het contactformulier: 1 jaar. Aanvragen van cafés: 2 jaar. Anonieme websitestatistieken: 13 maanden. Betaalgegevens bewaren we 7 jaar, omdat de belastingwet dat verplicht. Dit wordt automatisch opgeschoond. Wil je eerder weg? Vraag het, dan verwijderen we alles binnen 30 dagen (behalve wat we wettelijk moeten bewaren)."],
+      ["Je rechten", "Je mag je gegevens inzien, laten verbeteren of verwijderen, de verwerking laten beperken, bezwaar maken, je gegevens meenemen en je toestemming altijd intrekken. Stuur ons een berichtje; we reageren binnen een maand. Ben je niet tevreden over hoe we met je gegevens omgaan? Dan kun je een klacht indienen bij de Autoriteit Persoonsgegevens."],
+      ["18 jaar of ouder", "Onze meetups zijn voor vrouwen van 18 jaar en ouder. We verzamelen bewust geen gegevens van jongere meiden."],
+      ["Beveiliging", "Je gegevens staan in een beveiligde database waar alleen wij bij kunnen. Gaat er toch iets mis, dan melden we dat volgens de regels bij de Autoriteit Persoonsgegevens en, waar nodig, bij jou."],
     ],
-    cancelTitle: "Tickets & annuleren",
-    cancel: "Een ticket kost €12,50, inclusief btw en servicekosten (je eerste koffietje krijg je van ons). Kun je niet? Laat het minstens 48 uur van tevoren weten, dan verplaatsen we je plek naar de volgende datum. Later annuleren of niet komen kunnen we niet terugbetalen. Moeten wij annuleren, dan krijg je je geld volledig terug.",
+    termsTitle: "Voorwaarden & annuleren",
+    terms: [
+      ["Voor wie deze voorwaarden gelden", "Deze voorwaarden gelden voor elke aanmelding en elk ticket voor een meetup van Women's Meetups in Amsterdam. Je gaat ermee akkoord als je je aanmeldt. Je kunt ze altijd hier teruglezen en opslaan."],
+      ["Wat je krijgt", "Een plek aan een tafel van zes in een café in Amsterdam, op de datum en tijd die je kiest. Inclusief een host, de vragenkaartjes en je eerste koffietje. Wat je verder bestelt, reken je zelf af bij het café. Welk café het wordt en wie je tafelgenoten zijn, hoor je uiterlijk twee dagen van tevoren."],
+      ["Prijs en betalen", "Een ticket kost €12,50, inclusief btw en servicekosten. Je betaalt bij je aanmelding via Mollie. Sta je op de wachtlijst, dan betaal je pas als er een plek voor je vrijkomt."],
+      ["Geen bedenktijd", "Een ticket is voor een vaste datum. Daarom geldt er geen wettelijke bedenktijd van 14 dagen."],
+      ["Zelf annuleren", "Kun je niet? Laat het ons minstens 48 uur van tevoren weten, dan verplaatsen we je plek kosteloos naar een volgende datum. Later annuleren of niet komen kunnen we helaas niet terugbetalen of verplaatsen."],
+      ["Als wij iets moeten veranderen", "Moeten wij een meetup afzeggen, dan krijg je je geld volledig terug of schuif je aan bij een andere datum, wat jij wilt. Verandert het café of de tijd, dan laten we het je zo snel mogelijk weten; past het je dan niet meer, dan krijg je je geld terug."],
+      ["Huisregels en wegsturen", "Aan tafel gelden onze huisregels. Ontstaat er een onveilige of grensoverschrijdende situatie, dan kan de host iemand vragen om te vertrekken. Wie wordt weggestuurd, krijgt haar ticket niet terug en kan worden uitgesloten van volgende meetups."],
+      ["Kortingslinks", "Krijg je een persoonlijke link met korting, bijvoorbeeld om vriendinnen mee te nemen? Die is één keer geldig, voor de data die erbij staan, en niet te combineren met andere kortingen."],
+      ["Aansprakelijkheid", "Je komt op eigen verantwoordelijkheid en let zelf op je spullen. Het café is verantwoordelijk voor wat het serveert. Wij zijn niet aansprakelijk voor schade, behalve als die door onze eigen grove fout komt; dan nooit voor meer dan de prijs van je ticket."],
+      ["Klachten", "Niet tevreden? Laat het ons binnen twee weken na de meetup weten via het contactformulier of per mail. We reageren binnen 14 dagen en zoeken samen met je naar een oplossing."],
+      ["Recht", "Op deze voorwaarden is Nederlands recht van toepassing."],
+    ],
+  },
+  en: {
+    title: "Privacy & terms",
+    updated: "Last updated: 20 November 2026",
+    who: `${BUSINESS.name} is a sole proprietorship of ${BUSINESS.owner}, based in ${BUSINESS.city}. Chamber of Commerce (KvK) ${BUSINESS.kvk} · VAT ${BUSINESS.vat}. Contact: ${EMAIL} or the contact form.`,
+    privTitle: "Privacy policy",
+    priv: [
+      ["What we collect", "When you sign up: your first name, e-mail address, age range, neighbourhood, language preference, your quiz answers (and the type that comes out), work or study field, what you're hoping for, your preferred days, how you found us, your table wish and (if you fill it in) your Instagram. If you choose WhatsApp, also your phone number. After the meetup, your review answers. Through the contact form: your name, e-mail and message. Cafés that want to work with us: their contact details."],
+      ["Why, and on what basis", "To match you with a table, arrange your ticket and e-mail you about your meetup (needed for our agreement). To send your table details via WhatsApp and to show review quotes on the site (only with your consent). To e-mail you about new tables and events: with your consent, or because you bought a ticket before (then only about similar meetups). You can unsubscribe in every e-mail. To improve the website with anonymous statistics (legitimate interest)."],
+      ["Who sees your data", "Your tablemates only see your first name. We never sell your data. We do work with a few service providers who process it for us: Supabase (database, EU), Vercel (website, servers in Dublin), Resend (sending e-mails, EU), Mollie (payments) and Google (our mailbox). If you choose WhatsApp, that runs through WhatsApp (Meta). Some of these companies are American; agreements with them follow the European rules, such as the EU-US Data Privacy Framework or standard contractual clauses."],
+      ["Website statistics", "We count visits without cookies, without IP addresses and without advertising parties. A random code per browser tab (gone when you close the tab) shows us which parts are read and where the form could be easier. It can't be traced back to you. That's why there's no cookie banner."],
+      ["Photos at meetups", "Sometimes we take photos of the atmosphere for our website or Instagram. You'll only be recognisable in them if you say yes on the spot. Want a photo removed later? Let us know and we'll take it down."],
+      ["How long we keep it", "Sign-ups and reviews: up to 2 years after you signed up. Contact form messages: 1 year. Café requests: 2 years. Anonymous website statistics: 13 months. Payment records are kept for 7 years because tax law requires it. This is cleaned up automatically. Want it gone sooner? Ask us and we'll delete everything within 30 days (except what we're legally required to keep)."],
+      ["Your rights", "You can see, correct or delete your data, restrict or object to its use, take it with you and withdraw your consent at any time. Just send us a message; we reply within a month. Not happy with how we handle your data? You can complain to the Dutch Data Protection Authority (Autoriteit Persoonsgegevens)."],
+      ["18 or older", "Our meetups are for women aged 18 and over. We don't knowingly collect data from anyone younger."],
+      ["Security", "Your data is stored in a secured database that only we can access. If something does go wrong, we report it to the Autoriteit Persoonsgegevens and, where needed, to you, as the rules require."],
+    ],
+    termsTitle: "Terms & cancellation",
+    terms: [
+      ["Who these terms apply to", "These terms apply to every sign-up and ticket for a Women's Meetups in Amsterdam meetup. You accept them when you sign up. You can always read and save them here."],
+      ["What you get", "A seat at a table of six in a café in Amsterdam, on the date and time you choose. Including a host, the question cards and your first coffee. Anything else you order, you pay at the café. You'll hear which café and who your tablemates are at least two days before."],
+      ["Price and payment", "A ticket costs €12.50 including VAT and service costs. You pay when you sign up, through Mollie. If you're on the waitlist, you only pay once a seat opens up for you."],
+      ["No cooling-off period", "A ticket is for a fixed date, so the legal 14-day cooling-off period does not apply."],
+      ["Cancelling yourself", "Can't make it? Let us know at least 48 hours before and we'll move your seat to a later date for free. Later cancellations or no-shows can't be refunded or moved."],
+      ["If we have to change something", "If we have to cancel a meetup, you get a full refund or a seat at another date, whichever you prefer. If the café or time changes, we'll let you know as soon as possible; if it no longer works for you, you get your money back."],
+      ["Table guidelines and being asked to leave", "Our table guidelines apply at every meetup. If an unsafe situation arises or someone crosses a line, the host can ask that person to leave. Anyone asked to leave won't get her ticket refunded and may be excluded from future meetups."],
+      ["Discount links", "Get a personal discount link, for example to bring friends? It's valid once, for the dates shown, and can't be combined with other discounts."],
+      ["Liability", "You attend at your own responsibility and look after your own belongings. The café is responsible for what it serves. We're not liable for damage unless caused by our own gross fault, and never for more than the price of your ticket."],
+      ["Complaints", "Not happy? Let us know within two weeks after the meetup via the contact form or by e-mail. We'll reply within 14 days and look for a solution together."],
+      ["Law", "These terms are governed by Dutch law."],
+    ],
   },
 };
+
+const H = ({ children }: { children: React.ReactNode }) => <h2 className="display" style={{ fontSize: "1.35rem", color: "var(--wine)", margin: "0 0 6px" }}>{children}</h2>;
+const mail = (p: string) => (p.includes(EMAIL) ? <>{p.split(EMAIL)[0]}<a href={`mailto:${EMAIL}`}>{EMAIL}</a>{p.split(EMAIL)[1]}</> : p);
 
 export default function PrivacyPage({ lang }: { lang: Lang }) {
   const c = COPY[lang];
@@ -44,16 +81,15 @@ export default function PrivacyPage({ lang }: { lang: Lang }) {
       <Header lang={lang} alt={privacyPath(lang === "nl" ? "en" : "nl", lang)} />
       <main className="sec">
         <div className="wrap faq story-page">
-          <h1 className="title" style={{ marginBottom: 30 }}>{c.title}</h1>
-          {c.sections.map(([h, p]) => (
-            <section key={h} style={{ marginBottom: 22 }}>
-              <h2 className="display" style={{ fontSize: "1.5rem", color: "var(--wine)", marginBottom: 6 }}>{h}</h2>
-              <p>{p.includes(EMAIL) ? <>{p.split(EMAIL)[0]}<a href={`mailto:${EMAIL}`}>{EMAIL}</a>{p.split(EMAIL)[1]}</> : p}</p>
-            </section>
-          ))}
-          <section id="cancellation" style={{ marginTop: 40 }}>
-            <h2 className="display" style={{ fontSize: "1.5rem", color: "var(--wine)", marginBottom: 6 }}>{c.cancelTitle}</h2>
-            <p>{c.cancel}</p>
+          <h1 className="title" style={{ marginBottom: 10 }}>{c.title}</h1>
+          <p style={{ opacity: 0.7, marginBottom: 24 }}>{c.updated}</p>
+          <p style={{ marginBottom: 30 }}>{mail(c.who)} <Link href={contactPath(lang)}>{lang === "nl" ? "Naar het contactformulier" : "Go to the contact form"}</Link></p>
+          <h2 className="title" style={{ fontSize: "2rem", margin: "10px 0 18px" }}>{c.privTitle}</h2>
+          {c.priv.map(([h, p]) => <section key={h} style={{ marginBottom: 20 }}><H>{h}</H><p>{p}</p></section>)}
+          <section id="cancellation" style={{ marginTop: 44, scrollMarginTop: 90 }}>
+            <h2 className="title" style={{ fontSize: "2rem", margin: "0 0 18px" }}>{c.termsTitle}</h2>
+            {c.terms.map(([h, p]) => <section key={h} style={{ marginBottom: 20 }}><H>{h}</H><p>{p}</p></section>)}
+            <p><Link href={guidelinesPath(lang)}>{lang === "nl" ? "Lees de huisregels →" : "Read the table guidelines →"}</Link></p>
           </section>
         </div>
       </main>

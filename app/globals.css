@@ -405,3 +405,4 @@ footer a:hover{text-decoration:underline}
 .gl-safe{margin-top:28px;background:var(--blush);border-radius:22px;padding:22px 26px}
 .gl-safe h2{font-family:var(--display);color:var(--wine);margin:0 0 10px;font-size:1.5rem}
 .gl-safe p{margin:0 0 10px}
+.pt-form .ct-news{flex-direction:row;align-items:flex-start;gap:10px;font-weight:400;color:var(--ink)}.pt-form .ct-news input{width:auto;margin-top:4px}
