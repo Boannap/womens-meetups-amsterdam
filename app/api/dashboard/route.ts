@@ -13,12 +13,13 @@ export async function POST(req: Request) {
   const data = await rpc<Record<string, unknown>>("dashboard_stats", { p_password: b.password, p_days: Math.min(365, Math.max(1, Number(b.days) || 30)) });
   if (!data || data.error) return NextResponse.json({ error: "wrong password" }, { status: 401 });
   const days = Math.min(365, Math.max(1, Number(b.days) || 30));
-  const [extra, google, partners, contacts, priority] = await Promise.all([
+  const [extra, google, partners, contacts, priority, photos] = await Promise.all([
     rpc<Record<string, unknown>>("dashboard_extra", { p_password: b.password, p_days: days }),
     gsc(days).catch(() => null),
     rpc<unknown[]>("dashboard_partners", { p_password: b.password }),
     rpc<unknown[]>("dashboard_contacts", { p_password: b.password }),
     rpc<unknown[]>("dashboard_priority", { p_password: b.password, p_today: new Date().toISOString().slice(0, 10) }),
+    rpc<unknown[]>("dashboard_photos", { p_password: b.password, p_today: new Date().toISOString().slice(0, 10) }),
   ]);
-  return NextResponse.json({ ...data, extra: extra ?? {}, google, partners: Array.isArray(partners) ? partners : [], contacts: Array.isArray(contacts) ? contacts : [], priority: Array.isArray(priority) ? priority : [] }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ ...data, extra: extra ?? {}, google, partners: Array.isArray(partners) ? partners : [], contacts: Array.isArray(contacts) ? contacts : [], priority: Array.isArray(priority) ? priority : [], photos: Array.isArray(photos) ? photos : [] }, { headers: { "Cache-Control": "no-store" } });
 }

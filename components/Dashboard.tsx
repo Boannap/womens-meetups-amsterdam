@@ -175,6 +175,17 @@ export default function Dashboard() {
         </div>
       )}
 
+      {(data.photos || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Foto's aan tafel 📸</h3>
+          <p className="db-hint">Wie vooraf ja zei tegen herkenbaar op de foto. Vraag het aan tafel altijd nog even. Zonder ja: alleen handjes, koffie of van achteren.</p>
+          {Array.from(new Set(data.photos.map((p: any) => p.event_id))).map((ev: any) => {
+            const list = data.photos.filter((p: any) => p.event_id === ev);
+            return <p key={ev}><b>{ev}</b><br /><small>✅ {list.filter((p: any) => p.photo_ok).map((p: any) => p.name).join(", ") || "niemand"}<br />🚫 {list.filter((p: any) => !p.photo_ok).map((p: any) => p.name).join(", ") || "niemand"}</small></p>;
+          })}
+        </div>
+      )}
+
       {(data.contacts || []).length > 0 && (
         <div className="db-advice db-partners">
           <h3>Berichten via het contactformulier ✉️</h3>

@@ -54,7 +54,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       phone: contact === "whatsapp_email" ? fd.get("phone") : "", contact_pref: contact,
       whatsapp_consent: contact === "whatsapp_email" && fd.get("wa_consent") === "on",
       hoping: fd.getAll("hoping"), days: fd.getAll("days"), instagram: fd.get("instagram"),
-      consent: fd.get("consent") === "on", newsletter: fd.get("newsletter") === "on", site_lang: lang,
+      consent: fd.get("consent") === "on", newsletter: fd.get("newsletter") === "on", photo_ok: fd.get("photo_ok") === "on", site_lang: lang,
       event_id: eventId, waitlist, found_via: fd.get("found_via"), table_wish: fd.get("table_wish"),
       website: fd.get("website"), // honeypot, must stay empty
     };
@@ -191,6 +191,10 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       <label className="consent full field" style={{ flexDirection: "row" }}>
         <input type="checkbox" name="newsletter" />
         <span>{t.j_news}</span>
+      </label>
+      <label className="consent full field" style={{ flexDirection: "row" }}>
+        <input type="checkbox" name="photo_ok" />
+        <span>{t.j_photo}</span>
       </label>
       <div className="full field" style={{ alignItems: "flex-start" }}>
         <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : waitlist ? t.j_submit_wait : t.j_submit}</button>
