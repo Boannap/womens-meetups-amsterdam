@@ -11,7 +11,7 @@ const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
 
 function linkify(text: string, lang: Lang) {
   const links: [string, string][] = lang === "nl" ? [["privacyverklaring", privacyPath("nl")], ["huisregels", guidelinesPath("nl")]] : [["privacy policy", privacyPath("en")], ["table guidelines", guidelinesPath("en")]];
-  let parts: React.ReactNode[] = [text];
+  let parts: (string | React.ReactElement)[] = [text];
   for (const [word, url] of links) {
     parts = parts.flatMap((p) => (typeof p === "string" && p.includes(word) ? [p.split(word)[0], <a key={word} href={url} target="_blank" rel="noopener">{word}</a>, p.split(word).slice(1).join(word)] : [p]));
   }
