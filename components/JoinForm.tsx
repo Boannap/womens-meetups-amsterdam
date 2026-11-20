@@ -1,13 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { EVENTS, type Dict, type Lang } from "@/lib/site";
+import { EVENTS, privacyPath, guidelinesPath, type Dict, type Lang } from "@/lib/site";
 import { quizType, type TypeKey } from "@/lib/quiz";
 import { useSeats, isEventFull } from "@/lib/useSeats";
 import { track } from "./Tracker";
 
 // €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Mollie iDEAL fee. First coffee included.
 const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
+
+function linkify(text: string, lang: Lang) {
+  const links: [string, string][] = lang === "nl" ? [["privacyverklaring", privacyPath("nl")], ["huisregels", guidelinesPath("nl")]] : [["privacy policy", privacyPath("en")], ["table guidelines", guidelinesPath("en")]];
+  let parts: React.ReactNode[] = [text];
+  for (const [word, url] of links) {
+    parts = parts.flatMap((p) => (typeof p === "string" && p.includes(word) ? [p.split(word)[0], <a key={word} href={url} target="_blank" rel="noopener">{word}</a>, p.split(word).slice(1).join(word)] : [p]));
+  }
+  return parts;
+}
 
 export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
@@ -175,7 +184,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       </div>}
       <label className="consent full field" style={{ flexDirection: "row" }}>
         <input type="checkbox" name="consent" required />
-        <span>{t.j_consent}</span>
+        <span>{linkify(t.j_consent, lang)}</span>
       </label>
       <div className="full field" style={{ alignItems: "flex-start" }}>
         <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : waitlist ? t.j_submit_wait : t.j_submit}</button>

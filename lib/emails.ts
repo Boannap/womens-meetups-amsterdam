@@ -73,10 +73,10 @@ export function mailConfirm(lang: Lang, d: MailData) {
   const body = nl
     ? h1(`Hoi ${firstName(d.name)},`) + p("Wat leuk dat je erbij wilt zijn! Je aanmelding is binnen.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "Het café verklappen we twee dagen van tevoren"]]) +
       p("<b>Dit gebeurt er nu:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We zoeken vijf meiden die bij jou passen en zetten jullie samen aan één tafel.</li><li>Twee dagen van tevoren krijg je een mail${d.whatsapp ? " en een WhatsAppje" : ""} met het café en de tijd.</li><li>Een host heet iedereen welkom en brengt het gesprek op gang met de vragenkaartjes, dus niemand hoeft de stilte te vullen.</li></ul>` +
-      promo(lang) + p("Vragen? Beantwoord gewoon deze mail.") + p("Tot snel aan tafel,")
+      promo(lang) + p(`Zodat iedereen zich welkom voelt, hebben we een paar <a href="https://womensmeetupsinamsterdam.nl/huisregels" style="color:${C.tomato}">huisregels</a> voor aan tafel. Lees ze vast even.`) + p("Vragen? Beantwoord gewoon deze mail.") + p("Tot snel aan tafel,")
     : h1(`Hi ${firstName(d.name)},`) + p("So happy you want to join! We've got your sign-up.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "We'll reveal the café two days before"]]) +
       p("<b>Here's what happens next:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We match you with five girls you'll click with, all at one table.</li><li>Two days before, you'll get an e-mail${d.whatsapp ? " and a WhatsApp" : ""} with the café and the time.</li><li>A host welcomes everyone and gets the conversation going with the question cards, so nobody has to fill the silence.</li></ul>` +
-      promo(lang) + p("Questions? Just reply to this e-mail.") + p("See you at the table,");
+      promo(lang) + p(`So everyone feels welcome, we have a few <a href="https://womensmeetupsinamsterdam.com/guidelines" style="color:${C.tomato}">table guidelines</a>. Have a quick read before you come.`) + p("Questions? Just reply to this e-mail.") + p("See you at the table,");
   return { subject, html: layout(lang, nl ? "Je aanmelding is binnen. Dit gebeurt er nu." : "We've got your sign-up. Here's what happens next.", body) };
 }
 

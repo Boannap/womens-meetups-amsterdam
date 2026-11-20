@@ -396,3 +396,12 @@ footer a:hover{text-decoration:underline}
 .quiz-back:disabled{opacity:.25;cursor:default}
 .quiz-bar{height:6px;background:#eadfd3;border-radius:9px;margin:8px 0 12px;overflow:hidden}.quiz-bar span{display:block;height:100%;background:var(--tomato);transition:width .3s}
 .quiz-redo{background:none;border:0;color:var(--wine);text-decoration:underline;cursor:pointer;font:inherit;margin-top:8px}
+
+.gl-rules{counter-reset:r;list-style:none;padding:0;margin:26px 0 0;display:grid;gap:14px}
+.gl-rules li{counter-increment:r;background:var(--paper);border:2px solid var(--wine);border-radius:20px;padding:18px 22px 16px 70px;position:relative}
+.gl-rules li::before{content:counter(r);position:absolute;left:20px;top:16px;width:34px;height:34px;border-radius:50%;background:var(--pink);color:var(--wine);font-family:var(--display);font-weight:800;display:flex;align-items:center;justify-content:center}
+.gl-rules h2{font-family:var(--display);color:var(--wine);font-size:1.25rem;margin:0 0 4px}
+.gl-rules p{margin:0}
+.gl-safe{margin-top:28px;background:var(--blush);border-radius:22px;padding:22px 26px}
+.gl-safe h2{font-family:var(--display);color:var(--wine);margin:0 0 10px;font-size:1.5rem}
+.gl-safe p{margin:0 0 10px}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { dict, homePath, hostPath, partnerPath, contactPath, privacyPath, EMAIL, INSTAGRAM, type Lang } from "@/lib/site";
+import { dict, homePath, hostPath, partnerPath, contactPath, guidelinesPath, privacyPath, EMAIL, INSTAGRAM, type Lang } from "@/lib/site";
 import { Icon } from "./SvgDefs";
 import { LANDINGS, LANDING_ROUTES, type LandingKey } from "@/lib/landings";
 import { pubPath } from "@/lib/site";
@@ -34,8 +34,9 @@ export default function Footer({ lang }: { lang: Lang }) {
           <div>
             <h4>{t.ft_legal}</h4>
             <ul>
-              <li><Link href={privacyPath(lang)}>{t.ft_privacy}</Link></li>
-              <li><Link href={`${privacyPath(lang)}#cancellation`}>{t.ft_terms}</Link></li>
+              <li><a href={`${privacyPath(lang)}#top`}>{t.ft_privacy}</a></li>
+              <li><a href={`${privacyPath(lang)}#cancellation`}>{t.ft_terms}</a></li>
+              <li><Link href={guidelinesPath(lang)}>{lang === "nl" ? "Huisregels" : "Table guidelines"}</Link></li>
             </ul>
           </div>
           <div>

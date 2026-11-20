@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { ROUTES, absUrl, type Lang } from "@/lib/site";
 import { LANDING_ROUTES } from "@/lib/landings";
 
-const PRIORITY = { home: 1, founder: 0.8, partners: 0.7, contact: 0.5, privacy: 0.3 } as const;
+const PRIORITY = { home: 1, founder: 0.8, partners: 0.7, contact: 0.5, guidelines: 0.4, privacy: 0.3 } as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const landings = Object.values(LANDING_ROUTES).flatMap((r) =>

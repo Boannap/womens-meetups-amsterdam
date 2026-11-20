@@ -130,7 +130,7 @@
       "Weekday evening"
     ],
     "j_insta": "Instagram (optional)",
-    "j_consent": "I agree that my answers are used to match me with a table, as described in the privacy policy.",
+    "j_consent": "I agree that my answers are used to match me with a table, as described in the privacy policy, and I'll follow the table guidelines.",
     "j_submit": "Save my seat →",
     "j_ok_t": "You're on the list ✿",
     "j_ok_p": "We'll email you as soon as your table is matched. Keep an eye on your inbox (and your spam folder, just in case).",
@@ -560,7 +560,7 @@
       "Doordeweekse avond"
     ],
     "j_insta": "Instagram (optioneel)",
-    "j_consent": "Ik ga ermee akkoord dat mijn antwoorden worden gebruikt om me aan een tafel te matchen, zoals beschreven in de privacyverklaring.",
+    "j_consent": "Ik ga ermee akkoord dat mijn antwoorden worden gebruikt om me aan een tafel te matchen, zoals beschreven in de privacyverklaring, en ik houd me aan de huisregels.",
     "j_submit": "Houd een plek voor me vrij →",
     "j_ok_t": "Je staat op de lijst ✿",
     "j_ok_p": "We mailen je zodra je tafel gematcht is. Houd je inbox in de gaten (en je spammap, voor de zekerheid).",
