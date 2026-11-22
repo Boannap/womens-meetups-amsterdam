@@ -32,7 +32,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [refErr, setRefErr] = useState("");
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
-    if (q.get("paid") === "1") { setState("ok"); if (q.get("g")) setShareGroup(q.get("g")); }
+    if (q.get("paid") === "1") { setState("ok"); setPaidBack(true); if (q.get("g")) setShareGroup(q.get("g")); }
     if (q.get("cancelled") === "1") setCancelled(true);
     const tk = q.get("ref"), gr = q.get("vriendin");
     if (tk) fetch(`/api/referral?token=${encodeURIComponent(tk)}`).then((r) => r.json()).then((d) => { if (d?.ok) setRef({ token: tk, name: d.first_name || "" }); }).catch(() => {});
@@ -44,6 +44,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [fieldOther, setFieldOther] = useState(false);
   const [hopeOther, setHopeOther] = useState(false);
   const [foundOther, setFoundOther] = useState(false);
+  const [paidBack, setPaidBack] = useState(false);
   const type: TypeKey | null = quizType(answers);
   const traits = quizTraits(answers);
   const [started, setStarted] = useState(false);
@@ -112,7 +113,30 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   if (state === "ok") {
     return (
       <div className="join" style={{ display: "block" }}>
-        <div className="ok"><h3>{waitlist ? t.j_ok_wait_t : t.j_ok_t}</h3><p>{waitlist ? t.j_ok_wait_p : t.j_ok_p}</p>
+        {paidBack ? (
+          <div className="ok ok-paid">
+            <svg className="mug" viewBox="0 0 200 200" aria-hidden="true">
+              <g className="steam" fill="none" stroke="#F3A9B8" strokeWidth="7" strokeLinecap="round">
+                <path d="M78 70c-10-12 10-20 0-34" /><path d="M100 64c-10-12 10-20 0-34" /><path d="M122 70c-10-12 10-20 0-34" />
+              </g>
+              <g className="cup">
+                <path d="M50 88h100l-10 62a20 20 0 0 1-20 16H80a20 20 0 0 1-20-16z" fill="#5A0F14" />
+                <path d="M146 100c22-4 30 26 4 34" fill="none" stroke="#5A0F14" strokeWidth="9" strokeLinecap="round" />
+                <path d="M84 118c6 8 26 8 32 0" fill="none" stroke="#F3A9B8" strokeWidth="5" strokeLinecap="round" />
+                <circle cx="82" cy="108" r="4" fill="#F3A9B8" /><circle cx="118" cy="108" r="4" fill="#F3A9B8" />
+              </g>
+              <ellipse cx="100" cy="176" rx="62" ry="8" fill="#E4472F" opacity=".25" />
+            </svg>
+            <h3>{lang === "nl" ? "Je hebt een plek aan tafel! 🎉" : "You've got a seat at the table! 🎉"}</h3>
+            <ol className="ok-steps">
+              <li><b>💌 {lang === "nl" ? "Zodra je gematcht bent" : "Once you're matched"}</b><span>{lang === "nl" ? "krijg je een mailtje van ons." : "you'll get an e-mail from us."}</span></li>
+              <li><b>📍 {lang === "nl" ? "2 dagen van tevoren" : "2 days before"}</b><span>{lang === "nl" ? "sturen we je het café en de voornamen van je tafelgenoten." : "we send you the café and your tablemates' first names."}</span></li>
+              <li><b>☕ {lang === "nl" ? "Op de dag zelf" : "On the day"}</b><span>{lang === "nl" ? "schuif je gewoon aan. Wij zorgen voor de rest!" : "just show up. We'll take care of the rest!"}</span></li>
+            </ol>
+            <p className="ok-small">{lang === "nl" ? "Je betaalbewijs staat in je mail. Check ook even je spammap." : "Your receipt is in your inbox. Check your spam folder too."}</p>
+          </div>
+        ) : <div className="ok"><h3>{waitlist ? t.j_ok_wait_t : t.j_ok_t}</h3><p>{waitlist ? t.j_ok_wait_p : t.j_ok_p}</p></div>}
+        <div>
           {shareGroup && (() => {
             const link = `${window.location.origin}${window.location.pathname}?vriendin=${shareGroup}#join`;
             return <div className="share-friends" style={{ marginTop: 18 }}>
