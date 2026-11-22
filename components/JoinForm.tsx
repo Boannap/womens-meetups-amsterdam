@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { EVENTS, privacyPath, guidelinesPath, type Dict, type Lang } from "@/lib/site";
-import { quizType, type TypeKey } from "@/lib/quiz";
+import PhoneInput from "./PhoneInput";
+import { quizType, quizTraits, type TypeKey } from "@/lib/quiz";
 import { useSeats, isEventFull } from "@/lib/useSeats";
 import { track } from "./Tracker";
 
@@ -42,7 +43,9 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
   const [fieldOther, setFieldOther] = useState(false);
   const [hopeOther, setHopeOther] = useState(false);
+  const [foundOther, setFoundOther] = useState(false);
   const type: TypeKey | null = quizType(answers);
+  const traits = quizTraits(answers);
   const [started, setStarted] = useState(false);
   const touched = useRef(new Set<string>());
   useEffect(() => { if (type) track("form", "quiz_done", undefined, type); }, [type]);
@@ -71,10 +74,10 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       field: fieldOther ? `${fd.get("field")}: ${fd.get("field_other") || ""}` : fd.get("field"),
       hobbies: fd.get("hobbies"),
       phone: contact === "whatsapp_email" ? fd.get("phone") : "", contact_pref: contact,
-      whatsapp_consent: contact === "whatsapp_email" && fd.get("wa_consent") === "on",
+      whatsapp_consent: contact === "whatsapp_email",
       hoping: fd.getAll("hoping").map((h) => (hopeOther && h === t.j_hopes[t.j_hopes.length - 1] ? `${h}: ${fd.get("hope_other") || ""}` : h)), instagram: fd.get("instagram"),
       consent: fd.get("consent") === "on", newsletter: fd.get("newsletter") === "on", site_lang: lang,
-      event_id: eventId, waitlist, found_via: fd.get("found_via"), table_wish: fd.get("table_wish"),
+      event_id: eventId, waitlist, found_via: foundOther ? `${fd.get("found_via")}: ${fd.get("found_other") || ""}` : fd.get("found_via"), table_wish: fd.get("table_wish"),
       website: fd.get("website"), // honeypot, must stay empty
     };
     setState("sending"); setRefErr("");
@@ -193,7 +196,22 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
           <button type="button" className="quiz-redo" onClick={() => setStep(t.quiz.length - 1)}>← {lang === "nl" ? "Antwoord aanpassen" : "Change an answer"}</button>
         )}
         <div className={`quiz-result${typeInfo ? " on" : ""}`} aria-live="polite">
-          {typeInfo ? (<><small>{t.q_result}</small><b>{typeInfo[0]}</b><span>{typeInfo[1]}</span></>) : <span>☕ {answers.filter((a) => a !== null).length}/{t.quiz.length}</span>}
+          {typeInfo && traits ? (() => {
+            const L = t.q_letters as Record<string, string>;
+            const cols = ["#F2A7B8", "#E8503C", "#9DB48A", "#F6D58E"];
+            const w = traits.code.split("").map((ch, k) => ({ ch, k, s: Math.max(traits.pct[k], 100 - traits.pct[k]) }));
+            const tot = w.reduce((a, b) => a + b.s, 0);
+            let acc = 0;
+            const grad = w.map((x) => { const a = (acc / tot) * 360; acc += x.s; return `${cols[x.k]} ${a}deg ${(acc / tot) * 360}deg`; }).join(",");
+            return (<div className="vibe">
+              <div className="vibe-ring" style={{ background: `conic-gradient(${grad})` }}><span>{traits.code}</span></div>
+              <div className="vibe-txt">
+                <small>{t.q_result}</small><b>{typeInfo[0]}</b><span>{typeInfo[1]}</span>
+                <ul className="vibe-legend">{w.map((x) => <li key={x.k}><i style={{ background: cols[x.k] }} />{x.ch} · {L[x.ch]} <em>{x.s}%</em></li>)}</ul>
+                <p className="vibe-soft">{t.q_soft}</p>
+              </div>
+            </div>);
+          })() : <span>☕ {answers.filter((a) => a !== null).length}/{t.quiz.length}</span>}
         </div>
       </fieldset>
       <fieldset className="field full"><legend>{t.j_contact}</legend>
@@ -206,15 +224,12 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       </fieldset>
       {contact === "whatsapp_email" && (
         <>
-          <div className="field full"><label className="l" htmlFor="fp">{t.j_phone}</label><input id="fp" name="phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="+31 6 12345678" pattern="[+0-9 ()-]{8,20}" required /></div>
-          <label className="consent full field" style={{ flexDirection: "row" }}>
-            <input type="checkbox" name="wa_consent" required />
-            <span>{t.j_wa_consent}</span>
-          </label>
+          <PhoneInput lang={lang} label={t.j_phone} />
         </>
       )}
       <div className="field full"><label className="l" htmlFor="fw">{t.j_wish}</label><textarea id="fw" name="table_wish" rows={3} maxLength={500} placeholder={t.j_wish_ph} /></div>
-      <fieldset className="field full"><legend>{t.j_found}</legend>{pills("found_via", t.j_found_opts, "radio", false)}</fieldset>
+      <fieldset className="field full"><legend>{t.j_found}</legend><div onChange={(e) => { const el = e.target as HTMLInputElement; if (el.name === "found_via") setFoundOther(el.value === t.j_found_opts[t.j_found_opts.length - 1]); }}>{pills("found_via", t.j_found_opts, "radio", false)}</div>
+        {foundOther && <input name="found_other" type="text" maxLength={120} placeholder={lang === "nl" ? "Vertel, hoe dan?" : "Tell us, how?"} style={{ marginTop: 8 }} />}</fieldset>
       <div className="field full"><label className="l" htmlFor="fi">{t.j_insta}</label><input id="fi" name="instagram" type="text" placeholder="@" /></div>
       <fieldset className="field full"><legend>{t.j_hoping}</legend>
         <div className="pills">

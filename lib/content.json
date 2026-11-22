@@ -343,7 +343,7 @@
     "q_kicker": "Quick quiz",
     "q_title": "Which tablemate are you?",
     "q_intro": "Ten quick questions, no wrong answers. We use your type to match your table.",
-    "q_result": "You're",
+    "q_result": "This is how we see you now",
     "quiz": [
       [
         "At a party you're usually…",
@@ -500,7 +500,18 @@
       "Ik kijk super uit naar deze ervaring, ik heb zin om nieuwe meiden te ontmoeten en ondertussen een heerlijke kop koffie te drinken en leuke gesprekken te hebben.",
       "Current obsession: supporting women. Let's build and empower each other!",
       "Ik zou het heel leuk vinden om nieuwe meiden te ontmoeten en nieuwe vriendschappen te sluiten. Ik zou het ontzettend leuk vinden om aan te sluiten! 💗"
-    ]
+    ],
+    "q_soft": "A first impression, not a box. Now we'll match you! ✨",
+    "q_letters": {
+      "E": "Extravert",
+      "I": "Introvert",
+      "N": "Intuitive",
+      "S": "Practical",
+      "F": "Feeling",
+      "T": "Thinker",
+      "P": "Spontaneous",
+      "J": "Planner"
+    }
   },
   "nl": {
     "meta_title": "Nieuwe vriendinnen maken in Amsterdam | Koffiemeetups voor vrouwen",
@@ -846,7 +857,7 @@
     "q_kicker": "Snelle quiz",
     "q_title": "Welke tafelgenoot ben jij?",
     "q_intro": "Tien snelle vragen, er zijn geen foute antwoorden. Met jouw type matchen we je tafel.",
-    "q_result": "Jij bent",
+    "q_result": "Zo zien we jou nu",
     "quiz": [
       [
         "Op een feestje ben jij meestal…",
@@ -1003,6 +1014,17 @@
       "Ik kijk super uit naar deze ervaring, ik heb zin om nieuwe meiden te ontmoeten en ondertussen een heerlijke kop koffie te drinken en leuke gesprekken te hebben.",
       "Current obsession: supporting women. Let's build and empower each other!",
       "Ik zou het heel leuk vinden om nieuwe meiden te ontmoeten en nieuwe vriendschappen te sluiten. Ik zou het ontzettend leuk vinden om aan te sluiten! 💗"
-    ]
+    ],
+    "q_soft": "Een eerste indruk, geen hokje. We gaan je matchen! ✨",
+    "q_letters": {
+      "E": "Extravert",
+      "I": "Introvert",
+      "N": "Intuïtief",
+      "S": "Praktisch",
+      "F": "Gevoel",
+      "T": "Denker",
+      "P": "Spontaan",
+      "J": "Planner"
+    }
   }
 }

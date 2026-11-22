@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     site_lang: body.site_lang === "nl" ? "nl" : "en",
     event_id: str(body.event_id, 20),
     waitlist: body.waitlist === true,
-    found_via: str(body.found_via, 40),
+    found_via: str(body.found_via, 160),
     table_wish: str(body.table_wish, 500),
     form_ease: str(body.form_ease, 40),
     consent: body.consent === true,

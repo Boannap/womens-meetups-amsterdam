@@ -406,3 +406,25 @@ footer a:hover{text-decoration:underline}
 .gl-safe h2{font-family:var(--display);color:var(--wine);margin:0 0 10px;font-size:1.5rem}
 .gl-safe p{margin:0 0 10px}
 .pt-form .ct-news{flex-direction:row;align-items:flex-start;gap:10px;font-weight:400;color:var(--ink)}.pt-form .ct-news input{width:auto;margin-top:4px}
+.vibe{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.vibe-ring{width:116px;height:116px;border-radius:50%;display:grid;place-items:center;flex:none;animation:vibeIn .7s ease}
+.vibe-ring span{width:74px;height:74px;border-radius:50%;background:var(--wine);display:grid;place-items:center;font-family:var(--display);color:var(--pink);font-size:1.25rem;letter-spacing:.04em}
+.vibe-txt{flex:1;min-width:200px}
+.vibe-legend{list-style:none;padding:0;margin:10px 0 6px;display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:.82rem}
+.vibe-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.vibe-legend em{font-style:normal;opacity:.7}
+.vibe-soft{margin:6px 0 0;font-size:.85rem;opacity:.9}
+@keyframes vibeIn{from{transform:rotate(-90deg) scale(.6);opacity:0}to{transform:none;opacity:1}}
+.phone{position:relative;display:flex;gap:8px}
+.phone>input[type=tel]{flex:1;min-width:0}
+.phone-cc{flex:none;display:flex;align-items:center;gap:6px;padding:0 14px;border-radius:14px;border:2px solid #e3d3c6;background:#fff;font:inherit;color:var(--wine);cursor:pointer}
+.phone-cc span{font-size:1.25rem}
+.phone-cc small{opacity:.6}
+.phone-menu{position:absolute;top:calc(100% + 6px);left:0;z-index:30;width:min(320px,100%);background:#fff;border:1.5px solid #e6d6c4;border-radius:16px;box-shadow:0 12px 30px rgba(60,10,15,.15);padding:8px}
+.phone-menu input{width:100%;padding:10px 12px;border-radius:10px;border:1.5px solid #e6d6c4;font:inherit;margin-bottom:6px}
+.phone-menu ul{list-style:none;margin:0;padding:0;max-height:240px;overflow:auto}
+.phone-menu li{padding:8px 10px;border-radius:10px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.phone-menu li:hover,.phone-menu li[aria-selected=true]{background:var(--blush,#f6e3e6)}
+.phone-menu li span{font-size:1.2rem}
+.phone-menu li em{margin-left:auto;font-style:normal;opacity:.6}
+.phone-menu li.none{cursor:default;opacity:.6}
