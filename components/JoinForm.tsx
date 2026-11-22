@@ -6,7 +6,7 @@ import { quizType, type TypeKey } from "@/lib/quiz";
 import { useSeats, isEventFull } from "@/lib/useSeats";
 import { track } from "./Tracker";
 
-// €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Mollie iDEAL fee. First coffee included.
+// €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Stripe iDEAL fee. First coffee included.
 const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
 
 function linkify(text: string, lang: Lang) {
@@ -23,7 +23,7 @@ function linkify(text: string, lang: Lang) {
 export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const [cancelled, setCancelled] = useState(false);
-  // Back from Mollie: ?paid=1 shows the thank-you, ?cancelled=1 a short note above the form.
+  // Back from Stripe: ?paid=1 shows the thank-you, ?cancelled=1 a short note above the form.
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     if (q.get("paid") === "1") setState("ok");
