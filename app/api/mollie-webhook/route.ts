@@ -1,27 +1,27 @@
 import { NextResponse } from "next/server";
+import { mollie } from "@/lib/mollie";
 
 /**
- * Mollie calls this when a payment changes status. We look the payment up at Mollie (never trust the body)
- * and store it in the `payments` table. Mollie expects a 200 response.
+ * Mollie calls this with only a payment id when a payment changes status. We never trust the body:
+ * we look the payment up at Mollie ourselves, and if it is paid we mark the sign-up as paid through the
+ * database function mark_signup_paid (needs PAYMENT_WEBHOOK_TOKEN). Nothing is e-mailed from here.
  */
 export async function POST(req: Request) {
-  const key = process.env.MOLLIE_API_KEY;
   const form = await req.formData().catch(() => null);
   const id = form?.get("id");
-  if (!key || typeof id !== "string") return new NextResponse("ok");
+  if (typeof id !== "string" || !process.env.MOLLIE_API_KEY) return new NextResponse("ok");
 
-  const res = await fetch(`https://api.mollie.com/v2/payments/${encodeURIComponent(id)}`, { headers: { Authorization: `Bearer ${key}` } });
-  if (!res.ok) return new NextResponse("ok");
-  const p = await res.json();
-
-  const url = process.env.SUPABASE_URL;
-  const sk = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (url && sk) {
-    await fetch(`${url}/rest/v1/payments?on_conflict=mollie_id`, {
+  const p = await mollie<{ id: string; status: string; amount?: { value: string }; metadata?: { signup_id?: string } }>(`payments/${encodeURIComponent(id)}`).catch(() => null);
+  if (p?.status === "paid" && p.metadata?.signup_id) {
+    const r = await fetch(`${process.env.SUPABASE_URL}/rest/v1/rpc/mark_signup_paid`, {
       method: "POST",
-      headers: { apikey: sk, Authorization: `Bearer ${sk}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates,return=minimal" },
-      body: JSON.stringify({ mollie_id: p.id, status: p.status, amount: p.amount?.value, event_id: p.metadata?.eventId, email: p.metadata?.email }),
+      headers: { apikey: process.env.SUPABASE_PUBLISHABLE_KEY!, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_id: p.metadata.signup_id, p_session: p.id, p_amount: Math.round(Number(p.amount?.value ?? 0) * 100), p_token: process.env.PAYMENT_WEBHOOK_TOKEN ?? "" }),
     });
+    if (!r.ok) {
+      console.error("[mollie-webhook] mark paid failed", r.status, await r.text());
+      return new NextResponse("retry", { status: 500 });
+    }
   }
   return new NextResponse("ok");
 }

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { quizType } from "@/lib/quiz";
+import { mollie } from "@/lib/mollie";
+import { absUrl, baseUrl, ROUTES, PRICE_EUR } from "@/lib/site";
 
 /**
  * Saves a sign-up in Supabase (table `signups`, see supabase/schema.sql).
@@ -23,7 +25,10 @@ export async function POST(req: Request) {
 
   const quizAnswers = Array.isArray(body.quiz) ? body.quiz.slice(0, 5).map((a) => (typeof a === "number" ? a : null)) : [];
   const contactPref = body.contact_pref === "email" ? "email" : "whatsapp_email";
+  const payNow = !!process.env.MOLLIE_API_KEY && body.waitlist !== true;
   const row = {
+    id: crypto.randomUUID(),
+    needs_payment: payNow,
     name: str(body.name, 80),
     email: str(body.email, 160).toLowerCase(),
     age: str(body.age, 20),
@@ -71,5 +76,24 @@ export async function POST(req: Request) {
     console.error("[signup] Supabase error", res.status, await res.text());
     return NextResponse.json({ error: "could not save" }, { status: 502 });
   }
-  return NextResponse.json({ ok: true, stored: true });
+  if (!payNow) return NextResponse.json({ ok: true, stored: true });
+
+  // Seat (not waitlist): send her to Mollie (iDEAL/Wero, cards, Apple Pay). The webhook marks the sign-up as paid.
+  const l = row.site_lang === "nl" ? "nl" : "en";
+  const home = absUrl(l, ROUTES.home[l]);
+  try {
+    const p = await mollie<{ _links: { checkout: { href: string } } }>("payments", { method: "POST", body: {
+      amount: { currency: "EUR", value: PRICE_EUR },
+      description: l === "nl" ? `Plek aan een tafel van zes ${row.event_id}` : `Seat at a Table of Six ${row.event_id}`,
+      redirectUrl: `${home}?paid=1#join`,
+      cancelUrl: `${home}?cancelled=1#join`,
+      webhookUrl: `${baseUrl(l)}/api/mollie-webhook`,
+      locale: l === "nl" ? "nl_NL" : "en_GB",
+      metadata: { signup_id: row.id, event_id: row.event_id },
+    } });
+    return NextResponse.json({ ok: true, stored: true, checkout_url: p._links.checkout.href });
+  } catch (e) {
+    console.error("[signup] Mollie error", e);
+    return NextResponse.json({ error: "payment unavailable" }, { status: 502 });
+  }
 }

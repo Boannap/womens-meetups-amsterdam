@@ -22,6 +22,13 @@ function linkify(text: string, lang: Lang) {
 
 export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [cancelled, setCancelled] = useState(false);
+  // Back from Mollie: ?paid=1 shows the thank-you, ?cancelled=1 a short note above the form.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    if (q.get("paid") === "1") setState("ok");
+    if (q.get("cancelled") === "1") setCancelled(true);
+  }, []);
   const [answers, setAnswers] = useState<(number | null)[]>(() => t.quiz.map(() => null));
   const [step, setStep] = useState(0);
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
@@ -62,6 +69,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     track("form", "submit", undefined, waitlist ? "waitlist" : "seat");
     try {
       const res = await fetch("/api/signup", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      const data = res.ok ? await res.json().catch(() => ({})) : null;
+      if (data?.checkout_url) { window.location.href = data.checkout_url; return; }
       setState(res.ok ? "ok" : "error");
     } catch {
       setState("error");
@@ -184,6 +193,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         <div className="r t"><span>{t.pr_total}</span><span>€{PRICE.total}</span></div>
         <small>{t.pr_note}</small>
       </div>}
+      {cancelled && <p className="full" style={{ color: "var(--tomato)" }}>{lang === "nl" ? "Je betaling is niet afgerond, dus je plek is nog niet vast. Probeer het gerust opnieuw." : "Your payment wasn\u2019t completed, so your seat isn\u2019t booked yet. Feel free to try again."}</p>}
       <label className="consent full field" style={{ flexDirection: "row" }}>
         <input type="checkbox" name="consent" required />
         <span>{linkify(t.j_consent, lang)}</span>
