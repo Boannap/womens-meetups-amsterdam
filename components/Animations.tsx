@@ -111,6 +111,13 @@ export default function Animations() {
       }
     });
 
+    // Page height changes (e.g. the form turns into the thank-you screen): recalculate scroll animations,
+    // otherwise sections further down stay invisible.
+    let rt: ReturnType<typeof setTimeout> | undefined;
+    const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => ScrollTrigger.refresh(), 150); });
+    ro.observe(document.body);
+    cleanups.push(() => { ro.disconnect(); clearTimeout(rt); });
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       cleanups.forEach((f) => f());
