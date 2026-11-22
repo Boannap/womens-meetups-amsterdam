@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { quizType } from "@/lib/quiz";
+import { quizType, QUIZ_LENGTH } from "@/lib/quiz";
 import { rpc } from "@/lib/supa";
 import { stripe } from "@/lib/stripe";
 import { absUrl, ROUTES, PRICE_EUR } from "@/lib/site";
@@ -24,14 +24,14 @@ export async function POST(req: Request) {
   // Honeypot: bots fill the hidden "website" field.
   if (str(body.website)) return NextResponse.json({ ok: true });
 
-  const quizAnswers = Array.isArray(body.quiz) ? body.quiz.slice(0, 5).map((a) => (typeof a === "number" ? a : null)) : [];
+  const quizAnswers = Array.isArray(body.quiz) ? body.quiz.slice(0, QUIZ_LENGTH).map((a) => (typeof a === "number" ? a : null)) : [];
   const contactPref = body.contact_pref === "email" ? "email" : "whatsapp_email";
   // Friend discount: only if this e-mail belongs to the group (inviter or invited friend) and the date matches.
   let discount = 0, refGroup: string | null = null;
   const g = typeof body.ref_group === "string" && /^[0-9a-f-]{36}$/i.test(body.ref_group) ? body.ref_group : null;
   if (g && body.waitlist !== true) {
     const v = await rpc<{ ok: boolean; pct?: number; event_id?: string }>("referral_validate", { p_group: g, p_email: str(body.email, 160) });
-    if (v?.ok && v.event_id === str(body.event_id, 20)) { discount = v.pct ?? 0; refGroup = g; }
+    if (v?.ok) { discount = v.pct ?? 0; refGroup = g; } // any date: friends may also pick another table or date
   }
   const payNow = !!process.env.STRIPE_SECRET_KEY && body.waitlist !== true;
   const row = {
@@ -39,17 +39,18 @@ export async function POST(req: Request) {
     needs_payment: payNow,
     name: str(body.name, 80),
     email: str(body.email, 160).toLowerCase(),
-    age: str(body.age, 20),
+    age: (() => { const n = parseInt(String(body.age ?? ""), 10); return n >= 18 && n <= 99 ? String(n) : ""; })(),
     language: str(body.language, 40),
-    neighbourhood: str(body.neighbourhood, 60),
+    neighbourhood: "",
     personality: quizType(quizAnswers) ?? "",
     quiz: quizAnswers,
     phone: contactPref === "whatsapp_email" ? str(body.phone, 24).replace(/[^+0-9 ()-]/g, "") : "",
     contact_pref: contactPref,
     whatsapp_consent: contactPref === "whatsapp_email" && body.whatsapp_consent === true,
-    field: str(body.field, 80),
+    field: str(body.field, 140),
     hoping: list(body.hoping),
-    days: list(body.days),
+    days: [],
+    hobbies: str(body.hobbies, 1500),
     instagram: str(body.instagram, 60),
     site_lang: body.site_lang === "nl" ? "nl" : "en",
     event_id: str(body.event_id, 20),
@@ -59,12 +60,13 @@ export async function POST(req: Request) {
     form_ease: str(body.form_ease, 40),
     consent: body.consent === true,
     newsletter: body.newsletter === true,
-    photo_ok: body.photo_ok === true,
+    photo_ok: body.photo === "yes",
+    photo_choice: body.photo === "yes" ? "yes" : body.photo === "no" ? "no" : null,
     discount_pct: discount || null,
     referral_group: refGroup,
   };
 
-  if (!row.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(row.email) || !row.consent || !row.personality
+  if (!row.age || !row.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(row.email) || !row.consent || !row.personality
     || (row.contact_pref === "whatsapp_email" && (row.phone.replace(/\D/g, "").length < 8 || !row.whatsapp_consent))) {
     return NextResponse.json({ error: "missing fields" }, { status: 422 });
   }

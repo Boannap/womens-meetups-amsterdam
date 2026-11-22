@@ -91,10 +91,10 @@
     ],
     "j_kicker": "Join",
     "j_title": "Tell us a little about you.",
-    "j_text": "Takes two minutes. We only use it to match your table, and we keep it private.",
+    "j_text": "Takes a few minutes. We only use it to match your table, and we keep it private.",
     "j_name": "First name",
     "j_email": "Email",
-    "j_age": "Age",
+    "j_age": "How old are you?",
     "j_hood": "Where in Amsterdam?",
     "j_lang": "I'd like my table in…",
     "j_lang_nl": "Dutch",
@@ -120,7 +120,10 @@
       "New friends",
       "Someone to go out with",
       "A study or work buddy",
-      "Just a nice afternoon"
+      "Feeling more at home in Amsterdam",
+      "Practising my Dutch or English",
+      "Just a cosy morning",
+      "Something else"
     ],
     "j_days": "Best moment for me",
     "j_dayopts": [
@@ -339,7 +342,7 @@
     "j_wa_consent": "I'm fine with receiving WhatsApp messages about my table.",
     "q_kicker": "Quick quiz",
     "q_title": "Which tablemate are you?",
-    "q_intro": "Five quick questions, no wrong answers. We use your type to match your table.",
+    "q_intro": "Ten quick questions, no wrong answers. We use your type to match your table.",
     "q_result": "You're",
     "quiz": [
       [
@@ -347,7 +350,8 @@
         [
           "right in the middle of the group",
           "deep in a chat with one person",
-          "looking around first, then joining in"
+          "looking around first, then joining in",
+          "by the snacks with the funniest stories"
         ]
       ],
       [
@@ -355,7 +359,8 @@
         [
           "a night out with friends",
           "a quiet evening on the couch",
-          "something new: a museum, a walk, a market"
+          "something new: a museum, a walk, a market",
+          "a long catch-up with one friend"
         ]
       ],
       [
@@ -363,7 +368,8 @@
         [
           "dreams, feelings and life",
           "funny stories and what's new in the city",
-          "a bit of everything"
+          "a bit of everything",
+          "ideas, plans and learning new things"
         ]
       ],
       [
@@ -371,15 +377,62 @@
         [
           "awkward, I'll fill it",
           "fine, a moment to breathe",
-          "like a chance for a deeper question"
+          "like a chance for a deeper question",
+          "I wait for someone else to say something"
         ]
       ],
       [
         "Your perfect Sunday in Amsterdam…",
         [
           "brunch with a big group",
-          "a hidden café with a good book",
-          "cycling through a neighbourhood I don't know yet"
+          "a book and coffee in a quiet café",
+          "cycling somewhere I've never been",
+          "a long walk with good conversations"
+        ]
+      ],
+      [
+        "Meeting new people feels…",
+        [
+          "easy, I talk to anyone",
+          "fun, once I've warmed up",
+          "exciting, but I do it anyway",
+          "best with a friend by my side"
+        ]
+      ],
+      [
+        "Your friends describe you as…",
+        [
+          "the life of the party",
+          "the listener",
+          "the adventurer",
+          "the sweet connector"
+        ]
+      ],
+      [
+        "A good plan for Friday night…",
+        [
+          "dancing until late",
+          "dinner with good conversations",
+          "a film or series on the couch",
+          "spontaneous, see what happens"
+        ]
+      ],
+      [
+        "In a conversation you're more often the one who…",
+        [
+          "asks questions",
+          "tells stories",
+          "makes jokes",
+          "a bit of everything"
+        ]
+      ],
+      [
+        "What makes you happy in a friendship?",
+        [
+          "doing silly things together",
+          "being able to share everything",
+          "discovering new places together",
+          "just being there for each other"
         ]
       ]
     ],
@@ -429,7 +482,16 @@
     "pr_free": "included",
     "hero_cta1_b": "Save my seat →",
     "rv_kicker": "From the table",
-    "rv_title": "What the girls say"
+    "rv_title": "What the girls say",
+    "j_age_ph": "e.g. 27",
+    "j_field_other": "What do you do?",
+    "j_hobbies": "What are your hobbies and what makes you happy?",
+    "j_hobbies_ph": "Tell us as much as you like: sports, music, cooking, travel, series, books, going out, being creative… The more we know, the better we can match you.",
+    "j_hope_other": "What is it?",
+    "j_photo_q": "Are you happy to be in photos of the meetup (Instagram and website)?",
+    "j_photo_yes": "Yes, fun! 📸",
+    "j_photo_no": "I'd rather not",
+    "j_photo_note": "You can always change your mind, also at the table."
   },
   "nl": {
     "meta_title": "Nieuwe vriendinnen maken in Amsterdam | Koffiemeetups voor vrouwen",
@@ -523,10 +585,10 @@
     ],
     "j_kicker": "Aanmelden",
     "j_title": "Vertel ons iets over jezelf.",
-    "j_text": "Kost twee minuten. We gebruiken het alleen om je tafel te matchen, en we houden het privé.",
+    "j_text": "Kost een paar minuten. We gebruiken het alleen om je tafel te matchen, en we houden het privé.",
     "j_name": "Voornaam",
     "j_email": "E-mail",
-    "j_age": "Leeftijd",
+    "j_age": "Hoe oud ben je?",
     "j_hood": "Waar in Amsterdam?",
     "j_lang": "Mijn tafel graag in het…",
     "j_lang_nl": "Nederlands",
@@ -552,7 +614,10 @@
       "Nieuwe vriendinnen",
       "Iemand om mee uit te gaan",
       "Een studie- of werkmaatje",
-      "Gewoon een leuke middag"
+      "Me meer thuis voelen in Amsterdam",
+      "Mijn Nederlands of Engels oefenen",
+      "Gewoon een gezellige ochtend",
+      "Iets anders"
     ],
     "j_days": "Beste moment voor mij",
     "j_dayopts": [
@@ -771,7 +836,7 @@
     "j_wa_consent": "Ik vind het goed om WhatsAppjes te krijgen over mijn tafel.",
     "q_kicker": "Snelle quiz",
     "q_title": "Welke tafelgenoot ben jij?",
-    "q_intro": "Vijf snelle vragen, er zijn geen foute antwoorden. Met jouw type matchen we je tafel.",
+    "q_intro": "Tien snelle vragen, er zijn geen foute antwoorden. Met jouw type matchen we je tafel.",
     "q_result": "Jij bent",
     "quiz": [
       [
@@ -779,7 +844,8 @@
         [
           "midden in de groep",
           "diep in gesprek met één persoon",
-          "eerst even rondkijken, dan aanhaken"
+          "eerst even rondkijken, dan aanhaken",
+          "bij de snacks met de grappigste verhalen"
         ]
       ],
       [
@@ -787,7 +853,8 @@
         [
           "een avondje uit met vriendinnen",
           "een rustige avond op de bank",
-          "iets nieuws: een museum, een wandeling, een markt"
+          "iets nieuws: een museum, een wandeling, een markt",
+          "lang bijkletsen met één vriendin"
         ]
       ],
       [
@@ -795,7 +862,8 @@
         [
           "dromen, gevoelens en het leven",
           "grappige verhalen en wat er nieuw is in de stad",
-          "van alles een beetje"
+          "van alles een beetje",
+          "ideeën, plannen en nieuwe dingen leren"
         ]
       ],
       [
@@ -803,15 +871,62 @@
         [
           "ongemakkelijk, ik vul hem op",
           "prima, even ademhalen",
-          "als een kans voor een diepere vraag"
+          "als een kans voor een diepere vraag",
+          "ik wacht tot iemand anders iets zegt"
         ]
       ],
       [
         "Jouw perfecte zondag in Amsterdam…",
         [
           "brunchen met een grote groep",
-          "een verstopt café met een goed boek",
-          "fietsen door een buurt die ik nog niet ken"
+          "een boek en koffie in een rustig café",
+          "fietsen naar een plek waar ik nog nooit was",
+          "een lange wandeling met goede gesprekken"
+        ]
+      ],
+      [
+        "Nieuwe mensen ontmoeten vind jij…",
+        [
+          "makkelijk, ik praat met iedereen",
+          "leuk, als ik eenmaal warm ben",
+          "spannend, maar ik doe het toch",
+          "het fijnst met een vriendin erbij"
+        ]
+      ],
+      [
+        "Je vriendinnen omschrijven jou als…",
+        [
+          "de gangmaker",
+          "de luisteraar",
+          "de avonturier",
+          "de lieve verbinder"
+        ]
+      ],
+      [
+        "Een goed plan voor vrijdagavond…",
+        [
+          "dansen tot laat",
+          "uit eten met goede gesprekken",
+          "een film of serie op de bank",
+          "spontaan, zien wat er gebeurt"
+        ]
+      ],
+      [
+        "In een gesprek ben jij vaker degene die…",
+        [
+          "vragen stelt",
+          "verhalen vertelt",
+          "grapjes maakt",
+          "een beetje van alles"
+        ]
+      ],
+      [
+        "Waar word jij blij van in een vriendschap?",
+        [
+          "samen gekke dingen doen",
+          "alles met elkaar kunnen delen",
+          "samen nieuwe plekken ontdekken",
+          "er gewoon voor elkaar zijn"
         ]
       ]
     ],
@@ -861,6 +976,15 @@
     "pr_free": "van ons",
     "hero_cta1_b": "Reserveer mijn stoel →",
     "rv_kicker": "Aan tafel gezegd",
-    "rv_title": "Wat meiden zeggen"
+    "rv_title": "Wat meiden zeggen",
+    "j_age_ph": "bijv. 27",
+    "j_field_other": "Wat doe je dan?",
+    "j_hobbies": "Wat zijn je hobby's en waar word je blij van?",
+    "j_hobbies_ph": "Vertel zoveel je wilt: sport, muziek, koken, reizen, series, boeken, uitgaan, creatief bezig zijn… Hoe meer we weten, hoe beter we je kunnen matchen.",
+    "j_hope_other": "Wat dan?",
+    "j_photo_q": "Vind je het leuk om op foto's van de meetup te staan (Instagram en website)?",
+    "j_photo_yes": "Ja, leuk! 📸",
+    "j_photo_no": "Liever niet",
+    "j_photo_note": "Je kunt altijd van gedachten veranderen, ook aan tafel."
   }
 }

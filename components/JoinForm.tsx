@@ -40,6 +40,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [answers, setAnswers] = useState<(number | null)[]>(() => t.quiz.map(() => null));
   const [step, setStep] = useState(0);
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
+  const [fieldOther, setFieldOther] = useState(false);
+  const [hopeOther, setHopeOther] = useState(false);
   const type: TypeKey | null = quizType(answers);
   const [started, setStarted] = useState(false);
   const touched = useRef(new Set<string>());
@@ -65,11 +67,13 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     const fd = new FormData(form);
     const body = {
       name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), language: fd.get("language"),
-      neighbourhood: fd.get("neighbourhood"), personality: type, quiz: answers, field: fd.get("field"),
+      personality: type, quiz: answers,
+      field: fieldOther ? `${fd.get("field")}: ${fd.get("field_other") || ""}` : fd.get("field"),
+      hobbies: fd.get("hobbies"), photo: fd.get("photo"),
       phone: contact === "whatsapp_email" ? fd.get("phone") : "", contact_pref: contact,
       whatsapp_consent: contact === "whatsapp_email" && fd.get("wa_consent") === "on",
-      hoping: fd.getAll("hoping"), days: fd.getAll("days"), instagram: fd.get("instagram"),
-      consent: fd.get("consent") === "on", newsletter: fd.get("newsletter") === "on", photo_ok: fd.get("photo_ok") === "on", site_lang: lang,
+      hoping: fd.getAll("hoping").map((h) => (hopeOther && h === t.j_hopes[t.j_hopes.length - 1] ? `${h}: ${fd.get("hope_other") || ""}` : h)), instagram: fd.get("instagram"),
+      consent: fd.get("consent") === "on", newsletter: fd.get("newsletter") === "on", site_lang: lang,
       event_id: eventId, waitlist, found_via: fd.get("found_via"), table_wish: fd.get("table_wish"),
       website: fd.get("website"), // honeypot, must stay empty
     };
@@ -109,7 +113,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
           {shareGroup && (() => {
             const link = `${window.location.origin}${window.location.pathname}?vriendin=${shareGroup}#join`;
             return <div className="share-friends" style={{ marginTop: 18 }}>
-              <p><b>{lang === "nl" ? "Stuur deze link naar je vriendin(nen):" : "Send this link to your friend(s):"}</b><br />{lang === "nl" ? "Met deze link krijgen zij dezelfde korting voor dezelfde datum. Ze vullen hun eigen quiz in." : "With this link they get the same discount for the same date. They fill in their own quiz."}</p>
+              <p><b>{lang === "nl" ? "Stuur deze link naar je vriendin(nen):" : "Send this link to your friend(s):"}</b><br />{lang === "nl" ? "Met deze link krijgen zij dezelfde korting, op welke datum ze ook kiezen. Ze vullen hun eigen quiz in." : "With this link they get the same discount, on whichever date they pick. They fill in their own quiz."}</p>
               <input readOnly value={link} onFocus={(e) => e.currentTarget.select()} style={{ width: "100%" }} />
               <button type="button" className="btn btn-wine" style={{ marginTop: 10 }} onClick={() => navigator.clipboard?.writeText(link)}>{lang === "nl" ? "Kopieer link" : "Copy link"}</button>
             </div>;
@@ -133,13 +137,13 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   return (
     <form className="join" onSubmit={onSubmit} noValidate onFocus={(e) => { if (!started) { setStarted(true); track("form", "start"); } const n = (e.target as unknown as HTMLInputElement).name?.replace(/^q\d$/, "quiz"); if (n && !touched.current.has(n)) { touched.current.add(n); track("form", `field:${n}`); } }}>
       {invite && <p className="full invite-banner" style={{ background: "var(--pink)", color: "var(--wine)", padding: "14px 18px", borderRadius: 16, fontWeight: 600 }}>
-        {lang === "nl" ? `${invite.from || "Je vriendin"} neemt je mee! Je krijgt ${invite.pct}% korting op je plek. Gebruik het e-mailadres dat zij heeft ingevuld.` : `${invite.from || "Your friend"} is bringing you along! You get ${invite.pct}% off your seat. Use the e-mail address she filled in.`}
+        {lang === "nl" ? `${invite.from || "Je vriendin"} heeft je uitgenodigd! Je krijgt ${invite.pct}% korting op je plek, op elke datum. Gebruik het e-mailadres dat zij heeft ingevuld.` : `${invite.from || "Your friend"} invited you! You get ${invite.pct}% off your seat, on any date. Use the e-mail address she filled in.`}
       </p>}
       {upcoming.length > 0 && (
         <fieldset className="field full"><legend>{t.j_event}</legend>
           <div className="pills">
             {upcoming.map((e) => (
-              <label key={e.id}><input type="radio" name="event" value={e.id} checked={eventId === e.id} disabled={!!invite && invite.event !== e.id} onChange={() => setEventId(e.id)} />
+              <label key={e.id}><input type="radio" name="event" value={e.id} checked={eventId === e.id} onChange={() => setEventId(e.id)} />
                 <span>{fmtDate(e.date)}{isFull(e.id) ? ` · ${t.j_event_wait}` : ""}</span></label>
             ))}
           </div>
@@ -147,25 +151,17 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       )}
       <div className="field"><label className="l" htmlFor="fn">{t.j_name}</label><input id="fn" name="name" type="text" autoComplete="given-name" required /></div>
       <div className="field"><label className="l" htmlFor="fe">{t.j_email}</label><input id="fe" name="email" type="email" autoComplete="email" required /></div>
-      <fieldset className="field full"><legend>{t.j_age}</legend>{pills("age", t.ages, "radio")}</fieldset>
+      <div className="field"><label className="l" htmlFor="fa">{t.j_age}</label><input id="fa" name="age" type="number" inputMode="numeric" min={18} max={99} placeholder={t.j_age_ph} required /></div>
       <fieldset className="field full"><legend>{t.j_lang}</legend>{pills("language", [t.j_lang_nl, t.j_lang_en, t.j_lang_both], "radio")}</fieldset>
-      <div className="field">
-        <label className="l" htmlFor="fh">{t.j_hood}</label>
-        <select id="fh" name="neighbourhood" required defaultValue="">
-          <option value="">{t.j_choose}</option>
-          {t.hoods.map((h) => <option key={h}>{h}</option>)}
-          <option>{t.j_other}</option>
-        </select>
-      </div>
       <div className="field full">
         <label className="l" htmlFor="ff">{t.j_field}</label>
-        <select id="ff" name="field" required defaultValue="">
+        <select id="ff" name="field" required defaultValue="" onChange={(e) => setFieldOther(e.currentTarget.value === t.j_fields[t.j_fields.length - 1])}>
           <option value="">{t.j_choose}</option>
           {t.j_fields.map((x) => <option key={x}>{x}</option>)}
         </select>
+        {fieldOther && <input name="field_other" type="text" maxLength={100} placeholder={t.j_field_other} required style={{ marginTop: 8 }} />}
       </div>
-      <fieldset className="field full"><legend>{t.j_hoping}</legend>{pills("hoping", t.j_hopes, "checkbox")}</fieldset>
-      <fieldset className="field full"><legend>{t.j_days}</legend>{pills("days", t.j_dayopts, "checkbox")}</fieldset>
+      <div className="field full"><label className="l" htmlFor="fhb">{t.j_hobbies}</label><textarea id="fhb" name="hobbies" rows={4} maxLength={1500} placeholder={t.j_hobbies_ph} required /></div>
       <fieldset className="field full quiz" id="quiz">
         <legend><span className="kicker">{t.q_kicker}</span> {t.q_title}</legend>
         <p className="quiz-intro">{t.q_intro}</p>
@@ -220,6 +216,14 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       <div className="field full"><label className="l" htmlFor="fw">{t.j_wish}</label><textarea id="fw" name="table_wish" rows={3} maxLength={500} placeholder={t.j_wish_ph} /></div>
       <fieldset className="field full"><legend>{t.j_found}</legend>{pills("found_via", t.j_found_opts, "radio", false)}</fieldset>
       <div className="field full"><label className="l" htmlFor="fi">{t.j_insta}</label><input id="fi" name="instagram" type="text" placeholder="@" /></div>
+      <fieldset className="field full"><legend>{t.j_hoping}</legend>
+        <div className="pills">
+          {t.j_hopes.map((o, i) => (
+            <label key={o}><input type="checkbox" name="hoping" value={o} onChange={i === t.j_hopes.length - 1 ? (e) => setHopeOther(e.currentTarget.checked) : undefined} /><span>{o}</span></label>
+          ))}
+        </div>
+        {hopeOther && <input name="hope_other" type="text" maxLength={200} placeholder={t.j_hope_other} style={{ marginTop: 8 }} />}
+      </fieldset>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="vh" aria-hidden="true" />
       {!waitlist && <div className="price-box">
         <h4>{t.pr_title}</h4>
@@ -232,11 +236,11 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         <small>{t.pr_note}</small>
       </div>}
       {ref && !waitlist && <div className="full field friends-box" style={{ background: "#fff", border: "2px dashed var(--pink)", borderRadius: 16, padding: "16px 18px" }}>
-        <b>{lang === "nl" ? `Hoi ${ref.name}! Tot 15% korting: neem 1 of 2 nieuwe vriendinnen mee 👯` : `Hi ${ref.name}! Up to 15% off: bring 1 or 2 new friends 👯`}</b>
-        <small style={{ display: "block", margin: "4px 0 10px" }}>{lang === "nl" ? "Met 1 vriendin krijgen jullie allebei 10% korting, met 2 vriendinnen jullie alle drie 15%. Alleen voor meiden die nog nooit bij ons waren." : "With 1 friend you both get 10% off, with 2 friends all three of you get 15%. Only for girls who haven't joined us before."}</small>
+        <b>{lang === "nl" ? `Hoi ${ref.name}! Tot 15% korting: vertel het aan 1 of 2 nieuwe vriendinnen 👯` : `Hi ${ref.name}! Up to 15% off: tell 1 or 2 new friends 👯`}</b>
+        <small style={{ display: "block", margin: "4px 0 10px" }}>{lang === "nl" ? "Met 1 vriendin krijgen jullie allebei 10% korting, met 2 vriendinnen jullie alle drie 15%. Zij mogen zelf hun datum kiezen. Alleen voor meiden die nog nooit bij ons waren." : "With 1 friend you both get 10% off, with 2 friends all three of you get 15%. They can pick their own date. Only for girls who haven't joined us before."}</small>
         <input name="friend1" type="email" placeholder={lang === "nl" ? "E-mail vriendin 1" : "Friend 1 e-mail"} style={{ marginBottom: 8, width: "100%" }} />
         <input name="friend2" type="email" placeholder={lang === "nl" ? "E-mail vriendin 2 (mag leeg)" : "Friend 2 e-mail (optional)"} style={{ width: "100%" }} />
-        <label style={{ display: "flex", gap: 8, marginTop: 10, alignItems: "center" }}><input type="checkbox" name="together" defaultChecked /> <span>{lang === "nl" ? "Zet ons samen aan één tafel (gegarandeerd)" : "Put us together at one table (guaranteed)"}</span></label>
+        <label style={{ display: "flex", gap: 8, marginTop: 10, alignItems: "center" }}><input type="checkbox" name="together" defaultChecked /> <span>{lang === "nl" ? "Kiezen we dezelfde datum? Zet ons dan samen aan één tafel" : "If we pick the same date, put us together at one table"}</span></label>
         {refErr && <p style={{ color: "var(--tomato)", marginTop: 8 }}>{refErr}</p>}
       </div>}
       {cancelled && <p className="full" style={{ color: "var(--tomato)" }}>{lang === "nl" ? "Je betaling is niet afgerond, dus je plek is nog niet vast. Probeer het gerust opnieuw." : "Your payment wasn\u2019t completed, so your seat isn\u2019t booked yet. Feel free to try again."}</p>}
@@ -248,10 +252,13 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         <input type="checkbox" name="newsletter" />
         <span>{t.j_news}</span>
       </label>
-      <label className="consent full field" style={{ flexDirection: "row" }}>
-        <input type="checkbox" name="photo_ok" />
-        <span>{t.j_photo}</span>
-      </label>
+      <fieldset className="field full"><legend>{t.j_photo_q}</legend>
+        <div className="pills">
+          <label><input type="radio" name="photo" value="yes" required /><span>{t.j_photo_yes}</span></label>
+          <label><input type="radio" name="photo" value="no" /><span>{t.j_photo_no}</span></label>
+        </div>
+        <small className="hint">{t.j_photo_note}</small>
+      </fieldset>
       <div className="full field" style={{ alignItems: "flex-start" }}>
         <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : waitlist ? t.j_submit_wait : t.j_submit}</button>
         {state === "error" && <p style={{ color: "var(--tomato)", marginTop: 8 }}>{t.j_error}</p>}
