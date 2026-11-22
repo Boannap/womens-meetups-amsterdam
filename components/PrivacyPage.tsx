@@ -9,7 +9,7 @@ type S = [string, string][];
 const COPY: Record<Lang, { title: string; updated: string; who: string; privTitle: string; priv: S; termsTitle: string; terms: S }> = {
   nl: {
     title: "Privacy & voorwaarden",
-    updated: "Laatst bijgewerkt: 20 november 2026",
+    updated: "Laatst bijgewerkt: 22 november 2026",
     who: `${BUSINESS.name} is een eenmanszaak van ${BUSINESS.owner}, gevestigd in ${BUSINESS.city}. KvK-nummer ${BUSINESS.kvk} · btw-id ${BUSINESS.vat}. Contact: ${EMAIL} of het contactformulier.`,
     privTitle: "Privacyverklaring",
     priv: [
@@ -42,7 +42,7 @@ const COPY: Record<Lang, { title: string; updated: string; who: string; privTitl
   },
   en: {
     title: "Privacy & terms",
-    updated: "Last updated: 20 November 2026",
+    updated: "Last updated: 22 November 2026",
     who: `${BUSINESS.name} is a sole proprietorship of ${BUSINESS.owner}, based in ${BUSINESS.city}. Chamber of Commerce (KvK) ${BUSINESS.kvk} · VAT ${BUSINESS.vat}. Contact: ${EMAIL} or the contact form.`,
     privTitle: "Privacy policy",
     priv: [
