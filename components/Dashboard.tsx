@@ -207,11 +207,15 @@ export default function Dashboard() {
 
       {(data.photos || []).length > 0 && (
         <div className="db-advice db-partners">
-          <h3>Foto's aan tafel 📸</h3>
-          <p className="db-hint">Wie vooraf ja zei tegen herkenbaar op de foto. Vraag het aan tafel altijd nog even. Zonder ja: alleen handjes, koffie of van achteren.</p>
+          <h3>Wie komt er? 🪑</h3>
+          <p className="db-hint">Per meetup: leeftijd, persoonlijkheidstype uit de quiz, taal en hobby's. Handig om de tafels in te delen. 💳 = betaald, ⏳ = wachtlijst, % = vriendinnenkorting.</p>
           {Array.from(new Set(data.photos.map((p: any) => p.event_id))).map((ev: any) => {
             const list = data.photos.filter((p: any) => p.event_id === ev);
-            return <p key={ev}><b>{ev}</b><br /><small>✅ {list.filter((p: any) => p.photo_ok).map((p: any) => p.name).join(", ") || "niemand"}<br />🚫 {list.filter((p: any) => !p.photo_ok).map((p: any) => p.name).join(", ") || "niemand"}</small></p>;
+            const TYPES: Record<string, string> = { chatter: "Kletskous", connector: "Verbinder", explorer: "Ontdekker", listener: "Luisteraar" };
+            return <div key={ev} style={{ marginBottom: 14 }}><b>{ev}</b>
+              <ul className="db-list">{list.map((p: any, i: number) => (
+                <li key={i}>{p.waitlist ? "⏳" : p.paid ? "💳" : "·"} <b>{p.name}</b>{p.age ? `, ${p.age}` : ""} · {TYPES[p.personality] ?? p.personality ?? "?"} · {p.language}{p.discount_pct ? ` · ${p.discount_pct}%` : ""}{p.field ? ` · ${p.field}` : ""}{p.hobbies ? <><br /><small>{p.hobbies}</small></> : null}</li>
+              ))}</ul></div>;
           })}
         </div>
       )}

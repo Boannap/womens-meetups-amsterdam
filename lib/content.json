@@ -147,59 +147,59 @@
     "faq": [
       [
         "What is Women's Meetups in Amsterdam?",
-        "A community for women who want new friends in Amsterdam, without a subscription. We host Tables of Six: small coffee meetups in the cosiest cafés and hidden spots of the city, with every table matched on personality, work field and language and a host at every table."
+        "A cosy community for girls who want to make new friends in Amsterdam, with no subscription or strings attached. We host Tables of Six: small coffee meetups in the loveliest cafés and hidden spots of the city. We put every table together with care, based on personality, hobbies and language, and a host always joins to get the conversation going. ☕"
       ],
       [
         "Who joins?",
-        "Women who live in, study in, work in or visit Amsterdam. Many are in their twenties, but women in their thirties and beyond, newcomers and travellers are just as welcome. Dutch and international women alike. Tell us about yourself and we'll match you with the right table."
+        "Girls who live, study or work in Amsterdam, or who just moved here. Many are in their twenties, but girls in their thirties and beyond are just as welcome, and so are Dutch and international girls. Tell us who you are in the quiz and we'll find a table where you feel at home right away."
       ],
       [
         "Do I need to speak Dutch?",
-        "No. When you sign up you choose Dutch, English or either. We match tables by language, so everyone can join the conversation."
+        "Not at all! When you sign up you choose Dutch, English or either. We put tables together by language, so everyone can easily join in."
       ],
       [
         "What does it cost?",
-        "€12.50 per meetup, incl. VAT & service costs the conversation cards and your first coffee. Anything else you order at the café, you pay there yourself."
+        "€12.50 per meetup. That includes everything: VAT, service costs, the conversation cards and your first coffee or tea. Fancy some breakfast or a slice of banana bread too? You simply pay for that at the café."
       ],
       [
         "How do you match the tables?",
-        "We look at personality type, work or study field, age, language and neighbourhood. The goal: a similar energy, different stories."
+        "With love and a little puzzling! We look at your personality type from the quiz, your hobbies, your work or studies, your age and your language. Our goal: the same vibe, different stories."
       ],
       [
         "I'm an introvert. Will this be awkward?",
-        "It's built for you. Six people, not sixty. Conversation cards on the table. And you'll know the café and first names in advance."
+        "We made it this way especially for you. You sit with six girls, not sixty. There are conversation cards on the table and your host keeps the conversation flowing, so you never have to fill a silence yourself. 🤍"
       ],
       [
         "Do I have to talk a lot?",
-        "Not at all. Some love to chat and laugh, others prefer to listen first. Both are welcome. Your host brings conversation cards and an icebreaker when it helps, so the conversation flows by itself."
+        "Not at all. Some love to chat and laugh, others prefer to listen first. Both are just as welcome! Your host brings conversation cards and a fun icebreaker when it helps, so the conversation gets going by itself."
       ],
       [
         "Can I bring a friend?",
-        "Of course. You both sign up separately and mention each other's name; we'll seat you together, or at different tables if you'd like to stretch."
+        "Of course! You both sign up separately, so we can match you both well, and mention each other's name in your table wish. We'll seat you together, or at different tables if you'd like a little challenge. After your first meetup you'll also get a personal link with a discount to bring new friends along. 👯"
       ],
       [
         "Is this a dating thing?",
-        "No. It's friendship only, for women."
+        "Not at all, it's all about friendship. Think of it as a friend date over coffee."
       ],
       [
         "What if I can't make it?",
-        "In the cosiest cafés and hidden spots across Amsterdam: De Pijp, Jordaan, Oost, West, Noord and Centrum. You get the exact spot two days before."
+        "That happens! Let us know at least 48 hours before and we'll move your seat to another date for free. That way your chair goes to someone else and you simply join a bit later."
       ],
       [
         "Where do the meetups happen?",
-        "In cosy cafés all over Amsterdam: De Pijp, Jordaan, Oost, West, Noord and Centrum. A nice way to discover new spots in the city. You'll hear the exact café two days before."
+        "In cosy cafés all over Amsterdam: De Pijp, Jordaan, Oost, West, Noord and Centrum. A lovely way to discover new spots in the city. You'll get the exact café by e-mail two days before."
       ],
       [
         "How do I make friends in Amsterdam as an adult?",
-        "Small, regular meetups work best: you meet the same kind of people more than once and conversations go deeper than at a big event. That is exactly what a Table of Six is. Sign up, get matched with five women and stay part of the community afterwards through our e-mails and newsletter."
+        "Small, regular meetups work best: you see people more than once and conversations go much deeper than at a big event. That's exactly what a Table of Six is. Sign up, get matched with five lovely girls and stay part of the community afterwards through our e-mails and newsletter."
       ],
       [
         "I just moved to Amsterdam. Is this for expats too?",
-        "Yes. Many women at our tables are new in town. Pick an English table, or a mixed Dutch and English one if you'd like to meet Dutch girls and practise a little."
+        "Yes, you're so welcome! Many girls at our tables are new in town too. Pick an English table, or a mixed Dutch and English one if you'd like to meet Dutch girls and practise a little."
       ],
       [
         "Can I order tea instead of coffee?",
-        "Coffee or tea, both are great! Your first drink is on us: a cappuccino, espresso, latte or a cup of tea. Fancy something special, like a matcha or a smoothie? You pay for that yourself at the café."
+        "Coffee or tea, both are great! Your first drink is on us: a cappuccino, espresso, latte or a nice cup of tea. ☕"
       ]
     ],
     "cl_title": "Your chair is already pulled out.",
@@ -491,7 +491,16 @@
     "j_photo_q": "Are you happy to be in photos of the meetup (Instagram and website)?",
     "j_photo_yes": "Yes, fun! 📸",
     "j_photo_no": "I'd rather not",
-    "j_photo_note": "You can always change your mind, also at the table."
+    "j_photo_note": "You can always change your mind, also at the table.",
+    "ant_kicker": "What girls are looking forward to",
+    "ant_title": "They can't wait 🥹",
+    "ant_by": "future tablemate",
+    "ant_quotes": [
+      "I'm looking forward to meeting new people, making genuine connections, and being surrounded by women who inspire and uplift each other.",
+      "Ik kijk super uit naar deze ervaring, ik heb zin om nieuwe meiden te ontmoeten en ondertussen een heerlijke kop koffie te drinken en leuke gesprekken te hebben.",
+      "Current obsession: supporting women. Let's build and empower each other!",
+      "Ik zou het heel leuk vinden om nieuwe meiden te ontmoeten en nieuwe vriendschappen te sluiten. Ik zou het ontzettend leuk vinden om aan te sluiten! 💗"
+    ]
   },
   "nl": {
     "meta_title": "Nieuwe vriendinnen maken in Amsterdam | Koffiemeetups voor vrouwen",
@@ -641,59 +650,59 @@
     "faq": [
       [
         "Wat is Women's Meetups in Amsterdam?",
-        "Een community voor vrouwen die nieuwe vriendinnen willen maken in Amsterdam, zonder abonnement. We organiseren Tables of Six: kleine koffiemeetups in de gezelligste cafés en verborgen plekjes van de stad, elke tafel gematcht op persoonlijkheid, werkveld en taal, met een host aan elke tafel."
+        "Een gezellige community voor meiden die nieuwe vriendinnen willen maken in Amsterdam, zonder abonnement of verplichtingen. We organiseren Tables of Six: kleine koffiemeetups in de leukste cafés en verborgen plekjes van de stad. Elke tafel stellen we met zorg samen op persoonlijkheid, hobby's en taal, en er schuift altijd een host aan om het gesprek op gang te helpen. ☕"
       ],
       [
         "Wie doen er mee?",
-        "Vrouwen die in Amsterdam wonen, studeren, werken of op bezoek zijn. Veel zijn twintiger, maar dertigers en ouder, nieuwkomers en reizigers zijn net zo welkom. Nederlandse én internationale vrouwen. Vertel ons wie je bent, dan matchen we je aan de juiste tafel."
+        "Meiden die in Amsterdam wonen, studeren, werken of er net zijn komen wonen. Veel zijn twintigers, maar dertigers en ouder zijn net zo welkom, net als Nederlandse én internationale meiden. Vertel ons in de quiz wie je bent, dan zoeken wij een tafel waar je je meteen thuis voelt."
       ],
       [
         "Moet ik Nederlands spreken?",
-        "Nee. Bij je aanmelding kies je Nederlands, Engels of maakt niet uit. We matchen tafels op taal, dus iedereen kan meepraten."
+        "Helemaal niet! Bij je aanmelding kies je Nederlands, Engels of maakt niet uit. We stellen de tafels samen op taal, zodat iedereen lekker mee kan praten."
       ],
       [
         "Wat kost het?",
-        "€12,50 per meetup, incl. btw, servicekosten, de gespreksvragen en je eerste koffie. Wat je verder bestelt, reken je zelf af bij het café."
+        "€12,50 per meetup. Daarin zit alles: de btw, de servicekosten, de vragenkaartjes en je eerste koffie of thee. Heb je zin in een ontbijtje of een stukje bananenbrood erbij? Dat reken je gewoon zelf af bij het café."
       ],
       [
         "Hoe matchen jullie de tafels?",
-        "We kijken naar persoonlijkheidstype, werk- of studieveld, leeftijd, taal en buurt. Het doel: dezelfde energie, andere verhalen."
+        "Met liefde en een beetje puzzelwerk! We kijken naar je persoonlijkheidstype uit de quiz, je hobby's, je werk of studie, je leeftijd en je taal. Ons doel: dezelfde vibe, andere verhalen."
       ],
       [
         "Ik ben introvert. Wordt dit ongemakkelijk?",
-        "Het is juist voor jou gemaakt. Zes mensen, geen zestig. Gespreksvragen op tafel. En je weet vooraf het café en de voornamen."
+        "Juist voor jou hebben we het zo gemaakt. Je zit met zes meiden, niet met zestig. Er liggen vragenkaartjes op tafel, en je host zorgt dat het gesprek vanzelf loopt. Je hoeft dus nooit zelf een stilte te vullen. 🤍"
       ],
       [
         "Moet ik veel praten?",
-        "Helemaal niet. De een kletst en lacht graag, de ander luistert liever eerst. Allebei welkom. Je host neemt gespreksvragen en zo nodig een ijsbreker mee, zodat het gesprek vanzelf loopt."
+        "Helemaal niet. De een kletst en lacht graag, de ander luistert liever eerst. Allebei even welkom! Je host neemt vragenkaartjes en zo nodig een leuke ijsbreker mee, zodat het gesprek vanzelf op gang komt."
       ],
       [
         "Mag ik een vriendin meenemen?",
-        "Natuurlijk. Jullie melden je allebei apart aan en noemen elkaars naam; dan zetten we jullie bij elkaar, of juist aan verschillende tafels als je jezelf wilt uitdagen."
+        "Natuurlijk! Meld je allebei apart aan, zodat we jullie allebei goed kunnen matchen, en noem elkaars naam bij je tafelwens. Dan zetten we jullie samen, of juist aan verschillende tafels als je jezelf even wilt uitdagen. Na je eerste meetup krijg je trouwens een persoonlijke link met korting om nieuwe vriendinnen mee te nemen. 👯"
       ],
       [
         "Is dit daten?",
-        "Nee. Het gaat alleen om vriendschap, tussen vrouwen."
+        "Nee hoor, het gaat echt om vriendschap. Een vriendinnendate dus, bij een kopje koffie."
       ],
       [
         "Wat als ik niet kan?",
-        "In de gezelligste cafés en verborgen plekjes door heel Amsterdam: De Pijp, Jordaan, Oost, West, Noord en Centrum. Het precieze adres hoor je twee dagen van tevoren."
+        "Dat kan gebeuren! Laat het ons uiterlijk 48 uur van tevoren weten, dan verplaatsen we je plek kosteloos naar een andere datum. Zo blijft je stoel voor iemand anders beschikbaar en schuif jij gewoon een keer later aan."
       ],
       [
         "Waar zijn de meetups?",
-        "In gezellige cafés door heel Amsterdam: De Pijp, Jordaan, Oost, West, Noord en Centrum. Zo leer je meteen nieuwe plekjes in de stad kennen. Het precieze café hoor je twee dagen van tevoren."
+        "In gezellige cafés door heel Amsterdam: De Pijp, Jordaan, Oost, West, Noord en Centrum. Zo leer je meteen nieuwe plekjes in de stad kennen. Het precieze café hoor je twee dagen van tevoren in je mail."
       ],
       [
         "Hoe maak je nieuwe vriendinnen in Amsterdam?",
-        "Kleine, terugkerende meetups werken het best: je ziet mensen vaker en de gesprekken gaan dieper dan op een groot event. Dat is precies wat een Table of Six is. Meld je aan, word gematcht met vijf vrouwen en blijf daarna deel van de community via onze mails en nieuwsbrief."
+        "Kleine, terugkerende meetups werken het best: je ziet mensen vaker en de gesprekken gaan veel dieper dan op een groot event. Dat is precies wat een Table of Six is. Meld je aan, word gematcht met vijf leuke meiden en blijf daarna onderdeel van de community via onze mails en nieuwsbrief."
       ],
       [
         "Ik ben net in Amsterdam komen wonen. Kan ik meedoen?",
-        "Zeker. Veel vrouwen aan onze tafels zijn nieuw in de stad. Kies een Nederlandse, Engelse of gemengde tafel, wat jij het fijnst vindt."
+        "Zeker, van harte welkom! Veel meiden aan onze tafels zijn ook nieuw in de stad. Kies een Nederlandse, Engelse of gemengde tafel, wat voor jou het fijnst voelt."
       ],
       [
         "Kan ik ook thee bestellen in plaats van koffie?",
-        "Koffie of thee, allebei goed! Je eerste drankje krijg je van ons: een cappuccino, espresso, koffie verkeerd of een kopje thee. Zin in iets bijzonders, zoals een matcha of een smoothie? Dat reken je zelf af bij het café."
+        "Koffie of thee, allebei goed! Je eerste drankje krijg je van ons: een cappuccino, espresso, koffie verkeerd of een lekker kopje thee. ☕"
       ]
     ],
     "cl_title": "Je stoel staat al klaar.",
@@ -985,6 +994,15 @@
     "j_photo_q": "Vind je het leuk om op foto's van de meetup te staan (Instagram en website)?",
     "j_photo_yes": "Ja, leuk! 📸",
     "j_photo_no": "Liever niet",
-    "j_photo_note": "Je kunt altijd van gedachten veranderen, ook aan tafel."
+    "j_photo_note": "Je kunt altijd van gedachten veranderen, ook aan tafel.",
+    "ant_kicker": "Waar meiden zin in hebben",
+    "ant_title": "Ze kijken er al naar uit 🥹",
+    "ant_by": "toekomstige tafelgenote",
+    "ant_quotes": [
+      "I'm looking forward to meeting new people, making genuine connections, and being surrounded by women who inspire and uplift each other.",
+      "Ik kijk super uit naar deze ervaring, ik heb zin om nieuwe meiden te ontmoeten en ondertussen een heerlijke kop koffie te drinken en leuke gesprekken te hebben.",
+      "Current obsession: supporting women. Let's build and empower each other!",
+      "Ik zou het heel leuk vinden om nieuwe meiden te ontmoeten en nieuwe vriendschappen te sluiten. Ik zou het ontzettend leuk vinden om aan te sluiten! 💗"
+    ]
   }
 }

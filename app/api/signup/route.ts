@@ -60,8 +60,6 @@ export async function POST(req: Request) {
     form_ease: str(body.form_ease, 40),
     consent: body.consent === true,
     newsletter: body.newsletter === true,
-    photo_ok: body.photo === "yes",
-    photo_choice: body.photo === "yes" ? "yes" : body.photo === "no" ? "no" : null,
     discount_pct: discount || null,
     referral_group: refGroup,
   };

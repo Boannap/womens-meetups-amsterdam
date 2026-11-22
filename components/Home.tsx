@@ -220,7 +220,7 @@ export default function Home({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <Quotes kicker={t.rv_kicker} title={t.rv_title} />
+        <Quotes kicker={t.rv_kicker} title={t.rv_title} ant={{ kicker: t.ant_kicker, title: t.ant_title, by: t.ant_by, quotes: t.ant_quotes }} />
 
         {/* FAQ */}
         <section className="sec" id="faq" style={{ paddingTop: 40 }}>

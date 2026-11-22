@@ -69,7 +69,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), language: fd.get("language"),
       personality: type, quiz: answers,
       field: fieldOther ? `${fd.get("field")}: ${fd.get("field_other") || ""}` : fd.get("field"),
-      hobbies: fd.get("hobbies"), photo: fd.get("photo"),
+      hobbies: fd.get("hobbies"),
       phone: contact === "whatsapp_email" ? fd.get("phone") : "", contact_pref: contact,
       whatsapp_consent: contact === "whatsapp_email" && fd.get("wa_consent") === "on",
       hoping: fd.getAll("hoping").map((h) => (hopeOther && h === t.j_hopes[t.j_hopes.length - 1] ? `${h}: ${fd.get("hope_other") || ""}` : h)), instagram: fd.get("instagram"),
@@ -252,13 +252,6 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         <input type="checkbox" name="newsletter" />
         <span>{t.j_news}</span>
       </label>
-      <fieldset className="field full"><legend>{t.j_photo_q}</legend>
-        <div className="pills">
-          <label><input type="radio" name="photo" value="yes" required /><span>{t.j_photo_yes}</span></label>
-          <label><input type="radio" name="photo" value="no" /><span>{t.j_photo_no}</span></label>
-        </div>
-        <small className="hint">{t.j_photo_note}</small>
-      </fieldset>
       <div className="full field" style={{ alignItems: "flex-start" }}>
         <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : waitlist ? t.j_submit_wait : t.j_submit}</button>
         {state === "error" && <p style={{ color: "var(--tomato)", marginTop: 8 }}>{t.j_error}</p>}
