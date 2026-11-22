@@ -4,7 +4,7 @@ import { gsc } from "@/lib/gsc";
 
 /** Password-protected stats. The password is checked inside the database (bcrypt), never stored in the site. */
 export async function POST(req: Request) {
-  const b = (await req.json().catch(() => ({}))) as { password?: string; days?: number; approve?: { id: string; approved: boolean } };
+  const b = (await req.json().catch(() => ({}))) as { password?: string; days?: number; approve?: { id: string; approved: boolean }; tables?: { event: string; open: number } };
   if (!b.password) return NextResponse.json({ error: "wrong password" }, { status: 401 });
   if (b.approve) {
     const ok = await rpc<boolean>("dashboard_approve", { p_password: b.password, p_review: b.approve.id, p_approved: b.approve.approved });
