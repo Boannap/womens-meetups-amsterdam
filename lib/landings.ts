@@ -28,7 +28,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       faq: [
         ["Hoe maak ik nieuwe vriendinnen in Amsterdam?", "Zoek een plek waar je dezelfde soort mensen vaker ziet en waar je echt kunt praten. Bij Women's Meetups zit je met zes meiden aan één tafel, gematcht op persoonlijkheid, met vragenkaartjes en een host, zodat het gesprek vanzelf gaat."],
         ["Wat kost het?", "€12,50 per meetup, inclusief btw en servicekosten. Je eerste koffietje krijg je van ons! Geen abonnement."],
-        ["Wanneer zijn de meetups?", "Meestal op zondag rond 10.30, perfect voor een brunch. De data staan op de homepage."],
+        ["Wanneer zijn de meetups?", "Meestal op zondag rond 10.30, perfect voor een brunch (die bestel en betaal je zelf in het café). De data staan op de homepage."],
       ],
       cta: "Bekijk de volgende tafels",
     },
@@ -48,7 +48,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       faq: [
         ["How do I make friends in Amsterdam?", "Find a place where you see the same kind of people more than once and can actually talk. At Women's Meetups you sit with six women at one table, matched on personality, with question cards and a host, so the conversation flows."],
         ["How much does it cost?", "€12.50 per meetup, incl. VAT and service costs. Your first coffee is included. No subscription."],
-        ["When are the meetups?", "Usually on Sunday around 10:30, perfect for brunch. Dates are on the homepage."],
+        ["When are the meetups?", "Usually on Sunday around 10:30, perfect for brunch (you order and pay for that yourself at the café). Dates are on the homepage."],
       ],
       cta: "See the next tables",
     },
