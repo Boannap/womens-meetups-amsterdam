@@ -14,7 +14,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
   friends: {
     nl: {
       title: "Vriendinnen maken in Amsterdam | Women's Meetups in Amsterdam",
-      desc: "Nieuwe vriendinnen maken in Amsterdam? Schuif aan bij een tafel van zes meiden, gematcht op persoonlijkheid, in een gezellig café. Zondag rond 10.30, €12,50.",
+      desc: "Nieuwe vriendinnen maken in Amsterdam? Schuif aan bij een tafel van zes meiden, gematcht op persoonlijkheid, in een gezellig café. Zondag rond 10.30, zonder abonnement.",
       nav: "Vriendinnen maken in Amsterdam",
       kicker: "Vriendinnen maken",
       h1: "Nieuwe vriendinnen maken in Amsterdam",
@@ -34,7 +34,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
     },
     en: {
       title: "Make friends in Amsterdam | Women's Meetups in Amsterdam",
-      desc: "Want to make new friends in Amsterdam? Join a table of six women, matched on personality, in a cosy café. Sundays around 10:30, €12.50.",
+      desc: "Want to make new friends in Amsterdam? Join a table of six women, matched on personality, in a cosy café. Sundays around 10:30, no subscription.",
       nav: "Make friends in Amsterdam",
       kicker: "Making friends",
       h1: "How to make new friends in Amsterdam",

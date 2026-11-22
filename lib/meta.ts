@@ -21,9 +21,9 @@ export function pageMeta(lang: Lang, paths: { en: string; nl: string }, title?: 
       description: dd,
       url: absUrl(lang, paths[lang]),
       locale: lang === "nl" ? "nl_NL" : "en_GB",
-      images: [{ url: "/og.png", width: 1200, height: 630, alt: SITE_NAME }],
+      images: [{ url: "/og2.png", width: 1200, height: 630, alt: SITE_NAME }],
     },
-    twitter: { card: "summary_large_image", title: tt, description: dd, images: ["/og.png"] },
+    twitter: { card: "summary_large_image", title: tt, description: dd, images: ["/og2.png"] },
     icons: { icon: "/favicon.svg" },
     keywords: [
       "make friends in Amsterdam", "make new friends Amsterdam", "meet new people Amsterdam", "women's meetups Amsterdam",
