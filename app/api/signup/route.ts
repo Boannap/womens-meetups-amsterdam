@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { quizType, QUIZ_LENGTH } from "@/lib/quiz";
+import { notifySignup } from "@/lib/notify";
 import { rpc } from "@/lib/supa";
 import { stripe } from "@/lib/stripe";
 import { absUrl, ROUTES, PRICE_EUR } from "@/lib/site";
@@ -86,7 +87,10 @@ export async function POST(req: Request) {
     console.error("[signup] Supabase error", res.status, await res.text());
     return NextResponse.json({ error: "could not save" }, { status: 502 });
   }
-  if (!payNow) return NextResponse.json({ ok: true, stored: true });
+  if (!payNow) {
+    await notifySignup(row.waitlist ? "waitlist" : "free", row.event_id, row);
+    return NextResponse.json({ ok: true, stored: true });
+  }
 
   // Seat (not waitlist): send her to Stripe Checkout (iDEAL/Wero, cards, Apple Pay). The webhook marks the sign-up as paid.
   const l = row.site_lang === "nl" ? "nl" : "en";
