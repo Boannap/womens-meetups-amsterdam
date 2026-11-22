@@ -51,7 +51,7 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
                 <div className="meta">
                   <span>🕑 <time dateTime={e.date}>{fmt(e.date, { weekday: "long" })} {fmt(e.date, { hour: "2-digit", minute: "2-digit" })}</time> - {fmt(e.end, { hour: "2-digit", minute: "2-digit" })}</span>
                   <span>📍 {e.areas} · {t.ev_cafe}</span>
-                  <span>☕ {nOpen} {nOpen === 1 ? (lang === "nl" ? "tafel" : "table") : t.ev_tables}</span>
+                  {(e.soldOut || left === 0) && <span>☕ {nOpen} {nOpen === 1 ? (lang === "nl" ? "tafel" : "table") : t.ev_tables}</span>}
                 </div>
                 <div className="tables">
                   {tables.map((tb, i) => (
