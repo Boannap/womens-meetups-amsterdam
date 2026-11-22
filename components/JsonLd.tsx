@@ -11,6 +11,8 @@ export default function JsonLd({ lang }: { lang: Lang }) {
     name: SITE_NAME,
     alternateName: ["Table of Six Amsterdam", "Womens Meetups Amsterdam"],
     url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
+    image: `${SITE_URL}/logo.png`,
     description: t.meta_desc,
     areaServed: { "@type": "City", name: "Amsterdam" },
     founder: { "@id": `${SITE_URL}/#boanna` },
