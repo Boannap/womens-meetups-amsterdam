@@ -21,6 +21,42 @@ const TOPIC_NAMES: Record<string, string> = { meetup: "Vraag over meetup", aanme
 const PKG_NAMES: Record<string, string> = { proeftafel: "Proeftafel", maand1: "1x per maand €19", maand2: "2x per maand €35", "weet-niet": "Weet nog niet" };
 const FIELD_NAMES: Record<string, string> = { first_name: "Voornaam", name: "Naam", email: "E-mail", phone: "Telefoon", contact_pref: "WhatsApp of mail", wa_consent: "WhatsApp-toestemming", age: "Leeftijd", hood: "Buurt", neighbourhood: "Buurt", contact: "WhatsApp of mail", instagram: "Instagram", consent: "Akkoord privacy", field: "Werkveld", language: "Taal", hoping: "Wat ze hopen", quiz: "Quiz", table_wish: "Tafelwens", found_via: "Hoe gevonden", form_ease: "Makkelijk?", event: "Datum" };
 
+
+const PALETTE = ["#E4472F", "#F3A9B8", "#4F7DB8", "#4E6B3A", "#D9652B", "#8E1B2C", "#F5C9A9", "#9DB48A"];
+
+function sourceName(r: string): string {
+  const x = (r || "").toLowerCase();
+  if (!x || x === "direct") return "Direct (link of getypt)";
+  if (x.includes("instagram")) return "Instagram";
+  if (x.includes("google")) return "Google";
+  if (x.includes("whatsapp") || x.includes("wa.me")) return "WhatsApp";
+  if (x.includes("tiktok")) return "TikTok";
+  if (x.includes("facebook") || x.includes("fb.")) return "Facebook";
+  if (x.includes("bing") || x.includes("duckduckgo") || x.includes("ecosia")) return "Andere zoekmachine";
+  if (x.includes("chatgpt") || x.includes("openai") || x.includes("perplexity") || x.includes("claude")) return "AI (ChatGPT e.d.)";
+  if (x.includes("womensmeetupsinamsterdam")) return "Direct (link of getypt)";
+  return r;
+}
+
+function group(rows: [string, number][], fn: (k: string) => string): [string, number][] {
+  const m = new Map<string, number>();
+  for (const [k, v] of rows) m.set(fn(k), (m.get(fn(k)) ?? 0) + Number(v));
+  return [...m.entries()].sort((a, b) => b[1] - a[1]);
+}
+
+function Donut({ rows, empty }: { rows: [string, number][]; empty: string }) {
+  const tot = rows.reduce((a, [, v]) => a + v, 0);
+  if (!tot) return <p className="db-empty">{empty}</p>;
+  let acc = 0;
+  const grad = rows.map(([, v], i) => { const a = (acc / tot) * 360; acc += v; return `${PALETTE[i % PALETTE.length]} ${a}deg ${(acc / tot) * 360}deg`; }).join(",");
+  return (
+    <div className="db-donut">
+      <div className="db-ring" style={{ background: `conic-gradient(${grad})` }}><span><b>{tot}</b><small>totaal</small></span></div>
+      <ul>{rows.map(([k, v], i) => <li key={k}><i style={{ background: PALETTE[i % PALETTE.length] }} />{k}<b>{Math.round((v / tot) * 100)}%</b></li>)}</ul>
+    </div>
+  );
+}
+
 type Tip = { level: "go" | "fix" | "info"; text: React.ReactNode };
 
 function advice(data: any): Tip[] {
@@ -115,7 +151,7 @@ export default function Dashboard() {
     setBusy(false);
     if (!r || !r.ok) { setErr("Dat wachtwoord klopt niet."); setData(null); return; }
     setData(await r.json());
-    try { sessionStorage.setItem("wma-db", p); } catch {}
+    try { sessionStorage.setItem("wma-db", p); localStorage.setItem("wma-owner", "1"); } catch {}
   }
   useEffect(() => { try { const s = sessionStorage.getItem("wma-db"); if (s) { setPw(s); load(s, days); } } catch {} }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -164,127 +200,45 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <div className="db-kpis">
-        <div><small>Bezoekers</small><b>{data.visitors}</b></div>
-        <div><small>Aanmeldingen</small><b>{s.total}</b><em>{s.waitlist} wachtlijst</em></div>
-        <div><small>Conversie</small><b>{pct(f.submitted, f.visit)}%</b><em>bezoek → aanmelding</em></div>
-        <div><small>Gem. tijd op site</small><b>{data.avg_time ? `${Math.floor(data.avg_time / 60)}:${String(data.avg_time % 60).padStart(2, "0")}` : "-"}</b><em>min</em></div>
-        <div><small>Reviewscore</small><b>{rv.avg_rating ?? "-"}</b><em>{rv.count} reviews</em></div>
-      </div>
-
-      <div className="db-advice db-partners">
-        <h3>Tafels per datum 🪑</h3>
-        <p className="db-hint">Elke datum start met 1 tafel (6 plekken). Is die vol, dan krijg je een mailtje en komen nieuwe meiden op de wachtlijst. Wil je een tafel erbij? Klik op +1 (maximaal 4).</p>
-        {EVENTS.filter((e) => !e.soldOut && new Date(e.end) > new Date()).map((e) => {
-          const tb = ((data as unknown as { tables?: Record<string, { open: number; paid: number; pending: number; waitlist: number }> }).tables ?? {})[e.id] ?? { open: 1, paid: 0, pending: 0, waitlist: 0 };
-          const open = Math.min(tb.open ?? 1, e.tables.length);
-          return (
-            <p key={e.id}>
-              <b>{e.id}</b> · {open} {open === 1 ? "tafel" : "tafels"} open · <b>{tb.paid}</b>/{open * 6} betaald{tb.pending ? ` · ${tb.pending} bezig met betalen` : ""} · {tb.waitlist} op de wachtlijst<br />
-              <button className="db-toggle" disabled={open >= Math.min(4, e.tables.length)} onClick={() => setTables(e.id, open + 1)}>+1 tafel</button>{" "}
-              <button className="db-toggle" disabled={open <= 1 || tb.paid > (open - 1) * 6} onClick={() => setTables(e.id, open - 1)}>−1 tafel</button>
-            </p>
-          );
-        })}
-      </div>
-
-      {(data.referrals || []).length > 0 && (
-        <div className="db-advice db-partners">
-          <h3>Vriendinnen meegenomen 👯</h3>
-          <p className="db-hint">Groepjes via de vriendinnenkorting. ✓ = betaald. "Samen" betekent: ze willen gegarandeerd aan één tafel.</p>
-          {data.referrals.map((r: any, i: number) => <p key={i}><b>{r.event_id}</b> · {r.inviter} · {r.pct}% · {r.together ? "samen aan tafel" : "mag verdeeld"}<br /><small>{r.joined || "nog niemand betaald"}</small></p>)}
-        </div>
-      )}
-
-      {(data.priority || []).length > 0 && (
-        <div className="db-advice db-partners">
-          <h3>Eerst mailen bij nieuwe data ⏳</h3>
-          <p className="db-hint">Deze meiden stonden op de wachtlijst en kregen geen plek. Zodra je nieuwe data online zet, mail je hen als eerste.</p>
-          <p>{data.priority.length} meiden · <a className="db-toggle" href={`mailto:?bcc=${data.priority.map((p: any) => p.email).join(",")}&subject=${encodeURIComponent("Nieuwe data! Jij hoort het als eerste ☕")}&body=${encodeURIComponent("Hoi!\n\nJe stond op de wachtlijst, dus jij hoort het als eerste: de nieuwe data staan online. Kies je tafel via womensmeetupsinamsterdam.com voordat we ze op Instagram zetten.\n\nLiefs,\nBoanna")}`}>Open mail (BCC) ✉️</a></p>
-          <small>{data.priority.map((p: any) => `${p.name} (${p.event_id})`).join(" · ")}</small>
-        </div>
-      )}
-
-      {(data.photos || []).length > 0 && (
-        <div className="db-advice db-partners">
-          <h3>Wie komt er? 🪑</h3>
-          <p className="db-hint">Per meetup: leeftijd, persoonlijkheidstype uit de quiz, taal en hobby's. Handig om de tafels in te delen. 💳 = betaald, ⏳ = wachtlijst, % = vriendinnenkorting.</p>
-          {Array.from(new Set(data.photos.map((p: any) => p.event_id))).map((ev: any) => {
-            const list = data.photos.filter((p: any) => p.event_id === ev);
-            const TYPES: Record<string, string> = { chatter: "Kletskous", connector: "Verbinder", explorer: "Ontdekker", listener: "Luisteraar" };
-            return <div key={ev} style={{ marginBottom: 14 }}><b>{ev}</b>
-              <ul className="db-list">{list.map((p: any, i: number) => (
-                <li key={i}>{p.waitlist ? "⏳" : p.paid ? "💳" : "·"} <b>{p.name}</b>{p.age ? `, ${p.age}` : ""} · {TYPES[p.personality] ?? p.personality ?? "?"} · {p.language}{p.discount_pct ? ` · ${p.discount_pct}%` : ""}{p.field ? ` · ${p.field}` : ""}{p.hobbies ? <><br /><small>{p.hobbies}</small></> : null}</li>
-              ))}</ul></div>;
-          })}
-        </div>
-      )}
-
-      {(data.contacts || []).length > 0 && (
-        <div className="db-advice db-partners">
-          <h3>Berichten via het contactformulier ✉️</h3>
-          <ul className="db-list">
-            {data.contacts.map((c: any) => (
-              <li key={c.id}>
-                <b>{c.name}</b> · {TOPIC_NAMES[c.topic] ?? c.topic} <small>({new Date(c.created_at).toLocaleDateString("nl-NL")}{c.lang === "en" ? ", Engels" : ""})</small><br />
-                <em>&ldquo;{c.message}&rdquo;</em><br />
-                <a className="db-toggle" href={`mailto:${c.email}?subject=${encodeURIComponent(c.lang === "en" ? "Re: your message to Women's Meetups" : "Re: je bericht aan Women's Meetups")}`}>Beantwoorden ({c.email})</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {(data.partners || []).length > 0 && (
-        <div className="db-advice db-partners">
-          <h3>Cafés die willen samenwerken ☕</h3>
-          <ul className="db-list">
-            {data.partners.map((p: any) => (
-              <li key={p.id}>
-                <b>{p.cafe}</b>{p.neighbourhood ? ` · ${p.neighbourhood}` : ""} · {PKG_NAMES[p.package] ?? p.package} <small>({new Date(p.created_at).toLocaleDateString("nl-NL")})</small><br />
-                {p.contact} · <a href={`mailto:${p.email}`}>{p.email}</a>{p.phone ? ` · ${p.phone}` : ""}{p.link ? <> · <a href={p.link.startsWith("http") ? p.link : `https://${p.link}`} target="_blank" rel="noopener">{p.link}</a></> : null}
-                {p.message && <><br /><em>&ldquo;{p.message}&rdquo;</em></>}
-                <br /><a className="db-toggle" href={`mailto:${p.email}?subject=${encodeURIComponent(partnerMail(p.lang === "en" ? "en" : "nl").subject)}&body=${encodeURIComponent(partnerMailText(p.lang === "en" ? "en" : "nl", p.contact))}`}>Open mail met prijzen ✉️</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <div className="db-advice">
-        <h3>Wat kun je aanpassen</h3>
-        <p className="db-hint">Advies op basis van de cijfers van de afgelopen {days} dagen.</p>
-        <ul>{advice(data).map((t, i) => <li key={i} className={`tip-${t.level}`}>{t.text}</li>)}</ul>
-      </div>
-
-      <div className="db-insights">
-        <h3>Wat valt op</h3>
-        <ul>
-          {worst ? <li>De grootste afhaak zit bij <b>{worst[0].toLowerCase()}</b>: maar {worst[1]}% gaat door naar die stap.</li> : <li>Nog te weinig bezoekers voor conclusies. Na zo&apos;n 50 bezoekers zie je hier tips.</li>}
-          {topSection && <li>Mensen blijven het langst hangen bij <b>{topSection[0]}</b> (gem. {topSection[1]} sec).</li>}
-          {exp.length === 2 && <li>Knoptest: variant A {pct(exp.find((e) => e.variant === "A")?.submitted ?? 0, exp.find((e) => e.variant === "A")?.visitors ?? 0)}% vs variant B {pct(exp.find((e) => e.variant === "B")?.submitted ?? 0, exp.find((e) => e.variant === "B")?.visitors ?? 0)}% aanmeldingen.</li>}
-          {s.found_via && Object.keys(s.found_via).length > 0 && <li>De meeste meiden vinden je via <b>{Object.entries(s.found_via as Record<string, number>).sort((a, b) => b[1] - a[1])[0][0]}</b>.</li>}
-        </ul>
-      </div>
-
-      <div className="db-grid">
-        <Card title="Bezoekers per dag" wide>
-          {byDay.length ? (
-            <div className="db-days-chart">
-              {byDay.map((x) => <div key={x.d} title={`${x.d}: ${x.v}`}><span style={{ height: `${(x.v / maxDay) * 100}%` }} /><small>{x.d.slice(8, 10)}</small></div>)}
-            </div>
-          ) : <p className="db-empty">Nog geen bezoekers</p>}
-        </Card>
-
-        <Card title="Van bezoek naar aanmelding" hint="Waar haken mensen af?" wide>
-          <div className="db-funnel">
-            {steps.map(([k, v], i) => (
-              <div key={k}><span className="db-bl">{k}</span><span className="db-track"><span style={{ width: `${pct(v, f.visit || 1)}%` }} /></span><b>{v}</b>{i > 0 && <em>{pct(v, steps[i - 1][1])}%</em>}</div>
-            ))}
+      {(() => {
+        const tbs = ((data as unknown as { tables?: Record<string, { open: number; paid: number; pending: number; waitlist: number }> }).tables ?? {});
+        const upcoming = EVENTS.filter((e) => new Date(e.end) > new Date());
+        const paidTot = upcoming.reduce((a, e) => a + (tbs[e.id]?.paid ?? 0), 0);
+        const waitTot = upcoming.reduce((a, e) => a + (tbs[e.id]?.waitlist ?? 0), 0);
+        const sources = group((data.referrers || []).map((x: any) => [x.r, Number(x.n)] as [string, number]), sourceName);
+        const found = group(Object.entries((s.found_via || {}) as Record<string, number>).map(([k, v]) => [k, Number(v)] as [string, number]), (k) => k.split(":")[0].trim() || "Onbekend");
+        return (<>
+          <div className="db-kpis db-kpis-color">
+            <div className="k1"><small>👀 Bezoekers</small><b>{data.visitors}</b><em>laatste {days} dagen</em></div>
+            <div className="k2"><small>📝 Aanmeldingen</small><b>{f.submitted ?? 0}</b><em>via de site, laatste {days} dagen</em></div>
+            <div className="k3"><small>🎯 Conversie</small><b>{pct(f.submitted, f.visit)}%</b><em>van bezoeker naar aanmelding</em></div>
+            <div className="k4"><small>💳 Betaalde plekken</small><b>{paidTot}</b><em>{waitTot} op de wachtlijst · komende meetups</em></div>
           </div>
-        </Card>
 
-        <Card title="Waar blijven ze hangen" hint="Gemiddelde seconden per sectie"><Bars data={sections} unit="s" /></Card>
+          <div className="db-advice db-partners">
+            <h3>Komende meetups 🪑</h3>
+            <p className="db-hint">Elke balk is een datum. Donker = betaald. Klik +1 om een tafel erbij te openen (max. 4), dan komen er 6 plekken bij.</p>
+            {upcoming.map((e) => {
+              const tb = tbs[e.id] ?? { open: 1, paid: 0, pending: 0, waitlist: 0 };
+              const open = e.soldOut ? e.tables.length : Math.min(tb.open ?? 1, e.tables.length);
+              const cap = open * 6;
+              return (
+                <div className="db-ev" key={e.id}>
+                  <div className="db-ev-h"><b>{new Intl.DateTimeFormat("nl-NL", { weekday: "short", day: "numeric", month: "long" }).format(new Date(e.date))}</b>
+                    <span>{tb.paid}/{cap} betaald{tb.pending ? ` · ${tb.pending} bezig met betalen` : ""}{tb.waitlist ? ` · ${tb.waitlist} wachtlijst` : ""}{e.soldOut ? " · uitverkocht (lancering)" : ""}</span></div>
+                  <div className="db-prog"><span className="paid" style={{ width: `${Math.min(100, (tb.paid / cap) * 100)}%` }} /><span className="pend" style={{ width: `${Math.min(100, (tb.pending / cap) * 100)}%` }} /></div>
+                  {!e.soldOut && <div className="db-ev-btns">{open} {open === 1 ? "tafel" : "tafels"} open
+                    <button className="db-toggle" disabled={open >= Math.min(4, e.tables.length)} onClick={() => setTables(e.id, open + 1)}>+1 tafel</button>
+                    <button className="db-toggle" disabled={open <= 1 || tb.paid > (open - 1) * 6} onClick={() => setTables(e.id, open - 1)}>−1 tafel</button></div>}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="db-grid">
+            <Card title="Waar komen bezoekers vandaan" hint="Via welke app of site ze op je website kwamen"><Donut rows={sources} empty="Nog geen bezoekers" /></Card>
+            <Card title="Hoe vonden aanmelders je" hint="Wat ze zelf invulden bij het aanmelden"><Donut rows={found} empty="Nog geen aanmeldingen" /></Card>
+            <Card title="Waar blijven ze hangen" hint="Gemiddelde seconden per sectie"><Bars data={sections} unit="s" /></Card>
         <Card title="Hoe ver scrollen ze" hint="Aantal bezoekers dat zover kwam"><Bars data={Object.fromEntries(Object.entries(data.scroll || {}).map(([k, v]) => [`${k}%`, v as number]))} /></Card>
         <Card title="Waar klikken ze op"><Bars data={(data.clicks || []).map((x: any) => [x.label, x.n])} /></Card>
         <Card title="Waar komen ze vandaan"><Bars data={(data.referrers || []).map((x: any) => [x.r, x.n])} /></Card>
@@ -373,6 +327,24 @@ export default function Dashboard() {
           ) : <p className="db-empty">Nog geen reviews</p>}
         </Card>
       </div>
+      </details>
+
+      <div className="db-advice">
+        <h3>Wat kun je aanpassen</h3>
+        <p className="db-hint">Advies op basis van de cijfers van de afgelopen {days} dagen.</p>
+        <ul>{advice(data).map((t, i) => <li key={i} className={`tip-${t.level}`}>{t.text}</li>)}</ul>
+      </div>
+
+      <div className="db-insights">
+        <h3>Wat valt op</h3>
+        <ul>
+          {worst ? <li>De grootste afhaak zit bij <b>{worst[0].toLowerCase()}</b>: maar {worst[1]}% gaat door naar die stap.</li> : <li>Nog te weinig bezoekers voor conclusies. Na zo&apos;n 50 bezoekers zie je hier tips.</li>}
+          {topSection && <li>Mensen blijven het langst hangen bij <b>{topSection[0]}</b> (gem. {topSection[1]} sec).</li>}
+          {exp.length === 2 && <li>Knoptest: variant A {pct(exp.find((e) => e.variant === "A")?.submitted ?? 0, exp.find((e) => e.variant === "A")?.visitors ?? 0)}% vs variant B {pct(exp.find((e) => e.variant === "B")?.submitted ?? 0, exp.find((e) => e.variant === "B")?.visitors ?? 0)}% aanmeldingen.</li>}
+          {s.found_via && Object.keys(s.found_via).length > 0 && <li>De meeste meiden vinden je via <b>{Object.entries(s.found_via as Record<string, number>).sort((a, b) => b[1] - a[1])[0][0]}</b>.</li>}
+        </ul>
+      </div>
+
     </main>
   );
 }

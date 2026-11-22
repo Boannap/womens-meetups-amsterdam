@@ -30,6 +30,7 @@ function flush(beacon = false) {
 
 /** Call from anywhere (e.g. the join form) to record an event. */
 export function track(type: string, label?: string, value?: number, variant?: string) {
+  try { if (localStorage.getItem("wma-owner") === "1") return; } catch {}
   queue.push({ type, label, value, variant });
   if (queue.length >= 20) flush();
 }
@@ -38,6 +39,11 @@ export default function Tracker() {
   useEffect(() => {
     if (navigator.webdriver || /bot|crawl|spider/i.test(navigator.userAgent)) return;
     if (/^\/(dashboard|review)/.test(location.pathname)) return;
+    // Boanna herself: once she opened her dashboard (or used ?ikben=boanna) in this browser, her visits are never counted.
+    try {
+      if (new URLSearchParams(location.search).get("ikben") === "boanna") localStorage.setItem("wma-owner", "1");
+      if (localStorage.getItem("wma-owner") === "1") return;
+    } catch {}
     const w = window.innerWidth;
     let ref = "";
     try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, "") : ""; } catch {}

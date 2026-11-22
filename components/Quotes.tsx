@@ -9,6 +9,7 @@ type Q = { quote: string; first_name: string; rating: number | null };
 export default function Quotes({ kicker, title, ant }: { kicker: string; title: string; ant?: { kicker: string; title: string; by: string; quotes: string[] } }) {
   const [list, setList] = useState<Q[]>([]);
   useEffect(() => { fetch("/api/quotes").then((r) => r.json()).then((d) => Array.isArray(d) && setList(d)).catch(() => {}); }, []);
+  const nl = ant?.by?.toLowerCase().includes("tafelgenote") ?? false;
   const anticipation = ant && ant.quotes.length ? (
     <section className="sec" id="looking-forward" style={{ paddingTop: 40 }}>
       <div className="wrap">
@@ -16,14 +17,17 @@ export default function Quotes({ kicker, title, ant }: { kicker: string; title: 
         <h2 className="title">{ant.title}</h2>
         <div className="quotes">
           {ant.quotes.map((q, i) => (
-            <figure className="dm reveal" key={i}>
+            <figure className="dm" key={i}>
               <div className="dm-top"><span className="dm-av" aria-hidden /><div><b>{ant.by}</b><small>Instagram</small></div><svg className="dm-ig" viewBox="0 0 24 24" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg></div>
               <blockquote className="dm-bubble">{q}</blockquote>
               <div className="dm-foot">♡ <span>Message…</span></div>
             </figure>
           ))}
         </div>
-        <p style={{ textAlign: "center", marginTop: 28 }}><a className="btn btn-wine" href={`https://www.instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener">@{INSTAGRAM} ↗</a></p>
+        <div className="ig-cta">
+          <p><b>{nl ? "Alvast inspiratie opdoen? 📸" : "Want a sneak peek? 📸"}</b><br />{nl ? "Volg ons op Instagram voor de mooiste cafés, nieuwe datums en een kijkje achter de schermen. Zo blijf je als eerste op de hoogte!" : "Follow us on Instagram for the prettiest cafés, new dates and a look behind the scenes. That way you're always the first to know!"}</p>
+          <a className="btn btn-wine" href={`https://www.instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener">{nl ? "Volg ons op Instagram" : "Follow us on Instagram"} ↗</a>
+        </div>
       </div>
     </section>
   ) : null;

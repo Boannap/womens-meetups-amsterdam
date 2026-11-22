@@ -441,3 +441,22 @@ footer a:hover{text-decoration:underline}
 .dm-ig{width:20px;height:20px;color:#d62976;flex:none}
 .dm-bubble{margin:0;align-self:flex-start;background:#efefef;color:#262626;border-radius:20px 20px 20px 6px;padding:10px 14px;font-size:.92rem;line-height:1.45;font-family:inherit}
 .dm-foot{display:flex;align-items:center;gap:8px;border:1px solid #e6e6e6;border-radius:999px;padding:6px 12px;color:#8e8e8e;font-size:.8rem}
+.ig-cta{margin:32px auto 0;max-width:560px;text-align:center;background:linear-gradient(135deg,#fde7ec,#fbefe2);border-radius:24px;padding:22px 22px 24px}
+.ig-cta p{margin:0 0 14px;line-height:1.5}
+.db-kpis-color .k1{background:#E4472F;color:#fff}.db-kpis-color .k1 b{color:#fff}
+.db-kpis-color .k2{background:#F3A9B8;color:var(--wine)}.db-kpis-color .k2 b{color:var(--wine)}
+.db-kpis-color .k3{background:#4F7DB8;color:#fff}.db-kpis-color .k3 b{color:#fff}
+.db-kpis-color .k4{background:#4E6B3A;color:#fff}.db-kpis-color .k4 b{color:#fff}
+.db-ev{padding:12px 0;border-top:1px solid #f0e6dc}.db-ev:first-of-type{border-top:0}
+.db-ev-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}.db-ev-h span{font-size:.88rem;color:#7a5a5c}
+.db-prog{height:14px;border-radius:99px;background:#f3e9df;overflow:hidden;display:flex}
+.db-prog .paid{background:var(--wine)}.db-prog .pend{background:var(--pink)}
+.db-ev-btns{margin-top:8px;font-size:.85rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.db-donut{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.db-ring{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;flex:none}
+.db-ring span{width:84px;height:84px;border-radius:50%;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.db-ring b{font-family:var(--display);font-size:1.5rem;color:var(--wine);line-height:1}.db-ring small{font-size:.7rem;color:#7a5a5c}
+.db-donut ul{list-style:none;padding:0;margin:0;flex:1;min-width:150px;display:grid;gap:6px;font-size:.9rem}
+.db-donut li{display:flex;align-items:center;gap:8px}.db-donut li i{width:12px;height:12px;border-radius:50%;flex:none}.db-donut li b{margin-left:auto}
+.db-more{margin:22px 0}.db-more>summary{cursor:pointer;font-family:var(--display);color:var(--wine);font-size:1.2rem;padding:14px 20px;background:var(--paper);border-radius:18px;list-style:none;margin-bottom:16px}
+.db-funnel-color .db-track span{border-radius:99px}

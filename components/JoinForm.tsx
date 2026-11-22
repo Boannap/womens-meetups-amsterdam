@@ -260,12 +260,12 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       </div>}
       {cancelled && <p className="full" style={{ color: "var(--tomato)" }}>{lang === "nl" ? "Je betaling is niet afgerond, dus je plek is nog niet vast. Probeer het gerust opnieuw." : "Your payment wasn\u2019t completed, so your seat isn\u2019t booked yet. Feel free to try again."}</p>}
       <label className="consent full field" style={{ flexDirection: "row" }}>
-        <input type="checkbox" name="consent" required />
-        <span>{linkify(t.j_consent, lang)}</span>
-      </label>
-      <label className="consent full field" style={{ flexDirection: "row" }}>
         <input type="checkbox" name="newsletter" />
         <span>{t.j_news}</span>
+      </label>
+      <label className="consent full field" style={{ flexDirection: "row" }}>
+        <input type="checkbox" name="consent" required />
+        <span>{linkify(t.j_consent, lang)}</span>
       </label>
       <div className="full field" style={{ alignItems: "flex-start" }}>
         <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : waitlist ? t.j_submit_wait : t.j_submit}</button>
