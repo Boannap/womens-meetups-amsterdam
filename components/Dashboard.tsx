@@ -21,7 +21,6 @@ const TOPIC_NAMES: Record<string, string> = { meetup: "Vraag over meetup", aanme
 const PKG_NAMES: Record<string, string> = { proeftafel: "Proeftafel", maand1: "1x per maand €19", maand2: "2x per maand €35", "weet-niet": "Weet nog niet" };
 const FIELD_NAMES: Record<string, string> = { first_name: "Voornaam", name: "Naam", email: "E-mail", phone: "Telefoon", contact_pref: "WhatsApp of mail", wa_consent: "WhatsApp-toestemming", age: "Leeftijd", hood: "Buurt", neighbourhood: "Buurt", contact: "WhatsApp of mail", instagram: "Instagram", consent: "Akkoord privacy", field: "Werkveld", language: "Taal", hoping: "Wat ze hopen", quiz: "Quiz", table_wish: "Tafelwens", found_via: "Hoe gevonden", form_ease: "Makkelijk?", event: "Datum" };
 
-
 const PALETTE = ["#E4472F", "#F3A9B8", "#4F7DB8", "#4E6B3A", "#D9652B", "#8E1B2C", "#F5C9A9", "#9DB48A"];
 
 function sourceName(r: string): string {
@@ -56,6 +55,7 @@ function Donut({ rows, empty }: { rows: [string, number][]; empty: string }) {
     </div>
   );
 }
+
 
 type Tip = { level: "go" | "fix" | "info"; text: React.ReactNode };
 
@@ -238,7 +238,91 @@ export default function Dashboard() {
           <div className="db-grid">
             <Card title="Waar komen bezoekers vandaan" hint="Via welke app of site ze op je website kwamen"><Donut rows={sources} empty="Nog geen bezoekers" /></Card>
             <Card title="Hoe vonden aanmelders je" hint="Wat ze zelf invulden bij het aanmelden"><Donut rows={found} empty="Nog geen aanmeldingen" /></Card>
-            <Card title="Waar blijven ze hangen" hint="Gemiddelde seconden per sectie"><Bars data={sections} unit="s" /></Card>
+            <Card title="Bezoekers per dag" wide>
+              {byDay.length ? (
+                <div className="db-days-chart">
+                  {byDay.map((x) => <div key={x.d} title={`${x.d}: ${x.v}`}><span style={{ height: `${(x.v / maxDay) * 100}%` }} /><small>{x.d.slice(8, 10)}</small></div>)}
+                </div>
+              ) : <p className="db-empty">Nog geen bezoekers</p>}
+            </Card>
+            <Card title="Van bezoek naar aanmelding" hint="Hoeveel mensen elke stap halen. Het percentage = wie doorging vanaf de stap ervoor." wide>
+              <div className="db-funnel db-funnel-color">
+                {steps.map(([k, v], i) => (
+                  <div key={k}><span className="db-bl">{k}</span><span className="db-track"><span style={{ width: `${pct(v, f.visit || 1)}%`, background: PALETTE[i] }} /></span><b>{v}</b>{i > 0 && <em>{pct(v, steps[i - 1][1])}%</em>}</div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </>);
+      })()}
+
+      {(data.referrals || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Vriendinnen meegenomen 👯</h3>
+          <p className="db-hint">Groepjes via de vriendinnenkorting. ✓ = betaald. "Samen" betekent: ze willen gegarandeerd aan één tafel.</p>
+          {data.referrals.map((r: any, i: number) => <p key={i}><b>{r.event_id}</b> · {r.inviter} · {r.pct}% · {r.together ? "samen aan tafel" : "mag verdeeld"}<br /><small>{r.joined || "nog niemand betaald"}</small></p>)}
+        </div>
+      )}
+
+      {(data.priority || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Eerst mailen bij nieuwe data ⏳</h3>
+          <p className="db-hint">Deze meiden stonden op de wachtlijst en kregen geen plek. Zodra je nieuwe data online zet, mail je hen als eerste.</p>
+          <p>{data.priority.length} meiden · <a className="db-toggle" href={`mailto:?bcc=${data.priority.map((p: any) => p.email).join(",")}&subject=${encodeURIComponent("Nieuwe data! Jij hoort het als eerste ☕")}&body=${encodeURIComponent("Hoi!\n\nJe stond op de wachtlijst, dus jij hoort het als eerste: de nieuwe data staan online. Kies je tafel via womensmeetupsinamsterdam.com voordat we ze op Instagram zetten.\n\nLiefs,\nBoanna")}`}>Open mail (BCC) ✉️</a></p>
+          <small>{data.priority.map((p: any) => `${p.name} (${p.event_id})`).join(" · ")}</small>
+        </div>
+      )}
+
+      {(data.photos || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Wie komt er? 🪑</h3>
+          <p className="db-hint">Per meetup: leeftijd, persoonlijkheidstype uit de quiz, taal en hobby's. Handig om de tafels in te delen. 💳 = betaald, ⏳ = wachtlijst, % = vriendinnenkorting.</p>
+          {Array.from(new Set(data.photos.map((p: any) => p.event_id))).map((ev: any) => {
+            const list = data.photos.filter((p: any) => p.event_id === ev);
+            const TYPES: Record<string, string> = { chatter: "Kletskous", connector: "Verbinder", explorer: "Ontdekker", listener: "Luisteraar" };
+            return <div key={ev} style={{ marginBottom: 14 }}><b>{ev}</b>
+              <ul className="db-list">{list.map((p: any, i: number) => (
+                <li key={i}>{p.waitlist ? "⏳" : p.paid ? "💳" : "·"} <b>{p.name}</b>{p.age ? `, ${p.age}` : ""} · {TYPES[p.personality] ?? p.personality ?? "?"} · {p.language}{p.discount_pct ? ` · ${p.discount_pct}%` : ""}{p.field ? ` · ${p.field}` : ""}{p.hobbies ? <><br /><small>{p.hobbies}</small></> : null}</li>
+              ))}</ul></div>;
+          })}
+        </div>
+      )}
+
+      {(data.contacts || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Berichten via het contactformulier ✉️</h3>
+          <ul className="db-list">
+            {data.contacts.map((c: any) => (
+              <li key={c.id}>
+                <b>{c.name}</b> · {TOPIC_NAMES[c.topic] ?? c.topic} <small>({new Date(c.created_at).toLocaleDateString("nl-NL")}{c.lang === "en" ? ", Engels" : ""})</small><br />
+                <em>&ldquo;{c.message}&rdquo;</em><br />
+                <a className="db-toggle" href={`mailto:${c.email}?subject=${encodeURIComponent(c.lang === "en" ? "Re: your message to Women's Meetups" : "Re: je bericht aan Women's Meetups")}`}>Beantwoorden ({c.email})</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {(data.partners || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Cafés die willen samenwerken ☕</h3>
+          <ul className="db-list">
+            {data.partners.map((p: any) => (
+              <li key={p.id}>
+                <b>{p.cafe}</b>{p.neighbourhood ? ` · ${p.neighbourhood}` : ""} · {PKG_NAMES[p.package] ?? p.package} <small>({new Date(p.created_at).toLocaleDateString("nl-NL")})</small><br />
+                {p.contact} · <a href={`mailto:${p.email}`}>{p.email}</a>{p.phone ? ` · ${p.phone}` : ""}{p.link ? <> · <a href={p.link.startsWith("http") ? p.link : `https://${p.link}`} target="_blank" rel="noopener">{p.link}</a></> : null}
+                {p.message && <><br /><em>&ldquo;{p.message}&rdquo;</em></>}
+                <br /><a className="db-toggle" href={`mailto:${p.email}?subject=${encodeURIComponent(partnerMail(p.lang === "en" ? "en" : "nl").subject)}&body=${encodeURIComponent(partnerMailText(p.lang === "en" ? "en" : "nl", p.contact))}`}>Open mail met prijzen ✉️</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <details className="db-more">
+        <summary>Meer cijfers bekijken ▾</summary>
+      <div className="db-grid">
+        <Card title="Waar blijven ze hangen" hint="Gemiddelde seconden per sectie"><Bars data={sections} unit="s" /></Card>
         <Card title="Hoe ver scrollen ze" hint="Aantal bezoekers dat zover kwam"><Bars data={Object.fromEntries(Object.entries(data.scroll || {}).map(([k, v]) => [`${k}%`, v as number]))} /></Card>
         <Card title="Waar klikken ze op"><Bars data={(data.clicks || []).map((x: any) => [x.label, x.n])} /></Card>
         <Card title="Waar komen ze vandaan"><Bars data={(data.referrers || []).map((x: any) => [x.r, x.n])} /></Card>
