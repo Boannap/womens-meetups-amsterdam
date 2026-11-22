@@ -17,7 +17,7 @@ const AGAIN_NAMES: Record<string, string> = { yes: "Zeker", maybe: "Misschien", 
 const MATCH_NAMES: Record<string, string> = { "3": "Helemaal", "2": "Best wel", "1": "Niet echt" };
 
 const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
-const TOPIC_NAMES: Record<string, string> = { meetup: "Vraag over meetup", aanmelding: "Aanmelding wijzigen", samenwerken: "Samenwerken / pers", anders: "Anders" };
+const TOPIC_NAMES: Record<string, string> = { meetup: "Vraag over meetup", aanmelding: "Vraag over boeking", samenwerken: "Samenwerken", host: "Wil host worden", idee: "Idee of tip", anders: "Anders" };
 const PKG_NAMES: Record<string, string> = { proeftafel: "Proeftafel", maand1: "1x per maand €19", maand2: "2x per maand €35", "weet-niet": "Weet nog niet" };
 const FIELD_NAMES: Record<string, string> = { first_name: "Voornaam", name: "Naam", email: "E-mail", phone: "Telefoon", contact_pref: "WhatsApp of mail", wa_consent: "WhatsApp-toestemming", age: "Leeftijd", hood: "Buurt", neighbourhood: "Buurt", contact: "WhatsApp of mail", instagram: "Instagram", consent: "Akkoord privacy", field: "Werkveld", language: "Taal", hoping: "Wat ze hopen", quiz: "Quiz", table_wish: "Tafelwens", found_via: "Hoe gevonden", form_ease: "Makkelijk?", event: "Datum" };
 

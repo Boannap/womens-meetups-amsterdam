@@ -3,10 +3,11 @@ import Header from "./Header";
 import Footer from "./Footer";
 import JsonLd from "./JsonLd";
 import ContactForm from "./ContactForm";
+import MailLink from "./MailLink";
 
 export const CONTACT = {
-  nl: { title: "Contact | Women's Meetups in Amsterdam", desc: "Vraag over een meetup, je aanmelding of samenwerken? Stuur ons een berichtje via het formulier of mail naar hello@womensmeetupsinamsterdam.com.", kicker: "Contact", h1: "Zeg het maar!", intro: "Een vraag over een meetup, iets aanpassen aan je aanmelding of gewoon even hoi zeggen? Vul het formulier in, dan hoor je binnen een paar dagen van me. Liefs, Boanna", or: "Liever mailen?", ig: "Of stuur een DM op Instagram:" },
-  en: { title: "Contact | Women's Meetups in Amsterdam", desc: "Question about a meetup, your sign-up or working together? Send us a message through the form or e-mail hello@womensmeetupsinamsterdam.com.", kicker: "Contact", h1: "Tell us!", intro: "A question about a meetup, something to change in your sign-up, or just want to say hi? Fill in the form and you'll hear from me within a few days. Love, Boanna", or: "Rather e-mail?", ig: "Or send a DM on Instagram:" },
+  nl: { title: "Contact | Women's Meetups in Amsterdam", desc: "Vraag over een meetup, je aanmelding of samenwerken? Stuur ons een berichtje via het formulier of mail naar hello@womensmeetupsinamsterdam.com.", kicker: "Contact", h1: "Zeg het maar!", intro: "Een vraag over een meetup of je boeking, een leuk idee of gewoon even hoi zeggen? Vul het formulier in, dan hoor je binnen een paar dagen van me. Liefs, Boanna", or: "Liever mailen?", ig: "Of stuur een DM op Instagram:" },
+  en: { title: "Contact | Women's Meetups in Amsterdam", desc: "Question about a meetup, your sign-up or working together? Send us a message through the form or e-mail hello@womensmeetupsinamsterdam.com.", kicker: "Contact", h1: "Tell us!", intro: "A question about a meetup or your booking, a fun idea, or just want to say hi? Fill in the form and you'll hear from me within a few days. Love, Boanna", or: "Rather e-mail?", ig: "Or send a DM on Instagram:" },
 } as const;
 
 export default function ContactPage({ lang }: { lang: Lang }) {
@@ -22,7 +23,7 @@ export default function ContactPage({ lang }: { lang: Lang }) {
             <p className="pt-intro">{t.intro}</p>
             <ContactForm lang={lang} />
             <div className="ct-alt">
-              <p><b>{t.or}</b> <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+              <p><b>{t.or}</b> <MailLink email={EMAIL} lang={lang} /></p>
               <p>{t.ig} <a href={`https://www.instagram.com/${INSTAGRAM}`} rel="noopener">@{INSTAGRAM}</a></p>
             </div>
           </div>

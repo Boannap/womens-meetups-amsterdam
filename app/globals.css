@@ -473,3 +473,5 @@ footer a:hover{text-decoration:underline}
 .db-step-t{font-size:.95rem;margin-bottom:5px}.db-step-t b{font-family:var(--display);font-size:1.2rem;color:var(--wine);margin-right:4px}
 .db-step-t em{font-style:normal;font-size:.8rem;color:#7a5a5c;margin-left:8px;background:#f3e9df;border-radius:99px;padding:2px 8px}
 .db-step .db-track{height:16px}
+.maillink small{display:block;margin-top:6px;font-size:.82rem;color:#7a5a5c}
+.maillink small button{background:none;border:0;padding:0;font:inherit;color:#C2185B;text-decoration:underline;cursor:pointer}

@@ -43,8 +43,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             <h4>{t.ft_follow}</h4>
             <ul>
               <li><a href={`https://www.instagram.com/${INSTAGRAM}`} rel="noopener">Instagram: <span className="handle">{splitAmsterdam(`@${INSTAGRAM}`)}</span></a></li>
-              <li>{t.ft_contact}: <a className="handle" href={`mailto:${EMAIL}`}>{splitAmsterdam(EMAIL)}</a></li>
-              <li><Link href={contactPath(lang)}>{lang === "nl" ? "Contactformulier" : "Contact form"}</Link></li>
+              <li>{t.ft_contact}: <Link className="handle" href={contactPath(lang)}>{splitAmsterdam(EMAIL)}</Link></li>
             </ul>
           </div>
         </div>
