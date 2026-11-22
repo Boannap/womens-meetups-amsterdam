@@ -206,7 +206,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
             return (<div className="vibe">
               <div className="vibe-ring" style={{ background: `conic-gradient(${grad})` }}><span>{traits.code}</span></div>
               <div className="vibe-txt">
-                <small>{t.q_result}</small><b>{typeInfo[0]}</b><span>{typeInfo[1]}</span>
+                <small>{t.q_result}</small><b className="vibe-name">{w.map((x) => L[x.ch]).join(" · ")}</b><span>{typeInfo[1]}</span>
                 <ul className="vibe-legend">{w.map((x) => <li key={x.k}><i style={{ background: cols[x.k] }} />{x.ch} · {L[x.ch]} <em>{x.s}%</em></li>)}</ul>
                 <p className="vibe-soft">{t.q_soft}</p>
               </div>
@@ -243,7 +243,6 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       {!waitlist && <div className="price-box">
         <h4>{t.pr_title}</h4>
         <div className="r"><span>{t.pr_seat}</span><span>€{PRICE.seat}</span></div>
-        <div className="r promo-row"><span>☕ {t.pr_coffee}</span><span>{t.pr_free}</span></div>
         <div className="r"><span>{t.pr_service}</span><span>€{PRICE.service}</span></div>
         <div className="r"><span>{t.pr_vat}</span><span>€{PRICE.vat}</span></div>
         <div className="r t"><span>{t.pr_total}</span><span>€{PRICE.total}</span></div>
