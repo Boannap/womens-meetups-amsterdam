@@ -84,6 +84,8 @@ export async function POST(req: Request) {
   try {
     const session = await stripe<{ url: string }>("checkout/sessions", {
       mode: "payment",
+      // Only iDEAL/Wero and cards (cards include Apple Pay and Google Pay). No Klarna etc.
+      payment_method_types: { 0: "ideal", 1: "card" },
       client_reference_id: row.id,
       customer_email: row.email,
       locale: l,
