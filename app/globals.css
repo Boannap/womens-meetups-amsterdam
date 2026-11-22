@@ -428,3 +428,5 @@ footer a:hover{text-decoration:underline}
 .phone-menu li span{font-size:1.2rem}
 .phone-menu li em{margin-left:auto;font-style:normal;opacity:.6}
 .phone-menu li.none{cursor:default;opacity:.6}
+.consent a{color:#C2185B;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.consent a:hover{color:var(--wine)}
