@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { INSTAGRAM } from "@/lib/site";
 
 type Q = { quote: string; first_name: string; rating: number | null };
 
@@ -15,9 +16,14 @@ export default function Quotes({ kicker, title, ant }: { kicker: string; title: 
         <h2 className="title">{ant.title}</h2>
         <div className="quotes">
           {ant.quotes.map((q, i) => (
-            <figure className="quote reveal" key={i}><blockquote>&ldquo;{q}&rdquo;</blockquote><figcaption>{ant.by}</figcaption></figure>
+            <figure className="dm reveal" key={i}>
+              <div className="dm-top"><span className="dm-av" aria-hidden /><div><b>{ant.by}</b><small>Instagram</small></div><svg className="dm-ig" viewBox="0 0 24 24" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg></div>
+              <blockquote className="dm-bubble">{q}</blockquote>
+              <div className="dm-foot">♡ <span>Message…</span></div>
+            </figure>
           ))}
         </div>
+        <p style={{ textAlign: "center", marginTop: 28 }}><a className="btn btn-wine" href={`https://www.instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener">@{INSTAGRAM} ↗</a></p>
       </div>
     </section>
   ) : null;

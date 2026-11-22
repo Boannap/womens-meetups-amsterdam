@@ -430,3 +430,14 @@ footer a:hover{text-decoration:underline}
 .phone-menu li.none{cursor:default;opacity:.6}
 .consent a{color:#C2185B;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .consent a:hover{color:var(--wine)}
+#looking-forward .quotes{align-items:start}
+.dm{margin:0;background:#fff;border-radius:22px;border:1px solid #ece2d8;box-shadow:0 6px 20px rgba(60,10,15,.06);padding:14px 14px 12px;display:flex;flex-direction:column;gap:12px}
+.dm-top{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid #f0e8e0}
+.dm-av{width:34px;height:34px;border-radius:50%;flex:none;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);padding:2px;position:relative}
+.dm-av::after{content:"";position:absolute;inset:2px;border-radius:50%;background:#f3d9df;border:2px solid #fff}
+.dm-top div{flex:1;line-height:1.15}
+.dm-top b{display:block;font-size:.85rem;color:var(--ink)}
+.dm-top small{font-size:.72rem;color:#8e8e8e}
+.dm-ig{width:20px;height:20px;color:#d62976;flex:none}
+.dm-bubble{margin:0;align-self:flex-start;background:#efefef;color:#262626;border-radius:20px 20px 20px 6px;padding:10px 14px;font-size:.92rem;line-height:1.45;font-family:inherit}
+.dm-foot{display:flex;align-items:center;gap:8px;border:1px solid #e6e6e6;border-radius:999px;padding:6px 12px;color:#8e8e8e;font-size:.8rem}
