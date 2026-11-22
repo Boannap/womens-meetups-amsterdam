@@ -57,6 +57,31 @@ function Donut({ rows, empty }: { rows: [string, number][]; empty: string }) {
 }
 
 
+function VisitorsChart({ byDay }: { byDay: { d: string; v: number }[] }) {
+  const [gran, setGran] = useState<"dag" | "week" | "maand" | "jaar">("dag");
+  const fmt = (o: Intl.DateTimeFormatOptions, d: Date) => new Intl.DateTimeFormat("nl-NL", o).format(d);
+  const m = new Map<string, { label: string; v: number }>();
+  for (const x of byDay) {
+    const d = new Date(`${x.d}T12:00:00`);
+    let key = x.d, label = fmt({ day: "numeric", month: "short" }, d);
+    if (gran === "week") { const mon = new Date(d); mon.setDate(d.getDate() - ((d.getDay() + 6) % 7)); key = mon.toISOString().slice(0, 10); label = `wk ${fmt({ day: "numeric", month: "short" }, mon)}`; }
+    if (gran === "maand") { key = x.d.slice(0, 7); label = fmt({ month: "short", year: "numeric" }, d); }
+    if (gran === "jaar") { key = x.d.slice(0, 4); label = key; }
+    const cur = m.get(key) ?? { label, v: 0 }; cur.v += Number(x.v); m.set(key, cur);
+  }
+  const rows = [...m.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([, r]) => r);
+  const max = Math.max(1, ...rows.map((r) => r.v));
+  const total = rows.reduce((a, r) => a + r.v, 0);
+  return (<>
+    <div className="db-gran">{(["dag", "week", "maand", "jaar"] as const).map((g) => <button key={g} aria-pressed={gran === g} onClick={() => setGran(g)}>Per {g}</button>)}<span>{total} bezoekers in totaal</span></div>
+    {rows.length ? (
+      <div className="db-days-chart">
+        {rows.map((r, i) => <div key={i} title={`${r.label}: ${r.v}`}><b>{r.v}</b><span style={{ height: `${(r.v / max) * 100}%` }} /><small>{r.label}</small></div>)}
+      </div>
+    ) : <p className="db-empty">Nog geen bezoekers</p>}
+  </>);
+}
+
 type Tip = { level: "go" | "fix" | "info"; text: React.ReactNode };
 
 function advice(data: any): Tip[] {
@@ -180,7 +205,7 @@ export default function Dashboard() {
   }
 
   const f = data.funnel || {}; const s = data.signups || {}; const rv = data.reviews || {}; const x = data.extra || {};
-  const steps: [string, number][] = [["Bezoekers", f.visit], ["Zagen de tafels", f.saw_events], ["Begonnen formulier", f.form_start], ["Quiz af", f.quiz_done], ["Aangemeld", f.submitted]];
+  const steps: [string, number][] = [["kwamen op je website", f.visit], ["scrolden door tot de datums", f.saw_events], ["begonnen met het aanmeldformulier", f.form_start], ["maakten de persoonlijkheidsquiz af", f.quiz_done], ["meldden zich echt aan", f.submitted]];
   const drops = steps.slice(1).map(([k, v], i) => [k, pct(v, steps[i][1])] as [string, number]);
   const worst = drops.filter(([, p]) => f.visit > 10).sort((a, b) => a[1] - b[1])[0];
   const sections = (data.sections || []).map((x: any) => [SECTION_NAMES[x.label] ?? x.label, Number(x.secs)] as [string, number]);
@@ -196,7 +221,7 @@ export default function Dashboard() {
           <p>Women&apos;s Meetups in Amsterdam · eigen statistieken, zonder cookies</p>
         </div>
         <div className="db-days">
-          {[7, 30, 90].map((d) => <button key={d} aria-pressed={days === d} onClick={() => { setDays(d); load(pw, d); }}>{d} dagen</button>)}
+          {([[7, "Afgelopen week"], [30, "Afgelopen maand"], [90, "3 maanden"], [365, "Afgelopen jaar"]] as const).map(([d, l]) => <button key={d} aria-pressed={days === d} onClick={() => { setDays(d); load(pw, d); }}>{l}</button>)}
         </div>
       </header>
 
@@ -238,17 +263,16 @@ export default function Dashboard() {
           <div className="db-grid">
             <Card title="Waar komen bezoekers vandaan" hint="Via welke app of site ze op je website kwamen"><Donut rows={sources} empty="Nog geen bezoekers" /></Card>
             <Card title="Hoe vonden aanmelders je" hint="Wat ze zelf invulden bij het aanmelden"><Donut rows={found} empty="Nog geen aanmeldingen" /></Card>
-            <Card title="Bezoekers per dag" wide>
-              {byDay.length ? (
-                <div className="db-days-chart">
-                  {byDay.map((x) => <div key={x.d} title={`${x.d}: ${x.v}`}><span style={{ height: `${(x.v / maxDay) * 100}%` }} /><small>{x.d.slice(8, 10)}</small></div>)}
-                </div>
-              ) : <p className="db-empty">Nog geen bezoekers</p>}
+            <Card title="Bezoekers" hint="Hoeveel mensen je website bezochten. Kies hierboven de periode, en hier per dag, week, maand of jaar." wide>
+              <VisitorsChart byDay={byDay} />
             </Card>
-            <Card title="Van bezoek naar aanmelding" hint="Hoeveel mensen elke stap halen. Het percentage = wie doorging vanaf de stap ervoor." wide>
-              <div className="db-funnel db-funnel-color">
+            <Card title="Van bezoeker naar aanmelding" hint="Elke stap laat zien hoeveel mensen nog meedoen. Waar het grootste verschil zit, haken de meeste mensen af." wide>
+              <div className="db-steps">
                 {steps.map(([k, v], i) => (
-                  <div key={k}><span className="db-bl">{k}</span><span className="db-track"><span style={{ width: `${pct(v, f.visit || 1)}%`, background: PALETTE[i] }} /></span><b>{v}</b>{i > 0 && <em>{pct(v, steps[i - 1][1])}%</em>}</div>
+                  <div key={k} className="db-step">
+                    <div className="db-step-t"><b>{v ?? 0}</b> {k}{i > 0 && <em>{pct(v, steps[i - 1][1])}% van de stap ervoor</em>}</div>
+                    <div className="db-track"><span style={{ width: `${Math.max(2, pct(v, f.visit || 1))}%`, background: PALETTE[i] }} /></div>
+                  </div>
                 ))}
               </div>
             </Card>
