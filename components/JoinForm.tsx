@@ -232,7 +232,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         <small>{t.pr_note}</small>
       </div>}
       {ref && !waitlist && <div className="full field friends-box" style={{ background: "#fff", border: "2px dashed var(--pink)", borderRadius: 16, padding: "16px 18px" }}>
-        <b>{lang === "nl" ? `Hoi ${ref.name}! Neem 1 of 2 nieuwe vriendinnen mee` : `Hi ${ref.name}! Bring 1 or 2 new friends`}</b>
+        <b>{lang === "nl" ? `Hoi ${ref.name}! Tot 15% korting: neem 1 of 2 nieuwe vriendinnen mee 👯` : `Hi ${ref.name}! Up to 15% off: bring 1 or 2 new friends 👯`}</b>
         <small style={{ display: "block", margin: "4px 0 10px" }}>{lang === "nl" ? "Met 1 vriendin krijgen jullie allebei 10% korting, met 2 vriendinnen jullie alle drie 15%. Alleen voor meiden die nog nooit bij ons waren." : "With 1 friend you both get 10% off, with 2 friends all three of you get 15%. Only for girls who haven't joined us before."}</small>
         <input name="friend1" type="email" placeholder={lang === "nl" ? "E-mail vriendin 1" : "Friend 1 e-mail"} style={{ marginBottom: 8, width: "100%" }} />
         <input name="friend2" type="email" placeholder={lang === "nl" ? "E-mail vriendin 2 (mag leeg)" : "Friend 2 e-mail (optional)"} style={{ width: "100%" }} />
