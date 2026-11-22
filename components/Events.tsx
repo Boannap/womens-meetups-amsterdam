@@ -51,12 +51,11 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
                 <div className="meta">
                   <span>🕑 <time dateTime={e.date}>{fmt(e.date, { weekday: "long" })} {fmt(e.date, { hour: "2-digit", minute: "2-digit" })}</time> - {fmt(e.end, { hour: "2-digit", minute: "2-digit" })}</span>
                   <span>📍 {e.areas} · {t.ev_cafe}</span>
-                  {(e.soldOut || left === 0) && <span>☕ {nOpen} {nOpen === 1 ? (lang === "nl" ? "tafel" : "table") : t.ev_tables}</span>}
                 </div>
                 <div className="tables">
                   {tables.map((tb, i) => (
                     <div className="tbl" key={i} style={tb.soon ? { opacity: 0.45 } : undefined}>
-                      <small>{langName(tb.lang)}{tb.soon ? (lang === "nl" ? " · opent zodra tafel 1 vol is" : " · opens when table 1 is full") : ""}</small>
+                      <small>{langName(tb.lang)}{tb.soon ? (lang === "nl" ? " · opent hierna" : " · opens next") : ""}</small>
                       {(e.soldOut || left === 0) && <div className="seats" aria-label={`${tb.taken}/6`}>
                         {Array.from({ length: 6 }, (_, s) => <span key={s} className={`seat ${s < tb.taken ? "on" : ""}`} />)}
                       </div>}
