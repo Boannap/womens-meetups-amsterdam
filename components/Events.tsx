@@ -1,44 +1,22 @@
 "use client";
 
-import { useSeats, isEventFull, capacity, takenTotal, openTables } from "@/lib/useSeats";
-import { useState } from "react";
-import type { Dict, Lang, MeetupEvent, TableLang } from "@/lib/site";
-
-type Filter = "all" | TableLang;
+import { useSeats, isEventFull, capacity, takenTotal } from "@/lib/useSeats";
+import type { Dict, Lang, MeetupEvent } from "@/lib/site";
 
 export default function Events({ lang, t, events }: { lang: Lang; t: Dict; events: MeetupEvent[] }) {
   const seats = useSeats();
-  const [filter, setFilter] = useState<Filter>("all");
   const locale = lang === "nl" ? "nl-NL" : "en-GB";
   const fmt = (d: string, o: Intl.DateTimeFormatOptions) =>
     new Intl.DateTimeFormat(locale, { timeZone: "Europe/Amsterdam", ...o }).format(new Date(d));
-  const langName = (l: TableLang) => (l === "nl" ? t.ev_lang_nl : l === "en" ? t.ev_lang_en : t.ev_lang_mix);
 
   const list = events
-    .filter((e) => new Date(e.end) > new Date())
-    .filter((e) => filter === "all" || (e.soldOut ? e.tables : e.tables.slice(0, openTables(e, seats))).some((tb) => tb.lang === filter));
-
-  const chips: [Filter, string][] = [["all", t.f_all], ["nl", t.f_nl], ["en", t.f_en], ["mix", t.f_mix]];
+    .filter((e) => new Date(e.end) > new Date());
 
   return (
     <>
-      <div className="filters" role="group" aria-label="Language filter" style={{ marginBottom: 24 }}>
-        {chips.map(([f, label]) => (
-          <button key={f} className="chip" aria-pressed={filter === f} onClick={() => setFilter(f)}>{label}</button>
-        ))}
-      </div>
       <div className="events">
         {list.length === 0 && <p className="empty">{t.ev_none}</p>}
         {list.map((e) => {
-          // Only the open tables are shown; real sign-ups fill the seats table by table.
-          let rest = takenTotal(e, seats);
-          // Open tables plus the next one as a preview ("opens when this one is full"). Only real sign-ups fill the seats.
-          const nOpen = e.soldOut ? e.tables.length : openTables(e, seats);
-          const shown = e.tables.slice(0, Math.min(e.tables.length, nOpen + (e.soldOut ? 0 : 1))).map((tb, i) => {
-            if (i >= nOpen) return { ...tb, taken: 0, soon: true };
-            const n = Math.min(6, Math.max(tb.taken, rest)); rest -= n; return { ...tb, taken: n, soon: false };
-          });
-          const tables = shown.filter((tb) => filter === "all" || tb.lang === filter);
           const left = isEventFull(e, seats) ? 0 : Math.max(0, capacity(e, seats) - takenTotal(e, seats));
           return (
             <article className="ev" key={e.id}>
@@ -51,16 +29,6 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
                 <div className="meta">
                   <span>🕑 <time dateTime={e.date}>{fmt(e.date, { weekday: "long" })} {fmt(e.date, { hour: "2-digit", minute: "2-digit" })}</time> - {fmt(e.end, { hour: "2-digit", minute: "2-digit" })}</span>
                   <span>📍 {e.areas} · {t.ev_cafe}</span>
-                </div>
-                <div className="tables">
-                  {tables.map((tb, i) => (
-                    <div className="tbl" key={i} style={tb.soon ? { opacity: 0.45 } : undefined}>
-                      <small>{langName(tb.lang)}{tb.soon ? (lang === "nl" ? " · opent hierna" : " · opens next") : ""}</small>
-                      {(e.soldOut || left === 0) && <div className="seats" aria-label={`${tb.taken}/6`}>
-                        {Array.from({ length: 6 }, (_, s) => <span key={s} className={`seat ${s < tb.taken ? "on" : ""}`} />)}
-                      </div>}
-                    </div>
-                  ))}
                 </div>
               </div>
               <div className="ev-r">
