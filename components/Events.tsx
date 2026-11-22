@@ -57,15 +57,15 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
                   {tables.map((tb, i) => (
                     <div className="tbl" key={i} style={tb.soon ? { opacity: 0.45 } : undefined}>
                       <small>{langName(tb.lang)}{tb.soon ? (lang === "nl" ? " · opent zodra tafel 1 vol is" : " · opens when table 1 is full") : ""}</small>
-                      <div className="seats" aria-label={`${tb.taken}/6`}>
+                      {(e.soldOut || left === 0) && <div className="seats" aria-label={`${tb.taken}/6`}>
                         {Array.from({ length: 6 }, (_, s) => <span key={s} className={`seat ${s < tb.taken ? "on" : ""}`} />)}
-                      </div>
+                      </div>}
                     </div>
                   ))}
                 </div>
               </div>
               <div className="ev-r">
-                {left > 0 ? <span className="left">{left} {t.ev_spots}</span> : <span className="left soldout">{t.ev_soldout}</span>}
+                {left > 0 ? <span className="left">{lang === "nl" ? "Plekken beschikbaar" : "Seats available"}</span> : <span className="left soldout">{t.ev_soldout}</span>}
                 <span className="price">{t.ev_price}</span>
                 <a className="btn btn-wine" href="#join" onClick={() => window.dispatchEvent(new CustomEvent("wma:pick-event", { detail: e.id }))}>{left > 0 ? t.ev_reserve : t.ev_full}</a>
               </div>
