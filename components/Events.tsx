@@ -1,6 +1,6 @@
 "use client";
 
-import { useSeats, isEventFull, capacity, takenTotal } from "@/lib/useSeats";
+import { useSeats, isEventFull, capacity, takenTotal, openTables } from "@/lib/useSeats";
 import { useState } from "react";
 import type { Dict, Lang, MeetupEvent, TableLang } from "@/lib/site";
 
@@ -16,7 +16,7 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
 
   const list = events
     .filter((e) => new Date(e.end) > new Date())
-    .filter((e) => filter === "all" || e.tables.some((tb) => tb.lang === filter));
+    .filter((e) => filter === "all" || (e.soldOut ? e.tables : e.tables.slice(0, openTables(e, seats))).some((tb) => tb.lang === filter));
 
   const chips: [Filter, string][] = [["all", t.f_all], ["nl", t.f_nl], ["en", t.f_en], ["mix", t.f_mix]];
 
@@ -30,8 +30,11 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
       <div className="events">
         {list.length === 0 && <p className="empty">{t.ev_none}</p>}
         {list.map((e) => {
-          const tables = e.tables.filter((tb) => filter === "all" || tb.lang === filter);
-          const left = isEventFull(e, seats) ? 0 : Math.min(tables.reduce((n, tb) => n + (6 - tb.taken), 0), capacity(e) - takenTotal(e, seats));
+          // Only the open tables are shown; real sign-ups fill the seats table by table.
+          let rest = takenTotal(e, seats);
+          const shown = (e.soldOut ? e.tables : e.tables.slice(0, openTables(e, seats))).map((tb) => { const n = Math.min(6, Math.max(tb.taken, rest)); rest -= n; return { ...tb, taken: n }; });
+          const tables = shown.filter((tb) => filter === "all" || tb.lang === filter);
+          const left = isEventFull(e, seats) ? 0 : Math.max(0, capacity(e, seats) - takenTotal(e, seats));
           return (
             <article className="ev" key={e.id}>
               <div className="ev-date scallop">

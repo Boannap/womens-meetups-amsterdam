@@ -1,4 +1,5 @@
 "use client";
+import { EVENTS } from "@/lib/site";
 
 import { useEffect, useState } from "react";
 import { partnerMail, partnerMailText } from "@/lib/partnerMail";
@@ -118,6 +119,11 @@ export default function Dashboard() {
   }
   useEffect(() => { try { const s = sessionStorage.getItem("wma-db"); if (s) { setPw(s); load(s, days); } } catch {} }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  async function setTables(event: string, open: number) {
+    await fetch("/api/dashboard", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw, days, tables: { event, open } }) });
+    load();
+  }
+
   async function approve(id: string, approved: boolean) {
     await fetch("/api/dashboard", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw, approve: { id, approved } }) });
     load();
@@ -164,6 +170,22 @@ export default function Dashboard() {
         <div><small>Conversie</small><b>{pct(f.submitted, f.visit)}%</b><em>bezoek → aanmelding</em></div>
         <div><small>Gem. tijd op site</small><b>{data.avg_time ? `${Math.floor(data.avg_time / 60)}:${String(data.avg_time % 60).padStart(2, "0")}` : "-"}</b><em>min</em></div>
         <div><small>Reviewscore</small><b>{rv.avg_rating ?? "-"}</b><em>{rv.count} reviews</em></div>
+      </div>
+
+      <div className="db-advice db-partners">
+        <h3>Tafels per datum 🪑</h3>
+        <p className="db-hint">Elke datum start met 1 tafel (6 plekken). Is die vol, dan krijg je een mailtje en komen nieuwe meiden op de wachtlijst. Wil je een tafel erbij? Klik op +1 (maximaal 4).</p>
+        {EVENTS.filter((e) => !e.soldOut && new Date(e.end) > new Date()).map((e) => {
+          const tb = ((data as unknown as { tables?: Record<string, { open: number; paid: number; pending: number; waitlist: number }> }).tables ?? {})[e.id] ?? { open: 1, paid: 0, pending: 0, waitlist: 0 };
+          const open = Math.min(tb.open ?? 1, e.tables.length);
+          return (
+            <p key={e.id}>
+              <b>{e.id}</b> · {open} {open === 1 ? "tafel" : "tafels"} open · <b>{tb.paid}</b>/{open * 6} betaald{tb.pending ? ` · ${tb.pending} bezig met betalen` : ""} · {tb.waitlist} op de wachtlijst<br />
+              <button className="db-toggle" disabled={open >= Math.min(4, e.tables.length)} onClick={() => setTables(e.id, open + 1)}>+1 tafel</button>{" "}
+              <button className="db-toggle" disabled={open <= 1 || tb.paid > (open - 1) * 6} onClick={() => setTables(e.id, open - 1)}>−1 tafel</button>
+            </p>
+          );
+        })}
       </div>
 
       {(data.priority || []).length > 0 && (

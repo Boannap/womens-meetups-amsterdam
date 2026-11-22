@@ -31,19 +31,27 @@
     "areas": "De Pijp · Jordaan",
     "tables": [
       {
+        "lang": "mix",
+        "taken": 0
+      },
+      {
         "lang": "nl",
         "taken": 0
       },
       {
         "lang": "en",
         "taken": 0
+      },
+      {
+        "lang": "mix",
+        "taken": 0
       }
     ]
   },
   {
-    "id": "2027-01-24",
-    "date": "2027-01-24T10:30:00+01:00",
-    "end": "2027-01-24T12:30:00+01:00",
+    "id": "2027-02-07",
+    "date": "2027-02-07T10:30:00+01:00",
+    "end": "2027-02-07T12:30:00+01:00",
     "title": {
       "en": "Table of Six: third edition",
       "nl": "Table of Six: derde editie"
@@ -51,7 +59,7 @@
     "areas": "Noord · De Pijp · West",
     "tables": [
       {
-        "lang": "nl",
+        "lang": "mix",
         "taken": 0
       },
       {
@@ -60,6 +68,10 @@
       },
       {
         "lang": "en",
+        "taken": 0
+      },
+      {
+        "lang": "mix",
         "taken": 0
       }
     ]

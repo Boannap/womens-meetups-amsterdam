@@ -25,6 +25,30 @@ export async function POST(req: Request) {
       console.error("[stripe-webhook] mark paid failed", r.status, await r.text());
       return NextResponse.json({ error: "db" }, { status: 500 });
     }
+    const res = (await r.json().catch(() => null)) as { ok?: boolean; new?: boolean; event_id?: string; paid?: number; open_tables?: number } | null;
+    // A table just filled up (6, 12, 18...): one short note to Boanna's own inbox, nobody else.
+    if (res?.ok && res.new && res.paid && res.paid % 6 === 0) await notifyTableFull(res.event_id ?? "", res.paid, res.open_tables ?? 1);
   }
   return NextResponse.json({ received: true });
+}
+
+async function notifyTableFull(eventId: string, paid: number, open: number) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return;
+  const full = paid >= open * 6;
+  const text = [
+    `Hoi Boanna!`,
+    ``,
+    `Er hebben nu ${paid} meiden betaald voor ${eventId}. Tafel ${paid / 6} is vol. 🎉`,
+    full
+      ? `Alle ${open} open tafel(s) zijn vol, dus nieuwe aanmeldingen komen nu op de wachtlijst.${open < 4 ? " Wil je een tafel erbij? Dat doe je in je dashboard bij \"Tafels per datum\" (maximaal 4)." : " Dit is het maximum van 4 tafels."}`
+      : `Er staan nog plekken open aan de volgende tafel.`,
+    ``,
+    `Dashboard: https://womensmeetupsinamsterdam.com/dashboard`,
+  ].join("\n");
+  await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from: "Women's Meetups site <hello@womensmeetupsinamsterdam.com>", to: ["hello@womensmeetupsinamsterdam.com"], subject: `Tafel vol: ${eventId} (${paid} meiden)`, text }),
+  }).catch((e) => console.error("[notify]", e));
 }
