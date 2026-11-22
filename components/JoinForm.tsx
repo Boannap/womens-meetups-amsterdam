@@ -152,7 +152,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       <div className="field"><label className="l" htmlFor="fn">{t.j_name}</label><input id="fn" name="name" type="text" autoComplete="given-name" required /></div>
       <div className="field"><label className="l" htmlFor="fe">{t.j_email}</label><input id="fe" name="email" type="email" autoComplete="email" required /></div>
       <div className="field"><label className="l" htmlFor="fa">{t.j_age}</label><input id="fa" name="age" type="number" inputMode="numeric" min={18} max={99} placeholder={t.j_age_ph} required /></div>
-      <fieldset className="field full"><legend>{t.j_lang}</legend>{pills("language", [t.j_lang_nl, t.j_lang_en, t.j_lang_both], "radio")}</fieldset>
+      <fieldset className="field full"><legend>{t.j_lang}</legend>{pills("language", [t.j_lang_both, t.j_lang_nl, t.j_lang_en], "radio")}</fieldset>
       <div className="field full">
         <label className="l" htmlFor="ff">{t.j_field}</label>
         <select id="ff" name="field" required defaultValue="" onChange={(e) => setFieldOther(e.currentTarget.value === t.j_fields[t.j_fields.length - 1])}>
