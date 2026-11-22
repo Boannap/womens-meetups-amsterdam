@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   if (!data || data.error) return NextResponse.json({ error: "wrong password" }, { status: 401 });
   const days = Math.min(365, Math.max(1, Number(b.days) || 30));
   if (b.tables) await rpc("dashboard_tables", { p_password: b.password, p_event: b.tables.event, p_open: b.tables.open });
-  const [extra, google, partners, contacts, priority, photos, tables] = await Promise.all([
+  const [extra, google, partners, contacts, priority, photos, tables, referrals] = await Promise.all([
     rpc<Record<string, unknown>>("dashboard_extra", { p_password: b.password, p_days: days }),
     gsc(days).catch(() => null),
     rpc<unknown[]>("dashboard_partners", { p_password: b.password }),
@@ -22,6 +22,7 @@ export async function POST(req: Request) {
     rpc<unknown[]>("dashboard_priority", { p_password: b.password, p_today: new Date().toISOString().slice(0, 10) }),
     rpc<unknown[]>("dashboard_photos", { p_password: b.password, p_today: new Date().toISOString().slice(0, 10) }),
     rpc<Record<string, unknown>>("dashboard_tables", { p_password: b.password, p_event: null, p_open: null }),
+    rpc<unknown[]>("dashboard_referrals", { p_password: b.password }),
   ]);
-  return NextResponse.json({ ...data, extra: extra ?? {}, google, partners: Array.isArray(partners) ? partners : [], contacts: Array.isArray(contacts) ? contacts : [], priority: Array.isArray(priority) ? priority : [], photos: Array.isArray(photos) ? photos : [], tables: tables && !("error" in tables) ? tables : {} }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ ...data, extra: extra ?? {}, google, partners: Array.isArray(partners) ? partners : [], contacts: Array.isArray(contacts) ? contacts : [], priority: Array.isArray(priority) ? priority : [], photos: Array.isArray(photos) ? photos : [], tables: tables && !("error" in tables) ? tables : {}, referrals: Array.isArray(referrals) ? referrals : [] }, { headers: { "Cache-Control": "no-store" } });
 }

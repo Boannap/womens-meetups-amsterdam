@@ -188,6 +188,14 @@ export default function Dashboard() {
         })}
       </div>
 
+      {(data.referrals || []).length > 0 && (
+        <div className="db-advice db-partners">
+          <h3>Vriendinnen meegenomen 👯</h3>
+          <p className="db-hint">Groepjes via de vriendinnenkorting. ✓ = betaald. "Samen" betekent: ze willen gegarandeerd aan één tafel.</p>
+          {data.referrals.map((r: any, i: number) => <p key={i}><b>{r.event_id}</b> · {r.inviter} · {r.pct}% · {r.together ? "samen aan tafel" : "mag verdeeld"}<br /><small>{r.joined || "nog niemand betaald"}</small></p>)}
+        </div>
+      )}
+
       {(data.priority || []).length > 0 && (
         <div className="db-advice db-partners">
           <h3>Eerst mailen bij nieuwe data ⏳</h3>

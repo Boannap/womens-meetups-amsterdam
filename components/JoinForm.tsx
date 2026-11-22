@@ -24,11 +24,19 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const [cancelled, setCancelled] = useState(false);
   // Back from Stripe: ?paid=1 shows the thank-you, ?cancelled=1 a short note above the form.
+  // Friend discount: ?ref=<own link from the review mail>, ?vriendin=<group> for invited friends, &g=<group> after paying.
+  const [ref, setRef] = useState<{ token: string; name: string } | null>(null);
+  const [invite, setInvite] = useState<{ group: string; pct: number; event: string; from: string } | null>(null);
+  const [shareGroup, setShareGroup] = useState<string | null>(null);
+  const [refErr, setRefErr] = useState("");
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
-    if (q.get("paid") === "1") setState("ok");
+    if (q.get("paid") === "1") { setState("ok"); if (q.get("g")) setShareGroup(q.get("g")); }
     if (q.get("cancelled") === "1") setCancelled(true);
-  }, []);
+    const tk = q.get("ref"), gr = q.get("vriendin");
+    if (tk) fetch(`/api/referral?token=${encodeURIComponent(tk)}`).then((r) => r.json()).then((d) => { if (d?.ok) setRef({ token: tk, name: d.first_name || "" }); }).catch(() => {});
+    if (gr) fetch(`/api/referral?group=${encodeURIComponent(gr)}`).then((r) => r.json()).then((d) => { if (d?.ok) { setInvite({ group: gr, pct: d.pct, event: d.event_id, from: d.from || "" }); setEventId(d.event_id); } }).catch(() => {});
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [answers, setAnswers] = useState<(number | null)[]>(() => t.quiz.map(() => null));
   const [step, setStep] = useState(0);
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
@@ -65,10 +73,27 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       event_id: eventId, waitlist, found_via: fd.get("found_via"), table_wish: fd.get("table_wish"),
       website: fd.get("website"), // honeypot, must stay empty
     };
-    setState("sending");
+    setState("sending"); setRefErr("");
     track("form", "submit", undefined, waitlist ? "waitlist" : "seat");
+    // Inviter with friends: first create the group, so her own ticket gets the discount too.
+    let refGroup: string | null = invite?.group ?? null;
+    const friends = [fd.get("friend1"), fd.get("friend2")].filter((x): x is string => typeof x === "string" && !!x.trim());
+    if (ref && friends.length && !waitlist) {
+      const r = await fetch("/api/referral", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: ref.token, event: eventId, emails: friends, together: fd.get("together") === "on" }) }).then((x) => x.json()).catch(() => null);
+      if (!r?.ok) {
+        const why: Record<string, [string, string]> = {
+          not_new: ["Een van je vriendinnen staat al bij ons ingeschreven. De korting geldt alleen voor nieuwe meiden.", "One of your friends has already signed up with us. The discount is only for new girls."],
+          self: ["Vul de e-mail van je vriendin in, niet je eigen.", "Fill in your friend's e-mail, not your own."],
+          used: ["Je persoonlijke link is al gebruikt.", "Your personal link has already been used."],
+          expired: ["Je persoonlijke link is verlopen.", "Your personal link has expired."],
+        };
+        setRefErr((why[r?.reason] ?? ["Dat lukte niet, check de e-mailadressen.", "That didn't work, check the e-mail addresses."])[lang === "nl" ? 0 : 1]);
+        setState("idle"); return;
+      }
+      refGroup = r.group;
+    }
     try {
-      const res = await fetch("/api/signup", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      const res = await fetch("/api/signup", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...body, ref_group: refGroup }) });
       const data = res.ok ? await res.json().catch(() => ({})) : null;
       if (data?.checkout_url) { window.location.href = data.checkout_url; return; }
       setState(res.ok ? "ok" : "error");
@@ -80,7 +105,16 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   if (state === "ok") {
     return (
       <div className="join" style={{ display: "block" }}>
-        <div className="ok"><h3>{waitlist ? t.j_ok_wait_t : t.j_ok_t}</h3><p>{waitlist ? t.j_ok_wait_p : t.j_ok_p}</p></div>
+        <div className="ok"><h3>{waitlist ? t.j_ok_wait_t : t.j_ok_t}</h3><p>{waitlist ? t.j_ok_wait_p : t.j_ok_p}</p>
+          {shareGroup && (() => {
+            const link = `${window.location.origin}${window.location.pathname}?vriendin=${shareGroup}#join`;
+            return <div className="share-friends" style={{ marginTop: 18 }}>
+              <p><b>{lang === "nl" ? "Stuur deze link naar je vriendin(nen):" : "Send this link to your friend(s):"}</b><br />{lang === "nl" ? "Met deze link krijgen zij dezelfde korting voor dezelfde datum. Ze vullen hun eigen quiz in." : "With this link they get the same discount for the same date. They fill in their own quiz."}</p>
+              <input readOnly value={link} onFocus={(e) => e.currentTarget.select()} style={{ width: "100%" }} />
+              <button type="button" className="btn btn-wine" style={{ marginTop: 10 }} onClick={() => navigator.clipboard?.writeText(link)}>{lang === "nl" ? "Kopieer link" : "Copy link"}</button>
+            </div>;
+          })()}
+        </div>
       </div>
     );
   }
@@ -98,11 +132,14 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
 
   return (
     <form className="join" onSubmit={onSubmit} noValidate onFocus={(e) => { if (!started) { setStarted(true); track("form", "start"); } const n = (e.target as unknown as HTMLInputElement).name?.replace(/^q\d$/, "quiz"); if (n && !touched.current.has(n)) { touched.current.add(n); track("form", `field:${n}`); } }}>
+      {invite && <p className="full invite-banner" style={{ background: "var(--pink)", color: "var(--wine)", padding: "14px 18px", borderRadius: 16, fontWeight: 600 }}>
+        {lang === "nl" ? `${invite.from || "Je vriendin"} neemt je mee! Je krijgt ${invite.pct}% korting op je plek. Gebruik het e-mailadres dat zij heeft ingevuld.` : `${invite.from || "Your friend"} is bringing you along! You get ${invite.pct}% off your seat. Use the e-mail address she filled in.`}
+      </p>}
       {upcoming.length > 0 && (
         <fieldset className="field full"><legend>{t.j_event}</legend>
           <div className="pills">
             {upcoming.map((e) => (
-              <label key={e.id}><input type="radio" name="event" value={e.id} checked={eventId === e.id} onChange={() => setEventId(e.id)} />
+              <label key={e.id}><input type="radio" name="event" value={e.id} checked={eventId === e.id} disabled={!!invite && invite.event !== e.id} onChange={() => setEventId(e.id)} />
                 <span>{fmtDate(e.date)}{isFull(e.id) ? ` · ${t.j_event_wait}` : ""}</span></label>
             ))}
           </div>
@@ -191,7 +228,16 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         <div className="r"><span>{t.pr_service}</span><span>€{PRICE.service}</span></div>
         <div className="r"><span>{t.pr_vat}</span><span>€{PRICE.vat}</span></div>
         <div className="r t"><span>{t.pr_total}</span><span>€{PRICE.total}</span></div>
+        {(invite || ref) && <div className="r promo-row"><span>{lang === "nl" ? "Vriendinnenkorting" : "Friends discount"}</span><span>{invite ? `-${invite.pct}%` : (lang === "nl" ? "10% of 15%" : "10% or 15%")}</span></div>}
         <small>{t.pr_note}</small>
+      </div>}
+      {ref && !waitlist && <div className="full field friends-box" style={{ background: "#fff", border: "2px dashed var(--pink)", borderRadius: 16, padding: "16px 18px" }}>
+        <b>{lang === "nl" ? `Hoi ${ref.name}! Neem 1 of 2 nieuwe vriendinnen mee` : `Hi ${ref.name}! Bring 1 or 2 new friends`}</b>
+        <small style={{ display: "block", margin: "4px 0 10px" }}>{lang === "nl" ? "Met 1 vriendin krijgen jullie allebei 10% korting, met 2 vriendinnen jullie alle drie 15%. Alleen voor meiden die nog nooit bij ons waren." : "With 1 friend you both get 10% off, with 2 friends all three of you get 15%. Only for girls who haven't joined us before."}</small>
+        <input name="friend1" type="email" placeholder={lang === "nl" ? "E-mail vriendin 1" : "Friend 1 e-mail"} style={{ marginBottom: 8, width: "100%" }} />
+        <input name="friend2" type="email" placeholder={lang === "nl" ? "E-mail vriendin 2 (mag leeg)" : "Friend 2 e-mail (optional)"} style={{ width: "100%" }} />
+        <label style={{ display: "flex", gap: 8, marginTop: 10, alignItems: "center" }}><input type="checkbox" name="together" defaultChecked /> <span>{lang === "nl" ? "Zet ons samen aan één tafel (gegarandeerd)" : "Put us together at one table (guaranteed)"}</span></label>
+        {refErr && <p style={{ color: "var(--tomato)", marginTop: 8 }}>{refErr}</p>}
       </div>}
       {cancelled && <p className="full" style={{ color: "var(--tomato)" }}>{lang === "nl" ? "Je betaling is niet afgerond, dus je plek is nog niet vast. Probeer het gerust opnieuw." : "Your payment wasn\u2019t completed, so your seat isn\u2019t booked yet. Feel free to try again."}</p>}
       <label className="consent full field" style={{ flexDirection: "row" }}>

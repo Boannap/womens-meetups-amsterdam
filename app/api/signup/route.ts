@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { quizType } from "@/lib/quiz";
+import { rpc } from "@/lib/supa";
 import { stripe } from "@/lib/stripe";
 import { absUrl, ROUTES, PRICE_EUR } from "@/lib/site";
 
@@ -25,6 +26,13 @@ export async function POST(req: Request) {
 
   const quizAnswers = Array.isArray(body.quiz) ? body.quiz.slice(0, 5).map((a) => (typeof a === "number" ? a : null)) : [];
   const contactPref = body.contact_pref === "email" ? "email" : "whatsapp_email";
+  // Friend discount: only if this e-mail belongs to the group (inviter or invited friend) and the date matches.
+  let discount = 0, refGroup: string | null = null;
+  const g = typeof body.ref_group === "string" && /^[0-9a-f-]{36}$/i.test(body.ref_group) ? body.ref_group : null;
+  if (g && body.waitlist !== true) {
+    const v = await rpc<{ ok: boolean; pct?: number; event_id?: string }>("referral_validate", { p_group: g, p_email: str(body.email, 160) });
+    if (v?.ok && v.event_id === str(body.event_id, 20)) { discount = v.pct ?? 0; refGroup = g; }
+  }
   const payNow = !!process.env.STRIPE_SECRET_KEY && body.waitlist !== true;
   const row = {
     id: crypto.randomUUID(),
@@ -52,6 +60,8 @@ export async function POST(req: Request) {
     consent: body.consent === true,
     newsletter: body.newsletter === true,
     photo_ok: body.photo_ok === true,
+    discount_pct: discount || null,
+    referral_group: refGroup,
   };
 
   if (!row.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(row.email) || !row.consent || !row.personality
@@ -89,12 +99,12 @@ export async function POST(req: Request) {
       client_reference_id: row.id,
       customer_email: row.email,
       locale: l,
-      line_items: { 0: { quantity: 1, price_data: { currency: "eur", unit_amount: Math.round(Number(PRICE_EUR) * 100),
+      line_items: { 0: { quantity: 1, price_data: { currency: "eur", unit_amount: Math.round(Number(PRICE_EUR) * 100 * (100 - discount) / 100),
         product_data: { name: l === "nl" ? `Plek aan een tafel van zes (${row.event_id})` : `Seat at a Table of Six (${row.event_id})`,
-          description: l === "nl" ? "Inclusief je eerste koffie, host en vragenkaartjes" : "Includes your first coffee, a host and question cards" } } } },
+          description: (l === "nl" ? "Inclusief je eerste koffie, host en vragenkaartjes" : "Includes your first coffee, a host and question cards") + (discount ? (l === "nl" ? ` · ${discount}% vriendinnenkorting` : ` · ${discount}% friends discount`) : "") } } } },
       metadata: { signup_id: row.id, event_id: row.event_id },
       payment_intent_data: { metadata: { signup_id: row.id, event_id: row.event_id } },
-      success_url: `${home}?paid=1#join`,
+      success_url: `${home}?paid=1${refGroup ? `&g=${refGroup}` : ""}#join`,
       cancel_url: `${home}?cancelled=1#join`,
       expires_at: Math.floor(Date.now() / 1000) + 31 * 60,
     });
