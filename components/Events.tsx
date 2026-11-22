@@ -32,7 +32,12 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
         {list.map((e) => {
           // Only the open tables are shown; real sign-ups fill the seats table by table.
           let rest = takenTotal(e, seats);
-          const shown = (e.soldOut ? e.tables : e.tables.slice(0, openTables(e, seats))).map((tb) => { const n = Math.min(6, Math.max(tb.taken, rest)); rest -= n; return { ...tb, taken: n }; });
+          // Open tables plus the next one as a preview ("opens when this one is full"). Only real sign-ups fill the seats.
+          const nOpen = e.soldOut ? e.tables.length : openTables(e, seats);
+          const shown = e.tables.slice(0, Math.min(e.tables.length, nOpen + (e.soldOut ? 0 : 1))).map((tb, i) => {
+            if (i >= nOpen) return { ...tb, taken: 0, soon: true };
+            const n = Math.min(6, Math.max(tb.taken, rest)); rest -= n; return { ...tb, taken: n, soon: false };
+          });
           const tables = shown.filter((tb) => filter === "all" || tb.lang === filter);
           const left = isEventFull(e, seats) ? 0 : Math.max(0, capacity(e, seats) - takenTotal(e, seats));
           return (
@@ -46,12 +51,12 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
                 <div className="meta">
                   <span>🕑 <time dateTime={e.date}>{fmt(e.date, { weekday: "long" })} {fmt(e.date, { hour: "2-digit", minute: "2-digit" })}</time> - {fmt(e.end, { hour: "2-digit", minute: "2-digit" })}</span>
                   <span>📍 {e.areas} · {t.ev_cafe}</span>
-                  <span>☕ {tables.length} {tables.length === 1 ? (lang === "nl" ? "tafel" : "table") : t.ev_tables}</span>
+                  <span>☕ {nOpen} {nOpen === 1 ? (lang === "nl" ? "tafel" : "table") : t.ev_tables}</span>
                 </div>
                 <div className="tables">
                   {tables.map((tb, i) => (
-                    <div className="tbl" key={i}>
-                      <small>{langName(tb.lang)}</small>
+                    <div className="tbl" key={i} style={tb.soon ? { opacity: 0.45 } : undefined}>
+                      <small>{langName(tb.lang)}{tb.soon ? (lang === "nl" ? " · opent zodra tafel 1 vol is" : " · opens when table 1 is full") : ""}</small>
                       <div className="seats" aria-label={`${tb.taken}/6`}>
                         {Array.from({ length: 6 }, (_, s) => <span key={s} className={`seat ${s < tb.taken ? "on" : ""}`} />)}
                       </div>
