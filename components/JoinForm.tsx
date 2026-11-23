@@ -127,7 +127,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
               </g>
               <ellipse cx="100" cy="176" rx="62" ry="8" fill="#E4472F" opacity=".25" />
             </svg>
-            <h3>{lang === "nl" ? "Je hebt een plek aan tafel! 🎉" : "You've got a seat at the table! 🎉"}</h3>
+            <h3>{lang === "nl" ? "Je hebt een plek aan tafel!" : "You've got a seat at the table!"}</h3>
             <ol className="ok-steps">
               <li><b>💌 {lang === "nl" ? "Zodra je gematcht bent" : "Once you're matched"}</b><span>{lang === "nl" ? "krijg je een mailtje van ons." : "you'll get an e-mail from us."}</span></li>
               <li><b>📍 {lang === "nl" ? "2 dagen van tevoren" : "2 days before"}</b><span>{lang === "nl" ? "sturen we je het café en de voornamen van je tafelgenoten." : "we send you the café and your tablemates' first names."}</span></li>
