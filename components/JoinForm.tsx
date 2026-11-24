@@ -54,7 +54,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     try {
       const me = JSON.parse(localStorage.getItem("wma-me") || "null");
       if (!me) return;
-      for (const [id, v] of [["fn", me.name], ["fe", me.email], ["fa", me.age], ["fi", me.instagram]] as [string, string][]) {
+      for (const [id, v] of [["fn", me.name], ["fe", me.email], ["fa", me.age], ["fi", String(me.instagram || "").replace(/^@+/, "")]] as [string, string][]) {
         const el = document.getElementById(id) as HTMLInputElement | null;
         if (el && !el.value && v) el.value = v;
       }
@@ -81,7 +81,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     if (!type) { setStep(Math.max(0, answers.findIndex((x) => x === null))); form.querySelector("#quiz")?.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     const fd = new FormData(form);
     // Remember the basics on this device only, so a next booking fills itself in.
-    try { localStorage.setItem("wma-me", JSON.stringify({ name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), instagram: fd.get("instagram"), phone: fd.get("phone") })); } catch {}
+    try { localStorage.setItem("wma-me", JSON.stringify({ name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), instagram: fd.get("instagram") ? `@${String(fd.get("instagram")).replace(/^@+/, "")}` : "", phone: fd.get("phone") })); } catch {}
     const body = {
       name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), language: fd.get("language"),
       personality: type, quiz: answers,
@@ -89,7 +89,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       hobbies: fd.get("hobbies"),
       phone: contact === "whatsapp_email" ? fd.get("phone") : "", contact_pref: contact,
       whatsapp_consent: contact === "whatsapp_email",
-      hoping: fd.getAll("hoping").map((h) => (hopeOther && h === t.j_hopes[t.j_hopes.length - 1] ? `${h}: ${fd.get("hope_other") || ""}` : h)), instagram: fd.get("instagram"),
+      hoping: fd.getAll("hoping").map((h) => (hopeOther && h === t.j_hopes[t.j_hopes.length - 1] ? `${h}: ${fd.get("hope_other") || ""}` : h)), instagram: fd.get("instagram") ? `@${String(fd.get("instagram")).replace(/^@+/, "")}` : "",
       consent: fd.get("consent") === "on", newsletter: fd.get("newsletter") === "on", site_lang: lang,
       event_id: eventId, waitlist, found_via: foundOther ? `${fd.get("found_via")}: ${fd.get("found_other") || ""}` : fd.get("found_via"), table_wish: fd.get("table_wish"),
       website: fd.get("website"), // honeypot, must stay empty
@@ -267,7 +267,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       <div className="field full"><label className="l" htmlFor="fw">{t.j_wish}</label><textarea id="fw" name="table_wish" rows={3} maxLength={500} placeholder={t.j_wish_ph} /></div>
       <fieldset className="field full"><legend>{t.j_found}</legend><div onChange={(e) => { const el = e.target as HTMLInputElement; if (el.name === "found_via") setFoundOther(el.value === t.j_found_opts[t.j_found_opts.length - 1]); }}>{pills("found_via", t.j_found_opts, "radio", false)}</div>
         {foundOther && <input name="found_other" type="text" maxLength={120} placeholder={lang === "nl" ? "Vertel, hoe dan?" : "Tell us, how?"} style={{ marginTop: 8 }} />}</fieldset>
-      <div className="field full"><label className="l" htmlFor="fi">{t.j_insta}</label><input id="fi" name="instagram" type="text" placeholder="@" autoComplete="off" /></div>
+      <div className="field full"><label className="l" htmlFor="fi">{t.j_insta}</label><div className="at-input"><span aria-hidden="true">@</span><input id="fi" name="instagram" type="text" placeholder={lang === "nl" ? "jouwnaam" : "yourname"} autoComplete="off" autoCapitalize="none" spellCheck={false} onInput={(e) => { const el = e.currentTarget; if (el.value.startsWith("@")) el.value = el.value.replace(/^@+/, ""); }} /></div></div>
       <fieldset className="field full"><legend>{t.j_hoping}</legend>
         <div className="pills">
           {t.j_hopes.map((o, i) => (

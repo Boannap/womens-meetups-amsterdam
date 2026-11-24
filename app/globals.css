@@ -492,3 +492,6 @@ footer a:hover{text-decoration:underline}
 .ok-steps b{color:var(--wine)}
 .ok-small{font-size:.85rem;color:#7a5a5c;margin-top:16px}
 @media (prefers-reduced-motion:reduce){.mug .cup,.mug .steam path{animation:none}}
+.at-input{position:relative}
+.at-input span{position:absolute;left:.9em;top:50%;transform:translateY(-50%);color:var(--wine);font-weight:600;pointer-events:none}
+.at-input input{padding-left:2em!important}
