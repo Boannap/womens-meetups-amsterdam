@@ -50,6 +50,17 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [started, setStarted] = useState(false);
   const touched = useRef(new Set<string>());
   useEffect(() => { if (type) track("form", "quiz_done", undefined, type); }, [type]);
+  useEffect(() => {
+    try {
+      const me = JSON.parse(localStorage.getItem("wma-me") || "null");
+      if (!me) return;
+      for (const [id, v] of [["fn", me.name], ["fe", me.email], ["fa", me.age], ["fi", me.instagram]] as [string, string][]) {
+        const el = document.getElementById(id) as HTMLInputElement | null;
+        if (el && !el.value && v) el.value = v;
+      }
+      if (me.phone) window.dispatchEvent(new CustomEvent("wma:prefill-phone", { detail: me.phone }));
+    } catch {}
+  }, []);
   const upcoming = EVENTS.filter((e) => new Date(e.end) > new Date());
   const seats = useSeats();
   const isFull = (id: string) => { const e = upcoming.find((x) => x.id === id); return !!e && isEventFull(e, seats); };
@@ -69,6 +80,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     if (!form.checkValidity()) { form.reportValidity(); return; }
     if (!type) { setStep(Math.max(0, answers.findIndex((x) => x === null))); form.querySelector("#quiz")?.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     const fd = new FormData(form);
+    // Remember the basics on this device only, so a next booking fills itself in.
+    try { localStorage.setItem("wma-me", JSON.stringify({ name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), instagram: fd.get("instagram"), phone: fd.get("phone") })); } catch {}
     const body = {
       name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), language: fd.get("language"),
       personality: type, quiz: answers,
@@ -254,7 +267,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       <div className="field full"><label className="l" htmlFor="fw">{t.j_wish}</label><textarea id="fw" name="table_wish" rows={3} maxLength={500} placeholder={t.j_wish_ph} /></div>
       <fieldset className="field full"><legend>{t.j_found}</legend><div onChange={(e) => { const el = e.target as HTMLInputElement; if (el.name === "found_via") setFoundOther(el.value === t.j_found_opts[t.j_found_opts.length - 1]); }}>{pills("found_via", t.j_found_opts, "radio", false)}</div>
         {foundOther && <input name="found_other" type="text" maxLength={120} placeholder={lang === "nl" ? "Vertel, hoe dan?" : "Tell us, how?"} style={{ marginTop: 8 }} />}</fieldset>
-      <div className="field full"><label className="l" htmlFor="fi">{t.j_insta}</label><input id="fi" name="instagram" type="text" placeholder="@" /></div>
+      <div className="field full"><label className="l" htmlFor="fi">{t.j_insta}</label><input id="fi" name="instagram" type="text" placeholder="@" autoComplete="off" /></div>
       <fieldset className="field full"><legend>{t.j_hoping}</legend>
         <div className="pills">
           {t.j_hopes.map((o, i) => (

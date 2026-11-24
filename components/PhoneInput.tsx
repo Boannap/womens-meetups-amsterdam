@@ -41,6 +41,18 @@ export default function PhoneInput({ lang, label }: { lang: "nl" | "en"; label: 
       .concat(C.filter((c) => !name(c).toLowerCase().startsWith(s) && name(c).toLowerCase().includes(s)));
   }, [q, lang]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
+    const f = (e: Event) => {
+      const v = String((e as CustomEvent).detail || "");
+      const m = v.match(/^\+(\d+)\s*(.*)$/);
+      if (!m) return;
+      const c = C.find((x) => x[1] === m[1]);
+      if (c) setIso(c[0]);
+      setNum((n) => n || m[2]);
+    };
+    window.addEventListener("wma:prefill-phone", f);
+    return () => window.removeEventListener("wma:prefill-phone", f);
+  }, []);
+  useEffect(() => {
     const h = (e: MouseEvent) => { if (box.current && !box.current.contains(e.target as Node)) setOpen(false); };
     document.addEventListener("mousedown", h); return () => document.removeEventListener("mousedown", h);
   }, []);
