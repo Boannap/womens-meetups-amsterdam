@@ -23,7 +23,7 @@ export const BOANNA_SOCIALS = [
   { name: "Instagram", handle: "@boannap", url: "https://www.instagram.com/boannap" },
   { name: "YouTube", handle: "@boannathroughtwenties", url: "https://www.youtube.com/@boannathroughtwenties" },
 ] as const;
-export const MEETUP_PHOTOS = [1, 2, 3, 4, 5].map((n) => `/meetups/meetup-${n}.jpg`);
+export const MEETUP_PHOTOS = [1, 2, 3, 4, 5].map((n) => `/meetups/sfeer-${n}.jpg`);
 export const PRICE_EUR = "12.50";
 
 export const dict = (lang: Lang): Dict => content[lang] as Dict;
