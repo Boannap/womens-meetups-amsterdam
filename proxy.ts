@@ -13,6 +13,8 @@ export function proxy(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
   const nlPath = pathname === "/nl" || pathname.startsWith("/nl/");
 
+  const nlHeaders = () => { const h = new Headers(req.headers); h.set("x-wma-lang", "nl"); return { request: { headers: h } }; };
+
   if (NL_HOST.test(host)) {
     const url = req.nextUrl.clone();
     if (nlPath) {
@@ -20,12 +22,12 @@ export function proxy(req: NextRequest) {
       return NextResponse.redirect(url, 308);
     }
     url.pathname = "/nl" + (pathname === "/" ? "" : pathname);
-    return NextResponse.rewrite(url);
+    return NextResponse.rewrite(url, nlHeaders());
   }
   if (COM_HOST.test(host) && nlPath) {
     return NextResponse.redirect(`https://womensmeetupsinamsterdam.nl${pathname.slice(3) || "/"}${search}`, 308);
   }
-  return NextResponse.next();
+  return nlPath ? NextResponse.next(nlHeaders()) : NextResponse.next();
 }
 
 // Pages only: API routes, Next assets and files (sitemap.xml, robots.txt, images, llms.txt) pass straight through.

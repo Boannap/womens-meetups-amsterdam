@@ -1,4 +1,5 @@
 import { Gluten, Caveat, Courier_Prime, DM_Sans } from "next/font/google";
+import { headers } from "next/headers";
 import SvgDefs from "./SvgDefs";
 import Animations from "./Animations";
 import Tracker from "./Tracker";
@@ -10,9 +11,11 @@ const courier = Courier_Prime({ subsets: ["latin"], weight: ["400", "700"], vari
 const dm = DM_Sans({ subsets: ["latin"], variable: "--font-dm", display: "swap" });
 
 /** <html>/<body>, fonts and shared SVG drawings. */
-export default function Shell({ children }: { children: React.ReactNode }) {
+export default async function Shell({ children }: { children: React.ReactNode }) {
+  // proxy.ts marks Dutch pages with x-wma-lang: nl, so <html lang> matches the page for Google and screen readers.
+  const lang = (await headers()).get("x-wma-lang") === "nl" ? "nl" : "en";
   return (
-    <html lang="en" className={`${gluten.variable} ${caveat.variable} ${courier.variable} ${dm.variable}`}>
+    <html lang={lang} className={`${gluten.variable} ${caveat.variable} ${courier.variable} ${dm.variable}`}>
       <body>
         <SvgDefs />
         {children}
