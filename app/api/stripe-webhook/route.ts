@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { verifyStripeSignature } from "@/lib/stripe";
 import { notifySignup } from "@/lib/notify";
+import { sendDue } from "@/lib/customerMail";
 
 /**
  * Stripe calls this after a checkout. We check the signature (STRIPE_WEBHOOK_SECRET) and then mark the sign-up as paid
@@ -28,7 +29,9 @@ export async function POST(req: Request) {
     }
     const res = (await r.json().catch(() => null)) as { ok?: boolean; new?: boolean; event_id?: string; paid?: number; open_tables?: number; person?: Parameters<typeof notifySignup>[2] } | null;
     // A table just filled up (6, 12, 18...): one short note to Boanna's own inbox, nobody else.
-    // Every new payment: one note to Boanna's own inbox (with a "table full" line at 6, 12, 18...). Nobody else gets mail from here.
+    // Every new payment: one note to Boanna's own inbox (with a "table full" line at 6, 12, 18...). The participant gets her confirmation mail.
+    // Her own confirmation mail ("Your seat is saved"), once.
+    if (res?.ok) await sendDue("confirm", res.event_id).catch((e) => console.error("[confirm mail]", e));
     if (res?.ok && res.new) await notifySignup("paid", res.event_id ?? "", res.person ?? {}, res.paid && res.paid % 6 === 0 ? { paid: res.paid, open: res.open_tables ?? 1 } : undefined);
   }
   return NextResponse.json({ received: true });

@@ -6,6 +6,7 @@ import { partnerMail } from "./partnerMail";
  * and only for the moments Boanna approved (after payment, 2 days before, the morning itself, the day after).
  */
 import type { Lang } from "./site";
+import { quizTraits } from "./quiz";
 
 export const MAIL_BASE = "https://womensmeetupsinamsterdam.nl";
 const C = { wine: "#5A0F14", pink: "#F3A9B8", cream: "#F6EEE3", paper: "#FCF8F1", ink: "#3A1A1C", tomato: "#E4472F", soft: "#7a5a5c" };
@@ -22,6 +23,7 @@ export type MailData = {
   tableLang?: string;
   token?: string; // signup id, used for review links
   whatsapp?: boolean;
+  quiz?: (number | null)[] | null;
 };
 
 /** Signature block, also used as the Gmail signature for hello@. */
@@ -67,16 +69,44 @@ const card = (rows: [string, string][]) => `<table width="100%" cellpadding="0" 
 const promo = (lang: Lang) => `<div style="display:inline-block;background:${C.pink};color:${C.wine};border:2px dashed rgba(90,15,20,.35);border-radius:6px;padding:8px 16px;${sans};font-size:14px;font-weight:700;margin:2px 0 16px">☕ ${lang === "nl" ? "Je eerste koffietje krijg je van ons!" : "Your first coffee is included"}</div>`;
 
 /** 1. Right after payment + sign-up (text approved by Boanna, 18 Nov). */
+
+const LET: Record<Lang, Record<string, string>> = {
+  nl: { E: "Extravert", I: "Introvert", N: "Intuïtief", S: "Praktisch", F: "Gevoel", T: "Denker", P: "Spontaan", J: "Planner" },
+  en: { E: "Extravert", I: "Introvert", N: "Intuitive", S: "Practical", F: "Feeling", T: "Thinker", P: "Spontaneous", J: "Planner" },
+};
+/** Small recap of her quiz result: the 4-letter code and one bar per pair. Empty when the quiz is missing. */
+function vibe(lang: Lang, quiz?: (number | null)[] | null) {
+  const t = Array.isArray(quiz) ? quizTraits(quiz) : null;
+  if (!t) return "";
+  const L = LET[lang];
+  const pairs: [string, string][] = [["E", "I"], ["N", "S"], ["F", "T"], ["P", "J"]];
+  const bars = pairs.map(([a, b], k) => {
+    const v = t.pct[k];
+    return `<tr><td style="${sans};font-size:13px;color:${C.wine};padding:5px 8px 5px 0;white-space:nowrap;${v >= 50 ? "font-weight:700" : ""}">${L[a]}</td>
+<td width="100%" style="padding:5px 0"><div style="background:#ead9cc;border-radius:99px;height:10px"><div style="background:${C.wine};border-radius:99px;height:10px;width:${Math.max(6, v)}%"></div></div></td>
+<td style="${sans};font-size:13px;color:${C.wine};padding:5px 0 5px 8px;white-space:nowrap;text-align:right;${v < 50 ? "font-weight:700" : ""}">${L[b]}</td></tr>`;
+  }).join("");
+  const title = lang === "nl" ? "Zo zien we jou nu" : "This is how we see you now";
+  const soft = lang === "nl" ? "Een eerste indruk, geen hokje. Hiermee zoeken we jouw tafel." : "A first impression, not a box. This is how we find your table.";
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.pink};border-radius:16px;margin:0 0 18px"><tr><td style="padding:18px 20px">
+<div style="${sans};font-size:12px;font-weight:700;letter-spacing:2px;color:${C.wine}">${title.toUpperCase()}</div>
+<div style="${font};font-size:34px;font-weight:700;color:${C.wine};letter-spacing:3px;margin:6px 0 2px">${t.code}</div>
+<div style="${sans};font-size:14px;color:${C.wine};margin-bottom:10px">${t.code.split("").map((c) => L[c]).join(" · ")}</div>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">${bars}</table>
+<div style="${sans};font-size:13px;color:${C.wine};margin-top:8px">${soft}</div>
+</td></tr></table>`;
+}
+
 export function mailConfirm(lang: Lang, d: MailData) {
   const nl = lang === "nl";
   const subject = nl ? "Je stoel staat klaar ☕" : "Your seat is saved ☕";
   const body = nl
     ? h1(`Hoi ${firstName(d.name)},`) + p("Wat leuk dat je erbij wilt zijn! Je aanmelding is binnen.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "Het café verklappen we twee dagen van tevoren"]]) +
       p("<b>Dit gebeurt er nu:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We zoeken vijf meiden die bij jou passen en zetten jullie samen aan één tafel.</li><li>Twee dagen van tevoren krijg je een mail${d.whatsapp ? " en een WhatsAppje" : ""} met het café en de tijd.</li><li>Een host heet iedereen welkom en brengt het gesprek op gang met de vragenkaartjes, dus niemand hoeft de stilte te vullen.</li></ul>` +
-      promo(lang) + p(`Zodat iedereen zich welkom voelt, hebben we een paar <a href="https://womensmeetupsinamsterdam.nl/huisregels" style="color:${C.tomato}">huisregels</a> voor aan tafel. Lees ze vast even. Onze <a href="https://womensmeetupsinamsterdam.nl/privacy#cancellation" style="color:${C.tomato}">voorwaarden</a> vind je hier.`) + p("Vragen? Beantwoord gewoon deze mail.") + p("Tot snel aan tafel,")
+      vibe(lang, d.quiz) + promo(lang) + p(`Zodat iedereen zich welkom voelt, hebben we een paar <a href="https://womensmeetupsinamsterdam.nl/huisregels" style="color:${C.tomato}">huisregels</a> voor aan tafel. Lees ze vast even. Onze <a href="https://womensmeetupsinamsterdam.nl/privacy#cancellation" style="color:${C.tomato}">voorwaarden</a> vind je hier.`) + p("Vragen? Beantwoord gewoon deze mail.") + p("Tot snel aan tafel,")
     : h1(`Hi ${firstName(d.name)},`) + p("So happy you want to join! We've got your sign-up.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "We'll reveal the café two days before"]]) +
       p("<b>Here's what happens next:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We match you with five girls you'll click with, all at one table.</li><li>Two days before, you'll get an e-mail${d.whatsapp ? " and a WhatsApp" : ""} with the café and the time.</li><li>A host welcomes everyone and gets the conversation going with the question cards, so nobody has to fill the silence.</li></ul>` +
-      promo(lang) + p(`So everyone feels welcome, we have a few <a href="https://womensmeetupsinamsterdam.com/guidelines" style="color:${C.tomato}">table guidelines</a>. Have a quick read before you come. Our <a href="https://womensmeetupsinamsterdam.com/privacy#cancellation" style="color:${C.tomato}">terms</a> are here.`) + p("Questions? Just reply to this e-mail.") + p("See you at the table,");
+      vibe(lang, d.quiz) + promo(lang) + p(`So everyone feels welcome, we have a few <a href="https://womensmeetupsinamsterdam.com/guidelines" style="color:${C.tomato}">table guidelines</a>. Have a quick read before you come. Our <a href="https://womensmeetupsinamsterdam.com/privacy#cancellation" style="color:${C.tomato}">terms</a> are here.`) + p("Questions? Just reply to this e-mail.") + p("See you at the table,");
   return { subject, html: layout(lang, nl ? "Je aanmelding is binnen. Dit gebeurt er nu." : "We've got your sign-up. Here's what happens next.", body) };
 }
 
@@ -88,7 +118,7 @@ export function mailDetails(lang: Lang, d: MailData) {
     ["📅", `<b>${day(d.date, lang)}</b>`],
     ["🕑", `${time(d.date, lang)}${d.end ? ` - ${time(d.end, lang)}` : ""}`],
     ["📍", `<b>${d.cafe}</b><br>${d.address}`],
-    ["💬", nl ? `Tafel in het ${d.tableLang}` : `Table in ${d.tableLang}`],
+    ...(d.tableLang ? [["💬", nl ? `Tafel in het ${d.tableLang}` : `Table in ${d.tableLang}`]] as [string, string][] : []),
   ];
   const body = nl
     ? h1(`Nog twee nachtjes slapen, ${firstName(d.name)}!`) + p("Je tafel is gematcht en we hebben een gezellig plekje voor jullie gevonden. Hier zijn de details:") + card(rows) +

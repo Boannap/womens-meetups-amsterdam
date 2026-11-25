@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { quizType, QUIZ_LENGTH } from "@/lib/quiz";
 import { notifySignup } from "@/lib/notify";
+import { sendDue } from "@/lib/customerMail";
 import { rpc } from "@/lib/supa";
 import { stripe } from "@/lib/stripe";
 import { absUrl, ROUTES, PRICE_EUR } from "@/lib/site";
@@ -89,6 +90,7 @@ export async function POST(req: Request) {
   }
   if (!payNow) {
     await notifySignup(row.waitlist ? "waitlist" : "free", row.event_id, row);
+    if (row.waitlist) await sendDue("waitlist", row.event_id).catch((e) => console.error("[waitlist mail]", e));
     return NextResponse.json({ ok: true, stored: true });
   }
 
