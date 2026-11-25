@@ -543,3 +543,5 @@ footer a:hover{text-decoration:underline}
 .db-table-h{font-size:.85rem;color:#7a5355;margin-bottom:4px}.db-table-h b{color:var(--wine)}
 .db-seats{display:flex;gap:5px}.db-seats i{width:16px;height:16px;border-radius:50%;background:#F3D3DA}
 .db-seats i.paid{background:var(--wine)}.db-seats i.pend{background:var(--pink);outline:2px dashed var(--wine);outline-offset:-2px}
+.db-owner{display:flex;flex-direction:column;gap:6px;background:#fff;border:2px dashed var(--pink);border-radius:18px;padding:14px 18px;margin:0 0 18px;color:#6b4547;font-size:.92rem}
+.db-owner b{color:var(--wine)}.db-owner div{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}.db-owner a{text-decoration:none}

@@ -47,7 +47,7 @@ export default function Tracker() {
     const w = window.innerWidth;
     let ref = "";
     try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, "") : ""; } catch {}
-    if (ref === location.hostname.replace(/^www\./, "")) ref = "";
+    if (ref === location.hostname.replace(/^www\./, "") || /womensmeetupsinamsterdam\.(nl|com)$|stripe\.com$/.test(ref)) ref = ""; // own domains and coming back from paying are not a source
     const q = new URLSearchParams(location.search);
     ctx = {
       sid: sid(), path: location.pathname,

@@ -240,6 +240,15 @@ export default function Dashboard() {
             <div className="k4"><small>💳 Betaalde plekken</small><b>{paidTot}</b><em>{waitTot} op de wachtlijst · komende meetups</em></div>
           </div>
 
+          <div className="db-owner">
+            <b>🙈 Tel mijn eigen bezoeken niet mee</b>
+            <span>Open beide links één keer op elk apparaat waarmee je de site bekijkt (laptop, telefoon, en ook vanuit Instagram). Daarna tellen jouw bezoeken nooit meer mee.</span>
+            <div>
+              <a className="db-toggle" href="https://womensmeetupsinamsterdam.nl/?ikben=boanna" target="_blank" rel="noopener">.nl op dit apparaat</a>
+              <a className="db-toggle" href="https://womensmeetupsinamsterdam.com/?ikben=boanna" target="_blank" rel="noopener">.com op dit apparaat</a>
+            </div>
+          </div>
+
           <div className="db-advice db-partners">
             <h3>Komende meetups 🪑</h3>
             <p className="db-hint">Per datum zie je elke tafel met 6 stoelen. Donker = betaald, roze = bezig met betalen. Klik +1 om een tafel erbij te openen (max. 4).</p>
