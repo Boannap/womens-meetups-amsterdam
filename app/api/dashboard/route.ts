@@ -4,8 +4,16 @@ import { gsc } from "@/lib/gsc";
 
 /** Password-protected stats. The password is checked inside the database (bcrypt), never stored in the site. */
 export async function POST(req: Request) {
-  const b = (await req.json().catch(() => ({}))) as { password?: string; days?: number; approve?: { id: string; approved: boolean }; tables?: { event: string; open: number } };
+  const b = (await req.json().catch(() => ({}))) as { password?: string; days?: number; approve?: { id: string; approved: boolean }; photos?: { action: "list" | "delete"; id?: string }; tables?: { event: string; open: number } };
   if (!b.password) return NextResponse.json({ error: "wrong password" }, { status: 401 });
+  if (b.photos) {
+    const r = await fetch(`${process.env.SUPABASE_URL}/functions/v1/meetup-photos`, {
+      method: "POST", headers: { "Content-Type": "application/json", Origin: "https://womensmeetupsinamsterdam.com" },
+      body: JSON.stringify({ password: b.password, action: b.photos.action, id: b.photos.id }),
+    }).catch(() => null);
+    const d = r ? await r.json().catch(() => ({})) : {};
+    return NextResponse.json(d, { status: r?.status ?? 502, headers: { "Cache-Control": "no-store" } });
+  }
   if (b.approve) {
     const ok = await rpc<boolean>("dashboard_approve", { p_password: b.password, p_review: b.approve.id, p_approved: b.approve.approved });
     return NextResponse.json({ ok: !!ok });

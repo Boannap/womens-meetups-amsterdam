@@ -207,6 +207,13 @@ export function mailPartner(lang: Lang, name = "") {
   return { subject: m.subject, html: layout(lang, m.intro, body, false) };
 }
 
+/** Button to the private photo upload page (review mail). */
+const photos = (lang: Lang, token = "") => `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.cream};border-radius:16px;margin:20px 0 4px"><tr><td style="padding:18px 20px">
+<p style="margin:0 0 6px;font-weight:700;color:${C.wine}">${lang === "nl" ? "Leuke foto's gemaakt? 📸" : "Took some nice photos? 📸"}</p>
+<p style="margin:0 0 12px">${lang === "nl" ? "Zet ze in ons fotomapje. Alleen ik zie ze, en jij kiest of ze op Instagram mogen." : "Drop them in our photo folder. Only I can see them, and you choose if they may go on Instagram."}</p>
+<a href="${MAIL_BASE}/photos?r=${encodeURIComponent(token)}&l=${lang}" style="display:inline-block;background:${C.wine};color:${C.pink};border-radius:999px;padding:10px 18px;${sans};font-weight:700;text-decoration:none">${lang === "nl" ? "Deel je foto's →" : "Share your photos →"}</a>
+</td></tr></table>`;
+
 export function mailReview(lang: Lang, d: MailData) {
   const nl = lang === "nl";
   const u = (q: string, v: string | number) => `${MAIL_BASE}/api/review?r=${encodeURIComponent(d.token || "")}&q=${q}&v=${v}&l=${lang}`;
@@ -221,7 +228,7 @@ export function mailReview(lang: Lang, d: MailData) {
       q("Wat vond je het leukst?") + chip(u("best", "people"), "De meiden") + chip(u("best", "cards"), "De kaartjes") + chip(u("best", "cafe"), "Het café") + chip(u("best", "vibe"), "De sfeer") +
       p("<b>Nog iets kwijt?</b> Klik gewoon op beantwoorden en typ je zinnetje. Ik lees alles zelf.") +
       `<p style="margin:0 0 14px;font-size:13px;color:#8a6f6f">Mag je zinnetje op de website? <a href="${MAIL_BASE}/review?r=${encodeURIComponent(d.token || "")}&l=${lang}" style="color:#8a6f6f">Schrijf het dan hier</a>.</p>` +
-      `<div style="margin:20px 0;padding:16px 18px;border:2px dashed #F3A9B8;border-radius:16px"><p style="margin:0 0 8px;font-weight:700;color:${C.wine}">Tot 15% korting: vertel het aan 1 of 2 nieuwe vriendinnen 👯</p><p style="margin:0 0 12px">Met 1 vriendin krijgen jullie allebei 10% korting, met 2 vriendinnen jullie alle drie 15%. Je link is 2 maanden geldig en werkt één keer.</p><a href="${MAIL_BASE}/?ref=${encodeURIComponent(d.token || "")}#join" style="display:inline-block;background:${C.wine};color:#F6EEE3;border-radius:999px;padding:10px 18px;${sans};font-weight:700;text-decoration:none">Pak je korting</a></div>` +
+      photos("nl", d.token) + `<div style="margin:20px 0;padding:16px 18px;border:2px dashed #F3A9B8;border-radius:16px"><p style="margin:0 0 8px;font-weight:700;color:${C.wine}">Tot 15% korting: vertel het aan 1 of 2 nieuwe vriendinnen 👯</p><p style="margin:0 0 12px">Met 1 vriendin krijgen jullie allebei 10% korting, met 2 vriendinnen jullie alle drie 15%. Je link is 2 maanden geldig en werkt één keer.</p><a href="${MAIL_BASE}/?ref=${encodeURIComponent(d.token || "")}#join" style="display:inline-block;background:${C.wine};color:#F6EEE3;border-radius:999px;padding:10px 18px;${sans};font-weight:700;text-decoration:none">Pak je korting</a></div>` +
       p("Liefs,")
     : h1(`Thank you for yesterday, ${firstName(d.name)} 🤍`) + p("It was so lovely having you at the table. Got 20 seconds? Just tap your answer, that's it.") +
       q("How was your meetup? (1 = meh, 5 = loved it)") + `<div>${hearts}</div>` +
@@ -230,6 +237,6 @@ export function mailReview(lang: Lang, d: MailData) {
       q("What did you love most?") + chip(u("best", "people"), "The girls") + chip(u("best", "cards"), "The cards") + chip(u("best", "cafe"), "The café") + chip(u("best", "vibe"), "The vibe") +
       p("<b>Anything else?</b> Just hit reply and type your sentence. I read every one myself.") +
       `<p style="margin:0 0 14px;font-size:13px;color:#8a6f6f">Okay to share it on the website? <a href="${MAIL_BASE}/review?r=${encodeURIComponent(d.token || "")}&l=${lang}" style="color:#8a6f6f">Write it here instead</a>.</p>` +
-      `<div style="margin:20px 0;padding:16px 18px;border:2px dashed #F3A9B8;border-radius:16px"><p style="margin:0 0 8px;font-weight:700;color:${C.wine}">Up to 15% off: tell 1 or 2 new friends 👯</p><p style="margin:0 0 12px">With 1 friend you both get 10% off, with 2 friends all three of you get 15%. Your link is valid for 2 months and works once.</p><a href="https://womensmeetupsinamsterdam.com/?ref=${encodeURIComponent(d.token || "")}#join" style="display:inline-block;background:${C.wine};color:#F6EEE3;border-radius:999px;padding:10px 18px;${sans};font-weight:700;text-decoration:none">Get your discount</a></div>` + p("Love,");
+      photos("en", d.token) + `<div style="margin:20px 0;padding:16px 18px;border:2px dashed #F3A9B8;border-radius:16px"><p style="margin:0 0 8px;font-weight:700;color:${C.wine}">Up to 15% off: tell 1 or 2 new friends 👯</p><p style="margin:0 0 12px">With 1 friend you both get 10% off, with 2 friends all three of you get 15%. Your link is valid for 2 months and works once.</p><a href="https://womensmeetupsinamsterdam.com/?ref=${encodeURIComponent(d.token || "")}#join" style="display:inline-block;background:${C.wine};color:#F6EEE3;border-radius:999px;padding:10px 18px;${sans};font-weight:700;text-decoration:none">Get your discount</a></div>` + p("Love,");
   return { subject: nl ? "Hoe was het? (20 seconden) 🤍" : "How was it? (20 seconds) 🤍", html: layout(lang, nl ? "Tik je antwoord aan, meer hoeft niet." : "Just tap your answer, that's all.", body) };
 }

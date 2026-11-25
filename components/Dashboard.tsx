@@ -343,6 +343,8 @@ export default function Dashboard() {
         </div>
       )}
 
+      <PhotoInbox pw={pw} />
+
       <details className="db-more">
         <summary>Meer cijfers bekijken ▾</summary>
       <div className="db-grid">
@@ -454,5 +456,40 @@ export default function Dashboard() {
       </div>
 
     </main>
+  );
+}
+
+type Photo = { id: string; event_id: string; may_share: boolean; created_at: string; name: string; url: string };
+function PhotoInbox({ pw }: { pw: string }) {
+  const [list, setList] = useState<Photo[] | null>(null);
+  async function load() {
+    const r = await fetch("/api/dashboard", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw, photos: { action: "list" } }) }).catch(() => null);
+    const d = r && r.ok ? await r.json().catch(() => null) : null;
+    setList(Array.isArray(d?.photos) ? d.photos : []);
+  }
+  async function del(id: string) {
+    if (!window.confirm("Deze foto verwijderen?")) return;
+    await fetch("/api/dashboard", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw, photos: { action: "delete", id } }) });
+    load();
+  }
+  useEffect(() => { if (pw) load(); }, [pw]); // eslint-disable-line react-hooks/exhaustive-deps
+  if (!list) return null;
+  return (
+    <div className="db-card" style={{ marginBottom: 18 }}>
+      <h3>📸 Foto&apos;s van deelnemers ({list.length})</h3>
+      {!list.length ? <p>Nog geen foto&apos;s. Ze komen hier binnen via de knop in de reviewmail.</p> : (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 10 }}>
+          {list.map((f) => (
+            <figure key={f.id} style={{ margin: 0 }}>
+              <a href={f.url} target="_blank" rel="noopener"><img src={f.url} alt="" style={{ width: "100%", aspectRatio: "1", objectFit: "cover", borderRadius: 12 }} /></a>
+              <figcaption style={{ fontSize: ".8rem", lineHeight: 1.3, marginTop: 4 }}>
+                <b>{f.name}</b> · {f.event_id}<br />
+                {f.may_share ? "✅ mag op Instagram" : "🔒 alleen voor jou"} · <a href={f.url} download>download</a> · <button type="button" onClick={() => del(f.id)} style={{ background: "none", border: 0, color: "#C2185B", cursor: "pointer", padding: 0 }}>verwijder</button>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
