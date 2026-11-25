@@ -551,3 +551,7 @@ footer a:hover{text-decoration:underline}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,165,92,.55)}70%{box-shadow:0 0 0 9px rgba(59,165,92,0)}100%{box-shadow:0 0 0 0 rgba(59,165,92,0)}}
 @media (max-width:560px){.next-chip{font-size:.85rem;padding:8px 13px}}
 @media (max-width:560px){.next-chip .nt-days{display:none}}
+/* footer: logo may wrap, more air between columns */
+.ft{column-gap:64px}
+footer .logo{flex-wrap:wrap;row-gap:0;max-width:100%}
+footer .logo i{white-space:nowrap}
