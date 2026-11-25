@@ -21,7 +21,7 @@ export default function Animations() {
     const art = document.querySelector<HTMLElement>(".hero-art");
     const cleanups: (() => void)[] = [];
     if (art) {
-      const depth: [string, number][] = [["#receipt", 18], ["#cardPink", -26], ["#cupHero", 32], [".hand-note", -14], ["[data-wiggle]", 44]];
+      const depth: [string, number][] = [[".hero-photo", 10], ["#receipt", 18], ["#cardPink", -26], ["#cupHero", 32], [".hand-note", -14], ["[data-wiggle]", 44]];
       const items = depth.flatMap(([sel, d]) => Array.from(art.querySelectorAll<HTMLElement | SVGElement>(sel)).map((el) => [el, d] as const));
       const move = (e: PointerEvent) => {
         const r = art.getBoundingClientRect();
@@ -75,11 +75,13 @@ export default function Animations() {
       if (has("#heroBig")) {
         gsap.from("#heroBig .w", { y: 80, rotate: () => gsap.utils.random(-12, 12), opacity: 0, duration: 0.9, stagger: 0.08, ease: "back.out(1.8)" });
         gsap.from(".hero .sub, .hero .lead, .hero .ctas, .hero .note, .eyebrow", { y: 20, opacity: 0, duration: 0.7, stagger: 0.08, delay: 0.35 });
+        gsap.from(".hero-photo", { y: 70, rotate: -8, scale: 0.92, opacity: 0, duration: 1.1, delay: 0.15, ease: "back.out(1.4)" });
         gsap.from("#receipt", { y: -120, rotate: 18, opacity: 0, duration: 1.1, delay: 0.3, ease: "elastic.out(1,.7)" });
         gsap.from("#cardPink", { x: -80, rotate: -25, opacity: 0, duration: 1, delay: 0.5, ease: "back.out(1.5)" });
         gsap.from("#cupHero", { scale: 0, rotate: -30, duration: 0.9, delay: 0.8, ease: "back.out(2)" });
         gsap.from(".hand-note", { opacity: 0, x: -30, duration: 0.8, delay: 1 });
         // the hero composition keeps floating
+        floaty(".hero-photo", { y: -10, rotate: 1.5, duration: 3.4 }, 1.3);
         floaty("#receipt", { y: -14, rotate: 1, duration: 2.6 }, 1.4);
         floaty("#cardPink", { y: 12, x: 6, rotate: -3, duration: 2.2 }, 1.5);
         floaty("#cupHero", { y: -10, rotate: 6, duration: 1.8 }, 1.7);
