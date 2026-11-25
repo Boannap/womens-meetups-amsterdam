@@ -581,3 +581,5 @@ footer .ft-k{display:block;opacity:.8}
 .partner .pt-hero{padding-top:36px}
 .partner .pt-packs-sec .title{max-width:none;font-size:clamp(1.8rem,3.4vw,2.6rem)}
 .partner .pt-packs-sec .pt-packs{margin-top:16px}
+.nav-partner{border:1.5px solid var(--wine);color:var(--wine)!important;font-weight:500}
+.nav-partner:hover{background:var(--wine);color:var(--pink)!important}
