@@ -8,6 +8,7 @@ import Socials from "./Socials";
 import Header from "./Header";
 import Footer from "./Footer";
 import Events from "./Events";
+import NextTable from "./NextTable";
 import Deck from "./Deck";
 import JoinForm from "./JoinForm";
 import JsonLd from "./JsonLd";
@@ -46,6 +47,7 @@ export default function Home({ lang }: { lang: Lang }) {
                 <HeroCta a={t.hero_cta1} b={t.hero_cta1_b} />
                 <a href="#meetups" className="btn btn-ghost">{t.hero_cta2}</a>
               </div>
+              <NextTable lang={lang} events={EVENTS} />
               <p className="note"><Icon id="cup" style={{ color: "var(--tomato)" }} />{t.hero_note}</p>
             </div>
 
@@ -104,6 +106,18 @@ export default function Home({ lang }: { lang: Lang }) {
           </div>
         </section>
 
+        {/* MEETUPS */}
+        <section className="sec" id="meetups">
+          <div className="wrap">
+            <div className="sec-head"><div>
+              <span className="kicker">{t.m_kicker}</span>
+              <h2 className="title">{t.m_title}</h2>
+              <p className="lead" style={{ marginTop: 14 }}>{t.m_text}</p>
+            </div></div>
+            <Events lang={lang} t={t} events={EVENTS} />
+          </div>
+        </section>
+
         <Quotes kicker={t.rv_kicker} title={t.rv_title} ant={{ kicker: t.ant_kicker, title: t.ant_title, by: t.ant_by, quotes: t.ant_quotes }} />
 
         {/* PREVIOUS MEETUPS */}
@@ -140,18 +154,6 @@ export default function Home({ lang }: { lang: Lang }) {
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* MEETUPS */}
-        <section className="sec" id="meetups">
-          <div className="wrap">
-            <div className="sec-head"><div>
-              <span className="kicker">{t.m_kicker}</span>
-              <h2 className="title">{t.m_title}</h2>
-              <p className="lead" style={{ marginTop: 14 }}>{t.m_text}</p>
-            </div></div>
-            <Events lang={lang} t={t} events={EVENTS} />
           </div>
         </section>
 
