@@ -252,7 +252,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
                 {(opts as string[]).map((o, oi) => (
                   <label key={o}>
                     <input type="radio" name={`q${qi}`} value={oi} checked={answers[qi] === oi}
-                      onChange={() => { setAnswers((a) => a.map((v, i) => (i === qi ? oi : v))); setTimeout(() => setStep(qi + 1), 110); }} />
+                      onChange={() => { setAnswers((a) => a.map((v, i) => (i === qi ? oi : v))); setTimeout(() => setStep(qi + 1), qi === t.quiz.length - 1 ? 650 : 110); }} />
                     <span>{o}</span>
                   </label>
                 ))}
