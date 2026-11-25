@@ -232,31 +232,31 @@
     ],
     "u_kicker": "Why it's different",
     "u_title": "No membership. No big rooms. Just your table.",
-    "u_text": "Plenty of clubs ask for a yearly membership before you've even met anyone. We don't. You pay per meetup, only when you feel like it.",
+    "u_text": "No yearly membership. You pay per meetup, only when you feel like it.",
     "usps": [
       [
         "No subscription",
-        "€12.50 per meetup incl. VAT & service costs. No membership, no yearly fee, no strings. First coffee included."
+        "€12.50 per time, no strings."
       ],
       [
-        "A small, curated table",
-        "Six women, screened and matched on personality, work field and language. Never a room full of strangers."
+        "A small group",
+        "Six girls, matched on personality."
       ],
       [
-        "Hidden spots in Amsterdam",
-        "We meet in the cosiest cafés and hidden spots of the city. You'll leave with new friends and a new favourite (very Instagrammable) place."
+        "Hidden spots",
+        "The cosiest cafés in town."
       ],
       [
         "A host at the table",
-        "Your host welcomes you, brings conversation cards and an icebreaker or topic when it helps. As guided as you like, as free as you like."
+        "She gets the conversation going."
       ],
       [
-        "Talk a lot, or just listen",
-        "Love to chat and laugh? Great. Rather sit back for a bit? Also great. This is a safe, no-pressure space."
+        "Talk or listen",
+        "Both are great, no pressure."
       ],
       [
-        "Everyone gets a seat",
-        "Whether you're in your twenties or thirties, new in town, travelling through, or born and raised here: tell us who you are and we'll find your perfect table."
+        "Everyone's welcome",
+        "New in town or born here."
       ]
     ],
     "b_kicker": "Meet your host",
@@ -511,7 +511,25 @@
       "T": "Thinker",
       "P": "Spontaneous",
       "J": "Planner"
-    }
+    },
+    "ps_kicker": "Sound familiar?",
+    "ps_title": "Making new friends is harder than you think.",
+    "ps_prob_h": "How it often goes",
+    "ps_prob": [
+      "You don't know many people in Amsterdam yet",
+      "Meeting strangers one-on-one feels awkward",
+      "Big meetups are busy and shallow",
+      "Other clubs ask for a monthly subscription"
+    ],
+    "ps_sol_h": "At Table of Six",
+    "ps_sol": [
+      "Simply coffee with a small group",
+      "Matched on personality, so it clicks faster",
+      "A host gets the conversation going",
+      "No subscription, no hassle: €12.50 per time"
+    ],
+    "ps_cta": "Pick your table",
+    "ev_countdown": ""
   },
   "nl": {
     "meta_title": "Nieuwe vriendinnen maken in Amsterdam | Koffiemeetups voor vrouwen",
@@ -746,31 +764,31 @@
     ],
     "u_kicker": "Waarom het anders is",
     "u_title": "Geen lidmaatschap. Geen grote zalen. Gewoon jouw tafel.",
-    "u_text": "Veel clubs vragen een jaarlidmaatschap voordat je ook maar iemand hebt ontmoet. Wij niet. Je betaalt per meetup, alleen als jij er zin in hebt.",
+    "u_text": "Geen jaarlidmaatschap. Je betaalt per meetup, alleen als jij er zin in hebt.",
     "usps": [
       [
         "Geen abonnement",
-        "€12,50 per meetup incl. btw & servicekosten. Geen lidmaatschap, geen jaarbedrag, nergens aan vast. Je eerste koffietje krijg je van ons!"
+        "€12,50 per keer, nergens aan vast."
       ],
       [
-        "Een klein, zorgvuldig groepje",
-        "Zes vrouwen, gescreend en gematcht op persoonlijkheid, werkveld en taal. Nooit een zaal vol vreemden."
+        "Een klein groepje",
+        "Zes meiden, gematcht op persoonlijkheid."
       ],
       [
-        "Verborgen plekjes in Amsterdam",
-        "We zitten in de gezelligste cafés en hidden spots van de stad. Je gaat naar huis met nieuwe vriendinnen én een nieuw favoriet (heel Insta-waardig) plekje."
+        "Verborgen plekjes",
+        "De gezelligste cafés van de stad."
       ],
       [
         "Een host aan tafel",
-        "Je host verwelkomt je, neemt gespreksvragen mee en zo nodig een ijsbreker of onderwerp. Zo begeleid als jij wilt, zo vrij als jij wilt."
+        "Zij zet het gesprek op gang."
       ],
       [
-        "Veel kletsen, of gewoon luisteren",
-        "Hou je van kletsen en lachen? Top. Wil je even rustig aankijken? Ook top. Dit is een veilige plek zonder druk."
+        "Kletsen of luisteren",
+        "Allebei top, zonder druk."
       ],
       [
-        "Iedereen krijgt een stoel",
-        "Of je nou twintiger of dertiger bent, net in de stad, op doorreis of hier geboren: vertel wie je bent, dan zoeken wij jouw perfecte tafel."
+        "Iedereen welkom",
+        "Nieuw in de stad of hier geboren."
       ]
     ],
     "b_kicker": "Maak kennis met je host",
@@ -1025,6 +1043,24 @@
       "T": "Denker",
       "P": "Spontaan",
       "J": "Planner"
-    }
+    },
+    "ps_kicker": "Herkenbaar?",
+    "ps_title": "Nieuwe vriendinnen maken is lastiger dan je denkt.",
+    "ps_prob_h": "Zo gaat het vaak",
+    "ps_prob": [
+      "Je kent nog weinig mensen in Amsterdam",
+      "Afspreken met onbekenden voelt ongemakkelijk",
+      "Grote meetups zijn druk en oppervlakkig",
+      "Andere clubs vragen een maandabonnement"
+    ],
+    "ps_sol_h": "Bij Table of Six",
+    "ps_sol": [
+      "Gewoon koffie drinken met een klein groepje",
+      "Gematcht op persoonlijkheid, dus het klikt sneller",
+      "Een host zet het gesprek op gang",
+      "Geen abonnement of gedoe: €12,50 per keer"
+    ],
+    "ps_cta": "Kies je tafel",
+    "ev_countdown": "nog"
   }
 }

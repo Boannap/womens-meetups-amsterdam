@@ -14,6 +14,7 @@ import JsonLd from "./JsonLd";
 import { Icon } from "./SvgDefs";
 import { tableSvg } from "@/lib/tableSvg";
 
+const USP_IC = ["☕", "👯‍♀️", "📍", "🙋‍♀️", "💬", "🪑"];
 const IC = [["var(--pink)", "var(--wine)"], ["var(--blush)", "var(--berry)"], ["var(--peach)", "var(--wine)"], ["var(--pink)", "var(--wine)"], ["#DCE6F2", "var(--blue)"], ["#E2E8D8", "var(--green)"]];
 
 export default function Home({ lang }: { lang: Lang }) {
@@ -49,6 +50,7 @@ export default function Home({ lang }: { lang: Lang }) {
             </div>
 
             <div className="hero-art" aria-hidden="true">
+              <div className="hero-photo"><Image src="/meetups/sfeer-1.jpg" alt="" fill priority sizes="(max-width: 900px) 92vw, 520px" style={{ objectFit: "cover", objectPosition: "42% center" }} /></div>
               <div className="card-pink scallop" id="cardPink">
                 <div className="inner"><b>Table<br />of Six</b><span>where friendships start</span></div>
               </div>
@@ -67,8 +69,6 @@ export default function Home({ lang }: { lang: Lang }) {
                 <div className="c">*** {t.r_thanks} ***</div>
                 <div className="bar" />
               </div>
-              <div className="hand-note">{t.r_hand}</div>
-              <Icon id="cup" className="cup-hero" style={{ filter: "url(#wobble)" }} />
               <svg className="doodle" style={{ width: 38, height: 38, left: "40%", top: 0, color: "var(--tomato)" }} data-wiggle=""><use href="#sparkle" /></svg>
               <svg className="doodle" style={{ width: 26, height: 26, left: "8%", top: "30%" }} data-wiggle=""><use href="#heart" /></svg>
               <svg className="doodle" style={{ width: 22, height: 22, right: 0, top: "45%", color: "var(--blue)" }} data-wiggle=""><use href="#sparkle" /></svg>
@@ -81,6 +81,30 @@ export default function Home({ lang }: { lang: Lang }) {
             <div className="track">{marquee.map((m, i) => <span key={i}>{m}</span>)}</div>
           </div>
         </div>
+
+        {/* PROBLEM / SOLUTION */}
+        <section className="sec ps" id="why-us">
+          <div className="wrap">
+            <div style={{ textAlign: "center", marginBottom: 34 }}>
+              <span className="kicker">{t.ps_kicker}</span>
+              <h2 className="title" style={{ margin: "0 auto", maxWidth: "18ch" }}>{t.ps_title}</h2>
+            </div>
+            <div className="ps-grid">
+              <div className="ps-card ps-prob reveal">
+                <h3>{t.ps_prob_h}</h3>
+                <ul>{t.ps_prob.map((x) => <li key={x}><span className="mk">✕</span>{x}</li>)}</ul>
+              </div>
+              <div className="ps-arrow" aria-hidden="true">→</div>
+              <div className="ps-card ps-sol reveal">
+                <h3>{t.ps_sol_h}</h3>
+                <ul>{t.ps_sol.map((x) => <li key={x}><span className="mk">✓</span>{x}</li>)}</ul>
+                <a href="#meetups" className="btn ps-btn">{t.ps_cta} →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <Quotes kicker={t.rv_kicker} title={t.rv_title} ant={{ kicker: t.ant_kicker, title: t.ant_title, by: t.ant_by, quotes: t.ant_quotes }} />
 
         {/* PREVIOUS MEETUPS */}
         <section className="gallery-sec" id="gallery">
@@ -110,7 +134,7 @@ export default function Home({ lang }: { lang: Lang }) {
             <div className="usp-grid">
               {t.usps.map(([h, p], i) => (
                 <article className="usp reveal" key={h}>
-                  <div className="ic" style={{ background: IC[i][0], color: IC[i][1] }}>{i + 1}</div>
+                  <div className="ic" style={{ background: IC[i][0], color: IC[i][1] }} aria-hidden="true">{USP_IC[i]}</div>
                   <h3>{h}</h3>
                   <p>{p}</p>
                 </article>
@@ -219,7 +243,6 @@ export default function Home({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <Quotes kicker={t.rv_kicker} title={t.rv_title} ant={{ kicker: t.ant_kicker, title: t.ant_title, by: t.ant_by, quotes: t.ant_quotes }} />
 
         {/* FAQ */}
         <section className="sec" id="faq" style={{ paddingTop: 40 }}>

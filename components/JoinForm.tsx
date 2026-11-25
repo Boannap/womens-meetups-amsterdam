@@ -8,6 +8,7 @@ import { useSeats, isEventFull } from "@/lib/useSeats";
 import { track } from "./Tracker";
 
 // €12.50 incl. 21% VAT: VAT = 12.50 - 12.50/1.21 = 2.17; service costs = Stripe iDEAL fee. First coffee included.
+const PAGES = 5;
 const PRICE = { total: "12.50", vat: "2.17", service: "0.32", seat: "10.01" };
 
 function linkify(text: string, lang: Lang) {
@@ -40,6 +41,9 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [answers, setAnswers] = useState<(number | null)[]>(() => t.quiz.map(() => null));
   const [step, setStep] = useState(0);
+  // The form is split into small pages with a progress bar, so it never feels long.
+  const [page, setPage] = useState(0);
+  const formRef = useRef<HTMLFormElement>(null);
   const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
   const [fieldOther, setFieldOther] = useState(false);
   const [hopeOther, setHopeOther] = useState(false);
@@ -77,7 +81,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (page < PAGES - 1) { next(); return; }
+    if (!form.checkValidity()) { const bad = form.querySelector<HTMLElement>(":invalid"); const pg = bad?.closest<HTMLElement>("[data-page]")?.dataset.page; if (pg) setPage(Number(pg)); setTimeout(() => form.reportValidity(), 50); return; }
     if (!type) { setStep(Math.max(0, answers.findIndex((x) => x === null))); form.querySelector("#quiz")?.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     const fd = new FormData(form);
     // Remember the basics on this device only, so a next booking fills itself in.
@@ -163,6 +168,26 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     );
   }
 
+  const nl = lang === "nl";
+  const PAGE_NAMES = nl ? ["Jouw meetup", "Over jou", "Snelle quiz", "Contact", "Afronden"] : ["Your meetup", "About you", "Quick quiz", "Contact", "Finish"];
+  function next() {
+    const box = formRef.current?.querySelector<HTMLElement>(`[data-page="${page}"]`);
+    if (box) {
+      const bad = Array.from(box.querySelectorAll<HTMLInputElement>("input,select,textarea")).find((el) => !el.checkValidity());
+      if (bad) { bad.reportValidity(); return; }
+    }
+    if (page === 2 && !type) { setStep(Math.max(0, answers.findIndex((x) => x === null))); return; }
+    track("form", `page:${page + 2}`);
+    setPage((n) => Math.min(PAGES - 1, n + 1));
+    setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 30);
+  }
+  const back = () => { setPage((n) => Math.max(0, n - 1)); setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 30); };
+  const nav = (last = false) => (
+    <div className="full field fnav">
+      {page > 0 && <button type="button" className="btn btn-ghost fback" onClick={back}>← {nl ? "Terug" : "Back"}</button>}
+      {!last && <button type="button" className="btn btn-wine" onClick={next} disabled={page === 2 && !type}>{page === 2 && !type ? (nl ? `Nog ${answers.filter((a) => a === null).length} vraagjes` : `${answers.filter((a) => a === null).length} questions to go`) : (nl ? "Volgende →" : "Next →")}</button>}
+    </div>
+  );
   const pills = (name: string, arr: string[], type: "radio" | "checkbox", req = true) => (
     <div className="pills">
       {arr.map((o, i) => (
@@ -175,10 +200,16 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   );
 
   return (
-    <form className="join" onSubmit={onSubmit} noValidate onFocus={(e) => { if (!started) { setStarted(true); track("form", "start"); } const n = (e.target as unknown as HTMLInputElement).name?.replace(/^q\d$/, "quiz"); if (n && !touched.current.has(n)) { touched.current.add(n); track("form", `field:${n}`); } }}>
+    <form className="join" ref={formRef} onSubmit={onSubmit} noValidate onFocus={(e) => { if (!started) { setStarted(true); track("form", "start"); } const n = (e.target as unknown as HTMLInputElement).name?.replace(/^q\d$/, "quiz"); if (n && !touched.current.has(n)) { touched.current.add(n); track("form", `field:${n}`); } }}>
       {invite && <p className="full invite-banner" style={{ background: "var(--pink)", color: "var(--wine)", padding: "14px 18px", borderRadius: 16, fontWeight: 600 }}>
         {lang === "nl" ? `${invite.from || "Je vriendin"} heeft je uitgenodigd! Je krijgt ${invite.pct}% korting op je plek, op elke datum. Gebruik het e-mailadres dat zij heeft ingevuld.` : `${invite.from || "Your friend"} invited you! You get ${invite.pct}% off your seat, on any date. Use the e-mail address she filled in.`}
       </p>}
+      <div className="full fprog" aria-live="polite">
+        <div className="fprog-top"><b>{nl ? `Stap ${page + 1} van ${PAGES}` : `Step ${page + 1} of ${PAGES}`}</b><span>{PAGE_NAMES[page]}</span></div>
+        <div className="fprog-bar"><span style={{ width: `${((page + 1) / PAGES) * 100}%` }} /></div>
+        <ol className="fprog-dots">{PAGE_NAMES.map((n, i) => <li key={n} className={i < page ? "done" : i === page ? "on" : ""}>{i < page ? "✓" : i + 1}</li>)}</ol>
+      </div>
+      <div className="fstep" data-page="0" hidden={page !== 0}>
       {upcoming.length > 0 && (
         <fieldset className="field full"><legend>{t.j_event}</legend>
           <div className="pills">
@@ -191,6 +222,9 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       )}
       <div className="field"><label className="l" htmlFor="fn">{t.j_name}</label><input id="fn" name="name" type="text" autoComplete="given-name" required /></div>
       <div className="field"><label className="l" htmlFor="fe">{t.j_email}</label><input id="fe" name="email" type="email" autoComplete="email" required /></div>
+      {nav()}
+      </div>
+      <div className="fstep" data-page="1" hidden={page !== 1}>
       <div className="field"><label className="l" htmlFor="fa">{t.j_age}</label><input id="fa" name="age" type="number" inputMode="numeric" min={18} max={99} placeholder={t.j_age_ph} required /></div>
       <fieldset className="field full"><legend>{t.j_lang}</legend>{pills("language", [t.j_lang_both, t.j_lang_nl, t.j_lang_en], "radio")}</fieldset>
       <div className="field full">
@@ -202,6 +236,9 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         {fieldOther && <input name="field_other" type="text" maxLength={100} placeholder={t.j_field_other} required style={{ marginTop: 8 }} />}
       </div>
       <div className="field full"><label className="l" htmlFor="fhb">{t.j_hobbies}</label><textarea id="fhb" name="hobbies" rows={4} maxLength={1500} placeholder={t.j_hobbies_ph} required /></div>
+      {nav()}
+      </div>
+      <div className="fstep" data-page="2" hidden={page !== 2}>
       <fieldset className="field full quiz" id="quiz">
         <legend><span className="kicker">{t.q_kicker}</span> {t.q_title}</legend>
         <p className="quiz-intro">{t.q_intro}</p>
@@ -251,6 +288,9 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
           })() : <span>☕ {answers.filter((a) => a !== null).length}/{t.quiz.length}</span>}
         </div>
       </fieldset>
+      {nav()}
+      </div>
+      <div className="fstep" data-page="3" hidden={page !== 3}>
       <fieldset className="field full"><legend>{t.j_contact}</legend>
         <div className="pills">
           {(["whatsapp_email", "email"] as const).map((v, i) => (
@@ -276,6 +316,9 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         </div>
         {hopeOther && <input name="hope_other" type="text" maxLength={200} placeholder={t.j_hope_other} style={{ marginTop: 8 }} />}
       </fieldset>
+      {nav()}
+      </div>
+      <div className="fstep" data-page="4" hidden={page !== 4}>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="vh" aria-hidden="true" />
       {!waitlist && <div className="price-box">
         <h4>{t.pr_title}</h4>
@@ -309,6 +352,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
         <button className="btn btn-wine" type="submit" disabled={state === "sending"}>{state === "sending" ? "…" : waitlist ? t.j_submit_wait : t.j_submit}</button>
         {state === "error" && <p style={{ color: "var(--tomato)", marginTop: 8 }}>{t.j_error}</p>}
         {!waitlist && <small className="hint" style={{ marginTop: 8 }}>{lang === "nl" ? "Je krijgt af en toe een mailtje over nieuwe meetups. Afmelden kan altijd, met één klik." : "We'll occasionally e-mail you about new meetups. Unsubscribe anytime, in one click."}</small>}
+      </div>
+      {nav(true)}
       </div>
     </form>
   );
