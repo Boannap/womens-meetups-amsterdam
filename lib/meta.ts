@@ -6,7 +6,7 @@ export function pageMeta(lang: Lang, paths: { en: string; nl: string }, title?: 
   const t = dict(lang);
   const tt = title ?? t.meta_title;
   const dd = description ?? t.meta_desc;
-  const og = lang === "nl" ? "/og4-nl.png" : "/og4.png";
+  const og = lang === "nl" ? "/og5-nl.png" : "/og5.png";
   return {
     metadataBase: new URL(baseUrl(lang)),
     title: tt,

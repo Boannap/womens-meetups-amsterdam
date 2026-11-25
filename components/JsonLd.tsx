@@ -35,7 +35,7 @@ export default function JsonLd({ lang }: { lang: Lang }) {
     "@type": "Event",
     name: e.title[lang],
     description: t.meta_desc,
-    image: [`${SITE_URL}/og4.png`],
+    image: [`${SITE_URL}/og5.png`],
     startDate: e.date,
     endDate: e.end,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
