@@ -155,27 +155,6 @@ export default function Home({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        {/* EXPERIENCE */}
-        <section className="sec exp" id="experience">
-          <div className="wrap">
-            <div className="sec-head"><div><span className="kicker">{t.e_kicker}</span><h2 className="title">{t.e_title}</h2></div></div>
-            <div className="exp-grid">
-              <article className="xcard scallop x1 reveal">
-                <div className="ill" style={{ color: "var(--pink)" }}><svg viewBox="0 0 200 150" style={{ filter: "url(#wobble)" }}><use href="#cards" /></svg></div>
-                <h3>{t.e1_t}</h3><p>{t.e1_p}</p>
-              </article>
-              <article className="xcard scallop x2 reveal">
-                <div className="ill" style={{ color: "var(--tomato)" }}><svg viewBox="0 0 220 160" style={{ filter: "url(#wobble)" }}><use href="#hands" /></svg></div>
-                <h3>{t.e2_t}</h3><p>{t.e2_p}</p>
-              </article>
-              <article className="xcard scallop wavy stripes x3 reveal">
-                <div className="ill" style={{ color: "var(--paper)" }}><svg viewBox="0 0 200 230" style={{ filter: "url(#wobble)" }}><use href="#chair" /></svg></div>
-                <div className="panel"><h3>{t.e3_t}</h3><p>{t.e3_p}</p></div>
-              </article>
-            </div>
-          </div>
-        </section>
-
         {/* HOW */}
         <section className="sec" id="how">
           <div className="wrap">
