@@ -47,9 +47,9 @@ const day = (iso: string, lang: Lang) => fmt(iso, lang, { weekday: "long", day: 
 const time = (iso: string, lang: Lang) => fmt(iso, lang, { hour: "2-digit", minute: "2-digit" });
 
 const ig = (lang: Lang) => `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.wine};border-radius:16px;margin:22px 0 4px"><tr><td style="padding:20px 22px" align="center">
-<div style="${font};font-size:22px;font-weight:700;color:${C.pink};margin-bottom:4px">${lang === "nl" ? "Volg ons op Instagram 👇" : "Follow us on Instagram 👇"}</div>
-<div style="${sans};font-size:14px;color:${C.cream};margin-bottom:14px">${lang === "nl" ? "Voor de mooiste cafés, nieuwe datums en een kijkje achter de schermen." : "For the prettiest cafés, new dates and a look behind the scenes."}</div>
-<a href="https://www.instagram.com/womensmeetupsinamsterdam" style="display:inline-block;background:${C.pink};color:${C.wine};${sans};font-weight:700;font-size:16px;text-decoration:none;padding:12px 24px;border-radius:999px">→ @womensmeetupsinamsterdam</a>
+<div style="${font};font-size:26px;font-weight:700;color:${C.pink};margin-bottom:6px">${lang === "nl" ? "Volg ons op Instagram 👇" : "Follow us on Instagram 👇"}</div>
+<div style="${sans};font-size:16px;line-height:1.45;color:${C.cream};margin-bottom:16px">${lang === "nl" ? "Zie hoe nieuwe vriendschappen ontstaan en mis geen enkele update." : "Watch new friendships happen and catch all the latest updates."}</div>
+<a href="https://www.instagram.com/womensmeetupsinamsterdam" style="display:inline-block;background:${C.pink};color:${C.wine};${sans};font-weight:700;font-size:16px;text-decoration:none;padding:14px 28px;border-radius:999px">→ @womensmeetupsinamsterdam</a>
 </td></tr></table>`;
 
 function layout(lang: Lang, preheader: string, body: string, withIg = true) {
