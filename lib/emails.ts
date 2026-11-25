@@ -94,7 +94,9 @@ function vibe(lang: Lang, quiz?: (number | null)[] | null) {
 <td style="${sans};font-size:13px;color:${C.wine};padding:5px 0 5px 8px;white-space:nowrap;text-align:right;${v < 50 ? "font-weight:700" : ""}">${L[b]}</td></tr>`;
   }).join("");
   const title = lang === "nl" ? "Zo zien we jou nu" : "This is how we see you now";
-  const soft = lang === "nl" ? "Een eerste indruk, geen hokje. Hiermee zoeken we jouw tafel." : "A first impression, not a box. This is how we find your table.";
+  const soft = lang === "nl"
+    ? `Uit jouw quiz kwam <b>${t.code}</b>. Op basis daarvan koppelen we je nu aan een tafel met vijf meiden die bij je passen. Een eerste indruk, geen hokje!`
+    : `Your quiz result is <b>${t.code}</b>. Based on this, we're now matching you with five girls who fit you. A first impression, not a box!`;
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.pink};border-radius:16px;margin:0 0 18px"><tr><td style="padding:18px 20px">
 <div style="${sans};font-size:12px;font-weight:700;letter-spacing:2px;color:${C.wine}">${title.toUpperCase()}</div>
 <div style="${font};font-size:34px;font-weight:700;color:${C.wine};letter-spacing:3px;margin:6px 0 2px">${t.code}</div>
