@@ -1,16 +1,16 @@
 /**
  * Mails to participants. Boanna approved these as part of the website (25 Nov 2026):
- * confirmation after payment, waitlist confirmation, café details 2 days before, the morning itself, review the day after.
+ * confirmation after payment, waitlist confirmation, a reminder 1 week before, café details 2 days before, the morning itself, review the day after.
  * Every mail is sent once per person (tracked in signups.mail_*_at) and replies go to hello@.
  */
 import events from "./events.json";
 import { rpc } from "./supa";
-import { mailConfirm, mailDetails, mailMorning, mailReview, mailWaitlist, type MailData } from "./emails";
+import { mailConfirm, mailDetails, mailMorning, mailReminder, mailReview, mailWaitlist, type MailData } from "./emails";
 import type { Lang } from "./site";
 
 const FROM = "Boanna · Women's Meetups <hello@womensmeetupsinamsterdam.com>";
 const INBOX = "hello@womensmeetupsinamsterdam.com";
-type Kind = "confirm" | "waitlist" | "details" | "morning" | "review";
+type Kind = "confirm" | "waitlist" | "reminder" | "details" | "morning" | "review";
 type Who = { id: string; name: string; email: string; site_lang?: string; contact_pref?: string; event_id: string; quiz?: (number | null)[] | null };
 type Ev = { id: string; date: string; end?: string; cafe?: string; address?: string; maps?: string; tableLang?: string };
 
@@ -38,7 +38,7 @@ function build(kind: Kind, w: Who) {
     token: w.id, whatsapp: w.contact_pref === "whatsapp_email", quiz: w.quiz,
   };
   if ((kind === "details" || kind === "morning") && !ev.cafe) return null; // no café known yet: never send half a mail
-  return kind === "confirm" ? mailConfirm(lang, d) : kind === "waitlist" ? mailWaitlist(lang, d)
+  return kind === "confirm" ? mailConfirm(lang, d) : kind === "waitlist" ? mailWaitlist(lang, d) : kind === "reminder" ? mailReminder(lang, d)
     : kind === "details" ? mailDetails(lang, d) : kind === "morning" ? mailMorning(lang, d) : mailReview(lang, d);
 }
 
@@ -69,6 +69,7 @@ export async function runMailSchedule() {
   const missingCafe: string[] = [];
   for (const ev of events as Ev[]) {
     const until = daysBetween(today, ev.id);
+    if (until === 7 || until === 6) out[`reminder_${ev.id}`] = await sendDue("reminder", ev.id); // one week before (catch up a day late)
     if (until === 2 || until === 1) { // 2 days before (catch up the day after if the café came in late)
       if (!ev.cafe) missingCafe.push(ev.id); else out[`details_${ev.id}`] = await sendDue("details", ev.id);
     }

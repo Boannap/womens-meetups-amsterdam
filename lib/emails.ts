@@ -115,6 +115,22 @@ export function mailConfirm(lang: Lang, d: MailData) {
   return { subject, html: layout(lang, nl ? "Je aanmelding is binnen. Dit gebeurt er nu." : "We've got your sign-up. Here's what happens next.", body) };
 }
 
+/** One week before: a warm reminder, the table is being set up. */
+export function mailReminder(lang: Lang, d: MailData) {
+  const nl = lang === "nl";
+  const subject = nl ? "Nog één weekje! ☕" : "One more week! ☕";
+  const body = nl
+    ? h1(`Nog één weekje, ${firstName(d.name)}!`) + p("Over een week is het zover. De meiden aan jouw tafel kijken er al naar uit om je te ontmoeten!") +
+      card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "Het café hoor je twee dagen van tevoren"]]) +
+      p("Wij zijn druk bezig met een mooie tafel voor jullie: we matchen de groep, kiezen een gezellig café en leggen de vragenkaartjes alvast klaar.") +
+      p("Zet het vast in je agenda. Kun je toch niet? Laat het ons zo snel mogelijk weten, dan geven we je plek aan iemand van de wachtlijst.") + p("Tot volgende week,")
+    : h1(`One more week, ${firstName(d.name)}!`) + p("Next week is the day. The girls at your table can't wait to meet you!") +
+      card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "You'll hear the café two days before"]]) +
+      p("We're busy setting up a lovely table for you: matching the group, picking a cosy café and laying out the question cards.") +
+      p("Pop it in your calendar. Can't make it after all? Let us know as soon as you can, so we can give your seat to someone on the waitlist.") + p("See you next week,");
+  return { subject, html: layout(lang, nl ? "Over een week zit je aan tafel." : "Next week you'll be at the table.", body) };
+}
+
 /** 2. Two days before: the café is revealed. */
 export function mailDetails(lang: Lang, d: MailData) {
   const nl = lang === "nl";
