@@ -18,7 +18,7 @@ export default function Quotes({ kicker, title, ant }: { kicker: string; title: 
         <div className="quotes">
           {ant.quotes.map((q, i) => (
             <figure className="dm" key={i}>
-              <div className="dm-top"><span className="dm-av" aria-hidden>{/* eslint-disable-next-line @next/next/no-img-element */}<img src={`/dm/a${i + 1}.jpg?v=2`} alt="" width={30} height={30} loading="lazy" /></span><div><b>{ant.by}</b><small>Instagram</small></div><svg className="dm-ig" viewBox="0 0 24 24" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg></div>
+              <div className="dm-top"><span className="dm-av" aria-hidden>{/* eslint-disable-next-line @next/next/no-img-element */}<img src={`/dm/a${i + 1}.jpg?v=3`} alt="" width={30} height={30} loading="lazy" /></span><div><b>{ant.by}</b><small>Instagram</small></div><svg className="dm-ig" viewBox="0 0 24 24" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg></div>
               <blockquote className="dm-bubble">{q}</blockquote>
             </figure>
           ))}
