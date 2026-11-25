@@ -459,7 +459,7 @@ export default function Dashboard() {
   );
 }
 
-type Photo = { id: string; event_id: string; may_share: boolean; created_at: string; name: string; url: string };
+type Photo = { id: string; event_id: string; may_share: boolean; created_at: string; name: string; url: string; kind?: string; bytes?: number | null };
 function PhotoInbox({ pw }: { pw: string }) {
   const [list, setList] = useState<Photo[] | null>(null);
   async function load() {
@@ -476,12 +476,12 @@ function PhotoInbox({ pw }: { pw: string }) {
   if (!list) return null;
   return (
     <div className="db-card" style={{ marginBottom: 18 }}>
-      <h3>📸 Foto&apos;s van deelnemers ({list.length})</h3>
+      <h3>📸 Foto&apos;s en video&apos;s van deelnemers ({list.length})</h3>
       {!list.length ? <p>Nog geen foto&apos;s. Ze komen hier binnen via de knop in de reviewmail.</p> : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 10 }}>
           {list.map((f) => (
             <figure key={f.id} style={{ margin: 0 }}>
-              <a href={f.url} target="_blank" rel="noopener"><img src={f.url} alt="" style={{ width: "100%", aspectRatio: "1", objectFit: "cover", borderRadius: 12 }} /></a>
+              {f.kind === "video" ? <video src={f.url} controls preload="metadata" style={{ width: "100%", aspectRatio: "1", objectFit: "cover", borderRadius: 12, background: "#000" }} /> : <a href={f.url} target="_blank" rel="noopener"><img src={f.url} alt="" style={{ width: "100%", aspectRatio: "1", objectFit: "cover", borderRadius: 12 }} /></a>}
               <figcaption style={{ fontSize: ".8rem", lineHeight: 1.3, marginTop: 4 }}>
                 <b>{f.name}</b> · {f.event_id}<br />
                 {f.may_share ? "✅ mag op Instagram" : "🔒 alleen voor jou"} · <a href={f.url} download>download</a> · <button type="button" onClick={() => del(f.id)} style={{ background: "none", border: 0, color: "#C2185B", cursor: "pointer", padding: 0 }}>verwijder</button>

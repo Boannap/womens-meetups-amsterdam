@@ -209,8 +209,8 @@ export function mailPartner(lang: Lang, name = "") {
 
 /** Button to the private photo upload page (review mail). */
 const photos = (lang: Lang, token = "") => `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.cream};border-radius:16px;margin:20px 0 4px"><tr><td style="padding:18px 20px">
-<p style="margin:0 0 6px;font-weight:700;color:${C.wine}">${lang === "nl" ? "Leuke foto's gemaakt? 📸" : "Took some nice photos? 📸"}</p>
-<p style="margin:0 0 12px">${lang === "nl" ? "Zet ze in ons fotomapje. Alleen ik zie ze, en jij kiest of ze op Instagram mogen." : "Drop them in our photo folder. Only I can see them, and you choose if they may go on Instagram."}</p>
+<p style="margin:0 0 6px;font-weight:700;color:${C.wine}">${lang === "nl" ? "Leuke foto's of filmpjes gemaakt? 📸" : "Took some nice photos or videos? 📸"}</p>
+<p style="margin:0 0 12px">${lang === "nl" ? "Zet ze in ons fotomapje, zoveel als je wilt en in volle kwaliteit. Alleen ik zie ze, en jij kiest of ze op Instagram mogen." : "Drop them in our photo folder, as many as you like and in full quality. Only I can see them, and you choose if they may go on Instagram."}</p>
 <a href="${MAIL_BASE}/photos?r=${encodeURIComponent(token)}&l=${lang}" style="display:inline-block;background:${C.wine};color:${C.pink};border-radius:999px;padding:10px 18px;${sans};font-weight:700;text-decoration:none">${lang === "nl" ? "Deel je foto's →" : "Share your photos →"}</a>
 </td></tr></table>`;
 
