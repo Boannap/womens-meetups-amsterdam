@@ -75,25 +75,19 @@ export default function PartnerPage({ lang }: { lang: Lang }) {
     <div lang={lang}>
       <Header lang={lang} alt={partnerPath(lang === "nl" ? "en" : "nl", lang)} />
       <main className="partner">
-        <section className="sec">
+        <section className="sec pt-hero">
           <div className="wrap">
             <span className="kicker">{t.kicker}</span>
             <h1 className="title pt-h1">{t.h1}</h1>
             <p className="pt-intro">{t.intro}</p>
-            <a href="#partner-form" className="btn btn-wine">{t.form_t} →</a>
-          </div>
-        </section>
-
-        <section className="sec">
-          <div className="wrap">
-            <h2 className="title">{t.why_t}</h2>
-            <div className="pt-why">
-              {t.why.map(([h, p]) => <div key={h}><h3>{h}</h3><p>{p}</p></div>)}
+            <div className="pt-ctas">
+              <a href="#pakketten" className="btn btn-wine">{lang === "nl" ? "Bekijk de pakketten ↓" : "See the packages ↓"}</a>
+              <a href="#partner-form" className="btn btn-ghost">{t.form_t} →</a>
             </div>
           </div>
         </section>
 
-        <section className="sec">
+        <section className="sec pt-packs-sec" id="pakketten">
           <div className="wrap">
             <h2 className="title">{t.pk_t}</h2>
             <div className="pt-packs">
@@ -112,6 +106,15 @@ export default function PartnerPage({ lang }: { lang: Lang }) {
               <div><h3>☕ {t.coffee_t}</h3><p>{t.coffee}</p></div>
               <div><h3>🥐 {t.vibe_t}</h3><p>{t.vibe}</p></div>
               <div><h3>🔗 {t.link_t}</h3><p>{t.link}</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="sec">
+          <div className="wrap">
+            <h2 className="title">{t.why_t}</h2>
+            <div className="pt-why">
+              {t.why.map(([h, p]) => <div key={h}><h3>{h}</h3><p>{p}</p></div>)}
             </div>
           </div>
         </section>
