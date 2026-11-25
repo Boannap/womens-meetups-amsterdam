@@ -54,17 +54,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   const [started, setStarted] = useState(false);
   const touched = useRef(new Set<string>());
   useEffect(() => { if (type) track("form", "quiz_done", undefined, type); }, [type]);
-  useEffect(() => {
-    try {
-      const me = JSON.parse(localStorage.getItem("wma-me") || "null");
-      if (!me) return;
-      for (const [id, v] of [["fn", me.name], ["fe", me.email], ["fa", me.age], ["fi", String(me.instagram || "").replace(/^@+/, "")]] as [string, string][]) {
-        const el = document.getElementById(id) as HTMLInputElement | null;
-        if (el && !el.value && v) el.value = v;
-      }
-      if (me.phone) window.dispatchEvent(new CustomEvent("wma:prefill-phone", { detail: me.phone }));
-    } catch {}
-  }, []);
+  // The browser's own autofill (Bo… → Boanna) fills name, e-mail and phone. We no longer keep our own copy on the device.
+  useEffect(() => { try { localStorage.removeItem("wma-me"); } catch {} }, []);
   const upcoming = EVENTS.filter((e) => new Date(e.end) > new Date());
   const seats = useSeats();
   const isFull = (id: string) => { const e = upcoming.find((x) => x.id === id); return !!e && isEventFull(e, seats); };
@@ -85,8 +76,6 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     if (!form.checkValidity()) { const bad = form.querySelector<HTMLElement>(":invalid"); const pg = bad?.closest<HTMLElement>("[data-page]")?.dataset.page; if (pg) setPage(Number(pg)); setTimeout(() => form.reportValidity(), 50); return; }
     if (!type) { setStep(Math.max(0, answers.findIndex((x) => x === null))); form.querySelector("#quiz")?.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
     const fd = new FormData(form);
-    // Remember the basics on this device only, so a next booking fills itself in.
-    try { localStorage.setItem("wma-me", JSON.stringify({ name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), instagram: fd.get("instagram") ? `@${String(fd.get("instagram")).replace(/^@+/, "")}` : "", phone: fd.get("phone") })); } catch {}
     const body = {
       name: fd.get("name"), email: fd.get("email"), age: fd.get("age"), language: fd.get("language"),
       personality: type, quiz: answers,
@@ -200,7 +189,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   );
 
   return (
-    <form className="join" ref={formRef} onSubmit={onSubmit} noValidate onFocus={(e) => { if (!started) { setStarted(true); track("form", "start"); } const n = (e.target as unknown as HTMLInputElement).name?.replace(/^q\d$/, "quiz"); if (n && !touched.current.has(n)) { touched.current.add(n); track("form", `field:${n}`); } }}>
+    <form className="join" ref={formRef} autoComplete="on" onSubmit={onSubmit} noValidate onFocus={(e) => { if (!started) { setStarted(true); track("form", "start"); } const n = (e.target as unknown as HTMLInputElement).name?.replace(/^q\d$/, "quiz"); if (n && !touched.current.has(n)) { touched.current.add(n); track("form", `field:${n}`); } }}>
       {invite && <p className="full invite-banner" style={{ background: "var(--pink)", color: "var(--wine)", padding: "14px 18px", borderRadius: 16, fontWeight: 600 }}>
         {lang === "nl" ? `${invite.from || "Je vriendin"} heeft je uitgenodigd! Je krijgt ${invite.pct}% korting op je plek, op elke datum. Gebruik het e-mailadres dat zij heeft ingevuld.` : `${invite.from || "Your friend"} invited you! You get ${invite.pct}% off your seat, on any date. Use the e-mail address she filled in.`}
       </p>}
@@ -258,7 +247,7 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
                 {(opts as string[]).map((o, oi) => (
                   <label key={o}>
                     <input type="radio" name={`q${qi}`} value={oi} checked={answers[qi] === oi}
-                      onChange={() => { setAnswers((a) => a.map((v, i) => (i === qi ? oi : v))); setTimeout(() => setStep(qi + 1), 260); }} />
+                      onChange={() => { setAnswers((a) => a.map((v, i) => (i === qi ? oi : v))); setTimeout(() => setStep(qi + 1), 110); }} />
                     <span>{o}</span>
                   </label>
                 ))}
