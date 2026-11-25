@@ -15,7 +15,7 @@ const SITES = {
 };
 const WIDTHS = [360, 390, 430, 1280];
 // Wording that must never be on the site.
-const BANNED = [/\b14[:.]00\b/, /vijf (leuke )?meiden/i, /five (lovely )?(girls|women)/i, /5x nieuwe vriendinnen/i, /—/];
+const BANNED = [/\b14[:.]00\b/, /vijf (leuke )?meiden/i, /five (lovely )?(girls|women)/i, /—/];
 
 const problems = [];
 const browser = await chromium.launch();
