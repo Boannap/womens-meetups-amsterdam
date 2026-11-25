@@ -57,7 +57,7 @@ function tableBars(paid: number) {
   return `<table role="presentation" cellpadding="0" cellspacing="0"><tr>${cells.slice(0, 2).join("")}</tr><tr>${cells.slice(2).join("")}</tr></table>`;
 }
 
-export async function notifySignup(kind: "paid" | "waitlist" | "free", eventId: string, p: Person, tableFull?: { paid: number; open: number }) {
+export async function notifySignup(kind: "paid" | "waitlist" | "free", eventId: string, p: Person, tableFull?: { paid: number; open: number }, seatOverride?: number) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return;
   const evs = await summary();
@@ -67,7 +67,7 @@ export async function notifySignup(kind: "paid" | "waitlist" | "free", eventId: 
   const traits = Array.isArray(p.quiz) ? quizTraits(p.quiz) : null;
   const code = traits?.code ?? "";
   const typeTxt = [TYPES[p.personality ?? ""] ?? p.personality, code ? `${code} (${code.split("").map((c) => LETTERS[c] ?? c).join(" · ")})` : ""].filter(Boolean).join(" · ");
-  const seat = kind === "paid" ? paidNow : 0;
+  const seat = kind === "paid" ? (seatOverride || paidNow) : 0;
   const table = seat ? Math.ceil(seat / SEATS) : 0;
   const seatInTable = seat ? ((seat - 1) % SEATS) + 1 : 0;
   const left = MAX_TABLES * SEATS - paidNow;
