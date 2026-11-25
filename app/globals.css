@@ -496,8 +496,8 @@ footer a:hover{text-decoration:underline}
 .at-input span{position:absolute;left:.9em;top:50%;transform:translateY(-50%);color:var(--wine);font-weight:600;pointer-events:none}
 .at-input input{padding-left:2em!important}
 /* hero photo with the receipt overlaid */
-.hero-photo{position:absolute;right:0;top:0;width:86%;height:540px;border-radius:32px;overflow:hidden;rotate:2deg;box-shadow:0 26px 50px -24px rgba(90,15,20,.55);border:6px solid var(--paper)}
-.hero-art .receipt{right:auto;left:-4%;top:auto;bottom:-6px;width:250px;font-size:.7rem;padding:20px 18px 32px;transform:rotate(-7deg);z-index:4}
+.hero-photo{position:absolute;right:0;top:0;width:86%;height:540px;border-radius:0;overflow:hidden;rotate:2deg;box-shadow:0 26px 50px -24px rgba(90,15,20,.55)}
+.hero-art .receipt{right:auto;left:0;top:auto;bottom:-6px;width:250px;font-size:.7rem;padding:20px 18px 32px;transform:rotate(-7deg);z-index:4}
 .hero-art .receipt .bar{height:26px}
 .hero-art .card-pink{left:auto;right:-14px;top:-26px;width:190px;height:132px;transform:rotate(8deg);z-index:5}
 .hero-art .card-pink .inner b{font-size:1.75rem}.hero-art .card-pink .inner span{font-size:1.05rem}
