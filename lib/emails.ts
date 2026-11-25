@@ -93,8 +93,8 @@ function vibe(lang: Lang, quiz?: (number | null)[] | null) {
 <td width="100%" style="padding:2px 0"><div style="background:#ead9cc;border-radius:99px;height:6px"><div style="background:${C.wine};border-radius:99px;height:6px;width:${w}%"></div></div></td></tr>`;
   }).join("");
   const line = lang === "nl"
-    ? `Uit jouw quiz kwam <b>${t.code}</b>. Daarmee koppelen we je aan een tafel met vijf meiden die bij je passen.`
-    : `Your quiz result is <b>${t.code}</b>. We use it to match you with five girls who fit you.`;
+    ? `Uit jouw quiz kwam <b>${t.code}</b>. Daarmee koppelen we je aan een tafel van zes meiden die bij elkaar passen.`
+    : `Your quiz result is <b>${t.code}</b>. We use it to match you at a table of six girls who fit together.`;
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid #ead9cc;border-radius:14px;margin:0 0 6px"><tr>
 <td width="64" style="padding:14px 0 14px 14px;vertical-align:top"><div style="width:56px;height:56px;line-height:56px;border-radius:50%;background:${C.wine};color:${C.pink};text-align:center;${sans};font-size:15px;font-weight:700;letter-spacing:1px">${t.code}</div></td>
 <td style="padding:12px 14px;vertical-align:top"><div style="${sans};font-size:14px;line-height:1.45;color:${C.ink};margin-bottom:6px">${line}</div>
@@ -107,10 +107,10 @@ export function mailConfirm(lang: Lang, d: MailData) {
   const subject = nl ? "Je stoel staat klaar ☕" : "Your seat is saved ☕";
   const body = nl
     ? h1(`Hoi ${firstName(d.name)},`) + p("Wat leuk dat je erbij wilt zijn! Je aanmelding is binnen.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "Het café verklappen we twee dagen van tevoren"]]) +
-      p("<b>Dit gebeurt er nu:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We zoeken vijf meiden die bij jou passen en zetten jullie samen aan één tafel.</li><li>Twee dagen van tevoren krijg je een mail${d.whatsapp ? " en een WhatsAppje" : ""} met het café en de tijd.</li><li>Een host heet iedereen welkom en brengt het gesprek op gang met de vragenkaartjes, dus niemand hoeft de stilte te vullen.</li></ul>` +
+      p("<b>Dit gebeurt er nu:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We matchen zes meiden die bij elkaar passen aan één tafel.</li><li>Twee dagen van tevoren krijg je een mail${d.whatsapp ? " en een WhatsAppje" : ""} met het café en de tijd.</li><li>Een host heet iedereen welkom en brengt het gesprek op gang met de vragenkaartjes, dus niemand hoeft de stilte te vullen.</li></ul>` +
       vibe(lang, d.quiz) + promo(lang) + p(`Zodat iedereen zich welkom voelt, hebben we een paar <a href="https://womensmeetupsinamsterdam.nl/huisregels" style="color:${C.tomato}">huisregels</a> voor aan tafel. Lees ze vast even. Onze <a href="https://womensmeetupsinamsterdam.nl/privacy#cancellation" style="color:${C.tomato}">voorwaarden</a> vind je hier.`) + p("Vragen? Beantwoord gewoon deze mail.") + p("Tot snel aan tafel,")
     : h1(`Hi ${firstName(d.name)},`) + p("So happy you want to join! We've got your sign-up.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "We'll reveal the café two days before"]]) +
-      p("<b>Here's what happens next:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We match you with five girls you'll click with, all at one table.</li><li>Two days before, you'll get an e-mail${d.whatsapp ? " and a WhatsApp" : ""} with the café and the time.</li><li>A host welcomes everyone and gets the conversation going with the question cards, so nobody has to fill the silence.</li></ul>` +
+      p("<b>Here's what happens next:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We match six girls who'll click at one table.</li><li>Two days before, you'll get an e-mail${d.whatsapp ? " and a WhatsApp" : ""} with the café and the time.</li><li>A host welcomes everyone and gets the conversation going with the question cards, so nobody has to fill the silence.</li></ul>` +
       vibe(lang, d.quiz) + promo(lang) + p(`So everyone feels welcome, we have a few <a href="https://womensmeetupsinamsterdam.com/guidelines" style="color:${C.tomato}">table guidelines</a>. Have a quick read before you come. Our <a href="https://womensmeetupsinamsterdam.com/privacy#cancellation" style="color:${C.tomato}">terms</a> are here.`) + p("Questions? Just reply to this e-mail.") + p("See you at the table,");
   return { subject, html: layout(lang, nl ? "Je aanmelding is binnen. Dit gebeurt er nu." : "We've got your sign-up. Here's what happens next.", body) };
 }
@@ -158,9 +158,9 @@ export function mailMorning(lang: Lang, d: MailData) {
   const nl = lang === "nl";
   const subject = nl ? "Vandaag is het zover ☀️" : "Today's the day ☀️";
   const body = nl
-    ? h1(`Goedemorgen ${firstName(d.name)}! ☀️`) + p(`Vandaag om <b>${time(d.date, lang)}</b> zit je met vijf nieuwe meiden aan tafel bij <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Je eerste koffietje krijg je van ons"], ["🥐", "Bestel er lekker een ontbijtje of bananenbrood bij"]]) +
+    ? h1(`Goedemorgen ${firstName(d.name)}! ☀️`) + p(`Vandaag om <b>${time(d.date, lang)}</b> zit je met zes meiden aan tafel bij <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Je eerste koffietje krijg je van ons"], ["🥐", "Bestel er lekker een ontbijtje of bananenbrood bij"]]) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route →")}</p>` + p("Kom gewoon zoals je bent. Wij nemen de vragen mee, jij jezelf.") + p("Tot straks,")
-    : h1(`Good morning ${firstName(d.name)}! ☀️`) + p(`Today at <b>${time(d.date, lang)}</b> you'll sit down with five new girls at <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Your first coffee is included"], ["🥐", "Treat yourself to breakfast or banana bread"]]) +
+    : h1(`Good morning ${firstName(d.name)}! ☀️`) + p(`Today at <b>${time(d.date, lang)}</b> you'll sit down at a table of six at <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Your first coffee is included"], ["🥐", "Treat yourself to breakfast or banana bread"]]) +
       `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions →")}</p>` + p("Just come as you are. We bring the questions, you bring yourself.") + p("See you soon,");
   return { subject, html: layout(lang, nl ? `Vandaag ${time(d.date, lang)} bij ${d.cafe}.` : `Today ${time(d.date, lang)} at ${d.cafe}.`, body) };
 }
