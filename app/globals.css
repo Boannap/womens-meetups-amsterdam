@@ -205,7 +205,7 @@ form.join{background:var(--paper);border-radius:30px;padding:36px;display:grid;g
 .field.full{grid-column:1/-1}
 label.l,legend{font-weight:700;font-size:.9rem;color:var(--wine)}
 input[type=text],input[type=email],input[type=tel],input[type=number],select{font:inherit;padding:.7em .9em;border-radius:14px;border:2px solid #e3d3c6;background:#fff;color:var(--ink);width:100%}
-input:focus,select:focus{outline:none;border-color:var(--tomato)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#3D6FB6;box-shadow:0 0 0 3px rgba(61,111,182,.15)}
 fieldset{border:0;display:flex;flex-direction:column;gap:8px}
 .pills{display:flex;flex-wrap:wrap;gap:8px}
 .quiz{background:var(--cream,#fff6ee);border-radius:22px;padding:20px 20px 16px;border:2px dashed rgba(90,15,20,.18)}
@@ -233,7 +233,7 @@ textarea{font:inherit;padding:.7em .9em;border-radius:14px;border:2px solid #e3d
 .pills input{position:absolute;opacity:0;pointer-events:none}
 .pills span{display:inline-block;padding:.45em .95em;border-radius:999px;border:2px solid #e3d3c6;font-size:.92rem;transition:all .15s}
 .pills input:checked+span{background:var(--pink);border-color:var(--wine);color:var(--wine);font-weight:700}
-.pills input:focus-visible+span{outline:2px solid var(--tomato);outline-offset:2px}
+.pills input:focus-visible+span{outline:2px solid #3D6FB6;outline-offset:2px}
 .consent{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:#5b3a3c}
 .consent input{margin-top:4px;accent-color:var(--wine)}
 .ok{grid-column:1/-1;text-align:center;padding:30px 10px}
