@@ -12,7 +12,7 @@ export const evFor = (id: string) => (events as Ev[]).find((e) => e.id === id);
 
 export function calText(ev: Ev, lang: Lang) {
   const nl = lang === "nl";
-  const title = nl ? "Table of Six ☕ Women's Meetups in Amsterdam" : "Table of Six ☕ Women's Meetups in Amsterdam";
+  const title = "Women's Meetups in Amsterdam ☕";
   const location = ev.cafe ? `${ev.cafe}${ev.address ? `, ${ev.address}` : ""}` : nl ? "Amsterdam (het café hoor je 2 dagen van tevoren)" : "Amsterdam (café shared 2 days before)";
   const site = nl ? BASE : "https://womensmeetupsinamsterdam.com";
   const details = nl
