@@ -81,29 +81,24 @@ const LET: Record<Lang, Record<string, string>> = {
   nl: { E: "Extravert", I: "Introvert", N: "Intuïtief", S: "Praktisch", F: "Gevoel", T: "Denker", P: "Spontaan", J: "Planner" },
   en: { E: "Extravert", I: "Introvert", N: "Intuitive", S: "Practical", F: "Feeling", T: "Thinker", P: "Spontaneous", J: "Planner" },
 };
-/** Small recap of her quiz result: the 4-letter code and one bar per pair. Empty when the quiz is missing. */
+/** Small recap of her quiz result: a little badge with the 4-letter code, one line, and four mini bars. Empty when the quiz is missing. */
 function vibe(lang: Lang, quiz?: (number | null)[] | null) {
   const t = Array.isArray(quiz) ? quizTraits(quiz) : null;
   if (!t) return "";
   const L = LET[lang];
   const pairs: [string, string][] = [["E", "I"], ["N", "S"], ["F", "T"], ["P", "J"]];
   const bars = pairs.map(([a, b], k) => {
-    const v = t.pct[k];
-    return `<tr><td style="${sans};font-size:13px;color:${C.wine};padding:5px 8px 5px 0;white-space:nowrap;${v >= 50 ? "font-weight:700" : ""}">${L[a]}</td>
-<td width="100%" style="padding:5px 0"><div style="background:#ead9cc;border-radius:99px;height:10px"><div style="background:${C.wine};border-radius:99px;height:10px;width:${Math.max(6, v)}%"></div></div></td>
-<td style="${sans};font-size:13px;color:${C.wine};padding:5px 0 5px 8px;white-space:nowrap;text-align:right;${v < 50 ? "font-weight:700" : ""}">${L[b]}</td></tr>`;
+    const v = t.pct[k], win = v >= 50 ? a : b, w = v >= 50 ? v : 100 - v;
+    return `<tr><td style="${sans};font-size:12px;color:${C.soft};padding:2px 8px 2px 0;white-space:nowrap">${L[win]}</td>
+<td width="100%" style="padding:2px 0"><div style="background:#ead9cc;border-radius:99px;height:6px"><div style="background:${C.wine};border-radius:99px;height:6px;width:${w}%"></div></div></td></tr>`;
   }).join("");
-  const title = lang === "nl" ? "Zo zien we jou nu" : "This is how we see you now";
-  const soft = lang === "nl"
-    ? `Uit jouw quiz kwam <b>${t.code}</b>. Op basis daarvan koppelen we je nu aan een tafel met vijf meiden die bij je passen. Een eerste indruk, geen hokje!`
-    : `Your quiz result is <b>${t.code}</b>. Based on this, we're now matching you with five girls who fit you. A first impression, not a box!`;
-  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.pink};border-radius:16px;margin:0 0 18px"><tr><td style="padding:18px 20px">
-<div style="${sans};font-size:12px;font-weight:700;letter-spacing:2px;color:${C.wine}">${title.toUpperCase()}</div>
-<div style="${font};font-size:34px;font-weight:700;color:${C.wine};letter-spacing:3px;margin:6px 0 2px">${t.code}</div>
-<div style="${sans};font-size:14px;color:${C.wine};margin-bottom:10px">${t.code.split("").map((c) => L[c]).join(" · ")}</div>
-<table width="100%" cellpadding="0" cellspacing="0" role="presentation">${bars}</table>
-<div style="${sans};font-size:13px;color:${C.wine};margin-top:8px">${soft}</div>
-</td></tr></table>`;
+  const line = lang === "nl"
+    ? `Uit jouw quiz kwam <b>${t.code}</b>. Daarmee koppelen we je aan een tafel met vijf meiden die bij je passen.`
+    : `Your quiz result is <b>${t.code}</b>. We use it to match you with five girls who fit you.`;
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid #ead9cc;border-radius:14px;margin:0 0 16px"><tr>
+<td width="64" style="padding:14px 0 14px 14px;vertical-align:top"><div style="width:56px;height:56px;line-height:56px;border-radius:50%;background:${C.wine};color:${C.pink};text-align:center;${sans};font-size:15px;font-weight:700;letter-spacing:1px">${t.code}</div></td>
+<td style="padding:12px 14px;vertical-align:top"><div style="${sans};font-size:14px;line-height:1.45;color:${C.ink};margin-bottom:6px">${line}</div>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">${bars}</table></td></tr></table>`;
 }
 
 export function mailConfirm(lang: Lang, d: MailData) {
