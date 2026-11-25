@@ -20,7 +20,7 @@ export default function Header({ lang, alt }: { lang: Lang; alt: string }) {
           <li><a href={a("#looking-forward")}>{t.nav_exp}</a></li>
           <li><a href={a("#how")}>{t.nav_how}</a></li>
           <li><a href={a("#faq")}>{t.nav_faq}</a></li>
-          <li><Link className="nav-partner" href={partnerPath(lang)}>{lang === "nl" ? "Voor cafés" : "For cafés"}</Link></li>
+          <li><Link className="nav-partner" href={`${partnerPath(lang)}#top`}>{lang === "nl" ? "Voor cafés" : "For cafés"}</Link></li>
         </ul>
         <div className="nav-r">
           <nav className="lang" aria-label="Language">

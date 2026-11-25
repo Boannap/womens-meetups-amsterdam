@@ -26,9 +26,9 @@ export default function Footer({ lang }: { lang: Lang }) {
               <li><a href={a("#meetups")}>{t.nav_meetups}</a></li>
               <li><a href={a("#looking-forward")}>{t.nav_exp}</a></li>
               <li><a href={a("#how")}>{t.nav_how}</a></li>
-              <li><Link href={hostPath(lang)}>{t.b_founder}</Link></li>
+              <li><Link href={`${hostPath(lang)}#top`}>{t.b_founder}</Link></li>
               <li><a href={a("#faq")}>{t.nav_faq}</a></li>
-              <li><Link className="ft-partner" href={partnerPath(lang)}>☕ {lang === "nl" ? "Voor cafés: samenwerken" : "For cafés: partner with us"} →</Link></li>
+              <li><Link className="ft-partner" href={`${partnerPath(lang)}#top`}>☕ {lang === "nl" ? "Voor cafés: samenwerken" : "For cafés: partner with us"} →</Link></li>
             </ul>
           </div>
           <div>
