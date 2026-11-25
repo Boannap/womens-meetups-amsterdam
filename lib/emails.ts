@@ -48,7 +48,7 @@ const time = (iso: string, lang: Lang) => fmt(iso, lang, { hour: "2-digit", minu
 
 const ig = (lang: Lang) => `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.wine};border-radius:16px;margin:22px 0 4px"><tr><td style="padding:20px 22px" align="center">
 <div style="${font};font-size:26px;font-weight:700;color:${C.pink};margin-bottom:6px">${lang === "nl" ? "Volg ons op Instagram 👇" : "Follow us on Instagram 👇"}</div>
-<div style="${sans};font-size:15px;line-height:1.45;color:${C.cream};margin-bottom:16px;white-space:nowrap">${lang === "nl" ? "Nieuwe vriendschappen en de laatste updates ✨" : "New friendships and the latest updates ✨"}</div>
+<div style="${sans};font-size:15px;line-height:1.45;color:${C.cream};margin-bottom:16px;white-space:nowrap">${lang === "nl" ? "Zie nieuwe vriendschappen en de laatste updates ✨" : "See new friendships and the latest updates ✨"}</div>
 <a href="https://www.instagram.com/womensmeetupsinamsterdam" style="display:inline-block;background:${C.pink};color:${C.wine};${sans};font-weight:700;font-size:16px;text-decoration:none;padding:14px 28px;border-radius:999px">→ @womensmeetupsinamsterdam</a>
 </td></tr></table>`;
 
