@@ -9,12 +9,13 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => { setNow(Date.now()); const id = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(id); }, []);
   const nl = lang === "nl";
+  const daysLeft = (iso: string) => Math.max(0, Math.floor((new Date(iso).getTime() - (now ?? Date.now())) / 86400000));
   const countdown = (iso: string) => {
     if (now === null) return null;
     let s = Math.max(0, Math.floor((new Date(iso).getTime() - now) / 1000));
     const d = Math.floor(s / 86400); s -= d * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60;
     const pad = (n: number) => String(n).padStart(2, "0");
-    return <span className="cd" aria-label={nl ? `Nog ${d} dagen` : `${d} days to go`}>⏳ {nl ? "nog " : ""}<b>{d}</b>{nl ? "d" : "d"} <b>{pad(h)}</b>{nl ? "u" : "h"} <b>{pad(m)}</b>m <b>{pad(s)}</b>s{nl ? "" : " to go"}</span>;
+    return <span className="cd" aria-label={nl ? `Nog ${d} dagen` : `${d} days to go`}>⏳ <b>{d}</b>d <b>{pad(h)}</b>{nl ? "u" : "h"} <b>{pad(m)}</b>m <b>{pad(s)}</b>s</span>;
   };
   const locale = lang === "nl" ? "nl-NL" : "en-GB";
   const fmt = (d: string, o: Intl.DateTimeFormatOptions) =>
@@ -31,9 +32,12 @@ export default function Events({ lang, t, events }: { lang: Lang; t: Dict; event
           const left = isEventFull(e, seats) ? 0 : Math.max(0, capacity(e, seats) - takenTotal(e, seats));
           return (
             <article className="ev" key={e.id}>
-              <div className="ev-date scallop">
-                <div className="d">{fmt(e.date, { day: "numeric" })}</div>
-                <div className="m">{fmt(e.date, { month: "short" })}</div>
+              <div className="ev-dcol">
+                <div className="ev-date scallop">
+                  <div className="d">{fmt(e.date, { day: "numeric" })}</div>
+                  <div className="m">{fmt(e.date, { month: "short" })}</div>
+                </div>
+                {left > 0 && now !== null && <span className="ev-days">{nl ? `nog ${daysLeft(e.date)} dagen` : `${daysLeft(e.date)} days to go`}</span>}
               </div>
               <div>
                 <h3>{e.title[lang]}</h3>

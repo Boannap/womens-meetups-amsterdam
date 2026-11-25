@@ -537,3 +537,5 @@ footer a:hover{text-decoration:underline}
 .join .fprog{grid-column:1/-1}
 @media (max-width:800px){.ev{gap:16px 18px;padding:20px}.ev h3{font-size:1.35rem}.ev-r{flex-wrap:wrap;gap:10px;justify-content:flex-start}.ev-r .price{flex-basis:100%;order:3}.ev-r .btn{flex-basis:100%;order:4;text-align:center;justify-content:center}.ev-r .cd{order:1}.ev-r .left{order:2}
 .fnav .btn{white-space:nowrap;padding-left:20px;padding-right:20px}}
+.ev-dcol{display:flex;flex-direction:column;align-items:stretch;gap:10px}.ev-dcol .ev-days{align-self:center}
+.ev-days{background:var(--blush);color:var(--wine);border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:700;white-space:nowrap;rotate:-3deg}
