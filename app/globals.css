@@ -569,3 +569,7 @@ footer .ft-k{display:block;opacity:.8}
 @media (max-width:1240px){.nav ul{gap:16px;font-size:.95rem}}
 @media (max-width:1100px){.nav ul li:has(.nav-partner){display:none}}
 .ft-partner{white-space:nowrap;font-size:.92rem}
+.ft-partner{background:none;padding:0;margin-top:2px;border-radius:0;color:var(--pink)!important;font-weight:700;font-size:inherit;text-decoration:underline;text-decoration-color:rgba(243,169,184,.5);text-underline-offset:4px}
+.ft-partner:hover{background:none;color:var(--paper)!important}
+.nav-partner{border:2px solid var(--tomato);color:var(--tomato)!important;font-weight:600}
+.nav-partner:hover{background:var(--tomato);color:var(--paper)!important}
