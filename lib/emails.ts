@@ -46,7 +46,13 @@ const fmt = (iso: string, lang: Lang, o: Intl.DateTimeFormatOptions) =>
 const day = (iso: string, lang: Lang) => fmt(iso, lang, { weekday: "long", day: "numeric", month: "long" });
 const time = (iso: string, lang: Lang) => fmt(iso, lang, { hour: "2-digit", minute: "2-digit" });
 
-function layout(lang: Lang, preheader: string, body: string) {
+const ig = (lang: Lang) => `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.wine};border-radius:16px;margin:22px 0 4px"><tr><td style="padding:20px 22px" align="center">
+<div style="${font};font-size:22px;font-weight:700;color:${C.pink};margin-bottom:4px">${lang === "nl" ? "Volg ons op Instagram 👇" : "Follow us on Instagram 👇"}</div>
+<div style="${sans};font-size:14px;color:${C.cream};margin-bottom:14px">${lang === "nl" ? "Voor de mooiste cafés, nieuwe datums en een kijkje achter de schermen." : "For the prettiest cafés, new dates and a look behind the scenes."}</div>
+<a href="https://www.instagram.com/womensmeetupsinamsterdam" style="display:inline-block;background:${C.pink};color:${C.wine};${sans};font-weight:700;font-size:16px;text-decoration:none;padding:12px 24px;border-radius:999px">→ @womensmeetupsinamsterdam</a>
+</td></tr></table>`;
+
+function layout(lang: Lang, preheader: string, body: string, withIg = true) {
   return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="color-scheme" content="light"></head>
 <body style="margin:0;background:${C.cream}">
 <div style="display:none;max-height:0;overflow:hidden">${preheader}</div>
@@ -57,6 +63,7 @@ function layout(lang: Lang, preheader: string, body: string) {
 ${body}
 <div style="height:1px;background:#ead9cc;margin:28px 0 18px"></div>
 ${signature(lang)}
+${withIg ? ig(lang) : ""}
 </td></tr>
 <tr><td align="center" style="${sans};font-size:12px;color:${C.soft};padding:18px 10px">${lang === "nl" ? "Je krijgt deze mail omdat je je hebt aangemeld voor een Table of Six." : "You're getting this e-mail because you signed up for a Table of Six."}</td></tr>
 </table></td></tr></table></body></html>`;
@@ -183,7 +190,7 @@ export function mailPartner(lang: Lang, name = "") {
   const m = partnerMail(lang, name);
   const body = h1(m.hi) + p(m.intro) + p(`<b>${m.packs_t}</b>`) + `<ul style="margin:0 0 14px;padding-left:20px">${m.packs.map((x) => `<li>${x}</li>`).join("")}</ul>` +
     p(m.coffee) + card([["📊", `<b>${m.indic_t}:</b> ${m.indic}`]]) + p(m.bonus) + `<p style="margin:0 0 14px;font-size:13px;color:#8a6f6f">${m.disc}</p>` + p(m.next) + p(m.bye);
-  return { subject: m.subject, html: layout(lang, m.intro, body) };
+  return { subject: m.subject, html: layout(lang, m.intro, body, false) };
 }
 
 export function mailReview(lang: Lang, d: MailData) {
