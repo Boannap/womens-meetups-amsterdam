@@ -98,7 +98,8 @@ function vibe(lang: Lang, quiz?: (number | null)[] | null) {
   return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border:1px solid #ead9cc;border-radius:14px;margin:0 0 16px"><tr>
 <td width="64" style="padding:14px 0 14px 14px;vertical-align:top"><div style="width:56px;height:56px;line-height:56px;border-radius:50%;background:${C.wine};color:${C.pink};text-align:center;${sans};font-size:15px;font-weight:700;letter-spacing:1px">${t.code}</div></td>
 <td style="padding:12px 14px;vertical-align:top"><div style="${sans};font-size:14px;line-height:1.45;color:${C.ink};margin-bottom:6px">${line}</div>
-<table width="100%" cellpadding="0" cellspacing="0" role="presentation">${bars}</table></td></tr></table>`;
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">${bars}</table>
+<div style="${sans};font-size:12px;font-style:italic;color:${C.soft};margin-top:6px">${lang === "nl" ? "Een eerste indruk van dit moment, geen hokje." : "A first impression of right now, not a box."}</div></td></tr></table>`;
 }
 
 export function mailConfirm(lang: Lang, d: MailData) {
