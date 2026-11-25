@@ -1,3 +1,4 @@
+import { calLinks } from "./calendar";
 import { partnerMail } from "./partnerMail";
 /**
  * Branded e-mails for Women's Meetups in Amsterdam.
@@ -24,6 +25,7 @@ export type MailData = {
   token?: string; // signup id, used for review links
   whatsapp?: boolean;
   quiz?: (number | null)[] | null;
+  eventId?: string;
 };
 
 /** Signature block, also used as the Gmail signature for hello@. */
@@ -77,6 +79,15 @@ const promo = (lang: Lang) => `<div style="display:inline-block;background:${C.p
 
 /** 1. Right after payment + sign-up (text approved by Boanna, 18 Nov). */
 
+const cal = (lang: Lang, eventId?: string) => {
+  const l = eventId ? calLinks(eventId, lang) : null;
+  if (!l) return "";
+  const b = (href: string, t: string) => `<a href="${href}" style="display:inline-block;margin:4px 6px 4px 0;background:#fff;color:${C.wine};border:1.5px solid ${C.wine};border-radius:999px;padding:8px 14px;${sans};font-size:14px;font-weight:700;text-decoration:none">${t}</a>`;
+  return `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.cream};border-radius:16px;margin:4px 0 18px"><tr><td style="padding:16px 20px">
+<div style="${sans};font-weight:700;color:${C.wine};margin-bottom:6px">📅 ${lang === "nl" ? "Zet het in je agenda" : "Add it to your calendar"}</div>
+<div style="font-size:14px;color:${C.soft};margin-bottom:6px">${lang === "nl" ? "Met alle info erin: hoe het werkt, waar je heen moet en hoe je ons bereikt." : "With all the info inside: how it works, where to go and how to reach us."}</div>
+${b(l.google, "Google")}${b(l.apple, "Apple / iPhone")}${b(l.outlook, "Outlook")}</td></tr></table>`;
+};
 const LET: Record<Lang, Record<string, string>> = {
   nl: { E: "Extravert", I: "Introvert", N: "Intuïtief", S: "Praktisch", F: "Gevoel", T: "Denker", P: "Spontaan", J: "Planner" },
   en: { E: "Extravert", I: "Introvert", N: "Intuitive", S: "Practical", F: "Feeling", T: "Thinker", P: "Spontaneous", J: "Planner" },
@@ -106,10 +117,10 @@ export function mailConfirm(lang: Lang, d: MailData) {
   const nl = lang === "nl";
   const subject = nl ? "Je stoel staat klaar ☕" : "Your seat is saved ☕";
   const body = nl
-    ? h1(`Hoi ${firstName(d.name)},`) + p("Wat leuk dat je erbij wilt zijn! Je aanmelding is binnen.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "Het café verklappen we twee dagen van tevoren"]]) +
+    ? h1(`Hoi ${firstName(d.name)},`) + p("Wat leuk dat je erbij wilt zijn! Je aanmelding is binnen.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "Het café verklappen we twee dagen van tevoren"]]) + cal(lang, d.eventId) +
       p("<b>Dit gebeurt er nu:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We matchen zes meiden die bij elkaar passen aan één tafel.</li><li>Twee dagen van tevoren krijg je een mail${d.whatsapp ? " en een WhatsAppje" : ""} met het café en de tijd.</li><li>Een host heet iedereen welkom en brengt het gesprek op gang met de vragenkaartjes, dus niemand hoeft de stilte te vullen.</li></ul>` +
       vibe(lang, d.quiz) + promo(lang) + p(`Zodat iedereen zich welkom voelt, hebben we een paar <a href="https://womensmeetupsinamsterdam.nl/huisregels" style="color:${C.tomato}">huisregels</a> voor aan tafel. Lees ze vast even. Onze <a href="https://womensmeetupsinamsterdam.nl/privacy#cancellation" style="color:${C.tomato}">voorwaarden</a> vind je hier.`) + p("Vragen? Beantwoord gewoon deze mail.") + p("Tot snel aan tafel,")
-    : h1(`Hi ${firstName(d.name)},`) + p("So happy you want to join! We've got your sign-up.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "We'll reveal the café two days before"]]) +
+    : h1(`Hi ${firstName(d.name)},`) + p("So happy you want to join! We've got your sign-up.") + card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "We'll reveal the café two days before"]]) + cal(lang, d.eventId) +
       p("<b>Here's what happens next:</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>We match six girls who'll click at one table.</li><li>Two days before, you'll get an e-mail${d.whatsapp ? " and a WhatsApp" : ""} with the café and the time.</li><li>A host welcomes everyone and gets the conversation going with the question cards, so nobody has to fill the silence.</li></ul>` +
       vibe(lang, d.quiz) + promo(lang) + p(`So everyone feels welcome, we have a few <a href="https://womensmeetupsinamsterdam.com/guidelines" style="color:${C.tomato}">table guidelines</a>. Have a quick read before you come. Our <a href="https://womensmeetupsinamsterdam.com/privacy#cancellation" style="color:${C.tomato}">terms</a> are here.`) + p("Questions? Just reply to this e-mail.") + p("See you at the table,");
   return { subject, html: layout(lang, nl ? "Je aanmelding is binnen. Dit gebeurt er nu." : "We've got your sign-up. Here's what happens next.", body) };
@@ -121,13 +132,13 @@ export function mailReminder(lang: Lang, d: MailData) {
   const subject = nl ? "Nog één weekje! ☕" : "One more week! ☕";
   const body = nl
     ? h1(`Nog één weekje, ${firstName(d.name)}!`) + p("Over een week is het zover. De meiden aan jouw tafel kijken er al naar uit om je te ontmoeten!") +
-      card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "Het café hoor je twee dagen van tevoren"]]) +
+      card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "Het café hoor je twee dagen van tevoren"]]) + cal(lang, d.eventId) +
       p("Wij zijn druk bezig met een mooie tafel voor jullie: we matchen de groep, kiezen een gezellig café en leggen de vragenkaartjes alvast klaar.") +
-      p("Zet het vast in je agenda. Kun je toch niet? Laat het ons zo snel mogelijk weten, dan geven we je plek aan iemand van de wachtlijst.") + p("Tot volgende week,")
+      p("Kun je toch niet? Laat het ons zo snel mogelijk weten, dan geven we je plek aan iemand van de wachtlijst.") + p("Tot volgende week,")
     : h1(`One more week, ${firstName(d.name)}!`) + p("Next week is the day. The girls at your table can't wait to meet you!") +
-      card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "You'll hear the café two days before"]]) +
+      card([["📅", `<b>${day(d.date, lang)}</b>, ${time(d.date, lang)}`], ["📍", "You'll hear the café two days before"]]) + cal(lang, d.eventId) +
       p("We're busy setting up a lovely table for you: matching the group, picking a cosy café and laying out the question cards.") +
-      p("Pop it in your calendar. Can't make it after all? Let us know as soon as you can, so we can give your seat to someone on the waitlist.") + p("See you next week,");
+      p("Can't make it after all? Let us know as soon as you can, so we can give your seat to someone on the waitlist.") + p("See you next week,");
   return { subject, html: layout(lang, nl ? "Over een week zit je aan tafel." : "Next week you'll be at the table.", body) };
 }
 
@@ -143,11 +154,11 @@ export function mailDetails(lang: Lang, d: MailData) {
   ];
   const body = nl
     ? h1(`Nog twee nachtjes slapen, ${firstName(d.name)}!`) + p("Je tafel is gematcht en we hebben een gezellig plekje voor jullie gevonden. Hier zijn de details:") + card(rows) +
-      `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route in Google Maps →")}</p>` +
+      `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route in Google Maps →")}</p>` + cal(lang, d.eventId) +
       p("<b>Goed om te weten</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>Vraag bij binnenkomst naar de tafel van <b>Women's Meetups</b>, of zoek de gesprekskaartjes op tafel.</li><li>Je eerste koffietje krijg je van ons! Bestel er lekker een ontbijtje of bananenbrood bij! Wat je verder bestelt, reken je zelf af.</li><li>Kun je toch niet? Laat het ons vandaag nog weten, dan geven we je plek aan iemand van de wachtlijst.</li></ul>` +
       p("We hebben er zin in!")
     : h1(`Two more sleeps, ${firstName(d.name)}!`) + p("Your table is matched and we found a cosy spot for you. Here are the details:") + card(rows) +
-      `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions in Google Maps →")}</p>` +
+      `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions in Google Maps →")}</p>` + cal(lang, d.eventId) +
       p("<b>Good to know</b>") + `<ul style="margin:0 0 14px;padding-left:20px"><li>Ask for the <b>Women's Meetups</b> table when you walk in, or look for the conversation cards.</li><li>Your first coffee is included. Treat yourself to some breakfast or banana bread too! Anything else you order, you pay at the café.</li><li>Can't make it after all? Let us know today, so we can give your seat to someone on the waitlist.</li></ul>` +
       p("We can't wait!");
   return { subject, html: layout(lang, nl ? `${d.cafe}, ${time(d.date, lang)}. Alles wat je moet weten.` : `${d.cafe}, ${time(d.date, lang)}. Everything you need to know.`, body) };
@@ -159,9 +170,9 @@ export function mailMorning(lang: Lang, d: MailData) {
   const subject = nl ? "Vandaag is het zover ☀️" : "Today's the day ☀️";
   const body = nl
     ? h1(`Goedemorgen ${firstName(d.name)}! ☀️`) + p(`Vandaag om <b>${time(d.date, lang)}</b> zit je met zes meiden aan tafel bij <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Je eerste koffietje krijg je van ons"], ["🥐", "Bestel er lekker een ontbijtje of bananenbrood bij"]]) +
-      `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route →")}</p>` + p("Kom gewoon zoals je bent. Wij nemen de vragen mee, jij jezelf.") + p("Tot straks,")
+      `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Route →")}</p>` + cal(lang, d.eventId) + p("Kom gewoon zoals je bent. Wij nemen de vragen mee, jij jezelf.") + p("Tot straks,")
     : h1(`Good morning ${firstName(d.name)}! ☀️`) + p(`Today at <b>${time(d.date, lang)}</b> you'll sit down at a table of six at <b>${d.cafe}</b>.`) + card([["📍", `${d.cafe}, ${d.address}`], ["☕", "Your first coffee is included"], ["🥐", "Treat yourself to breakfast or banana bread"]]) +
-      `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions →")}</p>` + p("Just come as you are. We bring the questions, you bring yourself.") + p("See you soon,");
+      `<p style="margin:0 0 20px">${btn(d.mapsUrl || "#", "Directions →")}</p>` + cal(lang, d.eventId) + p("Just come as you are. We bring the questions, you bring yourself.") + p("See you soon,");
   return { subject, html: layout(lang, nl ? `Vandaag ${time(d.date, lang)} bij ${d.cafe}.` : `Today ${time(d.date, lang)} at ${d.cafe}.`, body) };
 }
 

@@ -35,7 +35,7 @@ function build(kind: Kind, w: Who) {
   const lang: Lang = w.site_lang === "nl" ? "nl" : "en";
   const d: MailData = {
     name: w.name, date: ev.date, end: ev.end, cafe: ev.cafe, address: ev.address, mapsUrl: ev.maps, tableLang: ev.tableLang,
-    token: w.id, whatsapp: w.contact_pref === "whatsapp_email", quiz: w.quiz,
+    token: w.id, whatsapp: w.contact_pref === "whatsapp_email", quiz: w.quiz, eventId: w.event_id,
   };
   if ((kind === "details" || kind === "morning") && !ev.cafe) return null; // no café known yet: never send half a mail
   return kind === "confirm" ? mailConfirm(lang, d) : kind === "waitlist" ? mailWaitlist(lang, d) : kind === "reminder" ? mailReminder(lang, d)
