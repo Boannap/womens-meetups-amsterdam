@@ -53,7 +53,7 @@ export default function Home({ lang }: { lang: Lang }) {
                 <div className="inner"><b>Table<br />of Six</b><span>where friendships start</span></div>
               </div>
               <div className="receipt" id="receipt">
-                <div className="c"><b>{t.r_head}</b><br />{t.r_table}<br />SUN 20 DEC · 14:00</div>
+                <div className="c"><b>{t.r_head}</b><br />{t.r_table}<br />{new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "Europe/Amsterdam" }).format(new Date(EVENTS[0].date)).toUpperCase().replace(",", "")} · {new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Amsterdam" }).format(new Date(EVENTS[0].date))}</div>
                 <hr />
                 <div className="row"><span>{t.r_seat}</span><span>€12.50</span></div>
                 <div className="row"><span>{t.r_coffee}</span><span className="free">{t.r_free}</span></div>
