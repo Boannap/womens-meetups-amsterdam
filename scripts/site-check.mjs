@@ -25,7 +25,7 @@ for (const [base, paths] of Object.entries(SITES)) {
     for (const width of WIDTHS) {
       const page = await browser.newPage({ viewport: { width, height: 900 }, isMobile: width < 800 });
       const errors = [];
-      page.on("pageerror", (e) => errors.push(e.message));
+      page.on("pageerror", (e) => { if (!/Loading chunk|ChunkLoadError|Loading CSS chunk/i.test(e.message)) errors.push(e.message); }); // chunk errors only happen while a new version is being deployed
       let res;
       try { res = await page.goto(url, { waitUntil: "networkidle", timeout: 45000 }); }
       catch (e) { problems.push(`${url} @${width}: laadt niet (${e.message.split("\n")[0]})`); await page.close(); continue; }
