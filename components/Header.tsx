@@ -17,7 +17,7 @@ export default function Header({ lang, alt }: { lang: Lang; alt: string }) {
         </Link>
         <ul>
           <li><a href={a("#meetups")}>{t.nav_meetups}</a></li>
-          <li><a href={a("#gallery")}>{t.nav_exp}</a></li>
+          <li><a href={a("#looking-forward")}>{t.nav_exp}</a></li>
           <li><a href={a("#how")}>{t.nav_how}</a></li>
           <li><a href={a("#faq")}>{t.nav_faq}</a></li>
         </ul>

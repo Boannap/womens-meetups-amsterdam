@@ -24,7 +24,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             <h4>{t.ft_explore}</h4>
             <ul>
               <li><a href={a("#meetups")}>{t.nav_meetups}</a></li>
-              <li><a href={a("#gallery")}>{t.nav_exp}</a></li>
+              <li><a href={a("#looking-forward")}>{t.nav_exp}</a></li>
               <li><a href={a("#how")}>{t.nav_how}</a></li>
               <li><Link href={hostPath(lang)}>{t.b_founder}</Link></li>
               <li><a href={a("#faq")}>{t.nav_faq}</a></li>
