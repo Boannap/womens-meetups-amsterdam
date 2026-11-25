@@ -539,3 +539,7 @@ footer a:hover{text-decoration:underline}
 .fnav .btn{white-space:nowrap;padding-left:20px;padding-right:20px}}
 .ev-dcol{display:flex;flex-direction:column;align-items:stretch;gap:10px}.ev-dcol .ev-days{align-self:center}
 .ev-days{background:var(--blush);color:var(--wine);border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:700;white-space:nowrap;rotate:-3deg}
+.db-tables{display:flex;flex-wrap:wrap;gap:10px 22px;margin:8px 0 4px}
+.db-table-h{font-size:.85rem;color:#7a5355;margin-bottom:4px}.db-table-h b{color:var(--wine)}
+.db-seats{display:flex;gap:5px}.db-seats i{width:16px;height:16px;border-radius:50%;background:#F3D3DA}
+.db-seats i.paid{background:var(--wine)}.db-seats i.pend{background:var(--pink);outline:2px dashed var(--wine);outline-offset:-2px}

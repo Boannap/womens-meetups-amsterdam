@@ -242,16 +242,26 @@ export default function Dashboard() {
 
           <div className="db-advice db-partners">
             <h3>Komende meetups 🪑</h3>
-            <p className="db-hint">Elke balk is een datum. Donker = betaald. Klik +1 om een tafel erbij te openen (max. 4), dan komen er 6 plekken bij.</p>
+            <p className="db-hint">Per datum zie je elke tafel met 6 stoelen. Donker = betaald, roze = bezig met betalen. Klik +1 om een tafel erbij te openen (max. 4).</p>
             {upcoming.map((e) => {
               const tb = tbs[e.id] ?? { open: 1, paid: 0, pending: 0, waitlist: 0 };
               const open = e.soldOut ? e.tables.length : Math.min(tb.open ?? 1, e.tables.length);
-              const cap = open * 6;
               return (
                 <div className="db-ev" key={e.id}>
                   <div className="db-ev-h"><b>{new Intl.DateTimeFormat("nl-NL", { weekday: "short", day: "numeric", month: "long" }).format(new Date(e.date))}</b>
-                    <span>{tb.paid}/{cap} betaald{tb.pending ? ` · ${tb.pending} bezig met betalen` : ""}{tb.waitlist ? ` · ${tb.waitlist} wachtlijst` : ""}{e.soldOut ? " · uitverkocht (lancering)" : ""}</span></div>
-                  <div className="db-prog"><span className="paid" style={{ width: `${Math.min(100, (tb.paid / cap) * 100)}%` }} /><span className="pend" style={{ width: `${Math.min(100, (tb.pending / cap) * 100)}%` }} /></div>
+                    <span>{tb.paid} betaald{tb.pending ? ` · ${tb.pending} bezig met betalen` : ""}{tb.waitlist ? ` · ${tb.waitlist} wachtlijst` : ""}{e.soldOut ? " · uitverkocht (lancering)" : ""}</span></div>
+                  <div className="db-tables">
+                    {Array.from({ length: open }, (_, ti) => {
+                      const paidHere = Math.max(0, Math.min(6, tb.paid - ti * 6));
+                      const pendHere = Math.max(0, Math.min(6 - paidHere, tb.paid + tb.pending - ti * 6 - paidHere));
+                      return (
+                        <div className="db-table" key={ti}>
+                          <div className="db-table-h">Tafel {ti + 1} <b>{paidHere}/6</b></div>
+                          <div className="db-seats">{Array.from({ length: 6 }, (_, si) => <i key={si} className={si < paidHere ? "paid" : si < paidHere + pendHere ? "pend" : ""} />)}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
                   {!e.soldOut && <div className="db-ev-btns">{open} {open === 1 ? "tafel" : "tafels"} open
                     <button className="db-toggle" disabled={open >= Math.min(4, e.tables.length)} onClick={() => setTables(e.id, open + 1)}>+1 tafel</button>
                     <button className="db-toggle" disabled={open <= 1 || tb.paid > (open - 1) * 6} onClick={() => setTables(e.id, open - 1)}>−1 tafel</button></div>}
