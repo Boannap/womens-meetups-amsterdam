@@ -3,6 +3,7 @@
  */
 import events from "./events.json";
 import { quizTraits } from "./quiz";
+import content from "./content.json";
 
 const TYPES: Record<string, string> = { chatter: "Kletskous", connector: "Verbinder", explorer: "Ontdekker", listener: "Luisteraar" };
 const LETTERS: Record<string, string> = { E: "Extravert", I: "Introvert", N: "Intuïtief", S: "Praktisch", F: "Gevoel", T: "Denker", P: "Spontaan", J: "Planner" };
@@ -15,6 +16,7 @@ type Person = {
   email?: string; phone?: string; contact_pref?: string; instagram?: string; hoping?: string[] | null; hobbies?: string;
   found_via?: string; table_wish?: string; newsletter?: boolean; quiz?: (number | null)[] | null;
   created_at?: string; paid_at?: string; amount_cents?: number | null;
+  form_ease?: string; site_lang?: string; whatsapp_consent?: boolean; referral_group?: string | null;
 };
 type Ev = { event_id: string; paid: number; waitlist: number; unpaid: number; open_tables: number };
 
@@ -92,10 +94,19 @@ export async function notifySignup(kind: "paid" | "waitlist" | "free", eventId: 
     ["Hobby's", p.hobbies ?? ""],
     ["Tafelwens", p.table_wish ?? ""],
     ["Gevonden via", p.found_via ?? ""],
-    ["Nieuwsbrief", p.newsletter ? "ja" : ""],
+    ["Nieuwsbrief", p.newsletter ? "ja" : "nee"],
+    ["WhatsApp-akkoord", p.contact_pref === "whatsapp_email" ? (p.whatsapp_consent ? "ja" : "nee") : ""],
+    ["Site-taal", p.site_lang === "nl" ? "Nederlands" : p.site_lang === "en" ? "Engels" : ""],
+    ["Formulier", p.form_ease ?? ""],
+    ["Vriendinnenlink", p.referral_group ? "ja, via een vriendin" : ""],
   ].filter(([, v]) => v) as [string, string][];
+  const QUIZ = (content as unknown as { nl: { quiz: [string, string[]][] } }).nl.quiz;
+  const quizRows: [string, string][] = Array.isArray(p.quiz)
+    ? p.quiz.map((a, i) => [QUIZ[i]?.[0] ?? `Vraag ${i + 1}`, a === null || a === undefined ? "-" : (QUIZ[i]?.[1]?.[a] ?? String(a))] as [string, string])
+    : [];
 
   const lines = [`Hoi Boanna!`, ``, headline, sub, ``, ...rows.map(([k, v]) => `${k}: ${v}`)];
+  if (quizRows.length) lines.push(``, `Quiz:`, ...quizRows.map(([q, a]) => `• ${q} ${a}`));
   if (tableFull) lines.push(``, `Tafel ${tableFull.paid / SEATS} is nu vol!`);
   if (evs.length) {
     lines.push(``, `Stand per datum:`);
@@ -105,6 +116,8 @@ export async function notifySignup(kind: "paid" | "waitlist" | "free", eventId: 
 
   const detail = rows.map(([k, v]) =>
     `<tr><td style="padding:7px 14px 7px 0;font:13px Arial,sans-serif;color:#8a6466;vertical-align:top;white-space:nowrap">${esc(k)}</td><td style="padding:7px 0;font:15px Arial,sans-serif;color:#2A1416;vertical-align:top">${esc(v)}</td></tr>`).join("");
+  const quizHtml = quizRows.length ? `<div style="font:bold 12px Arial,sans-serif;letter-spacing:3px;color:#5A0F14;margin:22px 0 8px">QUIZANTWOORDEN</div>` + quizRows.map(([q, a]) =>
+    `<div style="font:13px Arial,sans-serif;color:#8a6466;margin-top:8px">${esc(q)}</div><div style="font:15px Arial,sans-serif;color:#2A1416">${esc(a)}</div>`).join("") : "";
   const stand = evs.map((e) => `
     <div style="background:#FCF8F1;border-radius:14px;padding:14px 16px;margin:0 0 10px">
       <div style="font:bold 15px Arial,sans-serif;color:#5A0F14;margin-bottom:6px">${esc(dateNl(e.event_id))}${e.event_id === eventId ? " ✨" : ""}</div>
@@ -124,6 +137,7 @@ export async function notifySignup(kind: "paid" | "waitlist" | "free", eventId: 
 <tr><td style="background:#ffffff;padding:24px 28px">
   ${banner}
   <table role="presentation" cellpadding="0" cellspacing="0" width="100%">${detail}</table>
+  ${quizHtml}
 </td></tr>
 <tr><td style="background:#F9D9DF;padding:22px 28px">
   <div style="font:bold 12px Arial,sans-serif;letter-spacing:3px;color:#5A0F14;margin-bottom:12px">STAND PER DATUM</div>
