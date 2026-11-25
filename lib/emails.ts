@@ -30,7 +30,7 @@ export type MailData = {
 export function signature(lang: Lang = "nl") {
   const role = lang === "nl" ? "Founder &amp; host" : "Founder &amp; host";
   return `<table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:8px">
-<tr><td style="vertical-align:middle;padding-right:16px"><img src="${MAIL_BASE}/mail/logo.png" width="72" height="72" alt="Women's Meetups in Amsterdam" style="display:block;border-radius:50%"></td>
+<tr><td style="vertical-align:middle;padding-right:16px"><img src="${MAIL_BASE}/mail/boanna.jpg" width="72" height="72" alt="Boanna" style="display:block;border-radius:50%;object-fit:cover"></td>
 <td style="vertical-align:middle">
 <img src="${MAIL_BASE}/mail/handtekening.png" width="150" height="50" alt="Boanna" style="display:block;margin:0 0 2px -4px">
 <div style="${sans};font-size:13px;color:${C.soft}">${role} · Women's Meetups in Amsterdam</div>
