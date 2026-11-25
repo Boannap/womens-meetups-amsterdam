@@ -555,3 +555,8 @@ footer a:hover{text-decoration:underline}
 .ft{column-gap:64px}
 footer .logo{flex-wrap:wrap;row-gap:0;max-width:100%}
 footer .logo i{white-space:nowrap}
+footer .ft-k{display:block;opacity:.8}
+.ft-icons{display:flex;gap:12px;margin-top:16px}
+.ft-icons a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(243,169,184,.15);color:var(--pink);transition:background .2s,transform .2s}
+.ft-icons a:hover{background:var(--pink);color:var(--wine);transform:translateY(-2px)}
+.ft-icons svg{width:20px;height:20px}
