@@ -102,7 +102,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       nav: "Nieuw in Amsterdam",
       kicker: "Nieuw in de stad",
       h1: "Nieuw in Amsterdam? Zo leer je snel mensen kennen",
-      intro: "Je hebt een kamer, een baan of een studie, en misschien al een favoriet koffietentje. Maar met wie spreek je op zondag af? Bij Women's Meetups schuif je aan bij vijf andere meiden die ook nieuwe mensen willen leren kennen.",
+      intro: "Je hebt een kamer, een baan of een studie, en misschien al een favoriet koffietentje. Maar met wie spreek je op zondag af? Bij Women's Meetups ben je één van de zes meiden aan tafel die allemaal nieuwe mensen willen leren kennen.",
       blocks: [
         { h: "Nederlands, Engels of gemengd", p: "Je kiest zelf in welke taal je aan tafel wilt zitten. Er zijn Nederlandse tafels, Engelse tafels en gemengde tafels, dus ook als je net hier woont en nog geen Nederlands spreekt, kun je meedoen." },
         { h: "Ontdek de stad via haar cafés", p: "Elke meetup is in een ander gezellig café of hidden spot, van De Pijp tot Noord. Zo leer je niet alleen mensen kennen, maar ook de plekken waar je daarna zelf weer heen gaat." },
@@ -122,7 +122,7 @@ export const LANDINGS: Record<LandingKey, Record<"nl" | "en", Landing>> = {
       nav: "New in Amsterdam",
       kicker: "New in town",
       h1: "New in Amsterdam? Here's how to meet people fast",
-      intro: "You've got a room, a job or a study, maybe even a favourite coffee spot. But who do you meet up with on a Sunday? At Women's Meetups you join five other women who also want to meet new people.",
+      intro: "You've got a room, a job or a study, maybe even a favourite coffee spot. But who do you meet up with on a Sunday? At Women's Meetups you're one of six women at the table who all want to meet new people.",
       blocks: [
         { h: "English, Dutch or mixed", p: "You choose the language of your table. There are English tables, Dutch tables and mixed tables, so you can join even if you just moved here and don't speak Dutch yet." },
         { h: "Discover the city through its cafés", p: "Every meetup is in a different cosy café or hidden spot, from De Pijp to Noord. You don't just meet people, you also find the places you'll go back to on your own." },
