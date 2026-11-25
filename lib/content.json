@@ -332,13 +332,13 @@
         "Once a month, soon every two weeks, usually on a Sunday around 10:30. For €12.50 we take care of your seat, your match and your first coffee. Fancy brunch? You order and pay for that yourself at the café. No membership."
       ]
     ],
-    "j_phone": "Phone number (for WhatsApp)",
+    "j_phone": "Phone number (optional, for WhatsApp)",
     "j_contact": "How do you want your table details?",
     "j_contact_opts": [
       "WhatsApp + email",
       "Email only"
     ],
-    "j_contact_note": "The café and time always come by email too.",
+    "j_contact_note": "Add your number if you'd like the details on WhatsApp too. The café and time always come by email.",
     "j_wa_consent": "I'm fine with receiving WhatsApp messages about my table.",
     "q_kicker": "Quick quiz",
     "q_title": "Which tablemate are you?",
@@ -864,13 +864,13 @@
         "Eén keer per maand, binnenkort elke twee weken, meestal op zondag rond 10.30. Voor €12,50 regelen wij je plek, je match en je eerste koffietje. Zin in brunch? Die bestel en betaal je zelf in het café. Geen lidmaatschap."
       ]
     ],
-    "j_phone": "Telefoonnummer (voor WhatsApp)",
+    "j_phone": "Telefoonnummer (optioneel, voor WhatsApp)",
     "j_contact": "Hoe wil je de details van je tafel ontvangen?",
     "j_contact_opts": [
       "WhatsApp + mail",
       "Alleen mail"
     ],
-    "j_contact_note": "Het café en de tijd krijg je altijd ook per mail.",
+    "j_contact_note": "Vul je nummer in als je de details ook via WhatsApp wilt. Het café en de tijd krijg je altijd per mail.",
     "j_wa_consent": "Ik vind het goed om WhatsAppjes te krijgen over mijn tafel.",
     "q_kicker": "Snelle quiz",
     "q_title": "Welke tafelgenoot ben jij?",

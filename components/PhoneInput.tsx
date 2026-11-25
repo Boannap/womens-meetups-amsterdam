@@ -66,7 +66,7 @@ export default function PhoneInput({ lang, label }: { lang: "nl" | "en"; label: 
           <span>{flag(cur[0])}</span> +{cur[1]} <small>▾</small>
         </button>
         <input id="fp" type="tel" autoComplete="tel-national" inputMode="tel" placeholder={iso === "NL" ? "6 12345678" : ""}
-          value={num} onChange={(e) => setNum(e.target.value)} pattern="[0-9 ()-]{6,16}" required />
+          value={num} onChange={(e) => setNum(e.target.value)} pattern="[0-9 ()-]{6,16}" />
         <input type="hidden" name="phone" value={local ? `+${cur[1]} ${local}` : ""} />
         {open && (
           <div className="phone-menu">

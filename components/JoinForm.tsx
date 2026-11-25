@@ -44,7 +44,6 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
   // The form is split into small pages with a progress bar, so it never feels long.
   const [page, setPage] = useState(0);
   const formRef = useRef<HTMLFormElement>(null);
-  const [contact, setContact] = useState<"whatsapp_email" | "email">("whatsapp_email");
   const [fieldOther, setFieldOther] = useState(false);
   const [hopeOther, setHopeOther] = useState(false);
   const [foundOther, setFoundOther] = useState(false);
@@ -81,8 +80,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       personality: type, quiz: answers,
       field: fieldOther ? `${fd.get("field")}: ${fd.get("field_other") || ""}` : fd.get("field"),
       hobbies: fd.get("hobbies"),
-      phone: contact === "whatsapp_email" ? fd.get("phone") : "", contact_pref: contact,
-      whatsapp_consent: contact === "whatsapp_email",
+      phone: fd.get("phone") || "", contact_pref: fd.get("phone") ? "whatsapp_email" : "email",
+      whatsapp_consent: !!fd.get("phone"),
       hoping: fd.getAll("hoping").map((h) => (hopeOther && h === t.j_hopes[t.j_hopes.length - 1] ? `${h}: ${fd.get("hope_other") || ""}` : h)), instagram: fd.get("instagram") ? `@${String(fd.get("instagram")).replace(/^@+/, "")}` : "",
       consent: fd.get("consent") === "on", newsletter: fd.get("newsletter") === "on", site_lang: lang,
       event_id: eventId, waitlist, found_via: foundOther ? `${fd.get("found_via")}: ${fd.get("found_other") || ""}` : fd.get("found_via"), table_wish: fd.get("table_wish"),
@@ -168,9 +167,15 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
     if (page === 2 && !type) { setStep(Math.max(0, answers.findIndex((x) => x === null))); return; }
     track("form", `page:${page + 2}`);
     setPage((n) => Math.min(PAGES - 1, n + 1));
-    setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 30);
+    toTop();
   }
-  const back = () => { setPage((n) => Math.max(0, n - 1)); setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 30); };
+  // After a page change the form height changes: jump straight back to the top of the form (instant, so it can't overshoot).
+  const toTop = () => requestAnimationFrame(() => requestAnimationFrame(() => {
+    const f = formRef.current; if (!f) return;
+    const y = f.getBoundingClientRect().top + window.scrollY - 110;
+    if (Math.abs(window.scrollY - y) > 40) window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
+  }));
+  const back = () => { setPage((n) => Math.max(0, n - 1)); toTop(); };
   const nav = (last = false) => (
     <div className="full field fnav">
       {page > 0 && <button type="button" className="btn btn-ghost fback" onClick={back}>← {nl ? "Terug" : "Back"}</button>}
@@ -280,19 +285,8 @@ export default function JoinForm({ t, lang }: { t: Dict; lang: Lang }) {
       {nav()}
       </div>
       <div className="fstep" data-page="3" hidden={page !== 3}>
-      <fieldset className="field full"><legend>{t.j_contact}</legend>
-        <div className="pills">
-          {(["whatsapp_email", "email"] as const).map((v, i) => (
-            <label key={v}><input type="radio" name="contact" value={v} checked={contact === v} onChange={() => setContact(v)} /><span>{t.j_contact_opts[i]}</span></label>
-          ))}
-        </div>
-        <small className="hint">{t.j_contact_note}</small>
-      </fieldset>
-      {contact === "whatsapp_email" && (
-        <>
-          <PhoneInput lang={lang} label={t.j_phone} />
-        </>
-      )}
+      <PhoneInput lang={lang} label={t.j_phone} />
+      <small className="hint" style={{ marginTop: -6, gridColumn: "1 / -1" }}>{t.j_contact_note}</small>
       <div className="field full"><label className="l" htmlFor="fw">{t.j_wish}</label><textarea id="fw" name="table_wish" rows={3} maxLength={500} placeholder={t.j_wish_ph} /></div>
       <fieldset className="field full"><legend>{t.j_found}</legend><div onChange={(e) => { const el = e.target as HTMLInputElement; if (el.name === "found_via") setFoundOther(el.value === t.j_found_opts[t.j_found_opts.length - 1]); }}>{pills("found_via", t.j_found_opts, "radio", false)}</div>
         {foundOther && <input name="found_other" type="text" maxLength={120} placeholder={lang === "nl" ? "Vertel, hoe dan?" : "Tell us, how?"} style={{ marginTop: 8 }} />}</fieldset>
